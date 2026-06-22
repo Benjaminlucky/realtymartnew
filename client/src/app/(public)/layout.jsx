@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppWidget from "@/components/public/WhatsAppWidget";
 import { serverFetch } from "@/lib/api";
 
 async function getSiteSettings() {
@@ -22,6 +23,7 @@ export default async function PublicLayout({ children }) {
       <Navbar settings={safeSettings} />
       <main>{children}</main>
       <Footer settings={safeSettings} />
+      <WhatsAppWidget settings={safeSettings} />
     </>
   );
 }

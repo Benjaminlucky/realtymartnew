@@ -6,9 +6,6 @@
 export const API_URL = (
   process.env.NEXT_PUBLIC_API_URL || "https://mehurbs-production.up.railway.app"
 ).replace(/\/$/, "");
-if (typeof window !== "undefined") {
-  console.log("[API] URL:", API_URL);
-}
 
 // These are no-ops now — kept for compatibility but do nothing
 export function setUnauthorizedHandler(fn) {}

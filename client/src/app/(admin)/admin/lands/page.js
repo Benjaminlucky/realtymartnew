@@ -875,7 +875,7 @@ export default function AdminLandsPage() {
     setLoading(true);
     try {
       const params = { page, perPage };
-      if (search) params.q = search;
+      if (search) params.search = search;
       if (filterStatus) params.status = filterStatus;
       if (filterState) params.state = filterState;
       const res = await landsApi.adminGetAll(params);

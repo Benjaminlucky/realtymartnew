@@ -547,7 +547,7 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
     setLoading(true);
     setError("");
     try {
-      await teamApi.changePassword(member.id, form);
+      await teamApi.changePassword(member._id || member.id, form);
       toast.success("Password updated successfully.");
       onClose();
     } catch (err) {
@@ -789,7 +789,7 @@ export default function TeamPage() {
     if (!confirm(`Delete account for ${member.name}? This cannot be undone.`))
       return;
     try {
-      await teamApi.delete(member.id);
+      await teamApi.delete(member._id || member.id);
       toast.success(`${member.name}'s account deleted.`);
       load();
     } catch (err) {
@@ -799,7 +799,7 @@ export default function TeamPage() {
 
   const handleToggleActive = async (member) => {
     try {
-      await teamApi.update(member.id, { is_active: member.is_active ? 0 : 1 });
+      await teamApi.update(member._id || member.id, { is_active: member.is_active ? 0 : 1 });
       toast.success(
         member.is_active
           ? `${member.name} deactivated.`

@@ -16,39 +16,54 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mehurbs.com";
+
 export const metadata = {
-  title: "Real Estate CMS",
-  description: "Premium Properties Across Nigeria",
-  // Declare locale and alternate links for international SEO.
-  // We serve English (Nigerian) only — the x-default and en-NG alternates
-  // both point to the same canonical URL which is correct for a single-locale site.
+  title: "Mehurbs — Premium Properties Across Nigeria",
+  description:
+    "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    canonical: SITE_URL,
     languages: {
-      "en-NG": process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-      "x-default": process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+      "en-NG": SITE_URL,
+      "x-default": SITE_URL,
     },
+  },
+  openGraph: {
+    title: "Mehurbs — Premium Properties Across Nigeria",
+    description:
+      "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
+    url: SITE_URL,
+    siteName: "Mehurbs",
+    locale: "en_NG",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mehurbs — Premium Properties Across Nigeria",
+    description:
+      "Discover premium lands and houses for sale across Nigeria. Browse verified listings and estate developments.",
   },
 };
 
 const THEME_DEFAULTS = {
-  theme_primary: "#ff6b6b",
-  theme_primary_dark: "#0f172a",
-  theme_primary_light: "#38bdf8",
-  theme_primary_muted: "#d1fae5",
-  theme_secondary: "#1c1c2e",
-  theme_secondary_dark: "#0f0f1a",
-  theme_secondary_mid: "#2d2d44",
-  theme_secondary_light: "#3d3d5c",
-  theme_accent: "#f59e0b",
-  theme_accent_light: "#fcd34d",
+  theme_primary: "#b2ff70",
+  theme_primary_dark: "#1b2f31",
+  theme_primary_light: "#d4ffaa",
+  theme_primary_muted: "#e8ffd6",
+  theme_secondary: "#1b2f31",
+  theme_secondary_dark: "#132224",
+  theme_secondary_mid: "#2a4547",
+  theme_secondary_light: "#3a5d60",
+  theme_accent: "#b2ff70",
+  theme_accent_light: "#d4ffaa",
   theme_surface: "#ffffff",
-  theme_surface_2: "#f8fafc",
-  theme_surface_3: "#f1f5f9",
-  theme_border: "#e2e8f0",
-  theme_text: "#0f172a",
-  theme_text_secondary: "#475569",
-  theme_text_muted: "#94a3b8",
+  theme_surface_2: "#f4f9f4",
+  theme_surface_3: "#edf5ed",
+  theme_border: "#e2e8e0",
+  theme_text: "#0f1f20",
+  theme_text_secondary: "#3d5a5c",
+  theme_text_muted: "#a8c4c6",
   theme_radius: "0.625rem",
   theme_radius_lg: "1rem",
   theme_radius_xl: "1.5rem",
@@ -121,14 +136,14 @@ export default async function RootLayout({ children }) {
     >
       <head>
         <style id="theme-vars" dangerouslySetInnerHTML={{ __html: themeCss }} />
-        {faviconUrl ? (
+        {/* When a custom favicon is saved in admin settings it overrides
+            the generated /icon and /apple-icon served by icon.js / apple-icon.js */}
+        {faviconUrl && (
           <>
             <link rel="icon" href={faviconUrl} />
             <link rel="shortcut icon" href={faviconUrl} />
             <link rel="apple-touch-icon" href={faviconUrl} />
           </>
-        ) : (
-          <link rel="icon" href="/favicon.ico" />
         )}
       </head>
       <body className="antialiased">

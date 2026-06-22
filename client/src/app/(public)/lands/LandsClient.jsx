@@ -386,21 +386,82 @@ export default function LandsClient({
         </div>
       </PageHero>
 
+      {/* Mobile filter backdrop */}
+      <div
+        className={`mobile-filter-backdrop${mobileFiltersOpen ? " open" : ""}`}
+        onClick={() => setMobileFiltersOpen(false)}
+      />
+
+      {/* Mobile filter drawer */}
+      <div className={`mobile-filter-panel${mobileFiltersOpen ? " open" : ""}`}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "1.25rem",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <SlidersHorizontal size={15} style={{ color: "var(--color-primary)" }} />
+            <span
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 700,
+                fontSize: "0.9375rem",
+                color: "var(--color-secondary)",
+              }}
+            >
+              Filters
+            </span>
+            {activeFilterCount > 0 && (
+              <span
+                style={{
+                  background: "var(--color-primary)",
+                  color: "white",
+                  fontSize: "0.65rem",
+                  fontWeight: 700,
+                  width: "1.25rem",
+                  height: "1.25rem",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-heading)",
+                }}
+              >
+                {activeFilterCount}
+              </span>
+            )}
+          </div>
+          <button
+            onClick={() => setMobileFiltersOpen(false)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "var(--color-text-secondary)",
+              padding: "0.25rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+            aria-label="Close filters"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        {sidebarContent}
+      </div>
+
       <div
         className="section-pad"
         style={{ background: "var(--color-surface-2)" }}
       >
         <div className="container-site">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "260px 1fr",
-              gap: "2rem",
-              alignItems: "start",
-            }}
-          >
-            {/* ── SIDEBAR ── */}
+          <div className="listings-page-grid">
+            {/* ── SIDEBAR (desktop only) ── */}
             <aside
+              className="listings-sidebar-desktop"
               style={{
                 background: "var(--color-surface)",
                 borderRadius: "var(--radius-lg)",
@@ -465,6 +526,30 @@ export default function LandsClient({
 
             {/* ── MAIN CONTENT ── */}
             <main>
+              {/* Mobile filter toggle */}
+              <div className="mobile-filter-toggle">
+                <button
+                  onClick={() => setMobileFiltersOpen(true)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-surface)",
+                    color: "var(--color-text-secondary)",
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <SlidersHorizontal size={15} />
+                  Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
+                </button>
+              </div>
+
               {/* Toolbar */}
               <div
                 style={{

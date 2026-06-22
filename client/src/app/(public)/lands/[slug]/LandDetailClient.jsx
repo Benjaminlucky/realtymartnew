@@ -63,7 +63,8 @@ const TITLE_LABELS = {
 };
 
 // ── Gallery Lightbox ──────────────────────────────────────────────
-function Lightbox({ images, startIndex, onClose }) {
+// FIX: added title prop so thumbnail alt doesn't reference estate_name from outer scope
+function Lightbox({ images, startIndex, onClose, title = "Property" }) {
   const [current, setCurrent] = useState(startIndex);
   const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
   const next = () => setCurrent((c) => (c + 1) % images.length);
@@ -213,14 +214,14 @@ function Lightbox({ images, startIndex, onClose }) {
                 background: "none",
                 padding: 0,
                 cursor: "pointer",
+                position: "relative",
               }}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={img}
-                alt={`${estate_name} — gallery photo ${i + 1}`}
-                fill
-                sizes="96px"
-                style={{ objectFit: "cover" }}
+                alt={`${title} — gallery photo ${i + 1}`}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </button>
           ))}
@@ -344,7 +345,7 @@ function EnquiryForm({ land, settings }) {
       onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}
     >
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label style={labelStyle}>
             Name <span style={{ color: "var(--color-primary)" }}>*</span>
@@ -418,7 +419,7 @@ function EnquiryForm({ land, settings }) {
           gap: "0.5rem",
           padding: "0.75rem",
           background: "var(--color-primary)",
-          color: "white",
+          color: "var(--color-secondary)",
           border: "none",
           borderRadius: "var(--radius)",
           fontFamily: "var(--font-heading)",
@@ -507,12 +508,13 @@ export default function LandDetailClient({ land, settings, related }) {
 
   return (
     <>
-      {/* Lightbox */}
+      {/* Lightbox — FIX: pass title={estate_name} so Lightbox has it in scope */}
       {lightboxIndex !== null && (
         <Lightbox
           images={allImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+          title={estate_name}
         />
       )}
 
@@ -536,7 +538,7 @@ export default function LandDetailClient({ land, settings, related }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgb(178 255 112 / 0.08) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
@@ -697,14 +699,7 @@ export default function LandDetailClient({ land, settings, related }) {
           className="container-site"
           style={{ paddingTop: "2.5rem", paddingBottom: "4rem" }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 380px",
-              gap: "2.5rem",
-              alignItems: "start",
-            }}
-          >
+          <div className="detail-page-grid">
             {/* ── LEFT COLUMN ── */}
             <div>
               {/* ── Gallery ── */}
@@ -1053,9 +1048,9 @@ export default function LandDetailClient({ land, settings, related }) {
                 <div
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(255,107,107,0.05), rgba(255,107,107,0.02))",
+                      "linear-gradient(135deg, rgb(178 255 112 / 0.06), rgb(178 255 112 / 0.02))",
                     borderRadius: "var(--radius-lg)",
-                    border: "1px solid rgba(255,107,107,0.15)",
+                    border: "1px solid rgb(178 255 112 / 0.2)",
                     padding: "1.75rem",
                     marginBottom: "1.5rem",
                   }}
@@ -1077,7 +1072,7 @@ export default function LandDetailClient({ land, settings, related }) {
                         style={{
                           fontSize: "2rem",
                           fontWeight: 800,
-                          color: "var(--color-primary)",
+                          color: "var(--color-secondary)",
                           fontFamily: "var(--font-heading)",
                         }}
                       >
@@ -1252,7 +1247,7 @@ export default function LandDetailClient({ land, settings, related }) {
                     fontFamily: "var(--font-heading)",
                     fontWeight: 900,
                     fontSize: "clamp(1.5rem, 3vw, 2rem)",
-                    color: "var(--color-primary)",
+                    color: "var(--color-secondary)",
                     marginBottom: "1.25rem",
                     lineHeight: 1,
                   }}

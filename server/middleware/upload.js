@@ -6,7 +6,7 @@ const cloudinary = require("../config/cloudinary");
 
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const MAX = parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024;
-const VALID_FOLDERS = ["lands", "houses", "blog", "general"];
+const VALID_FOLDERS = ["lands", "houses", "blog", "general", "logos"];
 const FOLDER_PREFIX = process.env.CLOUDINARY_FOLDER_PREFIX || "naijarealty";
 
 function fileFilter(req, file, cb) {

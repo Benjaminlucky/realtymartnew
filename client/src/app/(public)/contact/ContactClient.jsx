@@ -262,14 +262,7 @@ export default function ContactClient({ settings }) {
           </div>
 
           {/* ── Main grid: Form left, Info right ── */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 380px",
-              gap: "2rem",
-              alignItems: "start",
-            }}
-          >
+          <div className="detail-page-grid">
             {/* ── Contact Form ── */}
             <div
               style={{
@@ -391,13 +384,7 @@ export default function ContactClient({ settings }) {
                       gap: "1.25rem",
                     }}
                   >
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "1rem",
-                      }}
-                    >
+                    <div className="form-grid-2">
                       <div>
                         <label
                           style={{
@@ -446,13 +433,7 @@ export default function ContactClient({ settings }) {
                       </div>
                     </div>
 
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "1rem",
-                      }}
-                    >
+                    <div className="form-grid-2">
                       <div>
                         <label
                           style={{

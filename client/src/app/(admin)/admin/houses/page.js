@@ -133,7 +133,7 @@ function ImageUpload({ label, value, onChange, folder = "houses" }) {
           transition: "all 150ms",
         }}
         onMouseEnter={(e) => {
-          if (!url) e.currentTarget.style.borderColor = "#ff6b6b";
+          if (!url) e.currentTarget.style.borderColor = "var(--color-primary, #b2ff70)";
         }}
         onMouseLeave={(e) => {
           if (!url) e.currentTarget.style.borderColor = "#e2e8f0";
@@ -151,7 +151,7 @@ function ImageUpload({ label, value, onChange, folder = "houses" }) {
             <Loader2
               size={26}
               style={{
-                color: "#ff6b6b",
+                color: "var(--color-primary, #b2ff70)",
                 animation: "spin 1s linear infinite",
                 display: "block",
                 margin: "0 auto 0.5rem",
@@ -349,7 +349,7 @@ function GalleryUpload({ value = [], onChange, folder = "houses" }) {
             background: "#f8fafc",
             gap: "0.25rem",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#ff6b6b")}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary, #b2ff70)")}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#e2e8f0")}
         >
           <input
@@ -363,7 +363,7 @@ function GalleryUpload({ value = [], onChange, folder = "houses" }) {
           {uploading ? (
             <Loader2
               size={20}
-              style={{ color: "#ff6b6b", animation: "spin 1s linear infinite" }}
+              style={{ color: "var(--color-primary, #b2ff70)", animation: "spin 1s linear infinite" }}
             />
           ) : (
             <>
@@ -772,7 +772,7 @@ function HouseForm({ initial, onSave, onClose, saving }) {
             width: "44px",
             height: "24px",
             borderRadius: "9999px",
-            background: form.featured ? "#ff6b6b" : "#e2e8f0",
+            background: form.featured ? "var(--color-primary, #b2ff70)" : "#e2e8f0",
             position: "relative",
             cursor: "pointer",
             transition: "background 0.2s",
@@ -855,7 +855,7 @@ export default function AdminHousesPage() {
     setLoading(true);
     try {
       const params = { page, perPage: 12 };
-      if (search) params.q = search;
+      if (search) params.search = search;
       if (filterStatus) params.status = filterStatus;
       if (filterState) params.state = filterState;
       if (filterCategory) params.category = filterCategory;
@@ -897,7 +897,7 @@ export default function AdminHousesPage() {
   const handleUpdate = async (form) => {
     setSaving(true);
     try {
-      await housesApi.update(editHouse.id, form);
+      await housesApi.update(editHouse._id || editHouse.id, form);
       toast.success("Updated!");
       setEditHouse(null);
       fetchHouses();
@@ -910,7 +910,7 @@ export default function AdminHousesPage() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await housesApi.delete(deleteHouse.id);
+      await housesApi.delete(deleteHouse._id || deleteHouse.id);
       toast.success("Deleted");
       setDeleteHouse(null);
       fetchHouses();
@@ -922,7 +922,7 @@ export default function AdminHousesPage() {
   };
   const toggleFeatured = async (house) => {
     try {
-      await housesApi.update(house.id, { ...house, featured: !house.featured });
+      await housesApi.update(house._id || house.id, { featured: !house.featured });
       fetchHouses();
     } catch {
       toast.error("Failed");
@@ -951,7 +951,7 @@ export default function AdminHousesPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <Home size={20} color="#ff6b6b" />
+              <Home size={20} style={{ color: "var(--color-primary, #b2ff70)" }} />
               <h1
                 style={{
                   fontWeight: 800,
@@ -1078,7 +1078,7 @@ export default function AdminHousesPage() {
               <Loader2
                 size={30}
                 style={{
-                  color: "#ff6b6b",
+                  color: "var(--color-primary, #b2ff70)",
                   animation: "spin 1s linear infinite",
                   display: "block",
                   margin: "0 auto 0.75rem",
@@ -1371,8 +1371,8 @@ export default function AdminHousesPage() {
                     onClick={() => setPage(p)}
                     style={{
                       ...S.pageBtn,
-                      background: p === page ? "#ff6b6b" : "#fff",
-                      color: p === page ? "#fff" : "#475569",
+                      background: p === page ? "var(--color-primary, #b2ff70)" : "#fff",
+                      color: p === page ? "var(--color-secondary, #1b2f31)" : "#475569",
                     }}
                   >
                     {p}
@@ -1510,8 +1510,8 @@ const S = {
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" },
   row3: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" },
   btnPrimary: {
-    background: "#ff6b6b",
-    color: "#fff",
+    background: "var(--color-primary, #b2ff70)",
+    color: "var(--color-secondary, #1b2f31)",
     border: "none",
     cursor: "pointer",
     padding: "0.625rem 1.25rem",

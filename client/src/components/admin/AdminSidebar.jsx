@@ -436,8 +436,10 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
 
       {/* Mobile */}
       <div className="admin-sidebar-mobile">
+        {/* Hamburger — hidden while sidebar is open so it never stacks on the close button */}
         <button
           onClick={() => setMobileOpen(true)}
+          aria-label="Open navigation"
           style={{
             position: "fixed",
             top: "1rem",
@@ -449,11 +451,14 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
             padding: "0.5rem",
             cursor: "pointer",
             color: "white",
+            display: mobileOpen ? "none" : "flex",
+            alignItems: "center",
           }}
         >
           <Menu size={20} />
         </button>
 
+        {/* Backdrop */}
         {mobileOpen && (
           <div
             onClick={() => setMobileOpen(false)}
@@ -467,35 +472,44 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
           />
         )}
 
+        {/* Slide-in panel */}
         <div
           style={{
             position: "fixed",
             top: 0,
             left: 0,
+            bottom: 0,
             zIndex: 50,
+            width: sidebarWidth,
+            overflowY: "auto",
             transform: mobileOpen ? "translateX(0)" : "translateX(-100%)",
             transition: "transform 300ms ease",
           }}
         >
-          <div style={{ position: "relative" }}>
-            {sidebarContent}
+          {sidebarContent}
+          {/* Close tab — only mounted when open so it never bleeds into viewport */}
+          {mobileOpen && (
             <button
               onClick={() => setMobileOpen(false)}
+              aria-label="Close navigation"
               style={{
                 position: "absolute",
                 top: "1rem",
-                right: "-3rem",
-                background: "rgba(255,255,255,0.1)",
-                border: "none",
-                borderRadius: "0.5rem",
-                padding: "0.5rem",
+                right: "-2.5rem",
+                background: "var(--color-secondary-mid, #2a4547)",
+                border: "1px solid rgba(255,255,255,0.12)",
+                borderLeft: "none",
+                borderRadius: "0 0.5rem 0.5rem 0",
+                padding: "0.5rem 0.5rem 0.5rem 0.375rem",
                 cursor: "pointer",
-                color: "white",
+                color: "rgba(255,255,255,0.7)",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <X size={18} />
             </button>
-          </div>
+          )}
         </div>
       </div>
 

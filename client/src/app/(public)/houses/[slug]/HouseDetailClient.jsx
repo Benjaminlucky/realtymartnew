@@ -51,8 +51,12 @@ function WAIcon({ size = 16 }) {
 
 const priceLabelMap = { per_annum: "/ yr", outright: "", on_request: "" };
 
-// ── Lightbox (shared pattern with LandDetailClient) ───────────────
-function Lightbox({ images, startIndex, onClose }) {
+// ── Lightbox ──────────────────────────────────────────────────────
+// FIX: added `title` prop — previously `title` was referenced here but
+// only existed in HouseDetailClient's scope, causing ReferenceError crash.
+// Also replaced <Image fill> thumbnails with plain <img> — Next.js Image
+// with fill requires a positioned parent with explicit dimensions.
+function Lightbox({ images, startIndex, onClose, title = "Property" }) {
   const [current, setCurrent] = useState(startIndex);
   const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
   const next = () => setCurrent((c) => (c + 1) % images.length);
@@ -188,12 +192,13 @@ function Lightbox({ images, startIndex, onClose }) {
                 cursor: "pointer",
               }}
             >
-              <Image
+              {/* FIX: was <Image fill> which requires a positioned parent with dimensions.
+                  Also was referencing `title` from outer scope — now uses the prop. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={img}
                 alt={`${title} — gallery photo ${i + 1}`}
-                fill
-                sizes="96px"
-                style={{ objectFit: "cover" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </button>
           ))}
@@ -315,7 +320,7 @@ function EnquiryForm({ house, settings }) {
       onSubmit={handleSubmit}
       style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}
     >
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label style={labelStyle}>
             Name <span style={{ color: "var(--color-primary)" }}>*</span>
@@ -389,7 +394,7 @@ function EnquiryForm({ house, settings }) {
           gap: "0.5rem",
           padding: "0.75rem",
           background: "var(--color-primary)",
-          color: "white",
+          color: "var(--color-secondary)",
           border: "none",
           borderRadius: "var(--radius)",
           fontFamily: "var(--font-heading)",
@@ -482,11 +487,13 @@ export default function HouseDetailClient({ house, settings, related }) {
 
   return (
     <>
+      {/* FIX: pass title={title} so Lightbox has the property name in scope */}
       {lightboxIndex !== null && (
         <Lightbox
           images={allImages}
           startIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+          title={title}
         />
       )}
 
@@ -510,7 +517,7 @@ export default function HouseDetailClient({ house, settings, related }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgb(178 255 112 / 0.08) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
@@ -596,7 +603,7 @@ export default function HouseDetailClient({ house, settings, related }) {
                       fontWeight: 600,
                       padding: "0.25rem 0.75rem",
                       borderRadius: "var(--radius-full)",
-                      background: "rgba(255,107,107,0.2)",
+                      background: "rgb(178 255 112 / 0.15)",
                       color: "var(--color-primary)",
                       fontFamily: "var(--font-heading)",
                     }}
@@ -684,14 +691,7 @@ export default function HouseDetailClient({ house, settings, related }) {
           className="container-site"
           style={{ paddingTop: "2.5rem", paddingBottom: "4rem" }}
         >
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 380px",
-              gap: "2.5rem",
-              alignItems: "start",
-            }}
-          >
+          <div className="detail-page-grid">
             {/* ── LEFT COLUMN ── */}
             <div>
               {/* ── Gallery ── */}
@@ -1134,7 +1134,7 @@ export default function HouseDetailClient({ house, settings, related }) {
                     fontFamily: "var(--font-heading)",
                     fontWeight: 900,
                     fontSize: "clamp(1.5rem, 3vw, 2rem)",
-                    color: "var(--color-primary)",
+                    color: "var(--color-secondary)",
                     marginBottom: "1.25rem",
                     lineHeight: 1,
                   }}

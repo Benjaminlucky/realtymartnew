@@ -24,6 +24,9 @@ import {
   Link as LinkIcon,
   GripVertical,
   Navigation,
+  MessageCircle,
+  ToggleLeft,
+  ToggleRight,
 } from "lucide-react";
 
 // ── Style constants ───────────────────────────────────────────────
@@ -79,23 +82,23 @@ const blur = (e) =>
 
 // ── Default theme values ──────────────────────────────────────────
 const THEME_DEFAULTS = {
-  theme_primary: "#ff6b6b",
-  theme_primary_dark: "#0f172a",
-  theme_primary_light: "#38bdf8",
-  theme_primary_muted: "#d1fae5",
-  theme_secondary: "#1c1c2e",
-  theme_secondary_dark: "#0f0f1a",
-  theme_secondary_mid: "#2d2d44",
-  theme_secondary_light: "#3d3d5c",
-  theme_accent: "#f59e0b",
-  theme_accent_light: "#fcd34d",
+  theme_primary: "#b2ff70",
+  theme_primary_dark: "#1b2f31",
+  theme_primary_light: "#d4ffaa",
+  theme_primary_muted: "#e8ffd6",
+  theme_secondary: "#1b2f31",
+  theme_secondary_dark: "#132224",
+  theme_secondary_mid: "#2a4547",
+  theme_secondary_light: "#3a5d60",
+  theme_accent: "#b2ff70",
+  theme_accent_light: "#d4ffaa",
   theme_surface: "#ffffff",
-  theme_surface_2: "#f8fafc",
-  theme_surface_3: "#f1f5f9",
-  theme_border: "#e2e8f0",
-  theme_text: "#0f172a",
-  theme_text_secondary: "#475569",
-  theme_text_muted: "#94a3b8",
+  theme_surface_2: "#f4f9f4",
+  theme_surface_3: "#edf5ed",
+  theme_border: "#e2e8e0",
+  theme_text: "#0f1f20",
+  theme_text_secondary: "#3d5a5c",
+  theme_text_muted: "#a8c4c6",
   theme_radius: "0.625rem",
   theme_radius_lg: "1rem",
   theme_radius_xl: "1.5rem",
@@ -104,10 +107,37 @@ const THEME_DEFAULTS = {
 // ── Preset themes ─────────────────────────────────────────────────
 const PRESETS = [
   {
-    name: "Midnight Coral",
-    desc: "Default — dark navy + coral red",
-    preview: ["#ff6b6b", "#1c1c2e", "#38bdf8"],
+    name: "Lime Teal",
+    desc: "Default — fresh lime green + deep teal",
+    preview: ["#b2ff70", "#1b2f31", "#d4ffaa"],
     values: { ...THEME_DEFAULTS },
+  },
+  {
+    name: "Midnight Coral",
+    desc: "Dark navy + coral red",
+    preview: ["#ff6b6b", "#1c1c2e", "#38bdf8"],
+    values: {
+      theme_primary: "#ff6b6b",
+      theme_primary_dark: "#0f172a",
+      theme_primary_light: "#38bdf8",
+      theme_primary_muted: "#d1fae5",
+      theme_secondary: "#1c1c2e",
+      theme_secondary_dark: "#0f0f1a",
+      theme_secondary_mid: "#2d2d44",
+      theme_secondary_light: "#3d3d5c",
+      theme_accent: "#f59e0b",
+      theme_accent_light: "#fcd34d",
+      theme_surface: "#ffffff",
+      theme_surface_2: "#f8fafc",
+      theme_surface_3: "#f1f5f9",
+      theme_border: "#e2e8f0",
+      theme_text: "#0f172a",
+      theme_text_secondary: "#475569",
+      theme_text_muted: "#94a3b8",
+      theme_radius: "0.625rem",
+      theme_radius_lg: "1rem",
+      theme_radius_xl: "1.5rem",
+    },
   },
   {
     name: "Forest Green",
@@ -207,11 +237,14 @@ function LogoUpload({ value, onChange }) {
     setUploading(true);
     try {
       const res = await mediaApi.upload(file, "logos");
-      if (res?.data?.file_path) {
-        const path = res.data.file_path;
-        const url = path.startsWith("http")
-          ? path
-          : `${API_URL}/uploads/${path.replace(/^uploads\//, "")}`;
+
+      // mediaApi.upload returns the raw JSON — check both shapes
+      const filePath = res?.data?.file_path || res?.file_path;
+
+      if (filePath) {
+        const url = filePath.startsWith("http")
+          ? filePath
+          : `${API_URL}/uploads/${filePath.replace(/^uploads\//, "")}`;
         onChange(url);
         toast.success("Logo uploaded");
       } else {
@@ -365,7 +398,7 @@ function LogoUpload({ value, onChange }) {
           <input
             ref={ref}
             type="file"
-            accept="image/png,image/jpeg,image/svg+xml,image/webp"
+            accept=".svg,.png,.jpg,.jpeg,.webp,image/svg+xml,image/png,image/jpeg,image/webp"
             style={{ display: "none" }}
             onChange={(e) => {
               upload(e.target.files[0]);
@@ -386,11 +419,114 @@ function LogoUpload({ value, onChange }) {
           >
             Displayed in the navbar on a dark background.
             <br />
-            PNG with transparent background or SVG recommended.
+            SVG, PNG, JPG, or WebP accepted. SVG or PNG with transparent background recommended.
             <br />
             Max 5MB.
           </p>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Agent avatar upload ───────────────────────────────────────────
+function AvatarUpload({ value, onChange }) {
+  const [uploading, setUploading] = useState(false);
+  const ref = useRef(null);
+
+  const upload = async (file) => {
+    if (!file) return;
+    setUploading(true);
+    try {
+      const res = await mediaApi.upload(file, "general");
+      const filePath = res?.data?.file_path || res?.file_path;
+      if (filePath) {
+        const url = filePath.startsWith("http")
+          ? filePath
+          : `${API_URL}/uploads/${filePath.replace(/^uploads\//, "")}`;
+        onChange(url);
+        toast.success("Avatar uploaded");
+      } else {
+        toast.error("Upload failed — no path returned");
+      }
+    } catch (err) {
+      toast.error(err?.message || "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div style={{ marginBottom: "1.25rem" }}>
+      <label style={S.label}>Agent Avatar / Photo</label>
+      <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", flexWrap: "wrap" }}>
+        {/* Circle preview */}
+        <div
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: "50%",
+            border: "2px solid var(--color-border, #E2E8F0)",
+            overflow: "hidden",
+            flexShrink: 0,
+            background: "linear-gradient(135deg,#b2ff70,#5ecb40)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {value ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={value}
+              alt="Agent avatar"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              onError={(e) => { e.target.style.display = "none"; }}
+            />
+          ) : (
+            <span style={{ color: "#1b2f31", fontWeight: 800, fontSize: "1.75rem", fontFamily: "Plus Jakarta Sans, sans-serif" }}>R</span>
+          )}
+        </div>
+        {/* Buttons */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          <button
+            type="button"
+            onClick={() => ref.current?.click()}
+            disabled={uploading}
+            style={{
+              display: "flex", alignItems: "center", gap: "0.5rem",
+              padding: "0.5rem 1rem",
+              borderRadius: "var(--radius, 0.625rem)",
+              border: "1px solid var(--color-border, #E2E8F0)",
+              background: "var(--color-surface, white)",
+              color: "var(--color-text-secondary, #475569)",
+              fontFamily: "Plus Jakarta Sans, sans-serif",
+              fontWeight: 600, fontSize: "0.8125rem",
+              cursor: uploading ? "wait" : "pointer",
+            }}
+          >
+            {uploading ? <><Loader2 size={13} style={{ animation: "spin 0.8s linear infinite" }} /> Uploading…</> : <><Upload size={13} /> {value ? "Change Photo" : "Upload Photo"}</>}
+          </button>
+          {value && (
+            <button
+              type="button"
+              onClick={() => onChange("")}
+              style={{
+                display: "flex", alignItems: "center", gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "var(--radius, 0.625rem)",
+                border: "1px solid #FCA5A5", background: "#FEF2F2", color: "#EF4444",
+                fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 600, fontSize: "0.8125rem", cursor: "pointer",
+              }}
+            >
+              <X size={13} /> Remove
+            </button>
+          )}
+          <input ref={ref} type="file" accept="image/png,image/jpeg,image/webp" style={{ display: "none" }} onChange={(e) => { upload(e.target.files[0]); e.target.value = ""; }} />
+        </div>
+        <p style={{ fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", lineHeight: 1.6, margin: 0 }}>
+          Square photo recommended (1:1 ratio).<br />JPG, PNG, or WebP. Max 5 MB.
+        </p>
       </div>
     </div>
   );
@@ -408,15 +544,18 @@ function FaviconUpload({ value, onChange }) {
     setUploading(true);
     try {
       const res = await mediaApi.upload(file, "logos");
-      if (res?.data?.file_path) {
-        const path = res.data.file_path;
-        const url = path.startsWith("http")
-          ? path
-          : `${API_URL}/uploads/${path.replace(/^uploads\//, "")}`;
+
+      // mediaApi.upload returns the raw JSON — check both shapes
+      const filePath = res?.data?.file_path || res?.file_path;
+
+      if (filePath) {
+        const url = filePath.startsWith("http")
+          ? filePath
+          : `${API_URL}/uploads/${filePath.replace(/^uploads\//, "")}`;
         onChange(url);
-        toast.success("Favicon uploaded");
+        toast.success("Logo uploaded");
       } else {
-        toast.error("Upload failed");
+        toast.error("Upload failed — no path returned");
       }
     } catch (err) {
       toast.error(err?.message || "Upload failed");
@@ -1226,6 +1365,7 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [savingGeneral, setSavingGeneral] = useState(false);
   const [savingTheme, setSavingTheme] = useState(false);
+  const [savingWhatsapp, setSavingWhatsapp] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -1282,6 +1422,27 @@ export default function AdminSettingsPage() {
       toast.error(err.message || "Failed to save");
     } finally {
       setSavingGeneral(false);
+    }
+  };
+
+  // ── Save WhatsApp widget settings ─────────────────────────────
+  const saveWhatsApp = async () => {
+    setSavingWhatsapp(true);
+    try {
+      await settingsApi.update({
+        wa_enabled: settings.wa_enabled ?? "true",
+        wa_number: settings.wa_number || "",
+        wa_name: settings.wa_name || "",
+        wa_title: settings.wa_title || "",
+        wa_avatar: settings.wa_avatar || "",
+        wa_message: settings.wa_message || "",
+        wa_prefill: settings.wa_prefill || "",
+      });
+      toast.success("WhatsApp widget settings saved");
+    } catch (err) {
+      toast.error(err.message || "Failed to save");
+    } finally {
+      setSavingWhatsapp(false);
     }
   };
 
@@ -1633,8 +1794,8 @@ export default function AdminSettingsPage() {
                 padding: "0.625rem 1.5rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "linear-gradient(135deg, #FF6B6B, #E85555)",
-                color: "white",
+                background: "var(--color-primary, #b2ff70)",
+                color: "var(--color-secondary, #1b2f31)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
@@ -2055,6 +2216,109 @@ export default function AdminSettingsPage() {
                   <Palette size={14} /> Save Theme
                 </>
               )}
+            </button>
+          </div>
+        </Accordion>
+
+        {/* ── WhatsApp Chat Widget ── */}
+        <Accordion icon={MessageCircle} title="WhatsApp Chat Widget" color="#25D366">
+          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #64748B)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+            A floating chat widget that appears on all public pages, letting visitors message or call your agent directly on WhatsApp.
+          </p>
+
+          {/* Enable / disable toggle */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #E2E8F0)", marginBottom: "1.25rem", background: "var(--color-surface-2, #f4f9f4)" }}>
+            <div>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #0F172A)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Show widget on public site</p>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", fontFamily: "Inter, sans-serif" }}>
+                {settings.wa_enabled === "false" ? "Widget is hidden" : "Widget is visible to visitors"}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSettings((p) => ({ ...p, wa_enabled: p.wa_enabled === "false" ? "true" : "false" }))}
+              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.wa_enabled === "false" ? "var(--color-text-muted, #94A3B8)" : "#25D366" }}
+              aria-label="Toggle widget"
+            >
+              {settings.wa_enabled === "false"
+                ? <ToggleLeft size={40} />
+                : <ToggleRight size={40} />}
+            </button>
+          </div>
+
+          {/* Avatar */}
+          <AvatarUpload
+            value={settings.wa_avatar || ""}
+            onChange={(url) => setSettings((p) => ({ ...p, wa_avatar: url }))}
+          />
+
+          {/* Name + Title */}
+          <div style={S.grid2}>
+            <Field label="Agent Name" value={settings.wa_name} onChange={setS("wa_name")} placeholder="Lucky Benjamin" />
+            <Field label="Agent Title / Role" value={settings.wa_title} onChange={setS("wa_title")} placeholder="CEO, Mehurbs Properties Limited" />
+          </div>
+
+          {/* WhatsApp number */}
+          <Field
+            label="WhatsApp Number"
+            value={settings.wa_number}
+            onChange={setS("wa_number")}
+            placeholder="09021359415 or 2349021359415"
+          />
+          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "-0.75rem", marginBottom: "1rem", fontFamily: "Inter, sans-serif" }}>
+            Nigerian format (09...) or international format (2349...) — both work.
+          </p>
+
+          {/* Greeting message */}
+          <div style={{ marginBottom: "1rem" }}>
+            <label style={S.label}>Greeting Message</label>
+            <textarea
+              value={settings.wa_message || ""}
+              onChange={setS("wa_message")}
+              onFocus={focus}
+              onBlur={blur}
+              rows={4}
+              placeholder={`Hi there! 👋 I'm Lucky Benjamin. I'm not available right now, but send me a message and I'll get back to you as soon as possible!`}
+              style={{ ...S.input, resize: "vertical", lineHeight: 1.6 }}
+            />
+            <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "0.3rem", fontFamily: "Inter, sans-serif" }}>
+              This message is shown in the chat bubble that appears on the widget.
+            </p>
+          </div>
+
+          {/* Pre-fill message */}
+          <Field
+            label="WhatsApp Pre-fill Text (optional)"
+            value={settings.wa_prefill}
+            onChange={setS("wa_prefill")}
+            placeholder="Hello! I came across Mehurbs Properties and I'd like to enquire about a listing."
+          />
+          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "-0.75rem", marginBottom: "1.25rem", fontFamily: "Inter, sans-serif" }}>
+            Pre-filled message visitors see when they tap "Start Chat on WhatsApp".
+          </p>
+
+          {/* Save */}
+          <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: "0.5rem" }}>
+            <button
+              onClick={saveWhatsApp}
+              disabled={savingWhatsapp}
+              style={{
+                display: "flex", alignItems: "center", gap: "0.5rem",
+                padding: "0.625rem 1.5rem",
+                borderRadius: "var(--radius, 0.75rem)",
+                border: "none",
+                background: "#25D366",
+                color: "#fff",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontWeight: 700, fontSize: "0.875rem",
+                cursor: savingWhatsapp ? "not-allowed" : "pointer",
+                opacity: savingWhatsapp ? 0.7 : 1,
+                boxShadow: "0 2px 8px rgba(37,211,102,0.35)",
+              }}
+            >
+              {savingWhatsapp
+                ? <><Loader2 size={14} style={{ animation: "spin 0.8s linear infinite" }} /> Saving…</>
+                : <><MessageCircle size={14} /> Save Widget Settings</>}
             </button>
           </div>
         </Accordion>

@@ -11,7 +11,7 @@ const {
   parsePagination,
 } = require("../lib/helpers");
 const { requireAuth, requireSuperAdmin } = require("../middleware/auth");
-const { upload } = require("../middleware/upload");
+const { upload, uploadToCloudinary } = require("../middleware/upload");
 const { Enquiry, Setting, Media } = require("../models/Misc");
 const { PopularArea, Partner } = require("../models/Homepage");
 const Admin = require("../models/Admin");
@@ -86,8 +86,6 @@ router.post("/enquiries", async (req, res, next) => {
     });
 
     // ── Email notification — fire-and-forget ──────────────────────
-    // Fetch the notification_email and email_from settings from DB.
-    // We do this asynchronously so it never delays the HTTP response.
     setImmediate(async () => {
       try {
         const settingDocs = await Setting.find({
@@ -101,7 +99,6 @@ router.post("/enquiries", async (req, res, next) => {
         await sendEnquiryNotification(
           {
             ...doc.toObject(),
-            // pass hero-form specific fields that may not be in schema
             property_type: doc.property_type || property_type,
             budget: doc.budget || budget,
             preferred_location: doc.preferred_location || preferred_location,
@@ -120,10 +117,9 @@ router.post("/enquiries", async (req, res, next) => {
 });
 
 // GET /admin/enquiries
-// FIX B1 + B3: use parsePagination(req.query) and correct paginated() signature
 router.get("/admin/enquiries", requireAuth, async (req, res, next) => {
   try {
-    const { page, perPage, skip } = parsePagination(req.query); // ← B1 fix
+    const { page, perPage, skip } = parsePagination(req.query);
     const { status, q } = req.query;
 
     const filter = {};
@@ -143,13 +139,12 @@ router.get("/admin/enquiries", requireAuth, async (req, res, next) => {
       Enquiry.find(filter)
         .sort({ createdAt: -1 })
         .skip(skip)
-        .limit(perPage) // ← B1 fix: was `limit` (undefined), now perPage
+        .limit(perPage)
         .lean(),
       Enquiry.countDocuments(filter),
       Enquiry.countDocuments({ status: "new" }),
     ]);
 
-    // B3 fix: correct paginated() signature + surface newCount in response
     return res.json({
       success: true,
       message: "Success",
@@ -158,7 +153,7 @@ router.get("/admin/enquiries", requireAuth, async (req, res, next) => {
       page,
       perPage,
       totalPages: Math.ceil(total / perPage),
-      newCount, // ← extra field consumed by dashboard badge
+      newCount,
     });
   } catch (err) {
     next(err);
@@ -289,10 +284,9 @@ router.put("/admin/settings", requireAuth, async (req, res, next) => {
 // ══════════════════════════════════════════════════════════════════
 
 // GET /admin/media
-// FIX B1: use parsePagination(req.query)
 router.get("/admin/media", requireAuth, async (req, res, next) => {
   try {
-    const { page, perPage, skip } = parsePagination(req.query); // ← B1 fix
+    const { page, perPage, skip } = parsePagination(req.query);
     const { folder } = req.query;
     const filter = folder ? { folder } : {};
     const [data, total] = await Promise.all([
@@ -303,27 +297,30 @@ router.get("/admin/media", requireAuth, async (req, res, next) => {
         .lean(),
       Media.countDocuments(filter),
     ]);
-    return paginated(res, { data, total, page, perPage }); // ← B3 fix
+    return paginated(res, { data, total, page, perPage });
   } catch (err) {
     next(err);
   }
 });
 
-// POST /admin/media — upload via Cloudinary (multer-storage-cloudinary)
+// POST /admin/media — upload via Cloudinary
+// FIX: added uploadToCloudinary middleware so req.file.path is populated
+// before we try to save it to MongoDB (was causing file_path required error)
 router.post(
   "/admin/media",
   requireAuth,
   upload.single("file"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       if (!req.file) return fail(res, "No file uploaded");
 
-      const folder = req.body.folder || "general";
+      const folder = req.uploadFolder || req.body.folder || "general";
       const doc = await Media.create({
         filename: req.file.filename || req.file.originalname,
         original_name: req.file.originalname,
-        file_path: req.file.path, // Cloudinary HTTPS URL
-        public_id: req.file.filename, // Cloudinary public_id
+        file_path: req.file.path, // Cloudinary HTTPS URL (set by uploadToCloudinary)
+        public_id: req.file.filename, // Cloudinary public_id (set by uploadToCloudinary)
         file_size: req.file.size,
         mime_type: req.file.mimetype,
         folder,
@@ -460,8 +457,6 @@ router.get("/admin/stats", requireAuth, async (req, res, next) => {
 
 // ══════════════════════════════════════════════════════════════════
 // PUBLIC STATS  — GET /stats/public
-// No auth required. Used by the public homepage hero section.
-// ISR-cached for 5 min via Next.js serverFetch on the frontend.
 // ══════════════════════════════════════════════════════════════════
 
 router.get("/stats/public", async (req, res, next) => {
@@ -475,7 +470,6 @@ router.get("/stats/public", async (req, res, next) => {
         House.distinct("state", { state: { $nin: ["", null] } }),
       ]);
 
-    // Deduplicated union of states covered across both property types
     const stateSet = new Set([
       ...landStates.filter(Boolean),
       ...houseStates.filter(Boolean),
@@ -568,7 +562,6 @@ router.post(
         role = "admin",
       } = req.body;
 
-      // Accept either a pre-combined `name` field or separate first/last
       const resolvedName =
         name?.trim() ||
         [first_name?.trim(), last_name?.trim()].filter(Boolean).join(" ");
@@ -598,7 +591,6 @@ router.put("/admin/team/:id", requireAuth, async (req, res, next) => {
   try {
     const { first_name, last_name, name, email, role, phone, bio } = req.body;
 
-    // Accept either a pre-combined `name` field or separate first/last
     const resolvedName =
       name?.trim() ||
       [first_name?.trim(), last_name?.trim()].filter(Boolean).join(" ") ||
@@ -694,10 +686,12 @@ router.get("/admin/popular-areas", requireAuth, async (req, res, next) => {
 });
 
 // POST /admin/popular-areas
+// FIX: added uploadToCloudinary so image is actually sent to Cloudinary
 router.post(
   "/admin/popular-areas",
   requireAuth,
   upload.single("image"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const { name, location, count, link_path, sort_order, is_active } =
@@ -726,10 +720,12 @@ router.post(
 );
 
 // PUT /admin/popular-areas/:id
+// FIX: added uploadToCloudinary so image is actually sent to Cloudinary
 router.put(
   "/admin/popular-areas/:id",
   requireAuth,
   upload.single("image"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const { name, location, count, link_path, sort_order, is_active } =
@@ -807,10 +803,12 @@ router.get("/admin/partners", requireAuth, async (req, res, next) => {
 });
 
 // POST /admin/partners
+// FIX: added uploadToCloudinary so logo is actually sent to Cloudinary
 router.post(
   "/admin/partners",
   requireAuth,
   upload.single("logo"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const { name, website, sort_order, is_active } = req.body;
@@ -835,10 +833,12 @@ router.post(
 );
 
 // PUT /admin/partners/:id
+// FIX: added uploadToCloudinary so logo is actually sent to Cloudinary
 router.put(
   "/admin/partners/:id",
   requireAuth,
   upload.single("logo"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const { name, website, sort_order, is_active } = req.body;

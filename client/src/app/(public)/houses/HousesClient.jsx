@@ -217,6 +217,7 @@ export default function HousesClient({
   });
 
   const activeFilterCount = Object.values(filters).filter(Boolean).length;
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const fetchHouses = useCallback(
     async (newFilters, page = 1) => {
@@ -262,6 +263,106 @@ export default function HousesClient({
     fetchHouses(empty, 1);
   };
 
+  const sidebarContent = (
+    <div>
+      {/* Location search */}
+      <div style={{ marginBottom: "1.5rem" }}>
+        <div style={{ position: "relative" }}>
+          <Search
+            size={14}
+            style={{
+              position: "absolute",
+              left: "0.75rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "var(--color-text-muted)",
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Search location..."
+            value={filters.location}
+            onChange={(e) => handleFilterChange("location", e.target.value)}
+            style={{
+              width: "100%",
+              paddingLeft: "2.25rem",
+              paddingRight: "0.875rem",
+              paddingTop: "0.625rem",
+              paddingBottom: "0.625rem",
+              borderRadius: "var(--radius)",
+              border: "1px solid var(--color-border)",
+              fontSize: "0.875rem",
+              background: "var(--color-surface-3)",
+              color: "var(--color-text)",
+              outline: "none",
+            }}
+          />
+        </div>
+      </div>
+
+      <FilterSection label="Bedrooms">
+        <BedroomToggle
+          value={filters.bedrooms}
+          onChange={(v) => handleFilterChange("bedrooms", v)}
+        />
+      </FilterSection>
+
+      <FilterSection label="Property Type">
+        <FilterRadio
+          options={[
+            { label: "All Types", value: "" },
+            ...HOUSE_CATEGORIES.map((c) => ({ label: c.label, value: c.value })),
+          ]}
+          value={filters.category}
+          onChange={(v) => handleFilterChange("category", v)}
+        />
+      </FilterSection>
+
+      <FilterSection label="Status">
+        <FilterRadio
+          options={STATUS_OPTIONS}
+          value={filters.status}
+          onChange={(v) => handleFilterChange("status", v)}
+        />
+      </FilterSection>
+
+      <FilterSection label="Max Budget">
+        <FilterRadio
+          options={PRICE_OPTIONS}
+          value={filters.maxPrice}
+          onChange={(v) => handleFilterChange("maxPrice", v)}
+        />
+      </FilterSection>
+
+      <FilterSection label="State" defaultOpen={false}>
+        <FilterRadio
+          options={[
+            { label: "All States", value: "" },
+            ...NIGERIAN_STATES.slice(0, 10).map((s) => ({ label: s, value: s })),
+          ]}
+          value={filters.state}
+          onChange={(v) => handleFilterChange("state", v)}
+        />
+      </FilterSection>
+
+      {activeFilterCount > 0 && (
+        <button
+          onClick={clearFilters}
+          className="btn-outline"
+          style={{
+            width: "100%",
+            justifyContent: "center",
+            marginTop: "0.5rem",
+            fontSize: "0.8125rem",
+            padding: "0.6rem 1rem",
+          }}
+        >
+          <X size={13} /> Clear All Filters
+        </button>
+      )}
+    </div>
+  );
+
   return (
     <>
       <PageHero
@@ -297,21 +398,81 @@ export default function HousesClient({
         </div>
       </PageHero>
 
+      {/* Mobile filter backdrop */}
+      <div
+        className={`mobile-filter-backdrop${mobileFiltersOpen ? " open" : ""}`}
+        onClick={() => setMobileFiltersOpen(false)}
+      />
+
+      {/* Mobile filter drawer */}
+      <div className={`mobile-filter-panel${mobileFiltersOpen ? " open" : ""}`}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "1.25rem",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <SlidersHorizontal size={15} style={{ color: "var(--color-primary)" }} />
+            <span
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontWeight: 700,
+                fontSize: "0.9375rem",
+                color: "var(--color-secondary)",
+              }}
+            >
+              Filters
+            </span>
+            {activeFilterCount > 0 && (
+              <span
+                style={{
+                  background: "var(--color-primary)",
+                  color: "white",
+                  fontSize: "0.65rem",
+                  fontWeight: 700,
+                  width: "1.25rem",
+                  height: "1.25rem",
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {activeFilterCount}
+              </span>
+            )}
+          </div>
+          <button
+            onClick={() => setMobileFiltersOpen(false)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "var(--color-text-secondary)",
+              padding: "0.25rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+            aria-label="Close filters"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        {sidebarContent}
+      </div>
+
       <div
         className="section-pad"
         style={{ background: "var(--color-surface-2)" }}
       >
         <div className="container-site">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "260px 1fr",
-              gap: "2rem",
-              alignItems: "start",
-            }}
-          >
-            {/* ── SIDEBAR ── */}
+          <div className="listings-page-grid">
+            {/* ── SIDEBAR (desktop only) ── */}
             <aside
+              className="listings-sidebar-desktop"
               style={{
                 background: "var(--color-surface)",
                 borderRadius: "var(--radius-lg)",
@@ -370,114 +531,35 @@ export default function HousesClient({
                   </span>
                 )}
               </div>
-
-              {/* Location search */}
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ position: "relative" }}>
-                  <Search
-                    size={14}
-                    style={{
-                      position: "absolute",
-                      left: "0.75rem",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      color: "var(--color-text-muted)",
-                    }}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Search location..."
-                    value={filters.location}
-                    onChange={(e) =>
-                      handleFilterChange("location", e.target.value)
-                    }
-                    style={{
-                      width: "100%",
-                      paddingLeft: "2.25rem",
-                      paddingRight: "0.875rem",
-                      paddingTop: "0.625rem",
-                      paddingBottom: "0.625rem",
-                      borderRadius: "var(--radius)",
-                      border: "1px solid var(--color-border)",
-                      fontSize: "0.875rem",
-                      background: "var(--color-surface-3)",
-                      color: "var(--color-text)",
-                      outline: "none",
-                    }}
-                  />
-                </div>
-              </div>
-
-              <FilterSection label="Bedrooms">
-                <BedroomToggle
-                  value={filters.bedrooms}
-                  onChange={(v) => handleFilterChange("bedrooms", v)}
-                />
-              </FilterSection>
-
-              <FilterSection label="Property Type">
-                <FilterRadio
-                  options={[
-                    { label: "All Types", value: "" },
-                    ...HOUSE_CATEGORIES.map((c) => ({
-                      label: c.label,
-                      value: c.value,
-                    })),
-                  ]}
-                  value={filters.category}
-                  onChange={(v) => handleFilterChange("category", v)}
-                />
-              </FilterSection>
-
-              <FilterSection label="Status">
-                <FilterRadio
-                  options={STATUS_OPTIONS}
-                  value={filters.status}
-                  onChange={(v) => handleFilterChange("status", v)}
-                />
-              </FilterSection>
-
-              <FilterSection label="Max Budget">
-                <FilterRadio
-                  options={PRICE_OPTIONS}
-                  value={filters.maxPrice}
-                  onChange={(v) => handleFilterChange("maxPrice", v)}
-                />
-              </FilterSection>
-
-              <FilterSection label="State" defaultOpen={false}>
-                <FilterRadio
-                  options={[
-                    { label: "All States", value: "" },
-                    ...NIGERIAN_STATES.slice(0, 10).map((s) => ({
-                      label: s,
-                      value: s,
-                    })),
-                  ]}
-                  value={filters.state}
-                  onChange={(v) => handleFilterChange("state", v)}
-                />
-              </FilterSection>
-
-              {activeFilterCount > 0 && (
-                <button
-                  onClick={clearFilters}
-                  className="btn-outline"
-                  style={{
-                    width: "100%",
-                    justifyContent: "center",
-                    marginTop: "0.5rem",
-                    fontSize: "0.8125rem",
-                    padding: "0.6rem 1rem",
-                  }}
-                >
-                  <X size={13} /> Clear All Filters
-                </button>
-              )}
+              {sidebarContent}
             </aside>
 
             {/* ── MAIN ── */}
             <main>
+              {/* Mobile filter toggle */}
+              <div className="mobile-filter-toggle">
+                <button
+                  onClick={() => setMobileFiltersOpen(true)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "var(--radius)",
+                    border: "1px solid var(--color-border)",
+                    background: "var(--color-surface)",
+                    color: "var(--color-text-secondary)",
+                    fontFamily: "var(--font-heading)",
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <SlidersHorizontal size={15} />
+                  Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
+                </button>
+              </div>
+
               <div
                 style={{
                   display: "flex",

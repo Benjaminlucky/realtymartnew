@@ -33,16 +33,16 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
           width: "2.75rem",
           height: "2.75rem",
           borderRadius: "0.75rem",
-          background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
+          background: "var(--color-primary, #b2ff70)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 8px 24px rgba(255,107,107,0.35)",
+          boxShadow: "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.25))",
         }}
       >
         <Loader2
           size={20}
-          style={{ color: "white", animation: "spin 1s linear infinite" }}
+          style={{ color: "var(--color-secondary, #1b2f31)", animation: "spin 1s linear infinite" }}
         />
       </div>
       <p
@@ -72,6 +72,7 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
     >
       <AdminSidebar newEnquiries={newEnquiries} />
       <main
+        className="admin-main-content"
         style={{
           flex: 1,
           minWidth: 0,

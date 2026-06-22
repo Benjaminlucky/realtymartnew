@@ -163,27 +163,13 @@ export function FeaturedLands({ lands = [] }) {
         </div>
 
         {/* ── Asymmetric grid layout ── */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            gridTemplateRows: "auto",
-            gap: "1.25rem",
-          }}
-        >
+        <div className="featured-lands-grid">
           {/* ── HERO CARD (spans 7 cols, tall) ── */}
           {hero && (
             <Link
               href={`/lands/${hero.slug}`}
-              className="group"
+              className="group featured-land-hero"
               style={{
-                gridColumn: "1 / 8",
-                gridRow: "1 / 3",
-                display: "block",
-                borderRadius: "var(--radius-xl)",
-                overflow: "hidden",
-                position: "relative",
-                minHeight: "480px",
                 background: hero.feature_image ? undefined : bgGradients[0],
               }}
             >
@@ -401,19 +387,9 @@ export function FeaturedLands({ lands = [] }) {
             <Link
               key={land.id || land.slug}
               href={`/lands/${land.slug}`}
-              className="group"
+              className="group featured-land-side"
               style={{
-                gridColumn: "8 / 13",
-                gridRow: `${i + 1} / ${i + 2}`,
-                display: "block",
-                borderRadius: "var(--radius-lg)",
-                overflow: "hidden",
-                position: "relative",
-                minHeight: "148px",
                 background: land.feature_image ? undefined : bgGradients[i + 1],
-                border: "1px solid var(--color-border)",
-                transition:
-                  "transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-4px)";
@@ -942,23 +918,12 @@ export function FeaturedHouses({ houses = [] }) {
         </div>
 
         {/* ── Main layout: spotlight left + cards right ── */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1.5rem",
-            alignItems: "start",
-          }}
-        >
+        <div className="featured-houses-grid">
           {/* ── LEFT: Active spotlight ── */}
           <Link
             href={`/houses/${active.slug}`}
+            className="featured-house-spotlight"
             style={{
-              display: "block",
-              borderRadius: "var(--radius-xl)",
-              overflow: "hidden",
-              position: "relative",
-              minHeight: "520px",
               background: active.feature_image
                 ? undefined
                 : cardBgs[activeIdx % cardBgs.length],

@@ -189,7 +189,7 @@ export default function InquiryForm({ settings }) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Row 1: Inquiry type + Property type */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label style={labelStyle}>I am interested in</label>
             <select
@@ -233,7 +233,7 @@ export default function InquiryForm({ settings }) {
         </div>
 
         {/* Row 2: Budget + Location */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label style={labelStyle}>Max Budget</label>
             <select
@@ -296,7 +296,7 @@ export default function InquiryForm({ settings }) {
         </div>
 
         {/* Row: First + Last name */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label style={labelStyle}>
               First Name <span style={{ color: "#ff6b6b" }}>*</span>
@@ -329,7 +329,7 @@ export default function InquiryForm({ settings }) {
         </div>
 
         {/* Row: Email + Phone */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label style={labelStyle}>Email Address</label>
             <input

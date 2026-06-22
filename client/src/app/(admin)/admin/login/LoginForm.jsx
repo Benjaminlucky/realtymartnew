@@ -90,7 +90,7 @@ export default function LoginForm() {
           height: "600px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 65%)",
+            "radial-gradient(circle, color-mix(in srgb, var(--color-primary, #b2ff70) 8%, transparent) 0%, transparent 65%)",
           pointerEvents: "none",
         }}
       />
@@ -131,14 +131,14 @@ export default function LoginForm() {
               width: "2.75rem",
               height: "2.75rem",
               borderRadius: "0.75rem",
-              background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
+              background: "var(--color-primary, #b2ff70)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "0 8px 24px rgba(255,107,107,0.35)",
+              boxShadow: "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.25))",
             }}
           >
-            <Building2 size={22} style={{ color: "white" }} />
+            <Building2 size={22} style={{ color: "var(--color-secondary, #1b2f31)" }} />
           </div>
           <div>
             <p
@@ -179,7 +179,7 @@ export default function LoginForm() {
         >
           Manage your
           <br />
-          <span style={{ color: "#FF6B6B" }}>real estate</span>
+          <span style={{ color: "var(--color-primary, #b2ff70)" }}>real estate</span>
           <br />
           empire.
         </h1>
@@ -238,13 +238,13 @@ export default function LoginForm() {
                 width: "2.25rem",
                 height: "2.25rem",
                 borderRadius: "0.625rem",
-                background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
+                background: "var(--color-primary, #b2ff70)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Building2 size={18} style={{ color: "white" }} />
+              <Building2 size={18} style={{ color: "var(--color-secondary, #1b2f31)" }} />
             </div>
             <span
               style={{
@@ -352,7 +352,7 @@ export default function LoginForm() {
                   boxSizing: "border-box",
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "#FF6B6B";
+                  e.target.style.borderColor = "var(--color-primary, #b2ff70)";
                   e.target.style.background = "rgba(255,255,255,0.08)";
                 }}
                 onBlur={(e) => {
@@ -396,7 +396,7 @@ export default function LoginForm() {
                     boxSizing: "border-box",
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = "#FF6B6B";
+                    e.target.style.borderColor = "var(--color-primary, #b2ff70)";
                     e.target.style.background = "rgba(255,255,255,0.08)";
                   }}
                   onBlur={(e) => {
@@ -431,9 +431,9 @@ export default function LoginForm() {
                 borderRadius: "0.75rem",
                 border: "none",
                 background: submitting
-                  ? "rgba(255,107,107,0.5)"
-                  : "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
-                color: "white",
+                  ? "color-mix(in srgb, var(--color-primary, #b2ff70) 50%, transparent)"
+                  : "var(--color-primary, #b2ff70)",
+                color: "var(--color-secondary, #1b2f31)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.9375rem",
@@ -445,7 +445,7 @@ export default function LoginForm() {
                 marginTop: "0.5rem",
                 boxShadow: submitting
                   ? "none"
-                  : "0 8px 24px rgba(255,107,107,0.35)",
+                  : "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.2))",
               }}
             >
               {submitting ? (
@@ -474,7 +474,7 @@ export default function LoginForm() {
             First time?{" "}
             <a
               href="/admin/setup"
-              style={{ color: "#FF9B9B", textDecoration: "none" }}
+              style={{ color: "var(--color-primary, #b2ff70)", textDecoration: "none", opacity: 0.85 }}
             >
               Create your admin account &rarr;
             </a>

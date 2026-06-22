@@ -241,7 +241,7 @@ export default function Footer({ settings }) {
             reserved.
           </p>
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-            {settings?.footer_credit || "Built with ❤️ for Nigerian Realtors"}
+            {settings?.footer_credit || "Built with ❤️ for Nigerian Realtors by Mark V Technologies Limited"}
           </p>
         </div>
       </div>

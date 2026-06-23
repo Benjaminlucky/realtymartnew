@@ -23,7 +23,7 @@ async function fetcher(endpoint, options = {}) {
   try {
     res = await fetch(url, { ...options, headers });
   } catch (err) {
-    throw new Error(`Network error: ${err.message}`);
+    throw new Error(`Cannot reach server at ${API_URL}. Make sure NEXT_PUBLIC_API_URL is set and the backend is running.`);
   }
 
   const ct = res.headers.get("content-type") || "";

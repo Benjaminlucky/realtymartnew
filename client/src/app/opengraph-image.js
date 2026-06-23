@@ -1,8 +1,10 @@
 import { ImageResponse } from "next/og";
 
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Nigerian Realty";
+
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Mehurbs — Premium Properties Across Nigeria";
+export const alt = `${SITE_NAME} — Premium Properties Across Nigeria`;
 
 export default function OGImage() {
   return new ImageResponse(
@@ -101,7 +103,7 @@ export default function OGImage() {
               letterSpacing: "-0.5px",
             }}
           >
-            mehurbs
+            {SITE_NAME}
           </span>
         </div>
 
@@ -164,7 +166,7 @@ export default function OGImage() {
             display: "flex",
           }}
         >
-          mehurbs.com
+          {(process.env.NEXT_PUBLIC_SITE_URL || "").replace(/^https?:\/\//, "") || SITE_NAME}
         </div>
       </div>
     ),

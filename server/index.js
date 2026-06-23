@@ -36,11 +36,15 @@ connectDB();
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 
 // ── CORS ──────────────────────────────────────────────────────────
+// Build CORS allowlist purely from env vars — no hardcoded client domains.
+// CORS_ORIGINS accepts a comma-separated list of extra origins if needed.
 const allowed = [
   process.env.FRONTEND_URL || "http://localhost:3000",
   "http://localhost:3000",
-  "https://mehurbs.com",
-  "https://mehurbs.netlify.app",
+  ...((process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean)),
 ];
 
 app.use(

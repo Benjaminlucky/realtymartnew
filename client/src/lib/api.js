@@ -4,7 +4,7 @@
  */
 
 export const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL || "https://mehurbs-production.up.railway.app"
+  process.env.NEXT_PUBLIC_API_URL || "https://realtymartnew-production.up.railway.app"
 ).replace(/\/$/, "");
 
 // These are no-ops now — kept for compatibility but do nothing

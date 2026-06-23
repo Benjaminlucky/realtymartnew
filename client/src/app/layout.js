@@ -16,12 +16,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mehurbs.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Nigerian Realty";
+const SITE_DESC = process.env.NEXT_PUBLIC_SITE_DESC ||
+  "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.";
 
 export const metadata = {
-  title: "Mehurbs — Premium Properties Across Nigeria",
-  description:
-    "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
+  title: `${SITE_NAME} — Premium Properties Across Nigeria`,
+  description: SITE_DESC,
   alternates: {
     canonical: SITE_URL,
     languages: {
@@ -30,19 +32,17 @@ export const metadata = {
     },
   },
   openGraph: {
-    title: "Mehurbs — Premium Properties Across Nigeria",
-    description:
-      "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.",
+    title: `${SITE_NAME} — Premium Properties Across Nigeria`,
+    description: SITE_DESC,
     url: SITE_URL,
-    siteName: "Mehurbs",
+    siteName: SITE_NAME,
     locale: "en_NG",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mehurbs — Premium Properties Across Nigeria",
-    description:
-      "Discover premium lands and houses for sale across Nigeria. Browse verified listings and estate developments.",
+    title: `${SITE_NAME} — Premium Properties Across Nigeria`,
+    description: SITE_DESC,
   },
 };
 

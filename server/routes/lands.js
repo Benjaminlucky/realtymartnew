@@ -9,9 +9,11 @@ const {
   parsePagination,
 } = require("../lib/helpers");
 const { requireAuth } = require("../middleware/auth");
-const { upload } = require("../middleware/upload");
+const { upload, uploadToCloudinary } = require("../middleware/upload");
 const Land = require("../models/Land");
 const { revalidate } = require("../lib/revalidate");
+
+const escapeRegex = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 
 // ── Revalidation path sets ────────────────────────────────────────
 // Called after every mutation so the public site reflects changes
@@ -41,8 +43,8 @@ router.get("/", async (req, res, next) => {
     } = req.query;
 
     const filter = {};
-    if (location) filter.location = { $regex: location, $options: "i" };
-    if (state) filter.state = { $regex: state, $options: "i" };
+    if (location) filter.location = { $regex: escapeRegex(location), $options: "i" };
+    if (state) filter.state = { $regex: escapeRegex(state), $options: "i" };
     if (status) filter.status = status;
     if (title_type) filter.title_type = title_type;
     if (featured === "true") filter.featured = true;
@@ -52,10 +54,11 @@ router.get("/", async (req, res, next) => {
       if (max_price) filter.price.$lte = Number(max_price);
     }
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { estate_name: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } },
-        { description: { $regex: search, $options: "i" } },
+        { estate_name: { $regex: s, $options: "i" } },
+        { location: { $regex: s, $options: "i" } },
+        { description: { $regex: s, $options: "i" } },
       ];
     }
 
@@ -106,6 +109,17 @@ router.get("/:slug", async (req, res, next) => {
 // ADMIN ROUTES
 // ══════════════════════════════════════════════════════════════════
 
+// GET /admin/lands/:id — full record for edit form
+router.get("/admin/lands/:id", requireAuth, async (req, res, next) => {
+  try {
+    const land = await Land.findById(req.params.id).lean();
+    if (!land) return fail(res, "Land listing not found", 404);
+    return ok(res, land);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // GET /admin/lands
 router.get("/admin/lands", requireAuth, async (req, res, next) => {
   try {
@@ -114,9 +128,10 @@ router.get("/admin/lands", requireAuth, async (req, res, next) => {
     const filter = {};
     if (status) filter.status = status;
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { estate_name: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } },
+        { estate_name: { $regex: s, $options: "i" } },
+        { location: { $regex: s, $options: "i" } },
       ];
     }
     const [data, total] = await Promise.all([
@@ -138,6 +153,7 @@ router.post(
   "/admin/lands",
   requireAuth,
   upload.array("images", 10),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };
@@ -187,6 +203,7 @@ router.put(
   "/admin/lands/:id",
   requireAuth,
   upload.array("images", 10),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };

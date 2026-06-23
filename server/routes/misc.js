@@ -3,6 +3,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
+
+const escapeRegex = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 const {
   ok,
   created,
@@ -125,7 +127,7 @@ router.get("/admin/enquiries", requireAuth, async (req, res, next) => {
     const filter = {};
     if (status) filter.status = status;
     if (q) {
-      const re = new RegExp(q.trim(), "i");
+      const re = new RegExp(escapeRegex(q.trim()), "i");
       filter.$or = [
         { first_name: re },
         { last_name: re },
@@ -496,7 +498,7 @@ router.get("/search", async (req, res, next) => {
     const { q } = req.query;
     if (!q || q.trim().length < 2) return ok(res, { lands: [], houses: [] });
 
-    const re = new RegExp(q.trim(), "i");
+    const re = new RegExp(escapeRegex(q.trim()), "i");
 
     const [lands, houses] = await Promise.all([
       Land.find({

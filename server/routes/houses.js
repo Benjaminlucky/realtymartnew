@@ -9,9 +9,12 @@ const {
   parsePagination,
 } = require("../lib/helpers");
 const { requireAuth } = require("../middleware/auth");
-const { upload } = require("../middleware/upload");
+const { upload, uploadToCloudinary } = require("../middleware/upload");
 const House = require("../models/House");
 const { revalidate } = require("../lib/revalidate");
+
+// Escape user input before using in a MongoDB $regex to prevent ReDoS
+const escapeRegex = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 
 function housePaths(slug) {
   const base = ["/", "/houses"];
@@ -39,8 +42,8 @@ router.get("/", async (req, res, next) => {
     } = req.query;
 
     const filter = {};
-    if (location) filter.location = { $regex: location, $options: "i" };
-    if (state) filter.state = { $regex: state, $options: "i" };
+    if (location) filter.location = { $regex: escapeRegex(location), $options: "i" };
+    if (state) filter.state = { $regex: escapeRegex(state), $options: "i" };
     if (status) filter.status = status;
     if (category) filter.category = category;
     if (bedrooms !== undefined) filter.bedrooms = Number(bedrooms);
@@ -51,10 +54,11 @@ router.get("/", async (req, res, next) => {
       if (max_price) filter.price.$lte = Number(max_price);
     }
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } },
-        { description: { $regex: search, $options: "i" } },
+        { title: { $regex: s, $options: "i" } },
+        { location: { $regex: s, $options: "i" } },
+        { description: { $regex: s, $options: "i" } },
       ];
     }
 
@@ -105,6 +109,17 @@ router.get("/:slug", async (req, res, next) => {
 // ADMIN ROUTES
 // ══════════════════════════════════════════════════════════════════
 
+// GET /admin/houses/:id — full record for edit form
+router.get("/admin/houses/:id", requireAuth, async (req, res, next) => {
+  try {
+    const house = await House.findById(req.params.id).lean();
+    if (!house) return fail(res, "House listing not found", 404);
+    return ok(res, house);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // GET /admin/houses
 router.get("/admin/houses", requireAuth, async (req, res, next) => {
   try {
@@ -113,9 +128,10 @@ router.get("/admin/houses", requireAuth, async (req, res, next) => {
     const filter = {};
     if (status) filter.status = status;
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { location: { $regex: search, $options: "i" } },
+        { title: { $regex: s, $options: "i" } },
+        { location: { $regex: s, $options: "i" } },
       ];
     }
     const [data, total] = await Promise.all([
@@ -137,6 +153,7 @@ router.post(
   "/admin/houses",
   requireAuth,
   upload.array("images", 10),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };
@@ -189,6 +206,7 @@ router.put(
   "/admin/houses/:id",
   requireAuth,
   upload.array("images", 10),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };

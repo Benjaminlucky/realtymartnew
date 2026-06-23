@@ -24,6 +24,7 @@ const houseSchema = new mongoose.Schema({
   latitude:        { type: Number },
   longitude:       { type: Number },
   features:        { type: [String], default: [] },
+  tags:            { type: [String], default: [] },
   meta_title:      { type: String },
   meta_description:{ type: String },
   featured:        { type: Boolean, default: false },

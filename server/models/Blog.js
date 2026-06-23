@@ -18,6 +18,7 @@ const postSchema = new mongoose.Schema({
   author_name:     { type: String },
   status:          { type: String, enum: ["draft","published"], default: "draft" },
   reading_time:    { type: Number, default: 5 },
+  tags:            { type: [String], default: [] },
   meta_title:      { type: String },
   meta_description:{ type: String },
   views_count:     { type: Number, default: 0 },
@@ -26,6 +27,7 @@ const postSchema = new mongoose.Schema({
 
 postSchema.index({ status: 1 });
 postSchema.index({ category: 1 });
+postSchema.index({ tags: 1 });
 postSchema.index({ title: "text", excerpt: "text", content: "text" });
 
 const BlogCategory = mongoose.model("BlogCategory", categorySchema);

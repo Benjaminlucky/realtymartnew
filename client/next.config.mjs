@@ -8,6 +8,12 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
+      // Railway production backend — static uploads served directly
+      {
+        protocol: "https",
+        hostname: "*.up.railway.app",
+        pathname: "/uploads/**",
+      },
       // Allow the Express API host for local development
       {
         protocol: "http",

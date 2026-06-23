@@ -9,9 +9,11 @@ const {
   parsePagination,
 } = require("../lib/helpers");
 const { requireAuth } = require("../middleware/auth");
-const { upload } = require("../middleware/upload");
+const { upload, uploadToCloudinary } = require("../middleware/upload");
 const { BlogPost, BlogCategory } = require("../models/Blog");
 const { revalidate } = require("../lib/revalidate");
+
+const escapeRegex = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 
 function blogPaths(slug) {
   const base = ["/blog"];
@@ -39,9 +41,10 @@ router.get("/", async (req, res, next) => {
 
     if (tag) filter.tags = tag;
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { excerpt: { $regex: search, $options: "i" } },
+        { title: { $regex: s, $options: "i" } },
+        { excerpt: { $regex: s, $options: "i" } },
       ];
     }
 
@@ -113,9 +116,10 @@ router.get("/admin/blog", requireAuth, async (req, res, next) => {
     const filter = {};
     if (status) filter.status = status;
     if (search) {
+      const s = escapeRegex(search);
       filter.$or = [
-        { title: { $regex: search, $options: "i" } },
-        { author_name: { $regex: search, $options: "i" } },
+        { title: { $regex: s, $options: "i" } },
+        { author_name: { $regex: s, $options: "i" } },
       ];
     }
     const [data, total] = await Promise.all([
@@ -149,6 +153,7 @@ router.post(
   "/admin/blog",
   requireAuth,
   upload.single("cover_image"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };
@@ -203,6 +208,7 @@ router.put(
   "/admin/blog/:id",
   requireAuth,
   upload.single("cover_image"),
+  uploadToCloudinary,
   async (req, res, next) => {
     try {
       const body = { ...req.body };
@@ -278,6 +284,29 @@ router.post("/admin/blog/categories", requireAuth, async (req, res, next) => {
     next(err);
   }
 });
+
+router.put(
+  "/admin/blog/categories/:id",
+  requireAuth,
+  async (req, res, next) => {
+    try {
+      const { name, slug } = req.body;
+      if (!name?.trim()) return fail(res, "Category name is required");
+      const cat = await BlogCategory.findByIdAndUpdate(
+        req.params.id,
+        {
+          name: name.trim(),
+          slug: slug?.trim() || name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        },
+        { new: true, runValidators: true },
+      ).lean();
+      if (!cat) return fail(res, "Category not found", 404);
+      return ok(res, cat, "Category updated");
+    } catch (err) {
+      next(err);
+    }
+  },
+);
 
 router.delete(
   "/admin/blog/categories/:id",

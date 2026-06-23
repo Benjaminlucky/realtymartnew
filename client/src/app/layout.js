@@ -109,11 +109,17 @@ async function getSettings() {
   }
 }
 
+// Strip characters that could break out of a <style> block.
+// CSS variable values can't execute code, but </style> injection is a real risk.
+function safeCssValue(v) {
+  return String(v).replace(/[<>"'`\\]/g, "");
+}
+
 function buildThemeCss(settings) {
   const t = { ...THEME_DEFAULTS };
   for (const [k] of VAR_MAP) {
     if (settings[k] && String(settings[k]).trim()) {
-      t[k] = String(settings[k]).trim();
+      t[k] = safeCssValue(String(settings[k]).trim());
     }
   }
   const declarations = VAR_MAP.map(

@@ -23,6 +23,7 @@ import {
   Send,
 } from "lucide-react";
 import { toast } from "sonner";
+import ShareButtons from "@/components/public/ShareButtons";
 import {
   formatPrice,
   buildWhatsAppLink,
@@ -447,6 +448,7 @@ function EnquiryForm({ land, settings }) {
 // ── Main component ────────────────────────────────────────────────
 export default function LandDetailClient({ land, settings, related }) {
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [shareOpen, setShareOpen] = useState(false);
 
   const {
     _id,
@@ -499,8 +501,7 @@ export default function LandDetailClient({ land, settings, related }) {
         await navigator.share({ title: estate_name, url: propertyUrl });
       } catch {}
     } else {
-      await navigator.clipboard.writeText(propertyUrl);
-      toast.success("Link copied to clipboard!");
+      setShareOpen((p) => !p);
     }
   };
 
@@ -651,25 +652,44 @@ export default function LandDetailClient({ land, settings, related }) {
               </div>
             </div>
             <div style={{ display: "flex", gap: "0.625rem", flexShrink: 0 }}>
-              <button
-                onClick={handleShare}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.375rem",
-                  padding: "0.5rem 0.875rem",
-                  borderRadius: "var(--radius)",
-                  background: "rgba(255,255,255,0.1)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  color: "white",
-                  fontSize: "0.8125rem",
-                  fontWeight: 600,
-                  cursor: "pointer",
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <Share2 size={14} /> Share
-              </button>
+              <div style={{ position: "relative" }}>
+                <button
+                  onClick={handleShare}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.375rem",
+                    padding: "0.5rem 0.875rem",
+                    borderRadius: "var(--radius)",
+                    background: "rgba(255,255,255,0.1)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "white",
+                    fontSize: "0.8125rem",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    fontFamily: "var(--font-heading)",
+                  }}
+                >
+                  <Share2 size={14} /> Share
+                </button>
+                {shareOpen && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "calc(100% + 0.5rem)",
+                      right: 0,
+                      zIndex: 20,
+                      background: "var(--color-surface)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "var(--radius-lg)",
+                      padding: "0.625rem",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
+                    }}
+                  >
+                    <ShareButtons url={propertyUrl} title={estate_name} whatsapp={whatsapp} />
+                  </div>
+                )}
+              </div>
               <Link
                 href="/lands"
                 style={{

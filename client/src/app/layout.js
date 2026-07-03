@@ -21,30 +21,40 @@ const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "Nigerian Realty";
 const SITE_DESC = process.env.NEXT_PUBLIC_SITE_DESC ||
   "Discover premium lands and houses for sale across Nigeria. Browse verified listings, investment properties, and estate developments.";
 
-export const metadata = {
-  title: `${SITE_NAME} — Premium Properties Across Nigeria`,
-  description: SITE_DESC,
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      "en-NG": SITE_URL,
-      "x-default": SITE_URL,
+export async function generateMetadata() {
+  const settings = await getSettings();
+  const siteName = settings.site_name || SITE_NAME;
+  const title = `${siteName} — Premium Properties Across Nigeria`;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title,
+    description: SITE_DESC,
+    alternates: {
+      canonical: SITE_URL,
+      languages: {
+        "en-NG": SITE_URL,
+        "x-default": SITE_URL,
+      },
     },
-  },
-  openGraph: {
-    title: `${SITE_NAME} — Premium Properties Across Nigeria`,
-    description: SITE_DESC,
-    url: SITE_URL,
-    siteName: SITE_NAME,
-    locale: "en_NG",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE_NAME} — Premium Properties Across Nigeria`,
-    description: SITE_DESC,
-  },
-};
+    openGraph: {
+      title,
+      description: SITE_DESC,
+      url: SITE_URL,
+      siteName,
+      locale: "en_NG",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: SITE_DESC,
+    },
+    verification: settings.google_site_verification
+      ? { google: settings.google_site_verification }
+      : undefined,
+  };
+}
 
 const THEME_DEFAULTS = {
   theme_primary: "#b2ff70",
@@ -129,10 +139,61 @@ function buildThemeCss(settings) {
   return `:root,html,body {\n${declarations}\n${shadowDecl}\n}`;
 }
 
+// Sitewide Organization + WebSite JSON-LD — improves eligibility for
+// Google's brand knowledge panel and sitelinks search box. Per-listing
+// pages layer their own Residence/Article schema on top of this.
+function buildOrganizationSchema(settings) {
+  const siteName = settings.site_name || SITE_NAME;
+  const sameAs = [
+    settings.facebook,
+    settings.instagram,
+    settings.twitter,
+    settings.linkedin,
+    settings.youtube,
+  ].filter(Boolean);
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: siteName,
+        url: SITE_URL,
+        logo: settings.logo || undefined,
+        image: settings.logo || undefined,
+        telephone: settings.phone || undefined,
+        email: settings.email || undefined,
+        address: settings.address
+          ? { "@type": "PostalAddress", addressCountry: "NG", streetAddress: settings.address }
+          : undefined,
+        sameAs: sameAs.length ? sameAs : undefined,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: siteName,
+        url: SITE_URL,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${SITE_URL}/houses?search={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+}
+
 export default async function RootLayout({ children }) {
   const settings = await getSettings();
   const themeCss = buildThemeCss(settings);
   const faviconUrl = settings.favicon || null;
+  const organizationLd = JSON.parse(
+    JSON.stringify(buildOrganizationSchema(settings), (_, v) =>
+      v === undefined ? undefined : v,
+    ),
+  );
 
   return (
     <html
@@ -151,6 +212,10 @@ export default async function RootLayout({ children }) {
             <link rel="apple-touch-icon" href={faviconUrl} />
           </>
         )}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+        />
       </head>
       <body className="antialiased">
         {children}

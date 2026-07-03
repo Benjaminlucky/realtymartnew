@@ -27,6 +27,7 @@ import {
   MessageCircle,
   ToggleLeft,
   ToggleRight,
+  Droplets,
 } from "lucide-react";
 
 // ── Style constants ───────────────────────────────────────────────
@@ -1366,6 +1367,7 @@ export default function AdminSettingsPage() {
   const [savingGeneral, setSavingGeneral] = useState(false);
   const [savingTheme, setSavingTheme] = useState(false);
   const [savingWhatsapp, setSavingWhatsapp] = useState(false);
+  const [savingWatermark, setSavingWatermark] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -1414,6 +1416,7 @@ export default function AdminSettingsPage() {
         youtube: settings.youtube || "",
         meta_title: settings.meta_title || "",
         meta_description: settings.meta_description || "",
+        google_site_verification: settings.google_site_verification || "",
         favicon: settings.favicon || "",
         nav_links: settings.nav_links || "",
       });
@@ -1443,6 +1446,25 @@ export default function AdminSettingsPage() {
       toast.error(err.message || "Failed to save");
     } finally {
       setSavingWhatsapp(false);
+    }
+  };
+
+  // ── Save watermark settings ────────────────────────────────────
+  const saveWatermark = async () => {
+    setSavingWatermark(true);
+    try {
+      await settingsApi.update({
+        watermark_enabled: settings.watermark_enabled ?? "true",
+        watermark_text: settings.watermark_text || "",
+        watermark_opacity: settings.watermark_opacity || "35",
+        watermark_color: settings.watermark_color || "#FFFFFF",
+        watermark_scale: settings.watermark_scale || "60",
+      });
+      toast.success("Watermark settings saved");
+    } catch (err) {
+      toast.error(err.message || "Failed to save");
+    } finally {
+      setSavingWatermark(false);
     }
   };
 
@@ -1668,6 +1690,20 @@ export default function AdminSettingsPage() {
               placeholder="SEO description"
             />
           </div>
+          <Field
+            label="Google Search Console Verification"
+            value={settings.google_site_verification}
+            onChange={setS("google_site_verification")}
+            placeholder="e.g. abc123XYZ..."
+            hint={
+              <>
+                Paste just the <code>content</code> value from the HTML tag
+                Google Search Console gives you (Settings → Ownership
+                verification → HTML tag) — not the whole tag. Renders as a
+                site-wide meta tag so Google can verify ownership.
+              </>
+            }
+          />
 
           {/* Nav Links */}
           <NavLinksEditor
@@ -2319,6 +2355,105 @@ export default function AdminSettingsPage() {
               {savingWhatsapp
                 ? <><Loader2 size={14} style={{ animation: "spin 0.8s linear infinite" }} /> Saving…</>
                 : <><MessageCircle size={14} /> Save Widget Settings</>}
+            </button>
+          </div>
+        </Accordion>
+
+        {/* ── Image Watermark ── */}
+        <Accordion icon={Droplets} title="Image Watermark" color="#0EA5E9">
+          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #64748B)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+            Stamps a centered, semi-transparent text watermark on every house, land, and blog image uploaded from now on. Your logo/favicon uploads are never watermarked.
+          </p>
+
+          {/* Enable / disable toggle */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #E2E8F0)", marginBottom: "1.25rem", background: "var(--color-surface-2, #f4f9f4)" }}>
+            <div>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #0F172A)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Watermark new uploads</p>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", fontFamily: "Inter, sans-serif" }}>
+                {settings.watermark_enabled === "false" ? "Disabled — uploads are saved as-is" : "Enabled — applied automatically on upload"}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setSettings((p) => ({ ...p, watermark_enabled: p.watermark_enabled === "false" ? "true" : "false" }))}
+              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.watermark_enabled === "false" ? "var(--color-text-muted, #94A3B8)" : "#0EA5E9" }}
+              aria-label="Toggle watermark"
+            >
+              {settings.watermark_enabled === "false"
+                ? <ToggleLeft size={40} />
+                : <ToggleRight size={40} />}
+            </button>
+          </div>
+
+          <Field
+            label="Watermark Text"
+            value={settings.watermark_text}
+            onChange={setS("watermark_text")}
+            placeholder={settings.site_name || "Leave blank to use your Site Name"}
+            hint="Shown centered across every watermarked image."
+          />
+
+          <div style={S.grid2}>
+            <Field
+              label="Opacity (%)"
+              type="number"
+              value={settings.watermark_opacity ?? "35"}
+              onChange={setS("watermark_opacity")}
+              placeholder="35"
+              hint="Higher = more visible. 30–45% keeps the photo clear underneath."
+            />
+            <Field
+              label="Width (% of image)"
+              type="number"
+              value={settings.watermark_scale ?? "60"}
+              onChange={setS("watermark_scale")}
+              placeholder="60"
+              hint="How wide the text stretches relative to the image."
+            />
+          </div>
+
+          <div style={{ marginBottom: "1.25rem" }}>
+            <label style={S.label}>Watermark Color</label>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
+              <input
+                type="color"
+                value={settings.watermark_color || "#FFFFFF"}
+                onChange={(e) => setSettings((p) => ({ ...p, watermark_color: e.target.value }))}
+                style={{ width: "2.5rem", height: "2.5rem", padding: 0, border: "1px solid var(--color-border, #E2E8F0)", borderRadius: "0.5rem", cursor: "pointer" }}
+              />
+              <input
+                type="text"
+                value={settings.watermark_color || "#FFFFFF"}
+                onChange={(e) => setSettings((p) => ({ ...p, watermark_color: e.target.value }))}
+                style={{ ...S.input, maxWidth: "10rem" }}
+                onFocus={focus}
+                onBlur={blur}
+              />
+            </div>
+          </div>
+
+          {/* Save */}
+          <div style={{ display: "flex", justifyContent: "flex-end", paddingTop: "0.5rem" }}>
+            <button
+              onClick={saveWatermark}
+              disabled={savingWatermark}
+              style={{
+                display: "flex", alignItems: "center", gap: "0.5rem",
+                padding: "0.625rem 1.5rem",
+                borderRadius: "var(--radius, 0.75rem)",
+                border: "none",
+                background: "#0EA5E9",
+                color: "#fff",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontWeight: 700, fontSize: "0.875rem",
+                cursor: savingWatermark ? "not-allowed" : "pointer",
+                opacity: savingWatermark ? 0.7 : 1,
+                boxShadow: "0 2px 8px rgba(14,165,233,0.35)",
+              }}
+            >
+              {savingWatermark
+                ? <><Loader2 size={14} style={{ animation: "spin 0.8s linear infinite" }} /> Saving…</>
+                : <><Droplets size={14} /> Save Watermark Settings</>}
             </button>
           </div>
         </Accordion>

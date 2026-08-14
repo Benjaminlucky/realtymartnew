@@ -7,6 +7,7 @@ const {
   fail,
   paginated,
   parsePagination,
+  uniqueSlug,
 } = require("../lib/helpers");
 const { requireAuth } = require("../middleware/auth");
 const { upload, uploadToCloudinary } = require("../middleware/upload");
@@ -35,8 +36,10 @@ router.get("/", async (req, res, next) => {
     // category param is a slug — must resolve to ObjectId first
     if (category) {
       const cat = await BlogCategory.findOne({ slug: category }).lean();
-      if (cat) filter.category = cat._id;
-      else filter.category = null; // no match → return empty
+      // No matching category → return empty, but don't use {category: null}
+      // as the filter since that also matches posts with no category set.
+      if (!cat) return paginated(res, { data: [], total: 0, page, perPage });
+      filter.category = cat._id;
     }
 
     if (tag) filter.tags = tag;
@@ -178,15 +181,14 @@ router.post(
       if (req.file) body.cover_image = req.file.path || req.file.secure_url;
 
       if (!body.title) return fail(res, "Title is required");
-      if (!body.slug)
-        body.slug = body.title
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "");
+      body.slug = await uniqueSlug(BlogPost, body.slug || body.title);
 
       if (body.status === "published" && !body.published_at) {
         body.published_at = new Date();
       }
+
+      body.author = req.admin._id;
+      body.author_name = req.admin.name;
 
       const post = await BlogPost.create(body);
 
@@ -234,6 +236,17 @@ router.put(
 
       if (body.status === "published" && !body.published_at) {
         body.published_at = new Date();
+      }
+
+      // Only touch the slug if the client explicitly sent a new value —
+      // re-derive it through uniqueSlug so edits can't collide with
+      // another post's slug. Leave the existing slug alone otherwise.
+      if (body.slug !== undefined) {
+        if (body.slug.trim()) {
+          body.slug = await uniqueSlug(BlogPost, body.slug, req.params.id);
+        } else {
+          delete body.slug;
+        }
       }
 
       const post = await BlogPost.findByIdAndUpdate(req.params.id, body, {
@@ -315,6 +328,10 @@ router.delete(
     try {
       const cat = await BlogCategory.findByIdAndDelete(req.params.id);
       if (!cat) return fail(res, "Category not found", 404);
+      await BlogPost.updateMany(
+        { category: cat._id },
+        { $unset: { category: "" } },
+      );
       return ok(res, null, "Category deleted");
     } catch (err) {
       next(err);

@@ -19,6 +19,7 @@ import HouseCard from "@/components/public/HouseCard";
 import SectionHeader from "@/components/shared/SectionHeader";
 import { API_URL } from "@/config/site";
 import { formatPrice } from "@/lib/utils";
+import { popularAreasApi, partnersApi } from "@/lib/api";
 
 function getImgUrl(path) {
   if (!path) return null;
@@ -31,59 +32,12 @@ function getImgUrl(path) {
 // FEATURED LANDS — Premium editorial layout
 // ════════════════════════════════════════════════════════════
 export function FeaturedLands({ lands = [] }) {
-  const PLACEHOLDER_LANDS = [
-    {
-      id: 1,
-      slug: "aviara-residence-ibeju-lekki",
-      estate_name: "The Aviara Residence",
-      location: "Ibeju-Lekki",
-      state: "Lagos",
-      price: 35000000,
-      size: "500 SQM",
-      title_type: "governors_consent",
-      status: "available",
-      feature_image: null,
-    },
-    {
-      id: 2,
-      slug: "palmview-estate-epe",
-      estate_name: "Palmview Estate",
-      location: "Epe",
-      state: "Lagos",
-      price: 18500000,
-      size: "300 SQM",
-      title_type: "c_of_o",
-      status: "available",
-      feature_image: null,
-    },
-    {
-      id: 3,
-      slug: "greenfield-court-abuja",
-      estate_name: "Greenfield Court",
-      location: "Lugbe",
-      state: "Abuja",
-      price: 55000000,
-      size: "600 SQM",
-      title_type: "c_of_o",
-      status: "reserved",
-      feature_image: null,
-    },
-    {
-      id: 4,
-      slug: "sunrise-park-awoyaya",
-      estate_name: "Sunrise Park",
-      location: "Awoyaya",
-      state: "Lagos",
-      price: 22000000,
-      size: "450 SQM",
-      title_type: "excision",
-      status: "available",
-      feature_image: null,
-    },
-  ];
+  // No fabricated fallback data — if there's nothing real to show
+  // (empty catalog or a failed fetch), hide the section rather than
+  // render fake listings that link to non-existent detail pages.
+  if (!lands.length) return null;
 
-  const displayLands = lands.length ? lands : PLACEHOLDER_LANDS;
-  const [hero, ...rest] = displayLands;
+  const [hero, ...rest] = lands;
 
   const titleLabels = {
     c_of_o: "C of O",
@@ -642,96 +596,12 @@ export function FeaturedLands({ lands = [] }) {
 export function FeaturedHouses({ houses = [] }) {
   const [activeIdx, setActiveIdx] = useState(0);
 
-  const PLACEHOLDER_HOUSES = [
-    {
-      id: 1,
-      slug: "ultra-luxury-mansion-ikoyi",
-      title: "Ultra-Luxury 5-Bedroom Mansion in Ikoyi",
-      location: "Ikoyi",
-      state: "Lagos",
-      price: null,
-      price_label: "on_request",
-      bedrooms: 5,
-      bathrooms: 6,
-      garage: 2,
-      category: "Fully Detached Duplex",
-      status: "available",
-      featured: true,
-      feature_image: null,
-      tags: ["New Listing", "Hot Offer"],
-    },
-    {
-      id: 2,
-      slug: "modern-penthouse-vi",
-      title: "Modern 4-Bedroom Penthouse in Victoria Island",
-      location: "Victoria Island",
-      state: "Lagos",
-      price: 450000000,
-      price_label: "outright",
-      bedrooms: 4,
-      bathrooms: 5,
-      garage: 2,
-      category: "Penthouse",
-      status: "available",
-      featured: true,
-      feature_image: null,
-      tags: ["New Listing"],
-    },
-    {
-      id: 3,
-      slug: "executive-terrace-lekki",
-      title: "Executive 3-Bedroom Terrace in Lekki Phase 1",
-      location: "Lekki Phase 1",
-      state: "Lagos",
-      price: 180000000,
-      price_label: "outright",
-      bedrooms: 3,
-      bathrooms: 4,
-      garage: 1,
-      category: "Terrace House",
-      status: "available",
-      featured: false,
-      feature_image: null,
-      tags: ["Hot Offer"],
-    },
-    {
-      id: 4,
-      slug: "smart-apartment-oniru",
-      title: "Smart 2-Bedroom Apartment in Oniru Estate",
-      location: "Oniru",
-      state: "Lagos",
-      price: 95000000,
-      price_label: "outright",
-      bedrooms: 2,
-      bathrooms: 3,
-      garage: 1,
-      category: "Apartment",
-      status: "available",
-      featured: false,
-      feature_image: null,
-      tags: [],
-    },
-    {
-      id: 5,
-      slug: "luxury-bungalow-asokoro",
-      title: "Luxury 5-Bedroom Bungalow in Asokoro",
-      location: "Asokoro",
-      state: "Abuja",
-      price: 320000000,
-      price_label: "outright",
-      bedrooms: 5,
-      bathrooms: 5,
-      garage: 3,
-      category: "Bungalow",
-      status: "available",
-      featured: false,
-      feature_image: null,
-      tags: ["New Listing"],
-    },
-  ];
+  // No fabricated fallback data — if there's nothing real to show
+  // (empty catalog or a failed fetch), hide the section rather than
+  // render fake listings that link to non-existent detail pages.
+  if (!houses.length) return null;
 
-  const displayHouses = houses.length ? houses : PLACEHOLDER_HOUSES;
-  const active = displayHouses[activeIdx];
+  const active = houses[activeIdx];
 
   const cardBgs = [
     "linear-gradient(160deg, #1a1f35 0%, #0F172A 100%)",
@@ -863,11 +733,11 @@ export function FeaturedHouses({ houses = [] }) {
                 onClick={() => {
                   if (dir === "prev")
                     setActiveIdx((i) =>
-                      i === 0 ? displayHouses.length - 1 : i - 1,
+                      i === 0 ? houses.length - 1 : i - 1,
                     );
                   else
                     setActiveIdx((i) =>
-                      i === displayHouses.length - 1 ? 0 : i + 1,
+                      i === houses.length - 1 ? 0 : i + 1,
                     );
                 }}
                 style={{
@@ -1033,7 +903,7 @@ export function FeaturedHouses({ houses = [] }) {
                 }}
               >
                 {String(activeIdx + 1).padStart(2, "0")} /{" "}
-                {String(displayHouses.length).padStart(2, "0")}
+                {String(houses.length).padStart(2, "0")}
               </span>
             </div>
 
@@ -1215,7 +1085,7 @@ export function FeaturedHouses({ houses = [] }) {
               gap: "0.875rem",
             }}
           >
-            {displayHouses.map((house, idx) => (
+            {houses.map((house, idx) => (
               <button
                 key={house.id || house.slug}
                 onClick={() => setActiveIdx(idx)}
@@ -1438,7 +1308,7 @@ export function FeaturedHouses({ houses = [] }) {
             marginTop: "2rem",
           }}
         >
-          {displayHouses.map((_, idx) => (
+          {houses.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIdx(idx)}
@@ -1485,33 +1355,16 @@ export function PopularAreas({ areas = [] }) {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
 
-    const FALLBACK = [
-      { name: "Lekki Phase 1", location: "Lagos", count: "24 Properties" },
-      { name: "Ikate", location: "Lagos", count: "18 Properties" },
-      { name: "Chevron Drive", location: "Lagos", count: "31 Properties" },
-      { name: "Maitama", location: "Abuja", count: "15 Properties" },
-      { name: "Asokoro", location: "Abuja", count: "22 Properties" },
-      { name: "GRA", location: "Port Harcourt", count: "19 Properties" },
-    ];
-
-    fetch(API_URL + "/popular-areas")
-      .then((r) => r.json())
-      .then((json) => {
-        const data = json?.data || [];
-        setDisplayAreas(data.length > 0 ? data : FALLBACK);
-      })
-      .catch(() => setDisplayAreas(FALLBACK));
+    popularAreasApi
+      .getPublic()
+      .then((json) => setDisplayAreas(json?.data || []))
+      .catch(() => setDisplayAreas([]));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // While the self-fetch is in-flight show the fallback immediately
-  const items = displayAreas ?? [
-    { name: "Lekki Phase 1", location: "Lagos", count: "24 Properties" },
-    { name: "Ikate", location: "Lagos", count: "18 Properties" },
-    { name: "Chevron Drive", location: "Lagos", count: "31 Properties" },
-    { name: "Maitama", location: "Abuja", count: "15 Properties" },
-    { name: "Asokoro", location: "Abuja", count: "22 Properties" },
-    { name: "GRA", location: "Port Harcourt", count: "19 Properties" },
-  ];
+  // Nothing real to show yet (still loading, or genuinely empty/failed) —
+  // don't fabricate fake areas, just render nothing.
+  const items = displayAreas ?? [];
+  if (items.length === 0) return null;
 
   return (
     <section
@@ -1755,18 +1608,8 @@ export function Testimonials({ testimonials = [] }) {
 // PARTNERS
 // ════════════════════════════════════════════════════════════
 export function Partners({ partners = [] }) {
-  const FALLBACK = [
-    { id: 1, name: "Landmark Group" },
-    { id: 2, name: "CruxStone Realty" },
-    { id: 3, name: "Quest Properties" },
-    { id: 4, name: "Veritasi Homes" },
-    { id: 5, name: "Mixta Africa" },
-    { id: 6, name: "Propertymart" },
-  ];
-
   // Initialise from prop immediately; self-fetch only once if prop is empty.
-  // useRef guard prevents re-renders from re-triggering the fetch and
-  // overwriting live DB data with the hardcoded fallback.
+  // useRef guard prevents re-renders from re-triggering the fetch.
   const [displayPartners, setDisplayPartners] = useState(
     partners.length > 0 ? partners : null,
   );
@@ -1782,17 +1625,16 @@ export function Partners({ partners = [] }) {
     if (partnerFetchedRef.current) return;
     partnerFetchedRef.current = true;
 
-    fetch(API_URL + "/partners")
-      .then((r) => r.json())
-      .then((json) => {
-        const data = json?.data || [];
-        setDisplayPartners(data.length > 0 ? data : FALLBACK);
-      })
-      .catch(() => setDisplayPartners(FALLBACK));
+    partnersApi
+      .getPublic()
+      .then((json) => setDisplayPartners(json?.data || []))
+      .catch(() => setDisplayPartners([]));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // While the self-fetch is in-flight show the fallback immediately
-  const shownPartners = displayPartners ?? FALLBACK;
+  // Nothing real to show yet (still loading, or genuinely empty/failed) —
+  // don't fabricate fake partner logos, just render nothing.
+  const shownPartners = displayPartners ?? [];
+  if (shownPartners.length === 0) return null;
 
   return (
     <section className="py-14" style={{ background: "var(--color-surface)" }}>

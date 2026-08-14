@@ -7,6 +7,7 @@ const {
   fail,
   paginated,
   parsePagination,
+  uniqueSlug,
 } = require("../lib/helpers");
 const { requireAuth } = require("../middleware/auth");
 const { upload, uploadToCloudinary } = require("../middleware/upload");
@@ -45,7 +46,9 @@ router.get("/", async (req, res, next) => {
     const filter = {};
     if (location) filter.location = { $regex: escapeRegex(location), $options: "i" };
     if (state) filter.state = { $regex: escapeRegex(state), $options: "i" };
+    // Default to hiding sold listings unless a status is explicitly requested
     if (status) filter.status = status;
+    else filter.status = { $ne: "sold" };
     if (title_type) filter.title_type = title_type;
     if (featured === "true") filter.featured = true;
     if (min_price || max_price) {
@@ -180,11 +183,7 @@ router.post(
       }
 
       if (!body.estate_name) return fail(res, "Estate name is required");
-      if (!body.slug)
-        body.slug = body.estate_name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "");
+      body.slug = await uniqueSlug(Land, body.slug || body.estate_name);
 
       const land = await Land.create(body);
 
@@ -209,8 +208,19 @@ router.put(
       const body = { ...req.body };
 
       // Strip immutable / server-managed fields the client may echo back
-      for (const k of ["_id", "__v", "createdAt", "updatedAt", "views_count", "slug"]) {
+      for (const k of ["_id", "__v", "createdAt", "updatedAt", "views_count"]) {
         delete body[k];
+      }
+
+      // Only touch the slug if the client explicitly sent a new value —
+      // re-derive it through uniqueSlug so edits can't collide with
+      // another listing's slug. Leave the existing slug alone otherwise.
+      if (body.slug !== undefined) {
+        if (body.slug.trim()) {
+          body.slug = await uniqueSlug(Land, body.slug, req.params.id);
+        } else {
+          delete body.slug;
+        }
       }
 
       for (const f of ["amenities", "gallery", "installment_plan"]) {

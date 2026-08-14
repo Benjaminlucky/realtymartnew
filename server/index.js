@@ -29,9 +29,6 @@ const PORT = process.env.PORT || 5000;
 // and IP-based rate limiting is inaccurate.
 app.set("trust proxy", 1);
 
-// ── Connect DB ────────────────────────────────────────────────────
-connectDB();
-
 // ── Security ──────────────────────────────────────────────────────
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 
@@ -156,21 +153,43 @@ app.use((err, req, res, next) => {
     return res.status(409).json({ success: false, message: `A record with this ${field} already exists` });
   }
 
+  // Cloudinary SDK errors carry an http_code — surface as a distinguishable
+  // 502 (upstream failure) instead of an opaque, misleading 500.
+  if (typeof err.http_code === "number") {
+    console.error("[ERROR][Cloudinary]", err.message);
+    return res.status(502).json({
+      success: false,
+      message:
+        process.env.NODE_ENV === "production"
+          ? "Image upload service error. Please try again."
+          : `Cloudinary error: ${err.message}`,
+    });
+  }
+
   console.error("[ERROR]", err.message);
-  res.status(err.status || 500).json({
+  const status = err.status || 500;
+  res.status(status).json({
     success: false,
+    // Errors we deliberately raised with a 4xx status (validation, bad
+    // input, etc.) carry a safe, intentional message — always show it.
+    // Only mask messages for unexpected 5xx failures in production.
     message:
-      process.env.NODE_ENV === "production"
-        ? "Internal server error"
-        : err.message,
+      status < 500 || process.env.NODE_ENV !== "production"
+        ? err.message
+        : "Internal server error",
   });
 });
 
 // ── Start ─────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`\n🚀 NaijaRealty API running on port ${PORT}`);
-  console.log(`   Environment: ${process.env.NODE_ENV || "development"}`);
-  console.log(`   Health:      http://localhost:${PORT}/health\n`);
+// Wait for MongoDB to connect before accepting traffic — otherwise
+// early requests can arrive (and fail confusingly) while the initial
+// connection is still in flight.
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`\n🚀 NaijaRealty API running on port ${PORT}`);
+    console.log(`   Environment: ${process.env.NODE_ENV || "development"}`);
+    console.log(`   Health:      http://localhost:${PORT}/health\n`);
+  });
 });
 
 module.exports = app;

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X, Phone } from "lucide-react";
+import { SITE_CONFIG } from "@/config/site";
 
 // ── WhatsApp SVG logo ─────────────────────────────────────────────
 function WaIcon({ size = 24, color = "currentColor" }) {
@@ -64,17 +65,18 @@ export default function WhatsAppWidget({ settings = {} }) {
   const [animate, setAnimate] = useState(false);
 
   const enabled = settings.wa_enabled !== "false";
-  const agentName = settings.wa_name || "Lucky Benjamin";
-  const agentTitle = settings.wa_title || "CEO, Mehurbs Properties Limited";
+  const siteName = settings.site_name || SITE_CONFIG.name;
+  const agentName = settings.wa_name || siteName;
+  const agentTitle = settings.wa_title || `Sales Team, ${siteName}`;
   const agentAvatar = settings.wa_avatar || "";
   const greeting =
     settings.wa_message ||
     `Hi there! 👋 I'm ${agentName}. I'm not available right now, but send me a message and I'll get back to you as soon as possible. You can also reach me directly on the number below.`;
-  const rawNumber = settings.wa_number || settings.whatsapp || "09021359415";
+  const rawNumber = settings.wa_number || settings.whatsapp || SITE_CONFIG.whatsapp;
   const waNumber = toWaNumber(rawNumber);
   const prefill = encodeURIComponent(
     settings.wa_prefill ||
-      "Hello! I came across Mehurbs Properties and I'd like to enquire about a listing.",
+      `Hello! I came across ${siteName} and I'd like to enquire about a listing.`,
   );
   const waUrl = `https://wa.me/${waNumber}?text=${prefill}`;
   const callUrl = `tel:${rawNumber}`;

@@ -593,6 +593,12 @@ router.put("/admin/team/:id", requireAuth, async (req, res, next) => {
   try {
     const { first_name, last_name, name, email, role, phone, bio } = req.body;
 
+    const isSelf = String(req.admin._id) === String(req.params.id);
+    const isSuper = req.admin.role === "super_admin";
+    if (!isSelf && !isSuper) return fail(res, "Forbidden", 403);
+    if (role !== undefined && !isSuper)
+      return fail(res, "Only a super admin can change roles", 403);
+
     const resolvedName =
       name?.trim() ||
       [first_name?.trim(), last_name?.trim()].filter(Boolean).join(" ") ||
@@ -620,7 +626,7 @@ router.put("/admin/team/:id", requireAuth, async (req, res, next) => {
 router.put("/admin/team/:id/password", requireAuth, async (req, res, next) => {
   try {
     const { current_password, new_password } = req.body;
-    const member = await Admin.findById(req.params.id);
+    const member = await Admin.findById(req.params.id).select("+password");
     if (!member) return fail(res, "Not found", 404);
 
     const isSelf = String(req.admin._id) === String(member._id);

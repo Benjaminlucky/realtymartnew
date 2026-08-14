@@ -195,6 +195,7 @@ function ImageUploadField({
   fileRef,
   previewUrl,
   setPreviewUrl,
+  onRemove,
   hint,
 }) {
   return (
@@ -248,6 +249,7 @@ function ImageUploadField({
             onClick={() => {
               setPreviewUrl("");
               if (fileRef.current) fileRef.current.value = "";
+              onRemove?.();
             }}
             style={{
               background: "#FEE2E2",
@@ -287,6 +289,7 @@ function PopularAreasSection() {
     is_active: true,
   });
   const [previewUrl, setPreviewUrl] = useState("");
+  const [imageRemoved, setImageRemoved] = useState(false);
   const fileRef = useRef(null);
 
   const load = useCallback(async () => {
@@ -315,6 +318,7 @@ function PopularAreasSection() {
       is_active: true,
     });
     setPreviewUrl("");
+    setImageRemoved(false);
     if (fileRef.current) fileRef.current.value = "";
     setModal("create");
   };
@@ -329,6 +333,7 @@ function PopularAreasSection() {
       is_active: area.is_active !== false,
     });
     setPreviewUrl("");
+    setImageRemoved(false);
     if (fileRef.current) fileRef.current.value = "";
     setModal(area);
   };
@@ -344,7 +349,7 @@ function PopularAreasSection() {
       // If user cleared the image entirely, send empty string
       if (fileRef.current?.files?.[0]) {
         fd.append("image", fileRef.current.files[0]);
-      } else if (!previewUrl && modal !== "create" && !modal?.image_url) {
+      } else if (imageRemoved) {
         fd.append("image_url", "");
       }
 
@@ -747,10 +752,11 @@ function PopularAreasSection() {
 
             <ImageUploadField
               label="Area Image"
-              currentUrl={modal !== "create" ? modal.image_url : ""}
+              currentUrl={modal !== "create" && !imageRemoved ? modal.image_url : ""}
               fileRef={fileRef}
               previewUrl={previewUrl}
               setPreviewUrl={setPreviewUrl}
+              onRemove={() => setImageRemoved(true)}
               hint="JPG, PNG or WebP. Displayed as a 256×256 card background."
             />
 
@@ -885,6 +891,7 @@ function PartnersSection() {
     is_active: true,
   });
   const [previewUrl, setPreviewUrl] = useState("");
+  const [imageRemoved, setImageRemoved] = useState(false);
   const fileRef = useRef(null);
 
   const load = useCallback(async () => {
@@ -911,6 +918,7 @@ function PartnersSection() {
       is_active: true,
     });
     setPreviewUrl("");
+    setImageRemoved(false);
     if (fileRef.current) fileRef.current.value = "";
     setModal("create");
   };
@@ -923,6 +931,7 @@ function PartnersSection() {
       is_active: partner.is_active !== false,
     });
     setPreviewUrl("");
+    setImageRemoved(false);
     if (fileRef.current) fileRef.current.value = "";
     setModal(partner);
   };
@@ -936,7 +945,7 @@ function PartnersSection() {
       Object.entries(form).forEach(([k, v]) => fd.append(k, v));
       if (fileRef.current?.files?.[0]) {
         fd.append("logo", fileRef.current.files[0]);
-      } else if (!previewUrl && modal !== "create" && !modal?.logo_url) {
+      } else if (imageRemoved) {
         fd.append("logo_url", "");
       }
 
@@ -1335,10 +1344,11 @@ function PartnersSection() {
 
             <ImageUploadField
               label="Logo Image"
-              currentUrl={modal !== "create" ? modal.logo_url : ""}
+              currentUrl={modal !== "create" && !imageRemoved ? modal.logo_url : ""}
               fileRef={fileRef}
               previewUrl={previewUrl}
               setPreviewUrl={setPreviewUrl}
+              onRemove={() => setImageRemoved(true)}
               hint="PNG with transparent background recommended. Displayed at 120×40px."
             />
 

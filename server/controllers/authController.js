@@ -18,7 +18,7 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) return fail(res, "Email and password are required");
 
-    const admin = await Admin.findOne({ email: email.toLowerCase().trim() });
+    const admin = await Admin.findOne({ email: email.toLowerCase().trim() }).select("+password");
     if (!admin || !admin.is_active) return fail(res, "Invalid email or password", 401);
 
     const valid = await admin.comparePassword(password);

@@ -69,9 +69,10 @@ async function getWatermarkTransformation() {
 }
 
 function fileFilter(req, file, cb) {
-  ALLOWED.has(file.mimetype)
-    ? cb(null, true)
-    : cb(new Error("Only JPEG, PNG, WebP, and GIF images are allowed"));
+  if (ALLOWED.has(file.mimetype)) return cb(null, true);
+  const err = new Error("Only JPEG, PNG, WebP, and GIF images are allowed");
+  err.status = 400;
+  cb(err);
 }
 
 const upload = multer({

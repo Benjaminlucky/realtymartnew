@@ -251,6 +251,7 @@ export default function BlogPostClient({ post, settings, related }) {
     published_at,
     reading_time,
     views_count,
+    faqs,
   } = post;
 
   const whatsapp = settings?.whatsapp || SITE_CONFIG.whatsapp;
@@ -550,7 +551,7 @@ export default function BlogPostClient({ post, settings, related }) {
             }}
           >
             {/* ── LEFT: Article ── */}
-            <article>
+            <div>
               {/* Cover image */}
               {coverUrl && (
                 <div
@@ -601,14 +602,9 @@ export default function BlogPostClient({ post, settings, related }) {
 
               {/* ── Article body ── */}
               {content ? (
-                <div
+                <article
                   ref={contentRef}
-                  className="prose-article"
-                  style={{
-                    fontSize: "1rem",
-                    lineHeight: 1.8,
-                    color: "var(--color-text-secondary)",
-                  }}
+                  className="rm-article"
                   dangerouslySetInnerHTML={{ __html: content }}
                 />
               ) : (
@@ -620,6 +616,59 @@ export default function BlogPostClient({ post, settings, related }) {
                 >
                   Content not available.
                 </p>
+              )}
+
+              {/* ── FAQs — rendered visibly, not just in JSON-LD, so the
+                  markup and the page actually match what's on screen ── */}
+              {Array.isArray(faqs) && faqs.length > 0 && (
+                <div style={{ marginTop: "3rem", maxWidth: "760px" }}>
+                  <h2
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      fontWeight: 800,
+                      fontSize: "1.375rem",
+                      color: "var(--color-secondary)",
+                      marginBottom: "1.25rem",
+                    }}
+                  >
+                    Frequently Asked Questions
+                  </h2>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    {faqs.map((f, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          background: "var(--color-surface)",
+                          border: "1px solid var(--color-border)",
+                          borderRadius: "var(--radius-lg)",
+                          padding: "1.25rem",
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            fontWeight: 700,
+                            fontSize: "0.9375rem",
+                            color: "var(--color-text)",
+                            marginBottom: "0.5rem",
+                          }}
+                        >
+                          {f.question}
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "0.875rem",
+                            lineHeight: 1.7,
+                            color: "var(--color-text-secondary)",
+                            margin: 0,
+                          }}
+                        >
+                          {f.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
 
               {/* ── Bottom share bar ── */}
@@ -739,7 +788,7 @@ export default function BlogPostClient({ post, settings, related }) {
                   </div>
                 </div>
               )}
-            </article>
+            </div>
 
             {/* ── RIGHT SIDEBAR ── */}
             <aside
@@ -990,114 +1039,6 @@ export default function BlogPostClient({ post, settings, related }) {
         </div>
       </div>
 
-      {/* ── Prose styles injected via a style tag ── */}
-      <style>{`
-        .prose-article h1,
-        .prose-article h2,
-        .prose-article h3,
-        .prose-article h4 {
-          font-family: var(--font-heading);
-          font-weight: 800;
-          color: var(--color-secondary);
-          line-height: 1.3;
-          margin-top: 2em;
-          margin-bottom: 0.75em;
-          letter-spacing: -0.02em;
-          scroll-margin-top: 6rem;
-        }
-        .prose-article h2 { font-size: 1.375rem; }
-        .prose-article h3 { font-size: 1.125rem; color: var(--color-text); }
-        .prose-article h4 { font-size: 1rem; }
-        .prose-article p  { margin-bottom: 1.25em; }
-        .prose-article a  {
-          color: var(--color-primary);
-          text-decoration: underline;
-          text-underline-offset: 3px;
-          font-weight: 500;
-        }
-        .prose-article a:hover { text-decoration: none; }
-        .prose-article ul,
-        .prose-article ol {
-          margin: 1em 0 1.25em 1.5rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.4em;
-        }
-        .prose-article ul { list-style: disc; }
-        .prose-article ol { list-style: decimal; }
-        .prose-article li { padding-left: 0.25rem; }
-        .prose-article blockquote {
-          border-left: 3px solid var(--color-primary);
-          padding: 0.875rem 1.25rem;
-          margin: 1.5em 0;
-          background: var(--color-surface);
-          border-radius: 0 var(--radius) var(--radius) 0;
-          font-style: italic;
-          color: var(--color-text-secondary);
-        }
-        .prose-article blockquote p { margin-bottom: 0; }
-        .prose-article code {
-          background: var(--color-surface-3);
-          padding: 0.15em 0.45em;
-          border-radius: var(--radius-sm);
-          font-size: 0.875em;
-          color: var(--color-primary);
-          font-family: var(--font-mono);
-        }
-        .prose-article pre {
-          background: var(--color-secondary);
-          color: rgba(255,255,255,0.85);
-          padding: 1.25rem;
-          border-radius: var(--radius-lg);
-          overflow-x: auto;
-          margin: 1.5em 0;
-          font-family: var(--font-mono);
-          font-size: 0.875rem;
-          line-height: 1.6;
-        }
-        .prose-article pre code {
-          background: none;
-          padding: 0;
-          color: inherit;
-          font-size: inherit;
-        }
-        .prose-article img {
-          border-radius: var(--radius-lg);
-          max-width: 100%;
-          height: auto;
-          margin: 1.5em 0;
-        }
-        .prose-article hr {
-          border: none;
-          border-top: 1px solid var(--color-border);
-          margin: 2.5em 0;
-        }
-        .prose-article strong { font-weight: 700; color: var(--color-text); }
-        .prose-article em { font-style: italic; }
-        .prose-article table {
-          width: 100%;
-          border-collapse: collapse;
-          margin: 1.5em 0;
-          font-size: 0.9375rem;
-        }
-        .prose-article th {
-          background: var(--color-secondary);
-          color: white;
-          padding: 0.625rem 0.875rem;
-          text-align: left;
-          font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 0.8125rem;
-        }
-        .prose-article td {
-          padding: 0.625rem 0.875rem;
-          border-bottom: 1px solid var(--color-border);
-          color: var(--color-text-secondary);
-        }
-        .prose-article tr:nth-child(even) td {
-          background: var(--color-surface-2);
-        }
-      `}</style>
     </>
   );
 }

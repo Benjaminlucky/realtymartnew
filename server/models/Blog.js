@@ -7,6 +7,11 @@ const categorySchema = new mongoose.Schema({
   slug: { type: String, required: true, unique: true },
 }, { timestamps: true });
 
+const faqSchema = new mongoose.Schema({
+  question: { type: String, required: true, trim: true },
+  answer:   { type: String, required: true, trim: true },
+}, { _id: false });
+
 const postSchema = new mongoose.Schema({
   title:           { type: String, required: true, trim: true },
   slug:            { type: String, required: true, unique: true },
@@ -23,6 +28,7 @@ const postSchema = new mongoose.Schema({
   meta_description:{ type: String },
   views_count:     { type: Number, default: 0 },
   published_at:    { type: Date },
+  faqs:            { type: [faqSchema], default: [] },
 }, { timestamps: true });
 
 postSchema.index({ status: 1 });

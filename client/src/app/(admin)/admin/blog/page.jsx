@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import AdminShell from "@/components/admin/AdminShell";
 import { blogApi, mediaApi } from "@/lib/api";
 import { API_URL } from "@/config/site";
+import { useAuth } from "@/context/useAuth";
 import { toast } from "sonner";
 import {
   BookOpen,
@@ -25,38 +26,11 @@ import {
   BarChart2,
   FolderPlus,
   Check,
-  Bold,
-  Italic,
-  Underline,
-  Link2,
-  Image as ImageIcon,
-  List,
-  ListOrdered,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-  Heading2,
-  Heading3,
-  Quote,
-  Code,
-  Highlighter,
-  Minus,
-  RotateCcw,
-  RotateCw,
-  Strikethrough,
+  HelpCircle,
+  Code2,
+  Lock,
 } from "lucide-react";
 import Pagination from "@/components/admin/Pagination";
-
-// ── TipTap ────────────────────────────────────────────────────────
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import TipTapImage from "@tiptap/extension-image";
-import TipTapLink from "@tiptap/extension-link";
-import Placeholder from "@tiptap/extension-placeholder";
-import CharacterCount from "@tiptap/extension-character-count";
-import UnderlineExt from "@tiptap/extension-underline";
-import TextAlign from "@tiptap/extension-text-align";
-import Highlight from "@tiptap/extension-highlight";
 
 // ── Helpers ───────────────────────────────────────────────────────
 function getImgUrl(path) {
@@ -248,297 +222,119 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
   );
 }
 
-// ── TipTap Toolbar ────────────────────────────────────────────────
-function ToolbarBtn({ onClick, active, disabled, title, children }) {
-  return (
-    <button
-      type="button"
-      title={title}
-      onClick={onClick}
-      disabled={disabled}
-      style={{
-        padding: "0.375rem",
-        borderRadius: "0.375rem",
-        border: "none",
-        background: active ? "#E2E8F0" : "transparent",
-        color: active ? "#0F172A" : "#64748B",
-        cursor: disabled ? "not-allowed" : "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: disabled ? 0.4 : 1,
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-function TipTapToolbar({ editor, onImageUpload }) {
-  if (!editor) return null;
-  const btn = (action, label, active, icon) => (
-    <ToolbarBtn onClick={action} active={active} title={label}>
-      {icon}
-    </ToolbarBtn>
-  );
-  const addLink = () => {
-    const url = window.prompt("Enter URL:");
-    if (url)
-      editor.chain().focus().setLink({ href: url, target: "_blank" }).run();
-  };
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "0.125rem",
-        padding: "0.5rem",
-        borderBottom: "1px solid #E2E8F0",
-        background: "var(--color-surface-2, #F8FAFC)",
-        borderRadius: "0.75rem 0.75rem 0 0",
-      }}
-    >
-      <ToolbarBtn
-        onClick={() => editor.chain().focus().undo().run()}
-        disabled={!editor.can().undo()}
-        title="Undo"
-      >
-        <RotateCcw size={14} />
-      </ToolbarBtn>
-      <ToolbarBtn
-        onClick={() => editor.chain().focus().redo().run()}
-        disabled={!editor.can().redo()}
-        title="Redo"
-      >
-        <RotateCw size={14} />
-      </ToolbarBtn>
-      <div
-        style={{ width: "1px", background: "#E2E8F0", margin: "0 0.25rem" }}
-      />
-      {btn(
-        () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
-        "Heading 2",
-        editor.isActive("heading", { level: 2 }),
-        <Heading2 size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-        "Heading 3",
-        editor.isActive("heading", { level: 3 }),
-        <Heading3 size={14} />,
-      )}
-      <div
-        style={{ width: "1px", background: "#E2E8F0", margin: "0 0.25rem" }}
-      />
-      {btn(
-        () => editor.chain().focus().toggleBold().run(),
-        "Bold",
-        editor.isActive("bold"),
-        <Bold size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleItalic().run(),
-        "Italic",
-        editor.isActive("italic"),
-        <Italic size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleUnderline().run(),
-        "Underline",
-        editor.isActive("underline"),
-        <Underline size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleStrike().run(),
-        "Strikethrough",
-        editor.isActive("strike"),
-        <Strikethrough size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleHighlight().run(),
-        "Highlight",
-        editor.isActive("highlight"),
-        <Highlighter size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleCode().run(),
-        "Inline Code",
-        editor.isActive("code"),
-        <Code size={14} />,
-      )}
-      <div
-        style={{ width: "1px", background: "#E2E8F0", margin: "0 0.25rem" }}
-      />
-      {btn(
-        () => editor.chain().focus().setTextAlign("left").run(),
-        "Align Left",
-        editor.isActive({ textAlign: "left" }),
-        <AlignLeft size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().setTextAlign("center").run(),
-        "Align Center",
-        editor.isActive({ textAlign: "center" }),
-        <AlignCenter size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().setTextAlign("right").run(),
-        "Align Right",
-        editor.isActive({ textAlign: "right" }),
-        <AlignRight size={14} />,
-      )}
-      <div
-        style={{ width: "1px", background: "#E2E8F0", margin: "0 0.25rem" }}
-      />
-      {btn(
-        () => editor.chain().focus().toggleBulletList().run(),
-        "Bullet List",
-        editor.isActive("bulletList"),
-        <List size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleOrderedList().run(),
-        "Numbered List",
-        editor.isActive("orderedList"),
-        <ListOrdered size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().toggleBlockquote().run(),
-        "Blockquote",
-        editor.isActive("blockquote"),
-        <Quote size={14} />,
-      )}
-      {btn(
-        () => editor.chain().focus().setHorizontalRule().run(),
-        "Divider",
-        false,
-        <Minus size={14} />,
-      )}
-      <div
-        style={{ width: "1px", background: "#E2E8F0", margin: "0 0.25rem" }}
-      />
-      {btn(addLink, "Add Link", editor.isActive("link"), <Link2 size={14} />)}
-      <ToolbarBtn onClick={onImageUpload} title="Upload Image">
-        <ImageIcon size={14} />
-      </ToolbarBtn>
-    </div>
-  );
-}
-
-// ── TipTap Editor ─────────────────────────────────────────────────
-function RichEditor({ value, onChange }) {
-  const imgRef = useRef(null);
-  const editor = useEditor({
-    immediatelyRender: false,
-    extensions: [
-      StarterKit,
-      UnderlineExt,
-      Highlight,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
-      TipTapLink.configure({ openOnClick: false }),
-      TipTapImage.configure({ inline: false, allowBase64: false }),
-      Placeholder.configure({ placeholder: "Write your blog post here…" }),
-      CharacterCount,
-    ],
-    content: value || "",
-    onUpdate: ({ editor }) => onChange(editor.getHTML()),
-    editorProps: {
-      attributes: {
-        style:
-          "min-height:400px;padding:1.25rem;outline:none;font-size:0.9375rem;line-height:1.8;color:#1e293b;",
-      },
-    },
-  });
+// ── Article HTML editor: plain textarea + live sanitized preview ──
+// No WYSIWYG, no rich-text buttons. The owner drafts HTML elsewhere and
+// pastes it in; this only shows what will actually render, by running
+// the pasted HTML through the exact same sanitizer used at save time
+// (blogApi.previewSanitize → server sanitizeArticleHtml) and rendering
+// it inside the same .rm-article CSS the public post page uses.
+function ArticleEditor({ value, onChange }) {
+  const [previewHtml, setPreviewHtml] = useState("");
+  const [previewing, setPreviewing] = useState(false);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
-    if (editor && value !== undefined && editor.getHTML() !== value) {
-      editor.commands.setContent(value || "", false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value === "" || value === "<p></p>"]);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(async () => {
+      if (!value?.trim()) {
+        setPreviewHtml("");
+        return;
+      }
+      setPreviewing(true);
+      try {
+        const res = await blogApi.previewSanitize(value);
+        setPreviewHtml(res?.data?.html || "");
+      } catch {
+        // Preview is best-effort — a failed preview call must never
+        // block editing or lose what's in the textarea.
+      } finally {
+        setPreviewing(false);
+      }
+    }, 500);
+    return () => clearTimeout(debounceRef.current);
+  }, [value]);
 
-  const handleImageUpload = async (file) => {
-    if (!file || !editor) return;
-    try {
-      const res = await mediaApi.upload(file, "blog");
-      const url = res?.data?.file_path;
-      if (url)
-        editor
-          .chain()
-          .focus()
-          .setImage({ src: getImgUrl(url) })
-          .run();
-    } catch {
-      toast.error("Image upload failed");
-    }
+  const panelStyle = {
+    border: "1px solid var(--color-border, #E2E8F0)",
+    borderRadius: "var(--radius, 0.75rem)",
+    overflow: "hidden",
+    background: "var(--color-surface, white)",
+    display: "flex",
+    flexDirection: "column",
   };
-
-  const words = editor?.storage?.characterCount?.words?.() ?? 0;
-  const readTime = Math.max(1, Math.ceil(words / 200));
+  const headerStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.375rem",
+    padding: "0.625rem 0.875rem",
+    borderBottom: "1px solid #E2E8F0",
+    background: "var(--color-surface-2, #F8FAFC)",
+    fontSize: "0.75rem",
+    fontWeight: 700,
+    color: "var(--color-text-muted, #94A3B8)",
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+  };
 
   return (
     <div
       style={{
-        border: "1px solid var(--color-border, #E2E8F0)",
-        borderRadius: "var(--radius, 0.75rem)",
-        overflow: "hidden",
-        background: "var(--color-surface, white)",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "1rem",
+        minHeight: "420px",
       }}
     >
-      <TipTapToolbar
-        editor={editor}
-        onImageUpload={() => imgRef.current?.click()}
-      />
-      <EditorContent editor={editor} />
-      <div
-        style={{
-          padding: "0.5rem 1rem",
-          borderTop: "1px solid #E2E8F0",
-          background: "var(--color-surface-2, #F8FAFC)",
-          display: "flex",
-          gap: "1.5rem",
-        }}
-      >
-        <span
+      <div style={panelStyle}>
+        <div style={headerStyle}>
+          <Code2 size={12} /> HTML
+        </div>
+        <textarea
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Paste your article HTML here…"
+          spellCheck={false}
           style={{
-            fontSize: "0.75rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            flex: 1,
+            minHeight: "380px",
+            padding: "1rem",
+            border: "none",
+            outline: "none",
+            resize: "vertical",
+            fontFamily: "var(--font-mono, ui-monospace, monospace)",
+            fontSize: "0.8125rem",
+            lineHeight: 1.6,
+            color: "var(--color-text, #0F172A)",
+            background: "transparent",
           }}
-        >
-          {words} words
-        </span>
-        <span
-          style={{
-            fontSize: "0.75rem",
-            color: "var(--color-text-muted, #94A3B8)",
-          }}
-        >
-          {readTime} min read
-        </span>
+        />
       </div>
-      <input
-        ref={imgRef}
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          handleImageUpload(e.target.files?.[0]);
-          e.target.value = "";
-        }}
-      />
-      <style>{`
-        .ProseMirror p.is-editor-empty:first-child::before { content: attr(data-placeholder); color: #94A3B8; pointer-events: none; float: left; height: 0; }
-        .ProseMirror h2 { font-size: 1.375rem; font-weight: 800; margin: 1.5rem 0 0.75rem; color: #0F172A; }
-        .ProseMirror h3 { font-size: 1.125rem; font-weight: 700; margin: 1.25rem 0 0.5rem; color: #0F172A; }
-        .ProseMirror blockquote { border-left: 3px solid #FF6B6B; padding-left: 1rem; color: #475569; font-style: italic; margin: 1rem 0; }
-        .ProseMirror code { background: #F1F5F9; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em; }
-        .ProseMirror ul { list-style: disc; padding-left: 1.5rem; }
-        .ProseMirror ol { list-style: decimal; padding-left: 1.5rem; }
-        .ProseMirror img { max-width: 100%; border-radius: 0.5rem; margin: 0.75rem 0; }
-        .ProseMirror hr { border: none; border-top: 1px solid #E2E8F0; margin: 1.5rem 0; }
-        .ProseMirror a { color: #FF6B6B; text-decoration: underline; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-      `}</style>
+      <div style={panelStyle}>
+        <div style={headerStyle}>
+          <Eye size={12} /> Live Preview{" "}
+          {previewing && (
+            <Loader2 size={11} style={{ animation: "spin 1s linear infinite" }} />
+          )}
+        </div>
+        <div style={{ flex: 1, minHeight: "380px", overflow: "auto", padding: "1.25rem" }}>
+          {previewHtml ? (
+            <article
+              className="rm-article"
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
+            />
+          ) : (
+            <p
+              style={{
+                color: "var(--color-text-muted, #94A3B8)",
+                fontStyle: "italic",
+                fontSize: "0.875rem",
+              }}
+            >
+              Paste HTML on the left to see how it will publish…
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -1091,6 +887,113 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
   );
 }
 
+// ── FAQ repeater — optional question/answer pairs for FAQPage JSON-LD ──
+function FaqEditor({ faqs, onChange }) {
+  const update = (i, key, val) => {
+    const next = faqs.slice();
+    next[i] = { ...next[i], [key]: val };
+    onChange(next);
+  };
+  const remove = (i) => onChange(faqs.filter((_, idx) => idx !== i));
+  const add = () => onChange([...faqs, { question: "", answer: "" }]);
+
+  const inputStyle = {
+    width: "100%",
+    padding: "0.625rem 0.875rem",
+    borderRadius: "var(--radius, 0.625rem)",
+    border: "1px solid var(--color-border, #E2E8F0)",
+    fontSize: "0.875rem",
+    color: "var(--color-text, #0F172A)",
+    outline: "none",
+    background: "var(--color-surface, white)",
+    boxSizing: "border-box",
+  };
+
+  return (
+    <div style={{ maxWidth: "700px", display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <p style={{ fontSize: "0.8125rem", color: "var(--color-text-muted, #94A3B8)", margin: 0 }}>
+        Optional. If you add questions here, this post gets FAQ rich-result markup in
+        Google search — otherwise this tab can stay empty.
+      </p>
+      {faqs.map((f, i) => (
+        <div
+          key={i}
+          style={{
+            border: "1px solid var(--color-border, #E2E8F0)",
+            borderRadius: "var(--radius, 0.75rem)",
+            padding: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.75rem",
+            position: "relative",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => remove(i)}
+            title="Remove"
+            style={{
+              position: "absolute",
+              top: "0.75rem",
+              right: "0.75rem",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "var(--color-text-muted, #94A3B8)",
+            }}
+          >
+            <X size={15} />
+          </button>
+          <div>
+            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #475569)", marginBottom: "0.375rem" }}>
+              Question {i + 1}
+            </label>
+            <input
+              value={f.question}
+              onChange={(e) => update(i, "question", e.target.value)}
+              placeholder="e.g. Do I need a lawyer for Governor's Consent?"
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #475569)", marginBottom: "0.375rem" }}>
+              Answer
+            </label>
+            <textarea
+              value={f.answer}
+              onChange={(e) => update(i, "answer", e.target.value)}
+              rows={3}
+              placeholder="Plain-text answer…"
+              style={{ ...inputStyle, resize: "vertical" }}
+            />
+          </div>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={add}
+        style={{
+          alignSelf: "flex-start",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.375rem",
+          padding: "0.5rem 1rem",
+          borderRadius: "var(--radius, 0.625rem)",
+          border: "1px dashed var(--color-border, #E2E8F0)",
+          background: "none",
+          color: "var(--color-text-secondary, #475569)",
+          fontFamily: "var(--font-heading)",
+          fontWeight: 600,
+          fontSize: "0.8125rem",
+          cursor: "pointer",
+        }}
+      >
+        <Plus size={14} /> Add question
+      </button>
+    </div>
+  );
+}
+
 // ── Blog Post Form ────────────────────────────────────────────────
 const EMPTY_POST = {
   title: "",
@@ -1098,33 +1001,63 @@ const EMPTY_POST = {
   excerpt: "",
   content: "",
   cover_image: "",
-  category_id: "",
+  category: "",
   status: "draft",
   reading_time: 5,
   meta_title: "",
   meta_description: "",
+  faqs: [],
 };
 
-function PostForm({ post, categories, onSave, onCancel }) {
+function toFormState(post) {
+  if (!post) return EMPTY_POST;
+  return {
+    title: post.title || "",
+    slug: post.slug || "",
+    excerpt: post.excerpt || "",
+    content: post.content || "",
+    cover_image: post.cover_image || "",
+    category: post.category?._id || post.category || "",
+    status: post.status || "draft",
+    reading_time: post.reading_time || 5,
+    meta_title: post.meta_title || "",
+    meta_description: post.meta_description || "",
+    faqs: Array.isArray(post.faqs) ? post.faqs : [],
+  };
+}
+
+function PostForm({ post, categories, currentUser, onSave, onCancel }) {
   const isEdit = !!post?._id;
-  const [form, setForm] = useState(() => {
-    if (!post) return EMPTY_POST;
-    return {
-      title: post.title || "",
-      slug: post.slug || "",
-      excerpt: post.excerpt || "",
-      content: post.content || "",
-      cover_image: post.cover_image || "",
-      category_id: post.category?._id || post.category || "",
-      status: post.status || "draft",
-      reading_time: post.reading_time || 5,
-      meta_title: post.meta_title || "",
-      meta_description: post.meta_description || "",
-    };
-  });
+  const initialForm = useRef(toFormState(post));
+  const [form, setForm] = useState(initialForm.current);
   const [saving, setSaving] = useState(false);
   const [slugEdited, setSlugEdited] = useState(isEdit);
   const [tab, setTab] = useState("content");
+  // Accepts "superadmin" (no underscore) too — some existing production
+  // admin accounts have that value stored instead of the schema's
+  // "super_admin", and this must not lock them out of publishing.
+  const canPublish = ["super_admin", "superadmin", "admin"].includes(currentUser?.role);
+  const isDirty = JSON.stringify(form) !== JSON.stringify(initialForm.current);
+
+  // ── Warn before losing a pasted article to a tab close / refresh /
+  // typed-URL navigation. Native browser back/forward inside the SPA
+  // doesn't fire beforeunload since this form is a modal, not a route —
+  // Cancel/X below handle that case with an in-app confirm instead.
+  useEffect(() => {
+    const handler = (e) => {
+      if (!isDirty) return;
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isDirty]);
+
+  const requestClose = () => {
+    if (isDirty && !confirm("You have unsaved changes. Discard them?")) return;
+    onCancel();
+  };
+
   const set = (k, v) => setForm((p) => ({ ...p, [k]: v }));
   const handleTitle = (v) => {
     set("title", v);
@@ -1140,6 +1073,10 @@ function PostForm({ post, categories, onSave, onCancel }) {
       toast.error("Title is required");
       return;
     }
+    if (form.status === "published" && !canPublish) {
+      toast.error("Only admins can publish — save as draft instead");
+      return;
+    }
     setSaving(true);
     try {
       const payload = { ...form };
@@ -1147,6 +1084,7 @@ function PostForm({ post, categories, onSave, onCancel }) {
         payload.reading_time = calcReadingTime(form.content);
       if (isEdit) await blogApi.update(post._id, payload);
       else await blogApi.create(payload);
+      initialForm.current = form;
       toast.success(isEdit ? "Post updated" : "Post created");
       onSave();
     } catch (err) {
@@ -1240,58 +1178,65 @@ function PostForm({ post, categories, onSave, onCancel }) {
                 padding: "0.25rem",
               }}
             >
-              {["draft", "published"].map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => set("status", s)}
-                  style={{
-                    padding: "0.375rem 0.875rem",
-                    borderRadius: "0.5rem",
-                    border: "none",
-                    background:
-                      form.status === s
-                        ? s === "published"
-                          ? "#22C55E"
-                          : "white"
-                        : "transparent",
-                    color:
-                      form.status === s
-                        ? s === "published"
-                          ? "white"
-                          : "#0F172A"
-                        : "#64748B",
-                    fontFamily: "var(--font-heading)",
-                    fontWeight: 600,
-                    fontSize: "0.8125rem",
-                    cursor: "pointer",
-                    transition: "all 150ms",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {s === "published" ? (
-                    <>
-                      <Globe
-                        size={12}
-                        style={{ display: "inline", marginRight: "0.25rem" }}
-                      />
-                      Publish
-                    </>
-                  ) : (
-                    <>
-                      <EyeOff
-                        size={12}
-                        style={{ display: "inline", marginRight: "0.25rem" }}
-                      />
-                      Draft
-                    </>
-                  )}
-                </button>
-              ))}
+              {["draft", "published"].map((s) => {
+                const disabled = s === "published" && !canPublish;
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    disabled={disabled}
+                    title={disabled ? "Only admins can publish" : undefined}
+                    onClick={() => !disabled && set("status", s)}
+                    style={{
+                      padding: "0.375rem 0.875rem",
+                      borderRadius: "0.5rem",
+                      border: "none",
+                      background:
+                        form.status === s
+                          ? s === "published"
+                            ? "#22C55E"
+                            : "white"
+                          : "transparent",
+                      color: disabled
+                        ? "#CBD5E1"
+                        : form.status === s
+                          ? s === "published"
+                            ? "white"
+                            : "#0F172A"
+                          : "#64748B",
+                      fontFamily: "var(--font-heading)",
+                      fontWeight: 600,
+                      fontSize: "0.8125rem",
+                      cursor: disabled ? "not-allowed" : "pointer",
+                      transition: "all 150ms",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {s === "published" ? (
+                      <>
+                        {disabled ? (
+                          <Lock size={12} style={{ display: "inline", marginRight: "0.25rem" }} />
+                        ) : (
+                          <Globe size={12} style={{ display: "inline", marginRight: "0.25rem" }} />
+                        )}
+                        Publish
+                      </>
+                    ) : (
+                      <>
+                        <EyeOff
+                          size={12}
+                          style={{ display: "inline", marginRight: "0.25rem" }}
+                        />
+                        Draft
+                      </>
+                    )}
+                  </button>
+                );
+              })}
             </div>
             <button
               type="button"
-              onClick={onCancel}
+              onClick={requestClose}
               style={{
                 background: "none",
                 border: "none",
@@ -1315,6 +1260,7 @@ function PostForm({ post, categories, onSave, onCancel }) {
             {[
               ["content", "Content", <FileText size={14} />],
               ["seo", "SEO", <Globe size={14} />],
+              ["faqs", "FAQs", <HelpCircle size={14} />],
             ].map(([t, label, icon]) => (
               <button
                 key={t}
@@ -1343,131 +1289,133 @@ function PostForm({ post, categories, onSave, onCancel }) {
           </div>
           <div style={{ padding: "2rem" }}>
             {tab === "content" && (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 280px",
-                  gap: "2rem",
-                }}
-              >
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1.25rem",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 280px",
+                    gap: "2rem",
                   }}
                 >
-                  <div>
-                    <label style={labelStyle}>Title *</label>
-                    <input
-                      value={form.title}
-                      onChange={(e) => handleTitle(e.target.value)}
-                      placeholder="Post title…"
-                      style={{
-                        ...inputStyle,
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Slug</label>
-                    <div style={{ position: "relative" }}>
-                      <span
-                        style={{
-                          position: "absolute",
-                          left: "0.875rem",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                          color: "var(--color-text-muted, #94A3B8)",
-                          fontSize: "0.8125rem",
-                        }}
-                      >
-                        /blog/
-                      </span>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1.25rem",
+                    }}
+                  >
+                    <div>
+                      <label style={labelStyle}>Title *</label>
                       <input
-                        value={form.slug}
-                        onChange={(e) => {
-                          setSlugEdited(true);
-                          set("slug", slugify(e.target.value));
+                        value={form.title}
+                        onChange={(e) => handleTitle(e.target.value)}
+                        placeholder="Post title…"
+                        style={{
+                          ...inputStyle,
+                          fontSize: "1rem",
+                          fontWeight: 600,
                         }}
-                        placeholder="auto-generated"
-                        style={{ ...inputStyle, paddingLeft: "3.25rem" }}
+                      />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>Slug</label>
+                      <div style={{ position: "relative" }}>
+                        <span
+                          style={{
+                            position: "absolute",
+                            left: "0.875rem",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            color: "var(--color-text-muted, #94A3B8)",
+                            fontSize: "0.8125rem",
+                          }}
+                        >
+                          /blog/
+                        </span>
+                        <input
+                          value={form.slug}
+                          onChange={(e) => {
+                            setSlugEdited(true);
+                            set("slug", slugify(e.target.value));
+                          }}
+                          placeholder="auto-generated"
+                          style={{ ...inputStyle, paddingLeft: "3.25rem" }}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label style={labelStyle}>Excerpt</label>
+                      <textarea
+                        value={form.excerpt}
+                        onChange={(e) => set("excerpt", e.target.value)}
+                        rows={2}
+                        placeholder="Short summary shown in listings…"
+                        style={{ ...inputStyle, resize: "vertical" }}
                       />
                     </div>
                   </div>
-                  <div>
-                    <label style={labelStyle}>Excerpt</label>
-                    <textarea
-                      value={form.excerpt}
-                      onChange={(e) => set("excerpt", e.target.value)}
-                      rows={2}
-                      placeholder="Short summary shown in listings…"
-                      style={{ ...inputStyle, resize: "vertical" }}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1.25rem",
+                    }}
+                  >
+                    <ImageUpload
+                      label="Cover Image"
+                      value={form.cover_image}
+                      onChange={(v) => set("cover_image", v)}
+                      folder="blog"
                     />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Content *</label>
-                    <RichEditor value={form.content} onChange={handleContent} />
+                    <div>
+                      <label style={labelStyle}>Category</label>
+                      <select
+                        value={form.category}
+                        onChange={(e) => set("category", e.target.value)}
+                        style={{ ...inputStyle, cursor: "pointer" }}
+                      >
+                        <option value="">— No Category —</option>
+                        {categories.map((c) => (
+                          <option key={c._id || c.id} value={c._id || c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label style={labelStyle}>Reading Time (min)</label>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <input
+                          type="number"
+                          min={1}
+                          max={60}
+                          value={form.reading_time}
+                          onChange={(e) =>
+                            set("reading_time", parseInt(e.target.value) || 1)
+                          }
+                          style={{ ...inputStyle, width: "80px" }}
+                        />
+                        <span
+                          style={{
+                            fontSize: "0.8125rem",
+                            color: "var(--color-text-muted, #94A3B8)",
+                          }}
+                        >
+                          min read
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "1.25rem",
-                  }}
-                >
-                  <ImageUpload
-                    label="Cover Image"
-                    value={form.cover_image}
-                    onChange={(v) => set("cover_image", v)}
-                    folder="blog"
-                  />
-                  <div>
-                    <label style={labelStyle}>Category</label>
-                    <select
-                      value={form.category_id}
-                      onChange={(e) => set("category_id", e.target.value)}
-                      style={{ ...inputStyle, cursor: "pointer" }}
-                    >
-                      <option value="">— No Category —</option>
-                      {categories.map((c) => (
-                        <option key={c._id || c.id} value={c._id || c.id}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Reading Time (min)</label>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
-                      }}
-                    >
-                      <input
-                        type="number"
-                        min={1}
-                        max={60}
-                        value={form.reading_time}
-                        onChange={(e) =>
-                          set("reading_time", parseInt(e.target.value) || 1)
-                        }
-                        style={{ ...inputStyle, width: "80px" }}
-                      />
-                      <span
-                        style={{
-                          fontSize: "0.8125rem",
-                          color: "var(--color-text-muted, #94A3B8)",
-                        }}
-                      >
-                        min read
-                      </span>
-                    </div>
-                  </div>
+                <div>
+                  <label style={labelStyle}>Content * — paste HTML, see it render on the right</label>
+                  <ArticleEditor value={form.content} onChange={handleContent} />
                 </div>
               </div>
             )}
@@ -1575,6 +1523,12 @@ function PostForm({ post, categories, onSave, onCancel }) {
                 </div>
               </div>
             )}
+            {tab === "faqs" && (
+              <FaqEditor
+                faqs={form.faqs}
+                onChange={(faqs) => set("faqs", faqs)}
+              />
+            )}
           </div>
           <div
             style={{
@@ -1601,7 +1555,7 @@ function PostForm({ post, categories, onSave, onCancel }) {
             <div style={{ display: "flex", gap: "0.75rem" }}>
               <button
                 type="button"
-                onClick={onCancel}
+                onClick={requestClose}
                 style={{
                   padding: "0.625rem 1.25rem",
                   borderRadius: "var(--radius, 0.625rem)",
@@ -1659,6 +1613,7 @@ function PostForm({ post, categories, onSave, onCancel }) {
 
 // ── Main Page ─────────────────────────────────────────────────────
 export default function AdminBlogPage() {
+  const { user: currentUser } = useAuth();
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -2158,6 +2113,7 @@ export default function AdminBlogPage() {
         <PostForm
           post={editing}
           categories={categories}
+          currentUser={currentUser}
           onSave={handleSave}
           onCancel={() => {
             setShowForm(false);

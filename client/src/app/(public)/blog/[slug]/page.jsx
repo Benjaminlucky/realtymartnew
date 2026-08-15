@@ -119,6 +119,19 @@ function buildArticleSchema(post, settings) {
   );
 }
 
+function buildFaqSchema(faqs) {
+  if (!Array.isArray(faqs) || !faqs.length) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+}
+
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
 
@@ -163,6 +176,7 @@ export default async function BlogPostPage({ params }) {
   }
 
   const jsonLd = buildArticleSchema(post, settings);
+  const faqLd = buildFaqSchema(post.faqs);
   const breadcrumbLd = buildBreadcrumbSchema([
     { name: "Home", url: SITE_URL },
     { name: "Blog", url: `${SITE_URL}/blog` },
@@ -187,6 +201,12 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
       <BlogPostClient post={post} settings={settings} related={related} />
     </>
   );

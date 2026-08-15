@@ -13,6 +13,13 @@ const { requireAuth } = require("../middleware/auth");
 const { upload, uploadToCloudinary } = require("../middleware/upload");
 const { BlogPost, BlogCategory } = require("../models/Blog");
 const { revalidate } = require("../lib/revalidate");
+const { sanitizeArticleHtml } = require("../lib/sanitizeArticleHtml");
+
+// Accepts both "super_admin" (the schema's enum value) and "superadmin"
+// (the value actually stored on existing production Admin documents,
+// which predate/bypass that enum) so publish-gating can't lock out a
+// real admin over a data inconsistency.
+const CAN_PUBLISH = ["super_admin", "superadmin", "admin"];
 
 const escapeRegex = (s) => s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 
@@ -151,6 +158,18 @@ router.get("/admin/blog/:id", requireAuth, async (req, res, next) => {
   }
 });
 
+// POST /admin/blog/preview — sanitize draft HTML for the live preview pane.
+// Runs the exact same sanitizeArticleHtml() used at save time, so the
+// preview and the eventually-published post can never diverge.
+router.post("/admin/blog/preview", requireAuth, (req, res, next) => {
+  try {
+    const html = sanitizeArticleHtml(req.body?.html || "");
+    return ok(res, { html });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // POST /admin/blog — create
 router.post(
   "/admin/blog",
@@ -172,16 +191,36 @@ router.post(
         }
       }
       if (typeof body.category === "string") {
+        if (body.category.trim() === "") {
+          // "" means "no category". Use null, not delete — on an update,
+          // omitting the key would leave a previously-set category
+          // untouched instead of clearing it; null casts cleanly for an
+          // optional ObjectId ref and reads back as "no category" same
+          // as undefined everywhere else in the app.
+          body.category = null;
+        } else {
+          try {
+            body.category = JSON.parse(body.category);
+          } catch {}
+        }
+      }
+      if (typeof body.faqs === "string") {
         try {
-          body.category = JSON.parse(body.category);
-        } catch {}
+          body.faqs = JSON.parse(body.faqs);
+        } catch {
+          body.faqs = [];
+        }
       }
       if (body.reading_time) body.reading_time = Number(body.reading_time);
 
       if (req.file) body.cover_image = req.file.path || req.file.secure_url;
 
       if (!body.title) return fail(res, "Title is required");
+      if (body.status === "published" && !CAN_PUBLISH.includes(req.admin.role))
+        return fail(res, "Only admins can publish posts — save as draft instead", 403);
+
       body.slug = await uniqueSlug(BlogPost, body.slug || body.title);
+      body.content = sanitizeArticleHtml(body.content);
 
       if (body.status === "published" && !body.published_at) {
         body.published_at = new Date();
@@ -213,6 +252,9 @@ router.put(
   uploadToCloudinary,
   async (req, res, next) => {
     try {
+      const existing = await BlogPost.findById(req.params.id).select("slug status").lean();
+      if (!existing) return fail(res, "Post not found", 404);
+
       const body = { ...req.body };
 
       if (typeof body.tags === "string") {
@@ -226,13 +268,34 @@ router.put(
         }
       }
       if (typeof body.category === "string") {
+        if (body.category.trim() === "") {
+          // "" means "no category". Use null, not delete — on an update,
+          // omitting the key would leave a previously-set category
+          // untouched instead of clearing it; null casts cleanly for an
+          // optional ObjectId ref and reads back as "no category" same
+          // as undefined everywhere else in the app.
+          body.category = null;
+        } else {
+          try {
+            body.category = JSON.parse(body.category);
+          } catch {}
+        }
+      }
+      if (typeof body.faqs === "string") {
         try {
-          body.category = JSON.parse(body.category);
-        } catch {}
+          body.faqs = JSON.parse(body.faqs);
+        } catch {
+          body.faqs = [];
+        }
       }
       if (body.reading_time) body.reading_time = Number(body.reading_time);
 
       if (req.file) body.cover_image = req.file.path || req.file.secure_url;
+
+      if (body.status === "published" && !CAN_PUBLISH.includes(req.admin.role))
+        return fail(res, "Only admins can publish posts — save as draft instead", 403);
+
+      if (body.content !== undefined) body.content = sanitizeArticleHtml(body.content);
 
       if (body.status === "published" && !body.published_at) {
         body.published_at = new Date();
@@ -255,10 +318,14 @@ router.put(
       }).lean();
       if (!post) return fail(res, "Post not found", 404);
 
-      // ── Revalidate whenever post is published or updated ────────
-      if (post.status === "published") {
-        revalidate(blogPaths(post.slug));
-      }
+      // ── Revalidate whenever the post was published, is published now,
+      // or its slug changed — covers publish, edit, unpublish, and
+      // slug-change cases so the live page never goes stale silently.
+      const paths = new Set([
+        ...(existing.status === "published" ? blogPaths(existing.slug) : []),
+        ...(post.status === "published" ? blogPaths(post.slug) : []),
+      ]);
+      if (paths.size) revalidate([...paths]);
 
       return ok(res, post, "Blog post updated");
     } catch (err) {

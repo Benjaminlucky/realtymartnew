@@ -126,6 +126,11 @@ export const blogApi = {
       body: JSON.stringify(d),
     }),
   delete: (id) => fetcher(`/blog/admin/blog/${id}`, { method: "DELETE" }),
+  previewSanitize: (html) =>
+    fetcher("/blog/admin/blog/preview", {
+      method: "POST",
+      body: JSON.stringify({ html }),
+    }),
   createCategory: (d) =>
     fetcher("/blog/admin/blog/categories", {
       method: "POST",

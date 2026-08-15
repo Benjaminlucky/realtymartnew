@@ -292,7 +292,7 @@ function ArticleEditor({ value, onChange }) {
         <textarea
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Paste your article HTML here…"
+          placeholder="Paste your article HTML here… or just type plain paragraphs if you don't have HTML — either works."
           spellCheck={false}
           style={{
             flex: 1,
@@ -1414,7 +1414,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel }) {
                   </div>
                 </div>
                 <div>
-                  <label style={labelStyle}>Content * — paste HTML, see it render on the right</label>
+                  <label style={labelStyle}>
+                    Content * — paste HTML, or just type plain text; see it render on the right
+                  </label>
                   <ArticleEditor value={form.content} onChange={handleContent} />
                 </div>
               </div>

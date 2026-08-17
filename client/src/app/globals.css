@@ -138,6 +138,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  html,
+  body {
+    /* Belt-and-suspenders: nothing on this site should ever need
+       page-level horizontal scroll. Fixed-width children (a table,
+       an off-canvas tooltip box, a rigid grid track) get clipped here
+       instead of dragging the whole page wider on mobile. */
+    overflow-x: hidden;
+  }
+
   body {
     background-color: var(--color-surface);
     color: var(--color-text);
@@ -1124,6 +1133,30 @@
   line-height: 1.75;
   color: var(--color-text-secondary);
   max-width: 760px;
+  font-size: 1.05rem;
+  overflow-wrap: break-word;
+}
+@media (max-width: 640px) {
+  .rm-article { font-size: 1rem; }
+}
+
+/* Blog post page: article + sticky sidebar (share/TOC). The sidebar's
+   300px track can't shrink in CSS grid, so on narrow viewports it was
+   forcing the whole page wider than the screen — collapse to a single
+   column (sidebar content just flows below the article) before that
+   track and its gap stop fitting. */
+.blog-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+}
+.blog-detail-sidebar {
+  position: sticky;
+  top: 6rem;
+}
+@media (max-width: 900px) {
+  .blog-detail-layout { grid-template-columns: 1fr; }
+  .blog-detail-sidebar { position: static; top: auto; }
 }
 .rm-article h1,
 .rm-article h2,
@@ -1244,3 +1277,10 @@
 @media (prefers-reduced-motion: reduce) {
   .rm-article .rm-tip .rm-tip-box { transition: none; }
 }
+
+/* Optional utility classes an editor can add directly in pasted content —
+   e.g. <p class="rm-meta"> for a byline/updated-date line, or
+   <p class="rm-disclaimer"> for the closing legal note — for de-emphasized
+   text that isn't a tooltip, callout, or the sources list above. */
+.rm-article .rm-meta { font-size: 0.875rem; opacity: 0.65; margin-bottom: 1.6em !important; }
+.rm-article .rm-disclaimer { font-size: 0.875rem; opacity: 0.7; margin-top: 2em; }

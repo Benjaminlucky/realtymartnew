@@ -30,6 +30,14 @@ import {
   Droplets,
 } from "lucide-react";
 
+const WATERMARK_POSITIONS = [
+  { value: "bottom_right", label: "Bottom Right" },
+  { value: "bottom_left", label: "Bottom Left" },
+  { value: "top_right", label: "Top Right" },
+  { value: "top_left", label: "Top Left" },
+  { value: "center", label: "Center" },
+];
+
 // ── Style constants ───────────────────────────────────────────────
 const S = {
   card: {
@@ -1458,7 +1466,8 @@ export default function AdminSettingsPage() {
         watermark_text: settings.watermark_text || "",
         watermark_opacity: settings.watermark_opacity || "35",
         watermark_color: settings.watermark_color || "#FFFFFF",
-        watermark_scale: settings.watermark_scale || "60",
+        watermark_scale: settings.watermark_scale || "18",
+        watermark_position: settings.watermark_position || "bottom_right",
       });
       toast.success("Watermark settings saved");
     } catch (err) {
@@ -2362,7 +2371,7 @@ export default function AdminSettingsPage() {
         {/* ── Image Watermark ── */}
         <Accordion icon={Droplets} title="Image Watermark" color="#0EA5E9">
           <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #64748B)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
-            Stamps a centered, semi-transparent text watermark on every house, land, and blog image uploaded from now on. Your logo/favicon uploads are never watermarked.
+            Stamps a small, semi-transparent text watermark in a corner of every house, land, and blog image uploaded from now on. Your logo/favicon uploads are never watermarked.
           </p>
 
           {/* Enable / disable toggle */}
@@ -2390,8 +2399,37 @@ export default function AdminSettingsPage() {
             value={settings.watermark_text}
             onChange={setS("watermark_text")}
             placeholder={settings.site_name || "Leave blank to use your Site Name"}
-            hint="Shown centered across every watermarked image."
+            hint="Shown in the corner of every watermarked image."
           />
+
+          <div style={{ marginBottom: "1.25rem" }}>
+            <label style={S.label}>Position</label>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              {WATERMARK_POSITIONS.map((p) => {
+                const active = (settings.watermark_position || "bottom_right") === p.value;
+                return (
+                  <button
+                    key={p.value}
+                    type="button"
+                    onClick={() => setSettings((prev) => ({ ...prev, watermark_position: p.value }))}
+                    style={{
+                      padding: "0.5rem 0.875rem",
+                      borderRadius: "var(--radius, 0.625rem)",
+                      border: `1px solid ${active ? "#0EA5E9" : "var(--color-border, #E2E8F0)"}`,
+                      background: active ? "rgba(14,165,233,0.08)" : "var(--color-surface, white)",
+                      color: active ? "#0EA5E9" : "var(--color-text-secondary, #475569)",
+                      fontFamily: "var(--font-heading)",
+                      fontWeight: 600,
+                      fontSize: "0.8125rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           <div style={S.grid2}>
             <Field
@@ -2405,10 +2443,10 @@ export default function AdminSettingsPage() {
             <Field
               label="Width (% of image)"
               type="number"
-              value={settings.watermark_scale ?? "60"}
+              value={settings.watermark_scale ?? "18"}
               onChange={setS("watermark_scale")}
-              placeholder="60"
-              hint="How wide the text stretches relative to the image."
+              placeholder="18"
+              hint="How wide the text is relative to the image. 15–25% reads as a small corner badge."
             />
           </div>
 

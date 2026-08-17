@@ -149,9 +149,19 @@ function normalizeInput(raw) {
   return html;
 }
 
+// Tables are wide by nature (globals.css gives them a 460px min-width so
+// columns don't crush on mobile) — without this wrapper that width has
+// nowhere to go but past the viewport edge, blowing out horizontal
+// scroll on the whole page. .rm-table-wrap (already in globals.css)
+// gives the overflow its own scroll container instead. No author pasting
+// HTML/Markdown ever remembers to add this by hand, so it's automatic.
+function wrapTables(html) {
+  return html.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (table) => `<div class="rm-table-wrap">${table}</div>`);
+}
+
 function sanitizeArticleHtml(html) {
   if (!html) return "";
-  return sanitizeHtml(normalizeInput(html), {
+  const clean = sanitizeHtml(normalizeInput(html), {
     allowedTags: ALLOWED_TAGS,
     allowedAttributes: ALLOWED_ATTRIBUTES,
     allowedSchemes: ["http", "https", "mailto"],
@@ -172,6 +182,7 @@ function sanitizeArticleHtml(html) {
       }),
     },
   });
+  return wrapTables(clean);
 }
 
 module.exports = { sanitizeArticleHtml };

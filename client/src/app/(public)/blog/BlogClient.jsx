@@ -388,7 +388,7 @@ export default function BlogClient({
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))",
                 gap: "1.5rem",
               }}
             >
@@ -432,7 +432,7 @@ export default function BlogClient({
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))",
                 gap: "1.5rem",
               }}
             >

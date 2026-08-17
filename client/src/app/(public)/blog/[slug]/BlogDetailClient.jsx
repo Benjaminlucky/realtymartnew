@@ -541,10 +541,8 @@ export default function BlogPostClient({ post, settings, related }) {
           style={{ paddingTop: "2.5rem", paddingBottom: "5rem" }}
         >
           <div
+            className="blog-detail-layout"
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 300px",
-              gap: "3rem",
               alignItems: "start",
               maxWidth: "1100px",
               margin: "0 auto",
@@ -792,9 +790,8 @@ export default function BlogPostClient({ post, settings, related }) {
 
             {/* ── RIGHT SIDEBAR ── */}
             <aside
+              className="blog-detail-sidebar"
               style={{
-                position: "sticky",
-                top: "6rem",
                 display: "flex",
                 flexDirection: "column",
                 gap: "1.5rem",

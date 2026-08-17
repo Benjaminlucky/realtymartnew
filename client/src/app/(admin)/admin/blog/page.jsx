@@ -1056,7 +1056,7 @@ function toFormState(post) {
   };
 }
 
-function PostForm({ post, categories, currentUser, onSave, onCancel }) {
+function PostForm({ post, categories, currentUser, onSave, onCancel, onCategoriesRefresh }) {
   const isEdit = !!post?._id;
   const initialForm = useRef(toFormState(post));
   const [form, setForm] = useState(initialForm.current);
@@ -1099,7 +1099,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel }) {
   };
   // Only fills fields the owner hasn't already typed into — pasting a
   // second MDX file into an in-progress post must never clobber edits.
-  const handleFrontmatterImport = (data) => {
+  const handleFrontmatterImport = async (data) => {
     const updates = {};
     if (data.title && !form.title) updates.title = String(data.title);
     if (data.slug && !form.slug) {
@@ -1111,15 +1111,33 @@ function PostForm({ post, categories, currentUser, onSave, onCancel }) {
       if (!form.excerpt) updates.excerpt = desc;
       if (!form.meta_description) updates.meta_description = desc;
     }
-    if (data.category) {
-      const wanted = String(data.category).toLowerCase();
-      const match = categories.find((c) => c.name?.toLowerCase() === wanted);
-      if (match) updates.category = match._id || match.id;
-      else toast.info(`Category "${data.category}" not found — create it under Categories, then select it.`);
-    }
     if (Object.keys(updates).length) {
       setForm((p) => ({ ...p, ...updates }));
       toast.success("Filled in title/slug/excerpt from frontmatter");
+    }
+
+    // Category is handled separately since a miss means a network round
+    // trip (create it) rather than a plain local field fill.
+    if (data.category) {
+      const wantedName = String(data.category).trim();
+      const wanted = wantedName.toLowerCase();
+      const existing = categories.find((c) => c.name?.toLowerCase() === wanted);
+      if (existing) {
+        set("category", existing._id || existing.id);
+        return;
+      }
+      try {
+        const res = await blogApi.createCategory({ name: wantedName });
+        const created = res?.data;
+        if (created) {
+          set("category", created._id || created.id);
+          toast.success(`Created category "${wantedName}"`);
+        }
+      } catch (err) {
+        toast.error(err.message || `Couldn't create category "${wantedName}"`);
+      } finally {
+        onCategoriesRefresh?.();
+      }
     }
   };
   const handleSubmit = async (e) => {
@@ -2180,6 +2198,7 @@ export default function AdminBlogPage() {
             setShowForm(false);
             setEditing(null);
           }}
+          onCategoriesRefresh={loadCategories}
         />
       )}
       {deleting && (

@@ -19,14 +19,26 @@ const WATERMARK_KEYS = [
   "watermark_opacity",
   "watermark_color",
   "watermark_scale",
+  "watermark_position",
   "site_name",
 ];
 
+// Corner options exposed in Admin Settings, mapped to Cloudinary gravity.
+// "center" is kept for anyone who preferred the old full-width banner look.
+const POSITION_GRAVITY = {
+  bottom_right: "south_east",
+  bottom_left: "south_west",
+  top_right: "north_east",
+  top_left: "north_west",
+  center: "center",
+};
+const CORNER_PADDING = 24; // px inset from the edge for corner placements
+
 /**
  * Builds a Cloudinary text-overlay transformation component for the
- * centered watermark, or null if watermarking is disabled/unconfigured.
- * Shared by the live upload path and the backfill script so both stay
- * in sync (server/scripts/backfill-watermark.js).
+ * watermark, or null if watermarking is disabled/unconfigured. Shared by
+ * the live upload path and the backfill script so both stay in sync
+ * (server/scripts/backfill-watermark.js).
  */
 async function getWatermarkTransformation() {
   const docs = await Setting.find({ key: { $in: WATERMARK_KEYS } }).lean();
@@ -44,13 +56,18 @@ async function getWatermarkTransformation() {
     100,
     Math.max(1, parseInt(map.watermark_opacity, 10) || 35),
   );
+  // Small corner badge by default — a centered mark sized to fill most of
+  // the photo (the old 60% default) reliably sat on top of cover-image
+  // text and subjects instead of staying out of the way.
   const scalePct = Math.min(
     100,
-    Math.max(10, parseInt(map.watermark_scale, 10) || 60),
+    Math.max(5, parseInt(map.watermark_scale, 10) || 18),
   );
   const color = /^#[0-9A-Fa-f]{3,8}$/.test(map.watermark_color || "")
     ? map.watermark_color
     : "#FFFFFF";
+  const gravity =
+    POSITION_GRAVITY[map.watermark_position] || POSITION_GRAVITY.bottom_right;
 
   return {
     overlay: {
@@ -61,7 +78,8 @@ async function getWatermarkTransformation() {
     },
     color,
     opacity,
-    gravity: "center",
+    gravity,
+    ...(gravity === "center" ? {} : { x: CORNER_PADDING, y: CORNER_PADDING }),
     flags: "relative",
     width: scalePct / 100,
     crop: "fit",

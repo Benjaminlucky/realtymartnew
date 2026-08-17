@@ -17,7 +17,10 @@
  */
 
 const sanitizeHtml = require("sanitize-html");
+const { marked } = require("marked");
 const SITE_URL = process.env.FRONTEND_URL || "";
+
+marked.setOptions({ gfm: true, breaks: false });
 
 const ALLOWED_TAGS = [
   "article", "h1", "h2", "h3", "h4", "h5", "h6",
@@ -50,8 +53,9 @@ function isExternal(href) {
 }
 
 // ── Input normalization ─────────────────────────────────────────────
-// The paste box has to work whether the owner drops real HTML markup
-// or just types/pastes plain paragraphs. Two failure modes without this:
+// The paste box has to work whether the owner drops real HTML markup,
+// Markdown/MDX, or just types/pastes plain paragraphs. Failure modes
+// without this:
 //   1. HTML copied from a source that displays it pre-escaped (a code
 //      viewer, some AI chat UIs) arrives as literal "&lt;p&gt;" text.
 //      sanitize-html correctly treats that as text, not markup, so the
@@ -59,8 +63,41 @@ function isExternal(href) {
 //      being rendered.
 //   2. Plain text with no tags at all collapses into one unstyled blob
 //      — HTML ignores newlines, so paragraph breaks disappear.
+//   3. Markdown/MDX (##, **bold**, tables, a leading --- frontmatter
+//      block) has no real tags of its own, or is mixed with a few raw
+//      HTML/JSX elements (<div className="...">, <Tip>) — sanitize-html
+//      only understands tags, so the Markdown syntax renders as literal
+//      text right alongside whatever real tags are present.
 const HAS_REAL_TAG = /<[a-zA-Z][a-zA-Z0-9-]*(\s|>|\/>)/;
 const HAS_ESCAPED_TAG = /&lt;[a-zA-Z][a-zA-Z0-9-]*(\s|&gt;|\/)/i;
+const HAS_MARKDOWN_SYNTAX =
+  /(^|\n) {0,3}#{1,6}\s+\S|\*\*[^\n*]+\*\*|(^|\n) {0,3}[-*+]\s+\S|(^|\n) {0,3}\d+\.\s+\S|(^|\n)\|.+\|[ \t]*($|\n)|\[[^\]\n]+\]\([^)\n]+\)/;
+
+// Strips a leading YAML frontmatter block (--- ... ---). The admin UI
+// already extracts this client-side to prefill title/slug/excerpt, so
+// this is just a safety net for content that reaches here with it intact.
+function stripFrontmatter(raw) {
+  const match = raw.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/);
+  return match ? raw.slice(match[0].length) : raw;
+}
+
+// The content-generation pipeline this site's articles come from emits
+// a `<Tip def="...">term</Tip>` JSX shorthand for the hover-tooltip
+// component, plus JSX's `className` instead of HTML's `class`. Neither
+// is real HTML, so expand/rename them to what .rm-tip/.rm-tip-box in
+// globals.css actually expects before handing the text to the Markdown
+// parser.
+function expandCustomComponents(md) {
+  return md
+    .replace(/<Tip\s+([^>]*)>([\s\S]*?)<\/Tip>/g, (match, attrs, inner) => {
+      const defMatch = attrs.match(/def="([^"]*)"/);
+      const alignMatch = attrs.match(/align="([^"]*)"/);
+      const def = defMatch ? defMatch[1] : "";
+      const alignClass = alignMatch && alignMatch[1] === "right" ? " rm-tip-right" : "";
+      return `<button type="button" class="rm-tip">${inner}<span class="rm-tip-box${alignClass}">${def}</span></button>`;
+    })
+    .replace(/\bclassName=/g, "class=");
+}
 
 const NAMED_ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
 
@@ -81,12 +118,20 @@ function escapeText(str) {
 }
 
 function normalizeInput(raw) {
-  let html = raw;
+  let html = stripFrontmatter(raw);
 
   // Pasted HTML that arrived already entity-escaped — decode once so
   // the tags are real tags again, not text that merely looks like tags.
   if (!HAS_REAL_TAG.test(html) && HAS_ESCAPED_TAG.test(html)) {
     html = decodeEntitiesOnce(html);
+  }
+
+  // Markdown/MDX — headers, bold, lists, tables, links, possibly mixed
+  // with a few raw HTML/JSX elements. Checked ahead of "no real tag at
+  // all" because MDX bodies often do contain real tags (<div>, <Tip>)
+  // alongside Markdown syntax that sanitize-html alone can't render.
+  if (HAS_MARKDOWN_SYNTAX.test(html)) {
+    return marked.parse(expandCustomComponents(html));
   }
 
   // Genuinely no markup at all — treat every blank-line-separated block

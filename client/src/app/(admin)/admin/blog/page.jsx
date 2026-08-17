@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { load as parseYaml } from "js-yaml";
 import AdminShell from "@/components/admin/AdminShell";
 import { blogApi, mediaApi } from "@/lib/api";
 import { API_URL } from "@/config/site";
@@ -46,6 +47,21 @@ function slugify(text) {
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "")
     .replace(/--+/g, "-");
+}
+
+// Splits a pasted .mdx file's leading "--- ... ---" frontmatter block
+// from its Markdown body, so the body alone goes into the content field
+// (sanitizeArticleHtml handles the Markdown→HTML conversion server-side)
+// while the frontmatter fields can prefill Title/Slug/Excerpt/Category.
+function extractFrontmatter(text) {
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+  if (!match) return null;
+  try {
+    const data = parseYaml(match[1]) || {};
+    return { data, body: text.slice(match[0].length) };
+  } catch {
+    return null;
+  }
 }
 
 function calcReadingTime(html) {
@@ -223,15 +239,28 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
 }
 
 // ── Article HTML editor: plain textarea + live sanitized preview ──
-// No WYSIWYG, no rich-text buttons. The owner drafts HTML elsewhere and
-// pastes it in; this only shows what will actually render, by running
-// the pasted HTML through the exact same sanitizer used at save time
-// (blogApi.previewSanitize → server sanitizeArticleHtml) and rendering
-// it inside the same .rm-article CSS the public post page uses.
-function ArticleEditor({ value, onChange }) {
+// No WYSIWYG, no rich-text buttons. The owner drafts HTML (or Markdown/
+// MDX) elsewhere and pastes it in; this only shows what will actually
+// render, by running the pasted content through the exact same sanitizer
+// used at save time (blogApi.previewSanitize → server sanitizeArticleHtml)
+// and rendering it inside the same .rm-article CSS the public post page
+// uses. Pasting a file with a "---" frontmatter block strips it out here
+// and hands it to onImportFrontmatter to prefill the other fields, so
+// only the Markdown body ever reaches the content field/server.
+function ArticleEditor({ value, onChange, onImportFrontmatter }) {
   const [previewHtml, setPreviewHtml] = useState("");
   const [previewing, setPreviewing] = useState(false);
   const debounceRef = useRef(null);
+
+  const handlePaste = (e) => {
+    const text = e.clipboardData?.getData("text/plain");
+    if (!text || !/^---\r?\n/.test(text)) return;
+    const parsed = extractFrontmatter(text);
+    if (!parsed) return;
+    e.preventDefault();
+    onChange(parsed.body.trimStart());
+    onImportFrontmatter?.(parsed.data);
+  };
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -292,7 +321,8 @@ function ArticleEditor({ value, onChange }) {
         <textarea
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Paste your article HTML here… or just type plain paragraphs if you don't have HTML — either works."
+          onPaste={handlePaste}
+          placeholder="Paste HTML, Markdown/MDX (with or without --- frontmatter), or just type plain paragraphs — all three work."
           spellCheck={false}
           style={{
             flex: 1,
@@ -1067,6 +1097,31 @@ function PostForm({ post, categories, currentUser, onSave, onCancel }) {
     set("content", html);
     set("reading_time", calcReadingTime(html));
   };
+  // Only fills fields the owner hasn't already typed into — pasting a
+  // second MDX file into an in-progress post must never clobber edits.
+  const handleFrontmatterImport = (data) => {
+    const updates = {};
+    if (data.title && !form.title) updates.title = String(data.title);
+    if (data.slug && !form.slug) {
+      updates.slug = slugify(String(data.slug));
+      setSlugEdited(true);
+    }
+    if (data.description) {
+      const desc = String(data.description);
+      if (!form.excerpt) updates.excerpt = desc;
+      if (!form.meta_description) updates.meta_description = desc;
+    }
+    if (data.category) {
+      const wanted = String(data.category).toLowerCase();
+      const match = categories.find((c) => c.name?.toLowerCase() === wanted);
+      if (match) updates.category = match._id || match.id;
+      else toast.info(`Category "${data.category}" not found — create it under Categories, then select it.`);
+    }
+    if (Object.keys(updates).length) {
+      setForm((p) => ({ ...p, ...updates }));
+      toast.success("Filled in title/slug/excerpt from frontmatter");
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.title) {
@@ -1415,9 +1470,13 @@ function PostForm({ post, categories, currentUser, onSave, onCancel }) {
                 </div>
                 <div>
                   <label style={labelStyle}>
-                    Content * — paste HTML, or just type plain text; see it render on the right
+                    Content * — paste HTML, Markdown/MDX, or plain text; see it render on the right
                   </label>
-                  <ArticleEditor value={form.content} onChange={handleContent} />
+                  <ArticleEditor
+                    value={form.content}
+                    onChange={handleContent}
+                    onImportFrontmatter={handleFrontmatterImport}
+                  />
                 </div>
               </div>
             )}

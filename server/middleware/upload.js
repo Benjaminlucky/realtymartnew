@@ -7,11 +7,13 @@ const { Setting } = require("../models/Misc");
 
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 const MAX = parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024;
-const VALID_FOLDERS = ["lands", "houses", "blog", "general", "logos"];
+const VALID_FOLDERS = ["lands", "houses", "blog", "general", "logos", "avatars"];
 const FOLDER_PREFIX = process.env.CLOUDINARY_FOLDER_PREFIX || "naijarealty";
 
-// Folders that must never receive a watermark — site branding assets.
-const WATERMARK_EXEMPT_FOLDERS = new Set(["logos"]);
+// Folders that must never receive a watermark — site branding assets and
+// team member photos (stamping "Realtymart.ng" over someone's face would
+// look broken, not branded).
+const WATERMARK_EXEMPT_FOLDERS = new Set(["logos", "avatars"]);
 
 const WATERMARK_KEYS = [
   "watermark_enabled",

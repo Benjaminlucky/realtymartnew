@@ -17,11 +17,19 @@ import {
   Eye,
   EyeOff,
   Users,
+  Upload,
+  User,
 } from "lucide-react";
 import { toast } from "sonner";
 import AdminShell from "@/components/admin/AdminShell";
-import { teamApi } from "@/lib/api";
+import { teamApi, mediaApi } from "@/lib/api";
+import { API_URL } from "@/config/site";
 import { useAuth } from "@/context/useAuth";
+
+function getAvatarUrl(path) {
+  if (!path) return null;
+  return path.startsWith("http") ? path : `${API_URL}/${path}`;
+}
 
 // ── Role config ───────────────────────────────────────────────
 const ROLES = {
@@ -182,18 +190,40 @@ function Modal({ title, onClose, children }) {
 // ── Create / Edit member form ─────────────────────────────────
 function MemberForm({ initial, onSave, onClose, isSelf }) {
   const [form, setForm] = useState(
-    initial || {
-      name: "",
-      email: "",
-      role: "admin",
-      password: "",
-      confirm: "",
-    },
+    initial
+      ? { avatar: "", bio: "", ...initial }
+      : {
+          name: "",
+          email: "",
+          role: "admin",
+          password: "",
+          confirm: "",
+          avatar: "",
+          bio: "",
+        },
   );
   const [showPw, setShowPw] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const isEdit = !!initial;
+
+  const handleAvatarUpload = async (file) => {
+    if (!file) return;
+    setUploadingAvatar(true);
+    try {
+      const res = await mediaApi.upload(file, "avatars");
+      if (res?.data?.file_path) {
+        setForm((p) => ({ ...p, avatar: res.data.file_path }));
+      } else {
+        toast.error("Upload failed");
+      }
+    } catch {
+      toast.error("Upload failed");
+    } finally {
+      setUploadingAvatar(false);
+    }
+  };
 
   const pwOk = isEdit
     ? !form.password ||
@@ -212,6 +242,10 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
     try {
       const payload = { name: form.name, email: form.email, role: form.role };
       if (!isEdit) payload.password = form.password;
+      if (isEdit) {
+        payload.avatar = form.avatar || "";
+        payload.bio = form.bio || "";
+      }
       await onSave(payload, form.password, form.confirm);
       onClose();
     } catch (err) {
@@ -305,6 +339,132 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
           }}
         />
       </div>
+
+      {/* Avatar + Bio — shown on the article author card, so only relevant
+          once the account exists (create flow is just credentials). */}
+      {isEdit && (
+        <>
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontWeight: 600,
+                fontSize: "0.75rem",
+                color: "#64748B",
+                marginBottom: "0.375rem",
+              }}
+            >
+              Profile Photo
+            </label>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
+              <div
+                style={{
+                  width: "3.25rem",
+                  height: "3.25rem",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  flexShrink: 0,
+                  background: "#F1F5F9",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "1px solid #E2E8F0",
+                }}
+              >
+                {form.avatar ? (
+                  <img
+                    src={getAvatarUrl(form.avatar)}
+                    alt=""
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : (
+                  <User size={22} style={{ color: "#CBD5E1" }} />
+                )}
+              </div>
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.375rem",
+                  padding: "0.5rem 0.875rem",
+                  borderRadius: "0.625rem",
+                  border: "1px solid #E2E8F0",
+                  background: "white",
+                  color: "#475569",
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "0.8125rem",
+                  cursor: uploadingAvatar ? "not-allowed" : "pointer",
+                }}
+              >
+                {uploadingAvatar ? (
+                  <Loader2 size={13} style={{ animation: "spin 1s linear infinite" }} />
+                ) : (
+                  <Upload size={13} />
+                )}
+                {uploadingAvatar ? "Uploading…" : "Upload"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  disabled={uploadingAvatar}
+                  onChange={(e) => handleAvatarUpload(e.target.files?.[0])}
+                />
+              </label>
+              {form.avatar && (
+                <button
+                  type="button"
+                  onClick={() => setForm((p) => ({ ...p, avatar: "" }))}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "#94A3B8",
+                    fontSize: "0.8125rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  Remove
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                fontWeight: 600,
+                fontSize: "0.75rem",
+                color: "#64748B",
+                marginBottom: "0.375rem",
+              }}
+            >
+              Bio{" "}
+              <span style={{ color: "#94A3B8", fontWeight: 400 }}>
+                ({(form.bio || "").length}/500)
+              </span>
+            </label>
+            <textarea
+              value={form.bio || ""}
+              onChange={(e) => setForm((p) => ({ ...p, bio: e.target.value }))}
+              maxLength={500}
+              rows={3}
+              placeholder="A couple of sentences about you — shown below every article you publish."
+              style={{ ...inputBase, resize: "vertical", fontFamily: "Inter, sans-serif" }}
+              onFocus={(e) => {
+                e.target.style.borderColor = "#FF6B6B";
+                e.target.style.background = "white";
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "#E2E8F0";
+                e.target.style.background = "#F8FAFC";
+              }}
+            />
+          </div>
+        </>
+      )}
 
       {/* Role — hidden if editing self (can't change own role) */}
       {!isSelf && (
@@ -1211,6 +1371,8 @@ export default function TeamPage() {
               name: modal.member.name,
               email: modal.member.email,
               role: modal.member.role,
+              avatar: modal.member.avatar || "",
+              bio: modal.member.bio || "",
             }}
             onSave={(data) => handleUpdate(modal.member.id, data)}
             onClose={() => setModal(null)}

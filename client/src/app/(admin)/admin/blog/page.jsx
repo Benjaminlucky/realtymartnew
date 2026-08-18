@@ -1063,6 +1063,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
   const [saving, setSaving] = useState(false);
   const [slugEdited, setSlugEdited] = useState(isEdit);
   const [tab, setTab] = useState("content");
+  const [addingCategory, setAddingCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [creatingCategory, setCreatingCategory] = useState(false);
   // Accepts "superadmin" (no underscore) too — some existing production
   // admin accounts have that value stored instead of the schema's
   // "super_admin", and this must not lock them out of publishing.
@@ -1122,22 +1125,33 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
       const wantedName = String(data.category).trim();
       const wanted = wantedName.toLowerCase();
       const existing = categories.find((c) => c.name?.toLowerCase() === wanted);
-      if (existing) {
-        set("category", existing._id || existing.id);
-        return;
+      if (existing) set("category", existing._id || existing.id);
+      else await createAndAssignCategory(wantedName);
+    }
+  };
+
+  // Shared by frontmatter import and the "+ New Category" picker in the
+  // form below — create the category, then immediately assign it to
+  // this post so there's no separate "go create it, come back, select
+  // it" round trip.
+  const createAndAssignCategory = async (name) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    setCreatingCategory(true);
+    try {
+      const res = await blogApi.createCategory({ name: trimmed });
+      const created = res?.data;
+      if (created) {
+        set("category", created._id || created.id);
+        toast.success(`Created category "${trimmed}"`);
       }
-      try {
-        const res = await blogApi.createCategory({ name: wantedName });
-        const created = res?.data;
-        if (created) {
-          set("category", created._id || created.id);
-          toast.success(`Created category "${wantedName}"`);
-        }
-      } catch (err) {
-        toast.error(err.message || `Couldn't create category "${wantedName}"`);
-      } finally {
-        onCategoriesRefresh?.();
-      }
+      setAddingCategory(false);
+      setNewCategoryName("");
+    } catch (err) {
+      toast.error(err.message || `Couldn't create category "${trimmed}"`);
+    } finally {
+      setCreatingCategory(false);
+      onCategoriesRefresh?.();
     }
   };
   const handleSubmit = async (e) => {
@@ -1442,18 +1456,91 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                     />
                     <div>
                       <label style={labelStyle}>Category</label>
-                      <select
-                        value={form.category}
-                        onChange={(e) => set("category", e.target.value)}
-                        style={{ ...inputStyle, cursor: "pointer" }}
-                      >
-                        <option value="">— No Category —</option>
-                        {categories.map((c) => (
-                          <option key={c._id || c.id} value={c._id || c.id}>
-                            {c.name}
-                          </option>
-                        ))}
-                      </select>
+                      {addingCategory ? (
+                        <div style={{ display: "flex", gap: "0.5rem" }}>
+                          <input
+                            autoFocus
+                            value={newCategoryName}
+                            onChange={(e) => setNewCategoryName(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                createAndAssignCategory(newCategoryName);
+                              }
+                              if (e.key === "Escape") {
+                                setAddingCategory(false);
+                                setNewCategoryName("");
+                              }
+                            }}
+                            placeholder="New category name…"
+                            style={inputStyle}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => createAndAssignCategory(newCategoryName)}
+                            disabled={!newCategoryName.trim() || creatingCategory}
+                            title="Create and assign"
+                            style={{
+                              flexShrink: 0,
+                              padding: "0 0.75rem",
+                              borderRadius: "var(--radius, 0.625rem)",
+                              border: "1px solid #22C55E",
+                              background: "#F0FDF4",
+                              color: "#16A34A",
+                              cursor: newCategoryName.trim() && !creatingCategory ? "pointer" : "not-allowed",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {creatingCategory ? (
+                              <Loader2 size={14} style={{ animation: "spin 1s linear infinite" }} />
+                            ) : (
+                              <Check size={14} />
+                            )}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setAddingCategory(false);
+                              setNewCategoryName("");
+                            }}
+                            title="Cancel"
+                            style={{
+                              flexShrink: 0,
+                              padding: "0 0.75rem",
+                              borderRadius: "var(--radius, 0.625rem)",
+                              border: "1px solid var(--color-border, #E2E8F0)",
+                              background: "var(--color-surface, white)",
+                              color: "var(--color-text-secondary, #64748B)",
+                              cursor: "pointer",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <X size={14} />
+                          </button>
+                        </div>
+                      ) : (
+                        <select
+                          value={form.category}
+                          onChange={(e) => {
+                            if (e.target.value === "__new__") {
+                              setAddingCategory(true);
+                              return;
+                            }
+                            set("category", e.target.value);
+                          }}
+                          style={{ ...inputStyle, cursor: "pointer" }}
+                        >
+                          <option value="">— No Category —</option>
+                          {categories.map((c) => (
+                            <option key={c._id || c.id} value={c._id || c.id}>
+                              {c.name}
+                            </option>
+                          ))}
+                          <option value="__new__">+ New Category…</option>
+                        </select>
+                      )}
                     </div>
                     <div>
                       <label style={labelStyle}>Reading Time (min)</label>

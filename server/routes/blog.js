@@ -106,7 +106,9 @@ router.get("/:slug", async (req, res, next) => {
       { slug: req.params.slug, status: "published" },
       { $inc: { views_count: 1 } },
       { new: true },
-    ).lean();
+    )
+      .populate("author", "name avatar bio")
+      .lean();
     if (!post) return fail(res, "Blog post not found", 404);
     return ok(res, post);
   } catch (err) {

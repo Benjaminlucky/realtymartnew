@@ -591,7 +591,7 @@ router.post(
 // PUT /admin/team/:id
 router.put("/admin/team/:id", requireAuth, async (req, res, next) => {
   try {
-    const { first_name, last_name, name, email, role, phone, bio } = req.body;
+    const { first_name, last_name, name, email, role, phone, bio, avatar } = req.body;
 
     const isSelf = String(req.admin._id) === String(req.params.id);
     const isSuper = req.admin.role === "super_admin";
@@ -610,6 +610,7 @@ router.put("/admin/team/:id", requireAuth, async (req, res, next) => {
     if (role !== undefined) update.role = role;
     if (phone !== undefined) update.phone = phone;
     if (bio !== undefined) update.bio = bio;
+    if (avatar !== undefined) update.avatar = avatar;
 
     const member = await Admin.findByIdAndUpdate(req.params.id, update, {
       new: true,

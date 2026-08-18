@@ -10,6 +10,9 @@ const adminSchema = new mongoose.Schema({
   role:      { type: String, enum: ["super_admin", "admin", "editor"], default: "admin" },
   is_active: { type: Boolean, default: true },
   last_login:{ type: Date },
+  avatar:    { type: String, default: "" },
+  bio:       { type: String, trim: true, maxlength: 500, default: "" },
+  phone:     { type: String, trim: true, default: "" },
 }, { timestamps: true });
 
 // Hash password before save

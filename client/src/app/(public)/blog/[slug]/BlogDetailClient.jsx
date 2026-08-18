@@ -247,6 +247,7 @@ export default function BlogPostClient({ post, settings, related }) {
     excerpt,
     cover_image,
     category,
+    author,
     author_name,
     published_at,
     reading_time,
@@ -470,9 +471,18 @@ export default function BlogPostClient({ post, settings, related }) {
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
+                    overflow: "hidden",
                   }}
                 >
-                  <User size={13} style={{ color: "white" }} />
+                  {author?.avatar ? (
+                    <img
+                      src={getCoverUrl(author.avatar)}
+                      alt=""
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <User size={13} style={{ color: "white" }} />
+                  )}
                 </div>
                 <span
                   style={{
@@ -482,7 +492,7 @@ export default function BlogPostClient({ post, settings, related }) {
                     color: "rgba(255,255,255,0.85)",
                   }}
                 >
-                  {author_name}
+                  {author?.name || author_name}
                 </span>
               </div>
             )}
@@ -734,8 +744,11 @@ export default function BlogPostClient({ post, settings, related }) {
                 )}
               </div>
 
-              {/* ── Author card ── */}
-              {author_name && (
+              {/* ── Author card — real photo/bio when the team member has
+                  set one (Admin Settings → Team → Edit), otherwise falls
+                  back to initials and no subtitle rather than a made-up
+                  one. ── */}
+              {(author?.name || author_name) && (
                 <div
                   style={{
                     marginTop: "2rem",
@@ -759,9 +772,18 @@ export default function BlogPostClient({ post, settings, related }) {
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
+                      overflow: "hidden",
                     }}
                   >
-                    <User size={22} style={{ color: "white" }} />
+                    {author?.avatar ? (
+                      <img
+                        src={getCoverUrl(author.avatar)}
+                        alt=""
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    ) : (
+                      <User size={22} style={{ color: "white" }} />
+                    )}
                   </div>
                   <div>
                     <p
@@ -773,16 +795,20 @@ export default function BlogPostClient({ post, settings, related }) {
                         marginBottom: "0.25rem",
                       }}
                     >
-                      {author_name}
+                      {author?.name || author_name}
                     </p>
-                    <p
-                      style={{
-                        fontSize: "0.8125rem",
-                        color: "var(--color-text-muted)",
-                      }}
-                    >
-                      Real estate writer & property market analyst
-                    </p>
+                    {author?.bio && (
+                      <p
+                        style={{
+                          fontSize: "0.8125rem",
+                          color: "var(--color-text-muted)",
+                          lineHeight: 1.6,
+                          margin: 0,
+                        }}
+                      >
+                        {author.bio}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}

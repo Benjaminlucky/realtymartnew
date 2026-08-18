@@ -564,6 +564,8 @@ export default function BlogPostClient({ post, settings, related }) {
               {coverUrl && (
                 <div
                   style={{
+                    position: "relative",
+                    aspectRatio: "16 / 9",
                     borderRadius: "var(--radius-lg)",
                     overflow: "hidden",
                     marginBottom: "2.5rem",
@@ -574,11 +576,9 @@ export default function BlogPostClient({ post, settings, related }) {
                     src={coverUrl}
                     alt={title}
                     fill
-                    sizes="(max-width:640px) 100vw, 33vw"
+                    sizes="(max-width:900px) 100vw, 750px"
                     style={{
-                      objectFit: "cover",
-                      maxHeight: "480px",
-                      objectFit: "cover",
+                      objectFit: "contain",
                       display: "block",
                     }}
                     onError={(e) => {

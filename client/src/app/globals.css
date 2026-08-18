@@ -1150,6 +1150,16 @@
   grid-template-columns: 1fr 300px;
   gap: 3rem;
 }
+/* Grid items default to min-width: auto — a floor set by their widest
+   piece of content (e.g. a table with min-width: 460px). That floor
+   ignores the grid's own track sizing, so one wide table can force the
+   whole "1fr" column wider than the viewport with no way to shrink,
+   even after the single-column collapse below. This removes that
+   floor so the column always fits; overflowing content like a table
+   still gets its own horizontal scroll via .rm-table-wrap. */
+.blog-detail-layout > * {
+  min-width: 0;
+}
 .blog-detail-sidebar {
   position: sticky;
   top: 6rem;

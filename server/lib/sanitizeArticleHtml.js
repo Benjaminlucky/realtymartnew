@@ -156,7 +156,15 @@ function normalizeInput(raw) {
 // gives the overflow its own scroll container instead. No author pasting
 // HTML/Markdown ever remembers to add this by hand, so it's automatic.
 function wrapTables(html) {
-  return html.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (table) => `<div class="rm-table-wrap">${table}</div>`);
+  return html.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (table, offset, full) => {
+    // Idempotent: sanitizeArticleHtml can run on content that's already
+    // been through it before (a re-save, a migration script) — without
+    // this check, each pass would nest another wrapper div around an
+    // already-wrapped table.
+    const before = full.slice(Math.max(0, offset - 40), offset);
+    if (/<div class="rm-table-wrap">\s*$/.test(before)) return table;
+    return `<div class="rm-table-wrap">${table}</div>`;
+  });
 }
 
 function sanitizeArticleHtml(html) {

@@ -42,10 +42,10 @@ const WATERMARK_POSITIONS = [
 const S = {
   card: {
     background: "var(--color-surface, white)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #DDD3D4)",
     borderRadius: "var(--radius-lg, 1rem)",
     padding: "1.5rem",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+    boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
     marginBottom: "1.5rem",
   },
   label: {
@@ -53,7 +53,7 @@ const S = {
     fontSize: "0.75rem",
     fontWeight: 600,
     marginBottom: "0.375rem",
-    color: "var(--color-text-secondary, #475569)",
+    color: "var(--color-text-secondary, #754a4f)",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
     fontFamily: "Plus Jakarta Sans, sans-serif",
@@ -62,9 +62,9 @@ const S = {
     width: "100%",
     padding: "0.625rem 0.875rem",
     borderRadius: "var(--radius, 0.625rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #DDD3D4)",
     fontSize: "0.875rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     outline: "none",
     background: "var(--color-surface, white)",
     boxSizing: "border-box",
@@ -75,7 +75,7 @@ const S = {
     fontFamily: "Plus Jakarta Sans, sans-serif",
     fontWeight: 700,
     fontSize: "1rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     margin: "0 0 1.25rem",
     display: "flex",
     alignItems: "center",
@@ -85,153 +85,72 @@ const S = {
 };
 
 const focus = (e) =>
-  (e.target.style.borderColor = "var(--color-primary, #FF6B6B)");
+  (e.target.style.borderColor = "var(--color-primary, #F49E0B)");
 const blur = (e) =>
-  (e.target.style.borderColor = "var(--color-border, #E2E8F0)");
+  (e.target.style.borderColor = "var(--color-border, #DDD3D4)");
 
 // ── Default theme values ──────────────────────────────────────────
+// Locked to the site's two brand colors (amber + wine) plus white — see
+// THEME_RULES.md at the repo root for the full palette and the contrast
+// reasoning behind each shade.
 const THEME_DEFAULTS = {
-  theme_primary: "#b2ff70",
-  theme_primary_dark: "#1b2f31",
-  theme_primary_light: "#d4ffaa",
-  theme_primary_muted: "#e8ffd6",
-  theme_secondary: "#1b2f31",
-  theme_secondary_dark: "#132224",
-  theme_secondary_mid: "#2a4547",
-  theme_secondary_light: "#3a5d60",
-  theme_accent: "#b2ff70",
-  theme_accent_light: "#d4ffaa",
+  theme_primary: "#f49e0b",
+  theme_primary_dark: "#99561c",
+  theme_primary_light: "#f8c060",
+  theme_primary_muted: "#fef3e2",
+  theme_secondary: "#572228",
+  theme_secondary_dark: "#361519",
+  theme_secondary_mid: "#7c5357",
+  theme_secondary_light: "#a38589",
+  theme_accent: "#f49e0b",
+  theme_accent_light: "#f8c060",
   theme_surface: "#ffffff",
-  theme_surface_2: "#f4f9f4",
-  theme_surface_3: "#edf5ed",
-  theme_border: "#e2e8e0",
-  theme_text: "#0f1f20",
-  theme_text_secondary: "#3d5a5c",
-  theme_text_muted: "#a8c4c6",
+  theme_surface_2: "#fffcf6",
+  theme_surface_3: "#fef8ee",
+  theme_border: "#ddd3d4",
+  theme_text: "#301316",
+  theme_text_secondary: "#754a4f",
+  theme_text_muted: "#9a7a7e",
   theme_radius: "0.625rem",
   theme_radius_lg: "1rem",
   theme_radius_xl: "1.5rem",
 };
 
 // ── Preset themes ─────────────────────────────────────────────────
+// Only tonal variations of the two brand colors are offered — no other
+// hue is permitted anywhere in the theme, so there's nothing else to
+// offer a preset for.
 const PRESETS = [
   {
-    name: "Lime Teal",
-    desc: "Default — fresh lime green + deep teal",
-    preview: ["#b2ff70", "#1b2f31", "#d4ffaa"],
+    name: "Amber & Wine",
+    desc: "Default — amber gold + deep wine",
+    preview: ["#f49e0b", "#572228", "#f8c060"],
     values: { ...THEME_DEFAULTS },
   },
   {
-    name: "Midnight Coral",
-    desc: "Dark navy + coral red",
-    preview: ["#ff6b6b", "#1c1c2e", "#38bdf8"],
+    name: "Deep Wine",
+    desc: "Wine-forward — darker, more formal",
+    preview: ["#f49e0b", "#361519", "#99561c"],
     values: {
-      theme_primary: "#ff6b6b",
-      theme_primary_dark: "#0f172a",
-      theme_primary_light: "#38bdf8",
-      theme_primary_muted: "#d1fae5",
-      theme_secondary: "#1c1c2e",
-      theme_secondary_dark: "#0f0f1a",
-      theme_secondary_mid: "#2d2d44",
-      theme_secondary_light: "#3d3d5c",
-      theme_accent: "#f59e0b",
-      theme_accent_light: "#fcd34d",
-      theme_surface: "#ffffff",
-      theme_surface_2: "#f8fafc",
-      theme_surface_3: "#f1f5f9",
-      theme_border: "#e2e8f0",
-      theme_text: "#0f172a",
-      theme_text_secondary: "#475569",
-      theme_text_muted: "#94a3b8",
-      theme_radius: "0.625rem",
-      theme_radius_lg: "1rem",
-      theme_radius_xl: "1.5rem",
+      ...THEME_DEFAULTS,
+      theme_secondary: "#361519",
+      theme_secondary_dark: "#220d10",
+      theme_secondary_mid: "#572228",
+      theme_secondary_light: "#7c5357",
     },
   },
   {
-    name: "Forest Green",
-    desc: "Fresh green + deep charcoal",
-    preview: ["#10b981", "#0f172a", "#34d399"],
+    name: "Bright Amber",
+    desc: "Amber-forward — lighter, more energetic",
+    preview: ["#f49e0b", "#7c5357", "#fbddaa"],
     values: {
       ...THEME_DEFAULTS,
-      theme_primary: "#10b981",
-      theme_primary_dark: "#047857",
-      theme_primary_light: "#34d399",
-      theme_primary_muted: "#d1fae5",
-      theme_accent: "#f59e0b",
-    },
-  },
-  {
-    name: "Royal Blue",
-    desc: "Professional blue + white",
-    preview: ["#3b82f6", "#1e3a5f", "#60a5fa"],
-    values: {
-      ...THEME_DEFAULTS,
-      theme_primary: "#3b82f6",
-      theme_primary_dark: "#1d4ed8",
-      theme_primary_light: "#60a5fa",
-      theme_primary_muted: "#dbeafe",
-      theme_secondary: "#1e3a5f",
-      theme_secondary_dark: "#0f2040",
-      theme_secondary_mid: "#2d4f7c",
-      theme_secondary_light: "#3d6099",
-      theme_accent: "#f59e0b",
-    },
-  },
-  {
-    name: "Purple Luxury",
-    desc: "Deep purple + gold accent",
-    preview: ["#8b5cf6", "#1a0a2e", "#fbbf24"],
-    values: {
-      ...THEME_DEFAULTS,
-      theme_primary: "#8b5cf6",
-      theme_primary_dark: "#6d28d9",
-      theme_primary_light: "#a78bfa",
-      theme_primary_muted: "#ede9fe",
-      theme_secondary: "#1a0a2e",
-      theme_secondary_dark: "#0f0620",
-      theme_secondary_mid: "#2e1a4a",
-      theme_secondary_light: "#4a2d72",
-      theme_accent: "#fbbf24",
-      theme_accent_light: "#fde68a",
-    },
-  },
-  {
-    name: "Warm Amber",
-    desc: "Golden amber + dark brown",
-    preview: ["#f59e0b", "#1c1008", "#fcd34d"],
-    values: {
-      ...THEME_DEFAULTS,
-      theme_primary: "#f59e0b",
-      theme_primary_dark: "#b45309",
-      theme_primary_light: "#fcd34d",
-      theme_primary_muted: "#fef3c7",
-      theme_secondary: "#1c1008",
-      theme_secondary_dark: "#0f0a04",
-      theme_secondary_mid: "#2d1f10",
-      theme_secondary_light: "#3d2f1c",
-      theme_accent: "#10b981",
-      theme_accent_light: "#34d399",
-    },
-  },
-  {
-    name: "Clean White",
-    desc: "Minimal white + slate",
-    preview: ["#0f172a", "#f8fafc", "#3b82f6"],
-    values: {
-      ...THEME_DEFAULTS,
-      theme_primary: "#0f172a",
-      theme_primary_dark: "#020617",
-      theme_primary_light: "#334155",
-      theme_primary_muted: "#f1f5f9",
-      theme_secondary: "#f8fafc",
-      theme_secondary_dark: "#f1f5f9",
-      theme_secondary_mid: "#e2e8f0",
-      theme_secondary_light: "#cbd5e1",
-      theme_accent: "#3b82f6",
-      theme_accent_light: "#60a5fa",
-      theme_text: "#0f172a",
-      theme_text_secondary: "#334155",
+      theme_secondary: "#7c5357",
+      theme_secondary_dark: "#572228",
+      theme_secondary_mid: "#a38589",
+      theme_secondary_light: "#d0c1c3",
+      theme_primary_light: "#fbddaa",
+      theme_primary_muted: "#fef3e2",
     },
   },
 ];
@@ -283,8 +202,8 @@ function LogoUpload({ value, onChange }) {
             width: "200px",
             height: "72px",
             borderRadius: "var(--radius, 0.75rem)",
-            border: "1px solid var(--color-border, #E2E8F0)",
-            background: "var(--color-secondary, #0F172A)",
+            border: "1px solid var(--color-border, #DDD3D4)",
+            background: "var(--color-secondary, #301316)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -344,9 +263,9 @@ function LogoUpload({ value, onChange }) {
               gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #DDD3D4)",
               background: "var(--color-surface, white)",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
@@ -356,14 +275,14 @@ function LogoUpload({ value, onChange }) {
             onMouseEnter={(e) => {
               if (!uploading) {
                 e.currentTarget.style.borderColor =
-                  "var(--color-primary, #FF6B6B)";
-                e.currentTarget.style.color = "var(--color-primary, #FF6B6B)";
+                  "var(--color-primary, #F49E0B)";
+                e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
               }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor =
-                "var(--color-border, #E2E8F0)";
-              e.currentTarget.style.color = "#475569";
+                "var(--color-border, #DDD3D4)";
+              e.currentTarget.style.color = "#754a4f";
             }}
           >
             {uploading ? (
@@ -391,9 +310,9 @@ function LogoUpload({ value, onChange }) {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid #FCA5A5",
-                background: "#FEF2F2",
-                color: "#EF4444",
+                border: "1px solid #9A7A7E",
+                background: "#F2EDEE",
+                color: "#4E1F24",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -421,7 +340,7 @@ function LogoUpload({ value, onChange }) {
           <p
             style={{
               fontSize: "0.75rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9A7A7E)",
               lineHeight: 1.6,
               margin: 0,
             }}
@@ -475,10 +394,10 @@ function AvatarUpload({ value, onChange }) {
             width: 80,
             height: 80,
             borderRadius: "50%",
-            border: "2px solid var(--color-border, #E2E8F0)",
+            border: "2px solid var(--color-border, #DDD3D4)",
             overflow: "hidden",
             flexShrink: 0,
-            background: "linear-gradient(135deg,#b2ff70,#5ecb40)",
+            background: "linear-gradient(135deg,#f8c060,#f49e0b)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -493,7 +412,7 @@ function AvatarUpload({ value, onChange }) {
               onError={(e) => { e.target.style.display = "none"; }}
             />
           ) : (
-            <span style={{ color: "#1b2f31", fontWeight: 800, fontSize: "1.75rem", fontFamily: "Plus Jakarta Sans, sans-serif" }}>R</span>
+            <span style={{ color: "#572228", fontWeight: 800, fontSize: "1.75rem", fontFamily: "Plus Jakarta Sans, sans-serif" }}>R</span>
           )}
         </div>
         {/* Buttons */}
@@ -506,9 +425,9 @@ function AvatarUpload({ value, onChange }) {
               display: "flex", alignItems: "center", gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #DDD3D4)",
               background: "var(--color-surface, white)",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600, fontSize: "0.8125rem",
               cursor: uploading ? "wait" : "pointer",
@@ -524,7 +443,7 @@ function AvatarUpload({ value, onChange }) {
                 display: "flex", alignItems: "center", gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid #FCA5A5", background: "#FEF2F2", color: "#EF4444",
+                border: "1px solid #9A7A7E", background: "#F2EDEE", color: "#4E1F24",
                 fontFamily: "Plus Jakarta Sans, sans-serif", fontWeight: 600, fontSize: "0.8125rem", cursor: "pointer",
               }}
             >
@@ -533,7 +452,7 @@ function AvatarUpload({ value, onChange }) {
           )}
           <input ref={ref} type="file" accept="image/png,image/jpeg,image/webp" style={{ display: "none" }} onChange={(e) => { upload(e.target.files[0]); e.target.value = ""; }} />
         </div>
-        <p style={{ fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", lineHeight: 1.6, margin: 0 }}>
+        <p style={{ fontSize: "0.75rem", color: "var(--color-text-muted, #9A7A7E)", lineHeight: 1.6, margin: 0 }}>
           Square photo recommended (1:1 ratio).<br />JPG, PNG, or WebP. Max 5 MB.
         </p>
       </div>
@@ -589,17 +508,17 @@ function FaviconUpload({ value, onChange }) {
             width: "72px",
             height: "72px",
             borderRadius: "var(--radius, 0.75rem)",
-            border: "1px solid var(--color-border, #E2E8F0)",
+            border: "1px solid var(--color-border, #DDD3D4)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             overflow: "hidden",
             flexShrink: 0,
             backgroundImage:
-              "linear-gradient(45deg,#F1F5F9 25%,transparent 25%)," +
-              "linear-gradient(-45deg,#F1F5F9 25%,transparent 25%)," +
-              "linear-gradient(45deg,transparent 75%,#F1F5F9 75%)," +
-              "linear-gradient(-45deg,transparent 75%,#F1F5F9 75%)",
+              "linear-gradient(45deg,#FEF8EE 25%,transparent 25%)," +
+              "linear-gradient(-45deg,#FEF8EE 25%,transparent 25%)," +
+              "linear-gradient(45deg,transparent 75%,#FEF8EE 75%)," +
+              "linear-gradient(-45deg,transparent 75%,#FEF8EE 75%)",
             backgroundSize: "16px 16px",
             backgroundPosition: "0 0,0 8px,8px -8px,-8px 0",
           }}
@@ -614,7 +533,7 @@ function FaviconUpload({ value, onChange }) {
               }}
             />
           ) : (
-            <ImageIcon size={20} style={{ color: "#CBD5E1" }} />
+            <ImageIcon size={20} style={{ color: "#9A7A7E" }} />
           )}
         </div>
 
@@ -631,9 +550,9 @@ function FaviconUpload({ value, onChange }) {
               gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #DDD3D4)",
               background: "var(--color-surface, white)",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
@@ -642,14 +561,14 @@ function FaviconUpload({ value, onChange }) {
             onMouseEnter={(e) => {
               if (!uploading) {
                 e.currentTarget.style.borderColor =
-                  "var(--color-primary, #FF6B6B)";
-                e.currentTarget.style.color = "var(--color-primary, #FF6B6B)";
+                  "var(--color-primary, #F49E0B)";
+                e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
               }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor =
-                "var(--color-border, #E2E8F0)";
-              e.currentTarget.style.color = "#475569";
+                "var(--color-border, #DDD3D4)";
+              e.currentTarget.style.color = "#754a4f";
             }}
           >
             {uploading ? (
@@ -677,9 +596,9 @@ function FaviconUpload({ value, onChange }) {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid #FCA5A5",
-                background: "#FEF2F2",
-                color: "#EF4444",
+                border: "1px solid #9A7A7E",
+                background: "#F2EDEE",
+                color: "#4E1F24",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -704,7 +623,7 @@ function FaviconUpload({ value, onChange }) {
         <p
           style={{
             fontSize: "0.75rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9A7A7E)",
             lineHeight: 1.6,
             flex: 1,
             minWidth: "160px",
@@ -769,7 +688,7 @@ function NavLinksEditor({ value, onChange }) {
       <p
         style={{
           fontSize: "0.75rem",
-          color: "var(--color-text-muted, #94A3B8)",
+          color: "var(--color-text-muted, #9A7A7E)",
           marginBottom: "0.875rem",
         }}
       >
@@ -795,11 +714,11 @@ function NavLinksEditor({ value, onChange }) {
               gap: "0.5rem",
               padding: "0.625rem 0.75rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
-              background: "#FAFAFA",
+              border: "1px solid var(--color-border, #DDD3D4)",
+              background: "#FFFCF6",
             }}
           >
-            <GripVertical size={14} style={{ color: "#CBD5E1" }} />
+            <GripVertical size={14} style={{ color: "#9A7A7E" }} />
             <input
               style={{
                 ...S.input,
@@ -820,7 +739,7 @@ function NavLinksEditor({ value, onChange }) {
                   left: "0.5rem",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9A7A7E)",
                 }}
               />
               <input
@@ -843,7 +762,7 @@ function NavLinksEditor({ value, onChange }) {
                 background: "none",
                 border: "none",
                 cursor: i === 0 ? "default" : "pointer",
-                color: i === 0 ? "#E2E8F0" : "#94A3B8",
+                color: i === 0 ? "#DDD3D4" : "#9A7A7E",
                 padding: "0.25rem",
                 display: "flex",
                 borderRadius: "0.375rem",
@@ -859,7 +778,7 @@ function NavLinksEditor({ value, onChange }) {
                 background: "none",
                 border: "none",
                 cursor: i === links.length - 1 ? "default" : "pointer",
-                color: i === links.length - 1 ? "#E2E8F0" : "#94A3B8",
+                color: i === links.length - 1 ? "#DDD3D4" : "#9A7A7E",
                 padding: "0.25rem",
                 display: "flex",
                 borderRadius: "0.375rem",
@@ -871,12 +790,12 @@ function NavLinksEditor({ value, onChange }) {
             <button
               onClick={() => remove(i)}
               style={{
-                background: "#FEE2E2",
+                background: "#F2EDEE",
                 border: "none",
                 borderRadius: "0.5rem",
                 padding: "0.3rem",
                 cursor: "pointer",
-                color: "#EF4444",
+                color: "#4E1F24",
                 display: "flex",
               }}
               title="Remove"
@@ -895,9 +814,9 @@ function NavLinksEditor({ value, onChange }) {
           gap: "0.4rem",
           padding: "0.5rem 1rem",
           borderRadius: "var(--radius, 0.625rem)",
-          border: "1px dashed #CBD5E1",
+          border: "1px dashed #9A7A7E",
           background: "var(--color-surface, white)",
-          color: "var(--color-text-secondary, #64748B)",
+          color: "var(--color-text-secondary, #754A4F)",
           fontFamily: "Plus Jakarta Sans, sans-serif",
           fontWeight: 600,
           fontSize: "0.8125rem",
@@ -906,12 +825,12 @@ function NavLinksEditor({ value, onChange }) {
           justifyContent: "center",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = "var(--color-primary, #FF6B6B)";
-          e.currentTarget.style.color = "var(--color-primary, #FF6B6B)";
+          e.currentTarget.style.borderColor = "var(--color-primary, #F49E0B)";
+          e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = "#CBD5E1";
-          e.currentTarget.style.color = "#64748B";
+          e.currentTarget.style.borderColor = "#9A7A7E";
+          e.currentTarget.style.color = "#754A4F";
         }}
       >
         <Plus size={14} /> Add Link
@@ -923,7 +842,7 @@ function NavLinksEditor({ value, onChange }) {
 function Accordion({
   icon: Icon,
   title,
-  color = "#FF6B6B",
+  color = "#F49E0B",
   children,
   defaultOpen = false,
 }) {
@@ -964,12 +883,12 @@ function Accordion({
         {open ? (
           <ChevronUp
             size={16}
-            style={{ color: "var(--color-text-muted, #94A3B8)" }}
+            style={{ color: "var(--color-text-muted, #9A7A7E)" }}
           />
         ) : (
           <ChevronDown
             size={16}
-            style={{ color: "var(--color-text-muted, #94A3B8)" }}
+            style={{ color: "var(--color-text-muted, #9A7A7E)" }}
           />
         )}
       </button>
@@ -1017,7 +936,7 @@ function Field({
         <p
           style={{
             fontSize: "0.7rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9A7A7E)",
             marginTop: "0.25rem",
           }}
         >
@@ -1039,13 +958,13 @@ function ColorField({ label, themeKey, value, onChange, hint }) {
           <>
             <input
               type="color"
-              value={value || "#000000"}
+              value={value || "#301316"}
               onChange={(e) => onChange(e.target.value)}
               style={{
                 width: "2.5rem",
                 height: "2.5rem",
                 padding: "0.125rem",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 borderRadius: "0.5rem",
                 cursor: "pointer",
                 background: "var(--color-surface, white)",
@@ -1055,7 +974,7 @@ function ColorField({ label, themeKey, value, onChange, hint }) {
               type="text"
               value={value || ""}
               onChange={(e) => onChange(e.target.value)}
-              placeholder="#000000"
+              placeholder="#301316"
               style={{
                 ...S.input,
                 flex: 1,
@@ -1087,7 +1006,7 @@ function ColorField({ label, themeKey, value, onChange, hint }) {
         <p
           style={{
             fontSize: "0.7rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9A7A7E)",
             marginTop: "0.25rem",
           }}
         >
@@ -1100,19 +1019,19 @@ function ColorField({ label, themeKey, value, onChange, hint }) {
 
 // ── Live theme preview ────────────────────────────────────────────
 function ThemePreview({ theme, logoUrl, siteName }) {
-  const primary = theme.theme_primary || "#ff6b6b";
-  const secondary = theme.theme_secondary || "#1c1c2e";
-  const accent = theme.theme_accent || "#f59e0b";
+  const primary = theme.theme_primary || "#f49e0b";
+  const secondary = theme.theme_secondary || "#572228";
+  const accent = theme.theme_accent || "#f49e0b";
   const surface = theme.theme_surface || "#ffffff";
-  const text = theme.theme_text || "#0f172a";
-  const border = theme.theme_border || "#e2e8f0";
+  const text = theme.theme_text || "#301316";
+  const border = theme.theme_border || "#ddd3d4";
   const radius = theme.theme_radius || "0.625rem";
   const radiusLg = theme.theme_radius_lg || "1rem";
 
   return (
     <div
       style={{
-        border: "1px solid var(--color-border, #E2E8F0)",
+        border: "1px solid var(--color-border, #DDD3D4)",
         borderRadius: "0.875rem",
         overflow: "hidden",
         marginBottom: "1.5rem",
@@ -1122,19 +1041,19 @@ function ThemePreview({ theme, logoUrl, siteName }) {
       <div
         style={{
           padding: "0.625rem 1rem",
-          background: "var(--color-surface-2, #F8FAFC)",
-          borderBottom: "1px solid #E2E8F0",
+          background: "var(--color-surface-2, #FFFCF6)",
+          borderBottom: "1px solid #DDD3D4",
           display: "flex",
           alignItems: "center",
           gap: "0.5rem",
         }}
       >
-        <Eye size={13} style={{ color: "var(--color-text-muted, #94A3B8)" }} />
+        <Eye size={13} style={{ color: "var(--color-text-muted, #9A7A7E)" }} />
         <span
           style={{
             fontSize: "0.75rem",
             fontWeight: 600,
-            color: "var(--color-text-secondary, #64748B)",
+            color: "var(--color-text-secondary, #754A4F)",
             fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
@@ -1193,7 +1112,7 @@ function ThemePreview({ theme, logoUrl, siteName }) {
           <span
             style={{
               background: primary,
-              color: "white",
+              color: "#301316",
               padding: "0.25rem 0.75rem",
               borderRadius: radius,
               fontSize: "0.75rem",
@@ -1302,7 +1221,7 @@ function ThemePreview({ theme, logoUrl, siteName }) {
             <div
               style={{
                 height: "60px",
-                background: `linear-gradient(135deg, ${secondary}, ${theme.theme_secondary_mid || "#2d2d44"})`,
+                background: `linear-gradient(135deg, ${secondary}, ${theme.theme_secondary_mid || "#7c5357"})`,
               }}
             />
             <div style={{ padding: "0.625rem" }}>
@@ -1558,7 +1477,7 @@ export default function AdminSettingsPage() {
             justifyContent: "center",
             height: "60vh",
             gap: "0.75rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9A7A7E)",
           }}
         >
           <Loader2 size={20} style={{ animation: "spin 1s linear infinite" }} />{" "}
@@ -1594,14 +1513,14 @@ export default function AdminSettingsPage() {
             >
               <Settings
                 size={20}
-                style={{ color: "var(--color-primary, #FF6B6B)" }}
+                style={{ color: "var(--color-primary, #F49E0B)" }}
               />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   margin: 0,
                 }}
               >
@@ -1610,7 +1529,7 @@ export default function AdminSettingsPage() {
             </div>
             <p
               style={{
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9A7A7E)",
                 fontSize: "0.875rem",
                 margin: 0,
               }}
@@ -1626,9 +1545,9 @@ export default function AdminSettingsPage() {
               gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #DDD3D4)",
               background: "var(--color-surface, white)",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
@@ -1643,7 +1562,7 @@ export default function AdminSettingsPage() {
         <Accordion
           icon={Globe}
           title="General & Brand"
-          color="#FF6B6B"
+          color="#F49E0B"
           defaultOpen
         >
           {/* ── Logo upload — first field ── */}
@@ -1723,7 +1642,7 @@ export default function AdminSettingsPage() {
           {/* Contact */}
           <div
             style={{
-              borderTop: "1px solid #F1F5F9",
+              borderTop: "1px solid #FEF8EE",
               paddingTop: "1.25rem",
               marginTop: "0.25rem",
             }}
@@ -1733,7 +1652,7 @@ export default function AdminSettingsPage() {
                 ...S.sectionTitle,
                 fontSize: "0.875rem",
                 marginBottom: "1rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
               }}
             >
               <Phone size={14} /> Contact Details
@@ -1773,7 +1692,7 @@ export default function AdminSettingsPage() {
           {/* Social */}
           <div
             style={{
-              borderTop: "1px solid #F1F5F9",
+              borderTop: "1px solid #FEF8EE",
               paddingTop: "1.25rem",
               marginTop: "0.25rem",
             }}
@@ -1783,7 +1702,7 @@ export default function AdminSettingsPage() {
                 ...S.sectionTitle,
                 fontSize: "0.875rem",
                 marginBottom: "1rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
               }}
             >
               <Globe size={14} /> Social Media
@@ -1839,8 +1758,8 @@ export default function AdminSettingsPage() {
                 padding: "0.625rem 1.5rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "var(--color-primary, #b2ff70)",
-                color: "var(--color-secondary, #1b2f31)",
+                background: "var(--color-primary, #f49e0b)",
+                color: "var(--color-secondary, #572228)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
@@ -1866,11 +1785,11 @@ export default function AdminSettingsPage() {
         </Accordion>
 
         {/* ── Theme & Colors ── */}
-        <Accordion icon={Palette} title="Theme & Colors" color="#A78BFA">
+        <Accordion icon={Palette} title="Theme & Colors" color="#896469">
           <p
             style={{
               fontSize: "0.8125rem",
-              color: "var(--color-text-secondary, #64748B)",
+              color: "var(--color-text-secondary, #754A4F)",
               marginBottom: "1.5rem",
               lineHeight: 1.6,
             }}
@@ -1899,20 +1818,20 @@ export default function AdminSettingsPage() {
                     gap: "0.75rem",
                     padding: "0.75rem 1rem",
                     borderRadius: "var(--radius, 0.75rem)",
-                    border: "1px solid var(--color-border, #E2E8F0)",
+                    border: "1px solid var(--color-border, #DDD3D4)",
                     background: "var(--color-surface, white)",
                     cursor: "pointer",
                     textAlign: "left",
                     transition: "all 150ms",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "#A78BFA";
+                    e.currentTarget.style.borderColor = "#896469";
                     e.currentTarget.style.boxShadow =
-                      "0 0 0 3px rgba(167,139,250,0.15)";
+                      "0 0 0 3px rgba(137,100,105,0.15)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor =
-                      "var(--color-border, #E2E8F0)";
+                      "var(--color-border, #DDD3D4)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
@@ -1935,7 +1854,7 @@ export default function AdminSettingsPage() {
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         fontWeight: 700,
                         fontSize: "0.8125rem",
-                        color: "var(--color-text, #0F172A)",
+                        color: "var(--color-text, #301316)",
                         margin: 0,
                       }}
                     >
@@ -1944,7 +1863,7 @@ export default function AdminSettingsPage() {
                     <p
                       style={{
                         fontSize: "0.7rem",
-                        color: "var(--color-text-muted, #94A3B8)",
+                        color: "var(--color-text-muted, #9A7A7E)",
                         margin: 0,
                       }}
                     >
@@ -1977,10 +1896,10 @@ export default function AdminSettingsPage() {
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid #FEF8EE",
                 }}
               >
                 Primary Brand Color
@@ -2021,10 +1940,10 @@ export default function AdminSettingsPage() {
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid #FEF8EE",
                 }}
               >
                 Secondary (Dark UI)
@@ -2065,10 +1984,10 @@ export default function AdminSettingsPage() {
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid #FEF8EE",
                 }}
               >
                 Accent Color
@@ -2095,10 +2014,10 @@ export default function AdminSettingsPage() {
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   marginBottom: "1rem",
                   paddingBottom: "0.5rem",
-                  borderBottom: "1px solid #F1F5F9",
+                  borderBottom: "1px solid #FEF8EE",
                 }}
               >
                 Surfaces & Text
@@ -2153,7 +2072,7 @@ export default function AdminSettingsPage() {
             style={{
               marginTop: "1.5rem",
               paddingTop: "1.5rem",
-              borderTop: "1px solid #F1F5F9",
+              borderTop: "1px solid #FEF8EE",
             }}
           >
             <p
@@ -2161,7 +2080,7 @@ export default function AdminSettingsPage() {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 marginBottom: "1rem",
               }}
             >
@@ -2206,7 +2125,7 @@ export default function AdminSettingsPage() {
               justifyContent: "space-between",
               alignItems: "center",
               paddingTop: "1.25rem",
-              borderTop: "1px solid #F1F5F9",
+              borderTop: "1px solid #FEF8EE",
               marginTop: "1.25rem",
             }}
           >
@@ -2218,9 +2137,9 @@ export default function AdminSettingsPage() {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 background: "var(--color-surface, white)",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -2239,7 +2158,7 @@ export default function AdminSettingsPage() {
                 padding: "0.625rem 1.5rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "linear-gradient(135deg, #A78BFA, #7C3AED)",
+                background: "linear-gradient(135deg, #896469, #572228)",
                 color: "white",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
@@ -2266,23 +2185,23 @@ export default function AdminSettingsPage() {
         </Accordion>
 
         {/* ── WhatsApp Chat Widget ── */}
-        <Accordion icon={MessageCircle} title="WhatsApp Chat Widget" color="#25D366">
-          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #64748B)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+        <Accordion icon={MessageCircle} title="WhatsApp Chat Widget" color="#572228">
+          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #754A4F)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
             A floating chat widget that appears on all public pages, letting visitors message or call your agent directly on WhatsApp.
           </p>
 
           {/* Enable / disable toggle */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #E2E8F0)", marginBottom: "1.25rem", background: "var(--color-surface-2, #f4f9f4)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #DDD3D4)", marginBottom: "1.25rem", background: "var(--color-surface-2, #fffcf6)" }}>
             <div>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #0F172A)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Show widget on public site</p>
-              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", fontFamily: "Inter, sans-serif" }}>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #301316)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Show widget on public site</p>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #9A7A7E)", fontFamily: "Inter, sans-serif" }}>
                 {settings.wa_enabled === "false" ? "Widget is hidden" : "Widget is visible to visitors"}
               </p>
             </div>
             <button
               type="button"
               onClick={() => setSettings((p) => ({ ...p, wa_enabled: p.wa_enabled === "false" ? "true" : "false" }))}
-              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.wa_enabled === "false" ? "var(--color-text-muted, #94A3B8)" : "#25D366" }}
+              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.wa_enabled === "false" ? "var(--color-text-muted, #9A7A7E)" : "#572228" }}
               aria-label="Toggle widget"
             >
               {settings.wa_enabled === "false"
@@ -2310,7 +2229,7 @@ export default function AdminSettingsPage() {
             onChange={setS("wa_number")}
             placeholder="09021359415 or 2349021359415"
           />
-          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "-0.75rem", marginBottom: "1rem", fontFamily: "Inter, sans-serif" }}>
+          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #9A7A7E)", marginTop: "-0.75rem", marginBottom: "1rem", fontFamily: "Inter, sans-serif" }}>
             Nigerian format (09...) or international format (2349...) — both work.
           </p>
 
@@ -2326,7 +2245,7 @@ export default function AdminSettingsPage() {
               placeholder={`Hi there! 👋 I'm Lucky Benjamin. I'm not available right now, but send me a message and I'll get back to you as soon as possible!`}
               style={{ ...S.input, resize: "vertical", lineHeight: 1.6 }}
             />
-            <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "0.3rem", fontFamily: "Inter, sans-serif" }}>
+            <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #9A7A7E)", marginTop: "0.3rem", fontFamily: "Inter, sans-serif" }}>
               This message is shown in the chat bubble that appears on the widget.
             </p>
           </div>
@@ -2338,7 +2257,7 @@ export default function AdminSettingsPage() {
             onChange={setS("wa_prefill")}
             placeholder="Hello! I came across Mehurbs Properties and I'd like to enquire about a listing."
           />
-          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #94A3B8)", marginTop: "-0.75rem", marginBottom: "1.25rem", fontFamily: "Inter, sans-serif" }}>
+          <p style={{ fontSize: "0.72rem", color: "var(--color-text-muted, #9A7A7E)", marginTop: "-0.75rem", marginBottom: "1.25rem", fontFamily: "Inter, sans-serif" }}>
             Pre-filled message visitors see when they tap "Start Chat on WhatsApp".
           </p>
 
@@ -2352,13 +2271,13 @@ export default function AdminSettingsPage() {
                 padding: "0.625rem 1.5rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "#25D366",
-                color: "#fff",
+                background: "#572228",
+                color: "#ffffff",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700, fontSize: "0.875rem",
                 cursor: savingWhatsapp ? "not-allowed" : "pointer",
                 opacity: savingWhatsapp ? 0.7 : 1,
-                boxShadow: "0 2px 8px rgba(37,211,102,0.35)",
+                boxShadow: "0 2px 8px rgba(87,34,40,0.35)",
               }}
             >
               {savingWhatsapp
@@ -2369,23 +2288,23 @@ export default function AdminSettingsPage() {
         </Accordion>
 
         {/* ── Image Watermark ── */}
-        <Accordion icon={Droplets} title="Image Watermark" color="#0EA5E9">
-          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #64748B)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+        <Accordion icon={Droplets} title="Image Watermark" color="#896469">
+          <p style={{ fontSize: "0.8125rem", color: "var(--color-text-secondary, #754A4F)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
             Stamps a small, semi-transparent text watermark in a corner of every house, land, and blog image uploaded from now on. Your logo/favicon uploads are never watermarked.
           </p>
 
           {/* Enable / disable toggle */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #E2E8F0)", marginBottom: "1.25rem", background: "var(--color-surface-2, #f4f9f4)" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.875rem 1rem", borderRadius: "var(--radius, 0.625rem)", border: "1px solid var(--color-border, #DDD3D4)", marginBottom: "1.25rem", background: "var(--color-surface-2, #fffcf6)" }}>
             <div>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #0F172A)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Watermark new uploads</p>
-              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #94A3B8)", fontFamily: "Inter, sans-serif" }}>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: "0.875rem", color: "var(--color-text, #301316)", fontFamily: "Plus Jakarta Sans, sans-serif" }}>Watermark new uploads</p>
+              <p style={{ margin: "0.2rem 0 0", fontSize: "0.75rem", color: "var(--color-text-muted, #9A7A7E)", fontFamily: "Inter, sans-serif" }}>
                 {settings.watermark_enabled === "false" ? "Disabled — uploads are saved as-is" : "Enabled — applied automatically on upload"}
               </p>
             </div>
             <button
               type="button"
               onClick={() => setSettings((p) => ({ ...p, watermark_enabled: p.watermark_enabled === "false" ? "true" : "false" }))}
-              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.watermark_enabled === "false" ? "var(--color-text-muted, #94A3B8)" : "#0EA5E9" }}
+              style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", padding: 0, color: settings.watermark_enabled === "false" ? "var(--color-text-muted, #9A7A7E)" : "#896469" }}
               aria-label="Toggle watermark"
             >
               {settings.watermark_enabled === "false"
@@ -2415,9 +2334,9 @@ export default function AdminSettingsPage() {
                     style={{
                       padding: "0.5rem 0.875rem",
                       borderRadius: "var(--radius, 0.625rem)",
-                      border: `1px solid ${active ? "#0EA5E9" : "var(--color-border, #E2E8F0)"}`,
-                      background: active ? "rgba(14,165,233,0.08)" : "var(--color-surface, white)",
-                      color: active ? "#0EA5E9" : "var(--color-text-secondary, #475569)",
+                      border: `1px solid ${active ? "#896469" : "var(--color-border, #DDD3D4)"}`,
+                      background: active ? "rgba(137,100,105,0.08)" : "var(--color-surface, white)",
+                      color: active ? "#896469" : "var(--color-text-secondary, #754a4f)",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 600,
                       fontSize: "0.8125rem",
@@ -2457,7 +2376,7 @@ export default function AdminSettingsPage() {
                 type="color"
                 value={settings.watermark_color || "#FFFFFF"}
                 onChange={(e) => setSettings((p) => ({ ...p, watermark_color: e.target.value }))}
-                style={{ width: "2.5rem", height: "2.5rem", padding: 0, border: "1px solid var(--color-border, #E2E8F0)", borderRadius: "0.5rem", cursor: "pointer" }}
+                style={{ width: "2.5rem", height: "2.5rem", padding: 0, border: "1px solid var(--color-border, #DDD3D4)", borderRadius: "0.5rem", cursor: "pointer" }}
               />
               <input
                 type="text"
@@ -2480,13 +2399,13 @@ export default function AdminSettingsPage() {
                 padding: "0.625rem 1.5rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "#0EA5E9",
-                color: "#fff",
+                background: "#896469",
+                color: "#ffffff",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700, fontSize: "0.875rem",
                 cursor: savingWatermark ? "not-allowed" : "pointer",
                 opacity: savingWatermark ? 0.7 : 1,
-                boxShadow: "0 2px 8px rgba(14,165,233,0.35)",
+                boxShadow: "0 2px 8px rgba(137,100,105,0.35)",
               }}
             >
               {savingWatermark

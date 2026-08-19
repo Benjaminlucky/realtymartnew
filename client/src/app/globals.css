@@ -4,37 +4,45 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  /* ── Brand Colours ─────────────────────────────── */
-  --color-primary: #b2ff70; /* Lime green  — buttons, accents     */
-  --color-primary-dark: #1b2f31; /* Dark teal   — hover state for btns */
-  --color-primary-light: #d4ffaa; /* Lime tint   — highlights           */
-  --color-primary-muted: #e8ffd6; /* Lime wash   — selection, tints     */
+  /* ── Brand Colours ─────────────────────────────────────────────
+     Locked to two brand colors — amber #f49e0b + wine #572228 —
+     plus white. Every token below is a tint/shade/mix of just those
+     three. See THEME_RULES.md at the repo root for the full palette
+     table and the contrast math behind each shade. */
+  --color-primary: #f49e0b; /* Amber       — buttons, accents     */
+  --color-primary-dark: #99561c; /* Amber→wine  — hover state for btns */
+  --color-primary-light: #f8c060; /* Amber tint  — highlights           */
+  --color-primary-muted: #fef3e2; /* Amber wash  — selection, tints     */
 
-  --color-secondary: #1b2f31; /* Deep teal   — backgrounds, navs    */
-  --color-secondary-dark: #132224; /* Deeper teal — footer, deep bg      */
-  --color-secondary-mid: #2a4547; /* Mid teal    — cards on dark bg     */
-  --color-secondary-light: #3a5d60; /* Light teal  — borders on dark bg   */
+  --color-secondary: #572228; /* Wine        — backgrounds, navs    */
+  --color-secondary-dark: #361519; /* Deep wine   — footer, deep bg      */
+  --color-secondary-mid: #7c5357; /* Mid wine    — cards on dark bg     */
+  --color-secondary-light: #a38589; /* Light wine  — borders on dark bg   */
 
-  --color-accent: #b2ff70; /* Same as primary for consistency    */
-  --color-accent-light: #d4ffaa; /* Light lime accent                  */
+  --color-accent: #f49e0b; /* Same as primary for consistency    */
+  --color-accent-light: #f8c060; /* Light amber accent                 */
 
   /* ── Neutrals ──────────────────────────────────── */
   --color-surface: #ffffff;
-  --color-surface-2: #f4f9f4;
-  --color-surface-3: #edf5ed;
-  --color-border: #e2e8e0;
-  --color-border-dark: #c8d5c8;
+  --color-surface-2: #fffcf6;
+  --color-surface-3: #fef8ee;
+  --color-border: #ddd3d4;
+  --color-border-dark: #9a7a7e;
 
-  --color-text: #0f1f20; /* Near black with teal undertone     */
-  --color-text-secondary: #3d5a5c; /* Teal-tinted slate                  */
-  --color-text-muted: #a8c4c6; /* Muted teal — on dark backgrounds   */
+  --color-text: #301316; /* Near-black wine                    */
+  --color-text-secondary: #754a4f; /* Wine-tinted slate                  */
+  --color-text-muted: #9a7a7e; /* Muted wine — on dark backgrounds   */
   --color-text-inverse: #ffffff;
 
-  /* ── Status Colours ────────────────────────────── */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  /* ── Status Colours ──────────────────────────────
+     Only two hues exist in this system, so status is differentiated
+     by icon + background tint, not by a dedicated hue per status.
+     success/warning both resolve to amber; danger to a deep wine
+     shade (reads as "serious" without introducing red). */
+  --color-success: #f49e0b;
+  --color-warning: #f49e0b;
+  --color-error: #4e1f24;
+  --color-info: #896469;
 
   /* ── Typography ────────────────────────────────── */
   --font-heading: "Plus Jakarta Sans", sans-serif;
@@ -56,13 +64,15 @@
   --radius-full: 9999px;
 
   /* ── Shadows ───────────────────────────────────── */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  /* Wine-tinted instead of pure black — a small, deliberate touch so
+     even elevation/depth cues stay inside the two-color system. */
+  --shadow-card: 0 1px 3px 0 rgb(87 34 40 / 0.12), 0 1px 2px -1px rgb(87 34 40 / 0.12);
+  --shadow-md: 0 4px 6px -1px rgb(87 34 40 / 0.12), 0 2px 4px -2px rgb(87 34 40 / 0.12);
   --shadow-lg:
-    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    0 10px 15px -3px rgb(87 34 40 / 0.12), 0 4px 6px -4px rgb(87 34 40 / 0.12);
   --shadow-xl:
-    0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 30px rgb(178 255 112 / 0.25);
+    0 20px 25px -5px rgb(87 34 40 / 0.12), 0 8px 10px -6px rgb(87 34 40 / 0.12);
+  --shadow-glow: 0 0 30px rgb(244 158 11 / 0.25);
 
   /* ── Transitions ───────────────────────────────── */
   --transition-fast: 150ms ease;
@@ -74,54 +84,56 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 192 30% 8%; /* #0f1f20 */
+    --foreground: 354 43% 13%; /* #301316 */
     --card: 0 0% 100%;
-    --card-foreground: 192 30% 8%;
+    --card-foreground: 354 43% 13%;
     --popover: 0 0% 100%;
-    --popover-foreground: 192 30% 8%;
-    --primary: 88 100% 72%; /* #b2ff70 — lime green */
-    --primary-foreground: 192 30% 15%; /* #1b2f31 — dark teal text ON lime btn */
-    --secondary: 192 30% 15%; /* #1b2f31 — deep teal */
-    --secondary-foreground: 0 0% 100%; /* white text on dark teal */
-    --muted: 120 20% 96%;
-    --muted-foreground: 192 20% 37%;
-    --accent: 88 100% 72%; /* #b2ff70 */
-    --accent-foreground: 192 30% 15%; /* #1b2f31 */
-    --destructive: 0 84.2% 60.2%;
+    --popover-foreground: 354 43% 13%;
+    --primary: 38 91% 50%; /* #f49e0b — amber */
+    --primary-foreground: 354 43% 13%; /* #301316 — dark text ON amber btn (white fails contrast here) */
+    --secondary: 353 44% 24%; /* #572228 — wine */
+    --secondary-foreground: 0 0% 100%; /* white text on wine */
+    --muted: 37 89% 96%; /* #fef8ee */
+    --muted-foreground: 353 23% 37%; /* #754a4f */
+    --accent: 38 91% 50%; /* #f49e0b */
+    --accent-foreground: 354 43% 13%; /* #301316 */
+    --destructive: 354 43% 21%; /* #4e1f24 — deep wine reads "danger" without red */
     --destructive-foreground: 0 0% 100%;
-    --border: 120 10% 88%;
-    --input: 120 10% 88%;
-    --ring: 88 100% 72%; /* #b2ff70 focus ring */
+    --border: 354 13% 85%; /* #ddd3d4 */
+    --input: 354 13% 85%;
+    --ring: 38 91% 50%; /* #f49e0b focus ring */
     --radius: 0.625rem;
 
-    /* Chart colours */
-    --chart-1: 88 100% 72%; /* lime */
-    --chart-2: 192 30% 15%; /* teal */
-    --chart-3: 38 92% 50%; /* amber */
-    --chart-4: 217 91% 60%; /* blue */
-    --chart-5: 0 84% 60%; /* red */
+    /* Chart colours — alternating amber/wine tones at different
+       lightness levels for series differentiation within the
+       two-hue constraint. */
+    --chart-1: 38 91% 50%; /* amber */
+    --chart-2: 353 44% 24%; /* wine */
+    --chart-3: 28 69% 35%; /* amber-dark */
+    --chart-4: 352 14% 58%; /* wine-light */
+    --chart-5: 38 92% 67%; /* amber-light */
   }
 
   .dark {
-    --background: 192 30% 10%;
-    --foreground: 0 0% 98%;
-    --card: 192 30% 14%;
-    --card-foreground: 0 0% 98%;
-    --popover: 192 30% 14%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 88 100% 72%;
-    --primary-foreground: 192 30% 15%;
-    --secondary: 192 25% 20%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 192 25% 20%;
-    --muted-foreground: 192 20% 65%;
-    --accent: 192 25% 20%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 192 25% 20%;
-    --input: 192 25% 20%;
-    --ring: 88 100% 72%;
+    --background: 353 44% 15%; /* #361519 */
+    --foreground: 0 0% 100%;
+    --card: 353 44% 18%;
+    --card-foreground: 0 0% 100%;
+    --popover: 353 44% 18%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 38 91% 50%;
+    --primary-foreground: 354 43% 13%;
+    --secondary: 354 20% 41%; /* #7c5357 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 354 20% 30%;
+    --muted-foreground: 352 14% 79%; /* #d0c1c3 */
+    --accent: 38 91% 50%;
+    --accent-foreground: 354 43% 13%;
+    --destructive: 354 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 354 20% 30%;
+    --input: 354 20% 30%;
+    --ring: 38 91% 50%;
   }
 }
 
@@ -259,7 +271,7 @@
   }
 
   .glass-dark {
-    background: rgb(27 47 49 / 0.85);
+    background: rgb(87 34 40 / 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgb(255 255 255 / 0.08);
@@ -321,8 +333,8 @@
   }
 
   .badge-sold {
-    background: #fee2e2;
-    color: #991b1b;
+    background: #f2edee;
+    color: #4e1f24;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.25rem 0.625rem;
@@ -330,8 +342,8 @@
   }
 
   .badge-offplan {
-    background: #fef3c7;
-    color: #92400e;
+    background: #fdf0da;
+    color: #99561c;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.25rem 0.625rem;
@@ -339,8 +351,8 @@
   }
 
   .badge-reserved {
-    background: #ede9fe;
-    color: #5b21b6;
+    background: #eee9ea;
+    color: #896469;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.25rem 0.625rem;
@@ -568,14 +580,14 @@
     overflow: hidden;
   }
 
-  /* Dark teal overlay instead of charcoal */
+  /* Dark wine overlay instead of charcoal */
   .img-overlay::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to top,
-      rgb(27 47 49 / 0.78) 0%,
+      rgb(87 34 40 / 0.78) 0%,
       transparent 60%
     );
     pointer-events: none;
@@ -666,10 +678,10 @@
 /* ── Card ── */
 .admin-card {
   background: white;
-  border: 1px solid var(--color-border, #e2e8e0);
+  border: 1px solid var(--color-border, #ddd3d4);
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(87, 34, 40, 0.08);
   margin-bottom: 1.5rem;
 }
 
@@ -679,7 +691,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   margin-bottom: 0.375rem;
-  color: var(--color-text-secondary, #3d5a5c);
+  color: var(--color-text-secondary, #754a4f);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -690,9 +702,9 @@
   width: 100%;
   padding: 0.625rem 0.875rem;
   border-radius: var(--radius, 0.625rem);
-  border: 1px solid var(--color-border, #e2e8e0);
+  border: 1px solid var(--color-border, #ddd3d4);
   font-size: 0.875rem;
-  color: var(--color-text, #0f1f20);
+  color: var(--color-text, #301316);
   outline: none;
   background: white;
   box-sizing: border-box;
@@ -702,8 +714,8 @@
 
 /* Focus ring uses primary color */
 .admin-input:focus {
-  border-color: var(--color-primary, #b2ff70);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #b2ff70) 20%, transparent);
+  border-color: var(--color-primary, #f49e0b);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #f49e0b) 20%, transparent);
 }
 
 /* ── Textarea ── */
@@ -711,9 +723,9 @@
   width: 100%;
   padding: 0.625rem 0.875rem;
   border-radius: var(--radius, 0.625rem);
-  border: 1px solid var(--color-border, #e2e8e0);
+  border: 1px solid var(--color-border, #ddd3d4);
   font-size: 0.875rem;
-  color: var(--color-text, #0f1f20);
+  color: var(--color-text, #301316);
   outline: none;
   background: white;
   box-sizing: border-box;
@@ -723,8 +735,8 @@
 }
 
 .admin-textarea:focus {
-  border-color: var(--color-primary, #b2ff70);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #b2ff70) 20%, transparent);
+  border-color: var(--color-primary, #f49e0b);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary, #f49e0b) 20%, transparent);
 }
 
 /* ── 2-column grid ── */
@@ -746,7 +758,7 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 1rem;
-  color: var(--color-text, #0f1f20);
+  color: var(--color-text, #301316);
   margin: 0 0 1.25rem;
   display: flex;
   align-items: center;
@@ -762,8 +774,8 @@
   padding: 0.625rem 1.25rem;
   border-radius: var(--radius, 0.625rem);
   border: none;
-  background: var(--color-primary, #b2ff70);
-  color: var(--color-secondary, #1b2f31);
+  background: var(--color-primary, #f49e0b);
+  color: var(--color-secondary, #572228);
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: 0.875rem;
@@ -774,7 +786,7 @@
 }
 
 .admin-btn-primary:hover {
-  background: var(--color-primary-light, #d4ffaa);
+  background: var(--color-primary-light, #f8c060);
   transform: translateY(-1px);
 }
 
@@ -791,9 +803,9 @@
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: var(--radius, 0.625rem);
-  border: 1px solid var(--color-border, #e2e8e0);
+  border: 1px solid var(--color-border, #ddd3d4);
   background: white;
-  color: var(--color-text-secondary, #3d5a5c);
+  color: var(--color-text-secondary, #754a4f);
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -805,9 +817,9 @@
 }
 
 .admin-btn-secondary:hover {
-  border-color: var(--color-secondary, #1b2f31);
-  background: var(--color-secondary, #1b2f31);
-  color: var(--color-primary, #b2ff70);
+  border-color: var(--color-secondary, #572228);
+  background: var(--color-secondary, #572228);
+  color: var(--color-primary, #f49e0b);
 }
 
 .admin-btn-secondary:disabled {
@@ -823,8 +835,8 @@
   padding: 0.375rem 0.625rem;
   border-radius: 0.5rem;
   border: none;
-  background: #fee2e2;
-  color: #ef4444;
+  background: #f2edee;
+  color: #4e1f24;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   font-size: 0.75rem;
@@ -833,7 +845,7 @@
 }
 
 .admin-btn-danger:hover {
-  background: #fecaca;
+  background: #e6d4d6;
 }
 
 .admin-btn-danger:disabled {
@@ -853,28 +865,28 @@
 }
 
 .admin-badge-green {
-  background: var(--color-primary-muted, #e8ffd6);
-  color: var(--color-secondary, #1b2f31);
+  background: var(--color-primary-muted, #fef3e2);
+  color: var(--color-secondary, #572228);
 }
 
 .admin-badge-blue {
-  background: #e0f2fe;
-  color: #0369a1;
+  background: #eee9ea;
+  color: #896469;
 }
 
 .admin-badge-yellow {
-  background: #fef9c3;
-  color: #92400e;
+  background: #fdf0da;
+  color: #99561c;
 }
 
 .admin-badge-gray {
-  background: #f1f5f9;
-  color: #64748b;
+  background: #fef8ee;
+  color: #754a4f;
 }
 
 .admin-badge-red {
-  background: #fee2e2;
-  color: #ef4444;
+  background: #f2edee;
+  color: #4e1f24;
 }
 
 /* ── Table-style row ── */
@@ -884,14 +896,14 @@
   gap: 0.875rem;
   padding: 0.875rem 1rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--color-border, #e2e8e0);
+  border: 1px solid var(--color-border, #ddd3d4);
   margin-bottom: 0.625rem;
   background: white;
   transition: box-shadow 150ms;
 }
 
 .admin-row:hover {
-  box-shadow: 0 2px 8px rgba(27, 47, 49, 0.08);
+  box-shadow: 0 2px 8px rgba(87, 34, 40, 0.1);
 }
 
 /* ── Page header ── */
@@ -903,12 +915,12 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
-  color: var(--color-text, #0f1f20);
+  color: var(--color-text, #301316);
   margin: 0 0 0.375rem;
 }
 
 .admin-page-header p {
-  color: var(--color-text-secondary, #3d5a5c);
+  color: var(--color-text-secondary, #754a4f);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -925,7 +937,7 @@
 .admin-empty {
   text-align: center;
   padding: 3rem 1rem;
-  color: var(--color-text-muted, #a8c4c6);
+  color: var(--color-text-muted, #9a7a7e);
   font-size: 0.875rem;
 }
 
@@ -979,7 +991,7 @@
   position: fixed;
   inset: 0;
   z-index: 40;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(48, 19, 22, 0.6);
   backdrop-filter: blur(2px);
   opacity: 0;
   pointer-events: none;

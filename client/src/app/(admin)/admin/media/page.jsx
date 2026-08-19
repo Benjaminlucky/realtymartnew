@@ -49,7 +49,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
     <div
       style={{
         borderRadius: "0.875rem",
-        border: `2px solid ${selected ? "#FF6B6B" : "#E2E8F0"}`,
+        border: `2px solid ${selected ? "#F49E0B" : "#DDD3D4"}`,
         overflow: "hidden",
         background: "white",
         transition: "all 150ms",
@@ -58,12 +58,12 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
       onClick={() => onSelect && onSelect(item)}
       onMouseEnter={(e) => {
         if (!selected && !onSelect) return;
-        e.currentTarget.style.borderColor = "#FF6B6B";
-        e.currentTarget.style.boxShadow = "0 0 0 3px rgba(255,107,107,0.15)";
+        e.currentTarget.style.borderColor = "#F49E0B";
+        e.currentTarget.style.boxShadow = "0 0 0 3px rgba(244,158,11,0.15)";
       }}
       onMouseLeave={(e) => {
         if (!selected) {
-          e.currentTarget.style.borderColor = "#E2E8F0";
+          e.currentTarget.style.borderColor = "#DDD3D4";
           e.currentTarget.style.boxShadow = "none";
         }
       }}
@@ -72,7 +72,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
       <div
         style={{
           aspectRatio: "4/3",
-          background: "#F8FAFC",
+          background: "#FFFCF6",
           overflow: "hidden",
           position: "relative",
         }}
@@ -94,7 +94,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
               width: "1.5rem",
               height: "1.5rem",
               borderRadius: "50%",
-              background: "#FF6B6B",
+              background: "#F49E0B",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -112,7 +112,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.75rem",
-            color: "#0F172A",
+            color: "#301316",
             margin: "0 0 0.25rem",
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -125,7 +125,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
         <p
           style={{
             fontSize: "0.7rem",
-            color: "#94A3B8",
+            color: "#9A7A7E",
             margin: "0 0 0.625rem",
           }}
         >
@@ -144,7 +144,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
                   flex: 1,
                   padding: "0.3rem 0.5rem",
                   borderRadius: "0.375rem",
-                  border: "1px solid #E2E8F0",
+                  border: "1px solid #DDD3D4",
                   fontSize: "0.75rem",
                   outline: "none",
                 }}
@@ -153,7 +153,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
                 onClick={saveAlt}
                 disabled={saving}
                 style={{
-                  background: "#FF6B6B",
+                  background: "#F49E0B",
                   color: "white",
                   border: "none",
                   cursor: "pointer",
@@ -176,8 +176,8 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
               <button
                 onClick={() => setEditAlt(false)}
                 style={{
-                  background: "#F1F5F9",
-                  color: "#64748B",
+                  background: "#FEF8EE",
+                  color: "#754A4F",
                   border: "none",
                   cursor: "pointer",
                   padding: "0.3rem 0.5rem",
@@ -198,7 +198,7 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
               <span
                 style={{
                   fontSize: "0.7rem",
-                  color: item.alt_text ? "#475569" : "#CBD5E1",
+                  color: item.alt_text ? "#754a4f" : "#9A7A7E",
                   fontStyle: item.alt_text ? "normal" : "italic",
                 }}
               >
@@ -208,12 +208,12 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
                 <button
                   onClick={() => setEditAlt(true)}
                   style={{
-                    background: "#F8FAFC",
-                    border: "1px solid #E2E8F0",
+                    background: "#FFFCF6",
+                    border: "1px solid #DDD3D4",
                     cursor: "pointer",
                     padding: "0.25rem",
                     borderRadius: "0.3rem",
-                    color: "#64748B",
+                    color: "#754A4F",
                     display: "inline-flex",
                   }}
                   title="Edit alt text"
@@ -223,12 +223,12 @@ function MediaCard({ item, onDelete, onAltSave, selected, onSelect }) {
                 <button
                   onClick={() => onDelete(item)}
                   style={{
-                    background: "#FFF5F5",
-                    border: "1px solid #FCA5A5",
+                    background: "#F2EDEE",
+                    border: "1px solid #9A7A7E",
                     cursor: "pointer",
                     padding: "0.25rem",
                     borderRadius: "0.3rem",
-                    color: "#EF4444",
+                    color: "#4E1F24",
                     display: "inline-flex",
                   }}
                   title="Delete"
@@ -294,11 +294,11 @@ function UploadZone({ folder, onUploaded }) {
       onDrop={onDrop}
       onClick={() => inputRef.current?.click()}
       style={{
-        border: `2px dashed ${dragging ? "#FF6B6B" : "#E2E8F0"}`,
+        border: `2px dashed ${dragging ? "#F49E0B" : "#DDD3D4"}`,
         borderRadius: "1rem",
         padding: "2rem",
         textAlign: "center",
-        background: dragging ? "#FFF5F5" : "#F8FAFC",
+        background: dragging ? "#F2EDEE" : "#FFFCF6",
         cursor: "pointer",
         transition: "all 150ms",
         marginBottom: "1.5rem",
@@ -320,7 +320,7 @@ function UploadZone({ folder, onUploaded }) {
           <Loader2
             size={28}
             style={{
-              color: "#FF6B6B",
+              color: "#F49E0B",
               animation: "spin 1s linear infinite",
               margin: "0 auto 0.75rem",
             }}
@@ -329,7 +329,7 @@ function UploadZone({ folder, onUploaded }) {
             style={{
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
-              color: "#0F172A",
+              color: "#301316",
               margin: "0 0 0.5rem",
             }}
           >
@@ -340,7 +340,7 @@ function UploadZone({ folder, onUploaded }) {
               key={p.name}
               style={{
                 fontSize: "0.8rem",
-                color: p.done ? "#22C55E" : "#94A3B8",
+                color: p.done ? "#F49E0B" : "#9A7A7E",
                 margin: "0.2rem 0",
               }}
             >
@@ -353,7 +353,7 @@ function UploadZone({ folder, onUploaded }) {
           <Upload
             size={28}
             style={{
-              color: "#CBD5E1",
+              color: "#9A7A7E",
               margin: "0 auto 0.75rem",
               display: "block",
             }}
@@ -362,13 +362,13 @@ function UploadZone({ folder, onUploaded }) {
             style={{
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
-              color: "#0F172A",
+              color: "#301316",
               margin: "0 0 0.25rem",
             }}
           >
             Drop images here or click to upload
           </p>
-          <p style={{ fontSize: "0.8125rem", color: "#94A3B8", margin: 0 }}>
+          <p style={{ fontSize: "0.8125rem", color: "#9A7A7E", margin: 0 }}>
             JPEG, PNG, WebP — max 5MB each
           </p>
         </>
@@ -444,13 +444,13 @@ export default function MediaPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <ImageIcon size={20} style={{ color: "#FF6B6B" }} />
+              <ImageIcon size={20} style={{ color: "#F49E0B" }} />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "#0F172A",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
@@ -458,8 +458,8 @@ export default function MediaPage() {
               </h1>
               <span
                 style={{
-                  background: "#F1F5F9",
-                  color: "#475569",
+                  background: "#FEF8EE",
+                  color: "#754a4f",
                   fontSize: "0.75rem",
                   fontWeight: 700,
                   padding: "0.2rem 0.55rem",
@@ -469,7 +469,7 @@ export default function MediaPage() {
                 {total}
               </span>
             </div>
-            <p style={{ color: "#94A3B8", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#9A7A7E", fontSize: "0.875rem", margin: 0 }}>
               Upload and manage property images
             </p>
           </div>
@@ -481,9 +481,9 @@ export default function MediaPage() {
               gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "0.625rem",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               background: "white",
-              color: "#475569",
+              color: "#754a4f",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
@@ -528,9 +528,9 @@ export default function MediaPage() {
               style={{
                 padding: "0.4rem 1rem",
                 borderRadius: "9999px",
-                border: `1px solid ${folder === f ? "#FF6B6B" : "#E2E8F0"}`,
-                background: folder === f ? "#FFECEC" : "white",
-                color: folder === f ? "#FF6B6B" : "#475569",
+                border: `1px solid ${folder === f ? "#F49E0B" : "#DDD3D4"}`,
+                background: folder === f ? "#FFFCF6" : "white",
+                color: folder === f ? "#F49E0B" : "#754a4f",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -564,14 +564,14 @@ export default function MediaPage() {
                 style={{
                   borderRadius: "0.875rem",
                   overflow: "hidden",
-                  border: "1px solid #E2E8F0",
+                  border: "1px solid #DDD3D4",
                 }}
               >
                 <div
                   style={{
                     aspectRatio: "4/3",
                     background:
-                      "linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%)",
+                      "linear-gradient(90deg,#fef8ee 25%,#ddd3d4 50%,#fef8ee 75%)",
                     backgroundSize: "200% 100%",
                     animation: "shimmer 1.5s infinite",
                   }}
@@ -580,7 +580,7 @@ export default function MediaPage() {
                   <div
                     style={{
                       height: "0.75rem",
-                      background: "#F1F5F9",
+                      background: "#FEF8EE",
                       borderRadius: "0.25rem",
                       marginBottom: "0.4rem",
                     }}
@@ -588,7 +588,7 @@ export default function MediaPage() {
                   <div
                     style={{
                       height: "0.625rem",
-                      background: "#F1F5F9",
+                      background: "#FEF8EE",
                       borderRadius: "0.25rem",
                       width: "60%",
                     }}
@@ -607,13 +607,13 @@ export default function MediaPage() {
               style={{
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
-                color: "#475569",
+                color: "#754a4f",
                 margin: "0 0 0.25rem",
               }}
             >
               No files yet
             </p>
-            <p style={{ margin: 0, fontSize: "0.875rem", color: "#94A3B8" }}>
+            <p style={{ margin: 0, fontSize: "0.875rem", color: "#9A7A7E" }}>
               Upload images above to get started
             </p>
           </div>
@@ -650,7 +650,7 @@ export default function MediaPage() {
               gap: "0.75rem",
             }}
           >
-            <p style={{ fontSize: "0.8rem", color: "#94A3B8", margin: 0 }}>
+            <p style={{ fontSize: "0.8rem", color: "#9A7A7E", margin: 0 }}>
               Page {page} of {totalPages} — {total} files
             </p>
             <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -659,8 +659,8 @@ export default function MediaPage() {
                 disabled={page === 1}
                 style={{
                   background: "white",
-                  color: "#475569",
-                  border: "1px solid #E2E8F0",
+                  color: "#754a4f",
+                  border: "1px solid #DDD3D4",
                   cursor: "pointer",
                   padding: "0.4rem 0.625rem",
                   borderRadius: "0.5rem",
@@ -674,8 +674,8 @@ export default function MediaPage() {
                 disabled={page === totalPages}
                 style={{
                   background: "white",
-                  color: "#475569",
-                  border: "1px solid #E2E8F0",
+                  color: "#754a4f",
+                  border: "1px solid #DDD3D4",
                   cursor: "pointer",
                   padding: "0.4rem 0.625rem",
                   borderRadius: "0.5rem",

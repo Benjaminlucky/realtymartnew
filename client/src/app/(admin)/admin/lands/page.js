@@ -41,10 +41,10 @@ function getImgUrl(path) {
 
 function StatusBadge({ status }) {
   const map = {
-    available: ["#d1fae5", "#065f46"],
-    sold: ["#fee2e2", "#991b1b"],
-    reserved: ["#ede9fe", "#5b21b6"],
-    coming_soon: ["#fef3c7", "#92400e"],
+    available: ["#fef5e7", "#f49e0b"],
+    sold: ["#f2edee", "#4e1f24"],
+    reserved: ["#eee9ea", "#361519"],
+    coming_soon: ["#fdf0da", "#99561c"],
   };
   const [bg, color] = map[status] || map.available;
   const label = LAND_STATUS.find((s) => s.value === status)?.label || status;
@@ -116,19 +116,19 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
       <div
         onClick={() => !uploading && ref.current?.click()}
         style={{
-          border: `2px dashed ${url ? "#22c55e" : "#e2e8f0"}`,
+          border: `2px dashed ${url ? "#f49e0b" : "#ddd3d4"}`,
           borderRadius: "var(--radius, 0.75rem)",
           padding: url ? "0.5rem" : "2rem 1rem",
           textAlign: "center",
           cursor: uploading ? "wait" : "pointer",
-          background: url ? "#f0fdf4" : "#f8fafc",
+          background: url ? "#fffcf6" : "#fffcf6",
           transition: "all 150ms",
         }}
         onMouseEnter={(e) => {
-          if (!url) e.currentTarget.style.borderColor = "#ff6b6b";
+          if (!url) e.currentTarget.style.borderColor = "#f49e0b";
         }}
         onMouseLeave={(e) => {
-          if (!url) e.currentTarget.style.borderColor = "#e2e8f0";
+          if (!url) e.currentTarget.style.borderColor = "#ddd3d4";
         }}
       >
         <input
@@ -143,13 +143,13 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
             <Loader2
               size={26}
               style={{
-                color: "#ff6b6b",
+                color: "#f49e0b",
                 animation: "spin 1s linear infinite",
                 display: "block",
                 margin: "0 auto 0.5rem",
               }}
             />
-            <p style={{ margin: 0, fontSize: "0.8rem", color: "#94a3b8" }}>
+            <p style={{ margin: 0, fontSize: "0.8rem", color: "#9a7a7e" }}>
               Uploading…
             </p>
           </>
@@ -181,8 +181,8 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
                   ref.current?.click();
                 }}
                 style={{
-                  background: "rgba(0,0,0,0.65)",
-                  color: "#fff",
+                  background: "rgba(87,34,40,0.65)",
+                  color: "#ffffff",
                   border: "none",
                   borderRadius: "0.375rem",
                   padding: "0.3rem 0.75rem",
@@ -199,8 +199,8 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
                   onChange("");
                 }}
                 style={{
-                  background: "rgba(239,68,68,0.85)",
-                  color: "#fff",
+                  background: "rgba(78,31,36,0.85)",
+                  color: "#ffffff",
                   border: "none",
                   borderRadius: "0.375rem",
                   padding: "0.3rem 0.5rem",
@@ -215,7 +215,7 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
               style={{
                 margin: "0.5rem 0 0",
                 fontSize: "0.75rem",
-                color: "#16a34a",
+                color: "#f49e0b",
                 fontWeight: 600,
                 display: "flex",
                 alignItems: "center",
@@ -231,7 +231,7 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
             <Upload
               size={26}
               style={{
-                color: "#cbd5e1",
+                color: "#9a7a7e",
                 display: "block",
                 margin: "0 auto 0.5rem",
               }}
@@ -241,12 +241,12 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
                 margin: "0 0 0.25rem",
                 fontWeight: 600,
                 fontSize: "0.875rem",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754a4f)",
               }}
             >
               Click to upload
             </p>
-            <p style={{ margin: 0, fontSize: "0.75rem", color: "#94a3b8" }}>
+            <p style={{ margin: 0, fontSize: "0.75rem", color: "#9a7a7e" }}>
               Any image format · Max 5MB
             </p>
           </>
@@ -296,7 +296,7 @@ function GalleryUpload({ value = [], onChange, folder = "lands" }) {
               height: "88px",
               borderRadius: "0.5rem",
               overflow: "hidden",
-              border: "1px solid #e2e8f0",
+              border: "1px solid #ddd3d4",
             }}
           >
             <img
@@ -310,8 +310,8 @@ function GalleryUpload({ value = [], onChange, folder = "lands" }) {
                 position: "absolute",
                 top: "3px",
                 right: "3px",
-                background: "rgba(239,68,68,0.85)",
-                color: "#fff",
+                background: "rgba(78,31,36,0.85)",
+                color: "#ffffff",
                 border: "none",
                 borderRadius: "0.25rem",
                 width: "20px",
@@ -332,17 +332,17 @@ function GalleryUpload({ value = [], onChange, folder = "lands" }) {
             width: "88px",
             height: "88px",
             borderRadius: "0.5rem",
-            border: "2px dashed #e2e8f0",
+            border: "2px dashed #ddd3d4",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             cursor: uploading ? "wait" : "pointer",
-            background: "#f8fafc",
+            background: "#fffcf6",
             gap: "0.25rem",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#ff6b6b")}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#e2e8f0")}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#f49e0b")}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#ddd3d4")}
         >
           <input
             ref={ref}
@@ -355,12 +355,12 @@ function GalleryUpload({ value = [], onChange, folder = "lands" }) {
           {uploading ? (
             <Loader2
               size={20}
-              style={{ color: "#ff6b6b", animation: "spin 1s linear infinite" }}
+              style={{ color: "#f49e0b", animation: "spin 1s linear infinite" }}
             />
           ) : (
             <>
-              <Plus size={20} style={{ color: "#94a3b8" }} />
-              <span style={{ fontSize: "0.65rem", color: "#94a3b8" }}>Add</span>
+              <Plus size={20} style={{ color: "#9a7a7e" }} />
+              <span style={{ fontSize: "0.65rem", color: "#9a7a7e" }}>Add</span>
             </>
           )}
         </div>
@@ -403,13 +403,13 @@ function TagInput({
                 key={s}
                 onClick={() => add(s)}
                 style={{
-                  background: "#f1f5f9",
-                  border: "1px solid #e2e8f0",
+                  background: "#fef8ee",
+                  border: "1px solid #ddd3d4",
                   borderRadius: "9999px",
                   padding: "0.15rem 0.55rem",
                   fontSize: "0.72rem",
                   cursor: "pointer",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                 }}
               >
                 + {s}
@@ -429,8 +429,8 @@ function TagInput({
           <span
             key={tag}
             style={{
-              background: "#0f172a",
-              color: "#fff",
+              background: "#301316",
+              color: "#ffffff",
               borderRadius: "9999px",
               padding: "0.2rem 0.625rem",
               fontSize: "0.78rem",
@@ -446,7 +446,7 @@ function TagInput({
                 border: "none",
                 background: "none",
                 cursor: "pointer",
-                color: "#94a3b8",
+                color: "#9a7a7e",
                 padding: 0,
                 display: "inline-flex",
               }}
@@ -492,7 +492,7 @@ function Modal({ open, onClose, title, children, wide }) {
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(15,23,42,0.6)",
+        background: "rgba(48,19,22,0.6)",
         backdropFilter: "blur(4px)",
         display: "flex",
         alignItems: "center",
@@ -503,14 +503,14 @@ function Modal({ open, onClose, title, children, wide }) {
     >
       <div
         style={{
-          background: "#fff",
+          background: "#ffffff",
           borderRadius: "var(--radius-lg, 1rem)",
           width: "100%",
           maxWidth: wide ? "820px" : "480px",
           maxHeight: "90vh",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 25px 60px rgba(0,0,0,0.2)",
+          boxShadow: "0 25px 60px rgba(87,34,40,0.2)",
           overflow: "hidden",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -521,7 +521,7 @@ function Modal({ open, onClose, title, children, wide }) {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #e2e8f0",
+            borderBottom: "1px solid #ddd3d4",
             flexShrink: 0,
           }}
         >
@@ -529,7 +529,7 @@ function Modal({ open, onClose, title, children, wide }) {
             style={{
               fontWeight: 800,
               fontSize: "1.125rem",
-              color: "#0f172a",
+              color: "#301316",
               margin: 0,
             }}
           >
@@ -541,7 +541,7 @@ function Modal({ open, onClose, title, children, wide }) {
               border: "none",
               background: "none",
               cursor: "pointer",
-              color: "#94a3b8",
+              color: "#9a7a7e",
             }}
           >
             <X size={20} />
@@ -745,12 +745,12 @@ function LandForm({ initial, onSave, onClose, saving }) {
         onChange={(v) => set("neighborhood", v)}
         placeholder="e.g. School 2km away"
       />
-      <div style={{ borderTop: "1px solid #f1f5f9", paddingTop: "1rem" }}>
+      <div style={{ borderTop: "1px solid #fef8ee", paddingTop: "1rem" }}>
         <p
           style={{
             fontSize: "0.78rem",
             fontWeight: 600,
-            color: "#94a3b8",
+            color: "#9a7a7e",
             marginBottom: "0.875rem",
           }}
         >
@@ -793,7 +793,7 @@ function LandForm({ initial, onSave, onClose, saving }) {
             width: "44px",
             height: "24px",
             borderRadius: "9999px",
-            background: form.featured ? "#ff6b6b" : "#e2e8f0",
+            background: form.featured ? "#f49e0b" : "#ddd3d4",
             position: "relative",
             cursor: "pointer",
             transition: "background 0.2s",
@@ -808,14 +808,14 @@ function LandForm({ initial, onSave, onClose, saving }) {
               width: "18px",
               height: "18px",
               borderRadius: "50%",
-              background: "#fff",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+              background: "#ffffff",
+              boxShadow: "0 1px 3px rgba(87,34,40,0.2)",
               transition: "left 0.2s",
             }}
           />
         </div>
         <span
-          style={{ fontWeight: 600, fontSize: "0.875rem", color: "#0f172a" }}
+          style={{ fontWeight: 600, fontSize: "0.875rem", color: "#301316" }}
         >
           Featured Listing
         </span>
@@ -980,12 +980,12 @@ export default function AdminLandsPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <MapPin size={20} color="#ff6b6b" />
+              <MapPin size={20} color="#f49e0b" />
               <h1
                 style={{
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "#0f172a",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
@@ -993,8 +993,8 @@ export default function AdminLandsPage() {
               </h1>
               <span
                 style={{
-                  background: "#f1f5f9",
-                  color: "var(--color-text-secondary, #475569)",
+                  background: "#fef8ee",
+                  color: "var(--color-text-secondary, #754a4f)",
                   fontSize: "0.75rem",
                   fontWeight: 700,
                   padding: "0.2rem 0.55rem",
@@ -1004,7 +1004,7 @@ export default function AdminLandsPage() {
                 {total}
               </span>
             </div>
-            <p style={{ color: "#94a3b8", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#9a7a7e", fontSize: "0.875rem", margin: 0 }}>
               Manage all land listings
             </p>
           </div>
@@ -1029,7 +1029,7 @@ export default function AdminLandsPage() {
                 left: "0.75rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                color: "#94a3b8",
+                color: "#9a7a7e",
               }}
             />
             <input
@@ -1080,11 +1080,11 @@ export default function AdminLandsPage() {
 
         <div
           style={{
-            background: "#fff",
+            background: "#ffffff",
             borderRadius: "var(--radius-lg, 1rem)",
-            border: "1px solid #e2e8f0",
+            border: "1px solid #ddd3d4",
             overflow: "hidden",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+            boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
           }}
         >
           {loading ? (
@@ -1092,20 +1092,20 @@ export default function AdminLandsPage() {
               <Loader2
                 size={30}
                 style={{
-                  color: "#ff6b6b",
+                  color: "#f49e0b",
                   animation: "spin 1s linear infinite",
                   display: "block",
                   margin: "0 auto 0.75rem",
                 }}
               />
-              <p style={{ color: "#94a3b8", margin: 0 }}>Loading…</p>
+              <p style={{ color: "#9a7a7e", margin: 0 }}>Loading…</p>
             </div>
           ) : lands.length === 0 ? (
             <div style={{ padding: "4rem", textAlign: "center" }}>
               <MapPin
                 size={40}
                 style={{
-                  color: "#e2e8f0",
+                  color: "#ddd3d4",
                   display: "block",
                   margin: "0 auto 1rem",
                 }}
@@ -1113,13 +1113,13 @@ export default function AdminLandsPage() {
               <p
                 style={{
                   fontWeight: 700,
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                   margin: "0 0 0.25rem",
                 }}
               >
                 No lands found
               </p>
-              <p style={{ color: "#94a3b8", margin: 0, fontSize: "0.875rem" }}>
+              <p style={{ color: "#9a7a7e", margin: 0, fontSize: "0.875rem" }}>
                 Click "Add Land" to get started
               </p>
             </div>
@@ -1127,7 +1127,7 @@ export default function AdminLandsPage() {
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
-                  <tr style={{ borderBottom: "1px solid #f1f5f9" }}>
+                  <tr style={{ borderBottom: "1px solid #fef8ee" }}>
                     {[
                       "Estate",
                       "Location",
@@ -1145,7 +1145,7 @@ export default function AdminLandsPage() {
                           textAlign: "left",
                           fontSize: "0.7rem",
                           fontWeight: 700,
-                          color: "#94a3b8",
+                          color: "#9a7a7e",
                           textTransform: "uppercase",
                           letterSpacing: "0.06em",
                           whiteSpace: "nowrap",
@@ -1160,9 +1160,9 @@ export default function AdminLandsPage() {
                   {lands.map((land) => (
                     <tr
                       key={land._id || land.id}
-                      style={{ borderBottom: "1px solid #f8fafc" }}
+                      style={{ borderBottom: "1px solid #fffcf6" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.background = "#fafbff")
+                        (e.currentTarget.style.background = "#fffcf6")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.background = "transparent")
@@ -1197,14 +1197,14 @@ export default function AdminLandsPage() {
                                 width: "44px",
                                 height: "44px",
                                 borderRadius: "0.5rem",
-                                background: "#f1f5f9",
+                                background: "#fef8ee",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 flexShrink: 0,
                               }}
                             >
-                              <MapPin size={18} color="#cbd5e1" />
+                              <MapPin size={18} color="#9a7a7e" />
                             </div>
                           )}
                           <div>
@@ -1212,7 +1212,7 @@ export default function AdminLandsPage() {
                               style={{
                                 fontWeight: 700,
                                 fontSize: "0.875rem",
-                                color: "#0f172a",
+                                color: "#301316",
                                 margin: "0 0 0.125rem",
                                 maxWidth: "180px",
                                 overflow: "hidden",
@@ -1226,7 +1226,7 @@ export default function AdminLandsPage() {
                               <p
                                 style={{
                                   fontSize: "0.75rem",
-                                  color: "#94a3b8",
+                                  color: "#9a7a7e",
                                   margin: 0,
                                 }}
                               >
@@ -1240,7 +1240,7 @@ export default function AdminLandsPage() {
                         <p
                           style={{
                             fontSize: "0.8rem",
-                            color: "var(--color-text-secondary, #475569)",
+                            color: "var(--color-text-secondary, #754a4f)",
                             margin: 0,
                           }}
                         >
@@ -1249,7 +1249,7 @@ export default function AdminLandsPage() {
                         <p
                           style={{
                             fontSize: "0.75rem",
-                            color: "#94a3b8",
+                            color: "#9a7a7e",
                             margin: 0,
                           }}
                         >
@@ -1261,7 +1261,7 @@ export default function AdminLandsPage() {
                           style={{
                             fontWeight: 700,
                             fontSize: "0.875rem",
-                            color: "#0f172a",
+                            color: "#301316",
                           }}
                         >
                           {formatPrice(land.price)}
@@ -1271,7 +1271,7 @@ export default function AdminLandsPage() {
                         <span
                           style={{
                             fontSize: "0.78rem",
-                            color: "var(--color-text-secondary, #475569)",
+                            color: "var(--color-text-secondary, #754a4f)",
                           }}
                         >
                           {LAND_TITLES.find((t) => t.value === land.title_type)
@@ -1289,18 +1289,18 @@ export default function AdminLandsPage() {
                             background: "none",
                             cursor: "pointer",
                             padding: "0.25rem",
-                            color: land.featured ? "#f59e0b" : "#cbd5e1",
+                            color: land.featured ? "#f49e0b" : "#9a7a7e",
                           }}
                         >
                           {land.featured ? (
-                            <Star size={18} fill="#f59e0b" />
+                            <Star size={18} fill="#f49e0b" />
                           ) : (
                             <StarOff size={18} />
                           )}
                         </button>
                       </td>
                       <td style={{ padding: "0.875rem 1rem" }}>
-                        <span style={{ fontSize: "0.8rem", color: "#94a3b8" }}>
+                        <span style={{ fontSize: "0.8rem", color: "#9a7a7e" }}>
                           {land.views_count || 0}
                         </span>
                       </td>
@@ -1314,7 +1314,7 @@ export default function AdminLandsPage() {
                           </button>
                           <button
                             onClick={() => setDeleteLand(land)}
-                            style={{ ...S.actionBtn, color: "#ef4444" }}
+                            style={{ ...S.actionBtn, color: "#4e1f24" }}
                           >
                             <Trash2 size={14} />
                           </button>
@@ -1380,24 +1380,24 @@ export default function AdminLandsPage() {
                 width: "56px",
                 height: "56px",
                 borderRadius: "50%",
-                background: "#fee2e2",
+                background: "#f2edee",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 margin: "0 auto 1rem",
               }}
             >
-              <AlertCircle size={28} color="#ef4444" />
+              <AlertCircle size={28} color="#4e1f24" />
             </div>
             <p
               style={{
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754a4f)",
                 margin: "0 0 1.5rem",
                 lineHeight: 1.6,
               }}
             >
               Delete{" "}
-              <strong style={{ color: "#0f172a" }}>
+              <strong style={{ color: "#301316" }}>
                 {deleteLand.estate_name}
               </strong>
               ? This cannot be undone.
@@ -1415,7 +1415,7 @@ export default function AdminLandsPage() {
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                style={{ ...S.btnPrimary, background: "#ef4444" }}
+                style={{ ...S.btnPrimary, background: "#4e1f24" }}
               >
                 {deleting ? (
                   <>
@@ -1444,25 +1444,25 @@ const S = {
     display: "block",
     fontSize: "0.8rem",
     fontWeight: 600,
-    color: "#374151",
+    color: "#896469",
     marginBottom: "0.375rem",
   },
   input: {
     width: "100%",
     padding: "0.625rem 0.875rem",
-    border: "1px solid #e2e8f0",
+    border: "1px solid #ddd3d4",
     borderRadius: "0.5rem",
     fontSize: "0.875rem",
-    color: "#0f172a",
-    background: "#fff",
+    color: "#301316",
+    background: "#ffffff",
     outline: "none",
     boxSizing: "border-box",
   },
   row2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" },
   row3: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" },
   btnPrimary: {
-    background: "#ff6b6b",
-    color: "#fff",
+    background: "#f49e0b",
+    color: "#301316",
     border: "none",
     cursor: "pointer",
     padding: "0.625rem 1.25rem",
@@ -1474,9 +1474,9 @@ const S = {
     gap: "0.375rem",
   },
   btnOutline: {
-    background: "#fff",
-    color: "var(--color-text-secondary, #475569)",
-    border: "1px solid #e2e8f0",
+    background: "#ffffff",
+    color: "var(--color-text-secondary, #754a4f)",
+    border: "1px solid #ddd3d4",
     cursor: "pointer",
     padding: "0.625rem 1.25rem",
     borderRadius: "var(--radius, 0.625rem)",
@@ -1487,8 +1487,8 @@ const S = {
     gap: "0.375rem",
   },
   btnSm: {
-    background: "#f1f5f9",
-    color: "var(--color-text-secondary, #475569)",
+    background: "#fef8ee",
+    color: "var(--color-text-secondary, #754a4f)",
     border: "none",
     cursor: "pointer",
     padding: "0.5rem 0.875rem",
@@ -1497,9 +1497,9 @@ const S = {
     fontSize: "0.8rem",
   },
   btnIcon: {
-    background: "#f8fafc",
-    color: "var(--color-text-secondary, #475569)",
-    border: "1px solid #e2e8f0",
+    background: "#fffcf6",
+    color: "var(--color-text-secondary, #754a4f)",
+    border: "1px solid #ddd3d4",
     cursor: "pointer",
     padding: "0.5rem 0.625rem",
     borderRadius: "0.5rem",
@@ -1507,9 +1507,9 @@ const S = {
     alignItems: "center",
   },
   actionBtn: {
-    background: "#f8fafc",
-    color: "var(--color-text-secondary, #475569)",
-    border: "1px solid #e2e8f0",
+    background: "#fffcf6",
+    color: "var(--color-text-secondary, #754a4f)",
+    border: "1px solid #ddd3d4",
     cursor: "pointer",
     padding: "0.4rem",
     borderRadius: "0.375rem",

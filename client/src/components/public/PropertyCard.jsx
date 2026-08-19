@@ -78,7 +78,7 @@ export default function PropertyCard({ land, whatsapp }) {
       <Link href={`/lands/${slug}`} className="block">
         <div
           className="relative h-52 overflow-hidden"
-          style={{ background: "#f1f5f9" }}
+          style={{ background: "#fef8ee" }}
         >
           {imageUrl ? (
             <Image
@@ -97,13 +97,13 @@ export default function PropertyCard({ land, whatsapp }) {
               style={{
                 width: "100%",
                 height: "100%",
-                background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+                background: "linear-gradient(135deg, #301316 0%, #361519 100%)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <MapPin size={32} style={{ color: "#475569" }} />
+              <MapPin size={32} style={{ color: "#754a4f" }} />
             </div>
           )}
           {/* Status badge */}
@@ -134,7 +134,7 @@ export default function PropertyCard({ land, whatsapp }) {
       <div className="p-4">
         <Link href={`/lands/${slug}`} className="block group">
           <h3
-            className="font-bold text-base mb-1 line-clamp-1 group-hover:text-[var(--color-primary)] transition-colors"
+            className="font-bold text-base mb-1 line-clamp-1 group-hover:text-[var(--color-primary-dark)] transition-colors"
             style={{
               fontFamily: "var(--font-heading)",
               color: "var(--color-secondary)",
@@ -183,7 +183,7 @@ export default function PropertyCard({ land, whatsapp }) {
                 flex: 1,
                 padding: "0.625rem 0.75rem",
                 borderRadius: "var(--radius)",
-                background: "#25D366",
+                background: "#572228",
                 color: "white",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
@@ -193,11 +193,11 @@ export default function PropertyCard({ land, whatsapp }) {
                 whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#1ebe5a";
+                e.currentTarget.style.background = "#361519";
                 e.currentTarget.style.transform = "translateY(-1px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#25D366";
+                e.currentTarget.style.background = "#572228";
                 e.currentTarget.style.transform = "none";
               }}
             >
@@ -226,7 +226,7 @@ export default function PropertyCard({ land, whatsapp }) {
               whiteSpace: "nowrap",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--color-primary)";
+              e.currentTarget.style.background = "var(--color-primary-dark)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "var(--color-secondary)";

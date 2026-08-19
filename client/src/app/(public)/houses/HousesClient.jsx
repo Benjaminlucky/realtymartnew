@@ -415,7 +415,7 @@ export default function HousesClient({
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <SlidersHorizontal size={15} style={{ color: "var(--color-primary)" }} />
+            <SlidersHorizontal size={15} style={{ color: "var(--color-primary-dark)" }} />
             <span
               style={{
                 fontFamily: "var(--font-heading)",
@@ -499,7 +499,7 @@ export default function HousesClient({
                 >
                   <SlidersHorizontal
                     size={15}
-                    style={{ color: "var(--color-primary)" }}
+                    style={{ color: "var(--color-primary-dark)" }}
                   />
                   <span
                     style={{
@@ -591,7 +591,7 @@ export default function HousesClient({
                       ·{" "}
                       <span
                         style={{
-                          color: "var(--color-primary)",
+                          color: "var(--color-primary-dark)",
                           fontWeight: 600,
                         }}
                       >

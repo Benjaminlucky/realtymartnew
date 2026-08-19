@@ -133,7 +133,7 @@ function ImageUpload({ label, value, onChange, folder = "houses" }) {
           transition: "all 150ms",
         }}
         onMouseEnter={(e) => {
-          if (!url) e.currentTarget.style.borderColor = "var(--color-primary, #f49e0b)";
+          if (!url) e.currentTarget.style.borderColor = "var(--color-primary-dark, #99561c)";
         }}
         onMouseLeave={(e) => {
           if (!url) e.currentTarget.style.borderColor = "#ddd3d4";
@@ -151,7 +151,7 @@ function ImageUpload({ label, value, onChange, folder = "houses" }) {
             <Loader2
               size={26}
               style={{
-                color: "var(--color-primary, #f49e0b)",
+                color: "var(--color-primary-dark, #99561c)",
                 animation: "spin 1s linear infinite",
                 display: "block",
                 margin: "0 auto 0.5rem",
@@ -349,7 +349,7 @@ function GalleryUpload({ value = [], onChange, folder = "houses" }) {
             background: "#fffcf6",
             gap: "0.25rem",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary, #f49e0b)")}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "var(--color-primary-dark, #99561c)")}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#ddd3d4")}
         >
           <input
@@ -363,7 +363,7 @@ function GalleryUpload({ value = [], onChange, folder = "houses" }) {
           {uploading ? (
             <Loader2
               size={20}
-              style={{ color: "var(--color-primary, #f49e0b)", animation: "spin 1s linear infinite" }}
+              style={{ color: "var(--color-primary-dark, #99561c)", animation: "spin 1s linear infinite" }}
             />
           ) : (
             <>
@@ -951,7 +951,7 @@ export default function AdminHousesPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <Home size={20} style={{ color: "var(--color-primary, #f49e0b)" }} />
+              <Home size={20} style={{ color: "var(--color-primary-dark, #99561c)" }} />
               <h1
                 style={{
                   fontWeight: 800,
@@ -1078,7 +1078,7 @@ export default function AdminHousesPage() {
               <Loader2
                 size={30}
                 style={{
-                  color: "var(--color-primary, #f49e0b)",
+                  color: "var(--color-primary-dark, #99561c)",
                   animation: "spin 1s linear infinite",
                   display: "block",
                   margin: "0 auto 0.75rem",

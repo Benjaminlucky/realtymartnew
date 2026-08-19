@@ -279,8 +279,8 @@ function ReviewCard({ review, onEdit, onDelete, onToggle }) {
             transition: "all 150ms",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "var(--color-primary, #F49E0B)";
-            e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
+            e.currentTarget.style.borderColor = "var(--color-primary-dark, #99561c)";
+            e.currentTarget.style.color = "var(--color-primary-dark, #99561c)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = "var(--color-border, #DDD3D4)";
@@ -459,7 +459,7 @@ function ReviewModal({ initial, onClose, onSave }) {
           <div>
             <label style={S.label}>
               Client Name{" "}
-              <span style={{ color: "var(--color-primary, #F49E0B)" }}>*</span>
+              <span style={{ color: "var(--color-primary-dark, #99561c)" }}>*</span>
             </label>
             <input
               value={form.name}
@@ -467,7 +467,7 @@ function ReviewModal({ initial, onClose, onSave }) {
               placeholder="e.g. Chukwuemeka Obi"
               style={S.input}
               onFocus={(e) =>
-                (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+                (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
               }
               onBlur={(e) =>
                 (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
@@ -484,7 +484,7 @@ function ReviewModal({ initial, onClose, onSave }) {
               placeholder="e.g. Land Buyer, Lekki"
               style={S.input}
               onFocus={(e) =>
-                (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+                (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
               }
               onBlur={(e) =>
                 (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
@@ -505,7 +505,7 @@ function ReviewModal({ initial, onClose, onSave }) {
           <div>
             <label style={S.label}>
               Review Text{" "}
-              <span style={{ color: "var(--color-primary, #F49E0B)" }}>*</span>
+              <span style={{ color: "var(--color-primary-dark, #99561c)" }}>*</span>
             </label>
             <textarea
               value={form.review}
@@ -514,7 +514,7 @@ function ReviewModal({ initial, onClose, onSave }) {
               rows={4}
               style={{ ...S.input, resize: "vertical" }}
               onFocus={(e) =>
-                (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+                (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
               }
               onBlur={(e) =>
                 (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
@@ -541,7 +541,7 @@ function ReviewModal({ initial, onClose, onSave }) {
                 min={0}
                 style={S.input}
                 onFocus={(e) =>
-                  (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+                  (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
                 }
                 onBlur={(e) =>
                   (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
@@ -737,7 +737,7 @@ export default function AdminReviewsPage() {
             >
               <Star
                 size={20}
-                style={{ color: "var(--color-primary, #F49E0B)" }}
+                style={{ color: "var(--color-primary-dark, #99561c)" }}
               />
               <h1
                 style={{
@@ -836,7 +836,7 @@ export default function AdminReviewsPage() {
             placeholder="Search by name or review text..."
             style={{ ...S.input, paddingLeft: "2.25rem" }}
             onFocus={(e) =>
-              (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+              (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
             }
             onBlur={(e) =>
               (e.target.style.borderColor = "var(--color-border, #DDD3D4)")

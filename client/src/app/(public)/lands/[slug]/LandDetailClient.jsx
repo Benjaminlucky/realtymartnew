@@ -82,7 +82,7 @@ function Lightbox({ images, startIndex, onClose, title = "Property" }) {
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "rgba(0,0,0,0.95)",
+        background: "rgba(87,34,40,0.95)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -312,14 +312,14 @@ function EnquiryForm({ land, settings }) {
             width: "3.5rem",
             height: "3.5rem",
             borderRadius: "50%",
-            background: "#DCFCE7",
+            background: "#FEF5E7",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto 1rem",
           }}
         >
-          <CheckCircle2 size={28} style={{ color: "#16A34A" }} />
+          <CheckCircle2 size={28} style={{ color: "#99561C" }} />
         </div>
         <p
           style={{
@@ -349,7 +349,7 @@ function EnquiryForm({ land, settings }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label style={labelStyle}>
-            Name <span style={{ color: "var(--color-primary)" }}>*</span>
+            Name <span style={{ color: "var(--color-primary-dark)" }}>*</span>
           </label>
           <input
             type="text"
@@ -360,14 +360,14 @@ function EnquiryForm({ land, settings }) {
             required
             style={inputStyle}
             onFocus={(e) =>
-              (e.target.style.borderColor = "var(--color-primary)")
+              (e.target.style.borderColor = "var(--color-primary-dark)")
             }
             onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")}
           />
         </div>
         <div>
           <label style={labelStyle}>
-            Phone <span style={{ color: "var(--color-primary)" }}>*</span>
+            Phone <span style={{ color: "var(--color-primary-dark)" }}>*</span>
           </label>
           <input
             type="tel"
@@ -378,7 +378,7 @@ function EnquiryForm({ land, settings }) {
             required
             style={inputStyle}
             onFocus={(e) =>
-              (e.target.style.borderColor = "var(--color-primary)")
+              (e.target.style.borderColor = "var(--color-primary-dark)")
             }
             onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")}
           />
@@ -393,7 +393,7 @@ function EnquiryForm({ land, settings }) {
           onChange={handleChange}
           placeholder="email@example.com"
           style={inputStyle}
-          onFocus={(e) => (e.target.style.borderColor = "var(--color-primary)")}
+          onFocus={(e) => (e.target.style.borderColor = "var(--color-primary-dark)")}
           onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")}
         />
       </div>
@@ -406,7 +406,7 @@ function EnquiryForm({ land, settings }) {
           placeholder="Tell us your requirements..."
           rows={3}
           style={{ ...inputStyle, resize: "none" }}
-          onFocus={(e) => (e.target.style.borderColor = "var(--color-primary)")}
+          onFocus={(e) => (e.target.style.borderColor = "var(--color-primary-dark)")}
           onBlur={(e) => (e.target.style.borderColor = "var(--color-border)")}
         />
       </div>
@@ -523,7 +523,7 @@ export default function LandDetailClient({ land, settings, related }) {
       <section
         style={{
           background:
-            "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #1E2D4A 100%)",
+            "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #361519 100%)",
           paddingTop: "7rem",
           paddingBottom: "2.5rem",
           position: "relative",
@@ -539,7 +539,7 @@ export default function LandDetailClient({ land, settings, related }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgb(178 255 112 / 0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgb(244 158 11 / 0.08) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
@@ -578,7 +578,7 @@ export default function LandDetailClient({ land, settings, related }) {
             </span>
             <span
               style={{
-                color: "var(--color-primary)",
+                color: "var(--color-primary-dark)",
                 fontSize: "0.8rem",
                 fontWeight: 600,
               }}
@@ -683,7 +683,7 @@ export default function LandDetailClient({ land, settings, related }) {
                       border: "1px solid var(--color-border)",
                       borderRadius: "var(--radius-lg)",
                       padding: "0.625rem",
-                      boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
+                      boxShadow: "0 8px 24px rgba(87,34,40,0.25)",
                     }}
                   >
                     <ShareButtons url={propertyUrl} title={estate_name} whatsapp={whatsapp} />
@@ -735,7 +735,7 @@ export default function LandDetailClient({ land, settings, related }) {
                       overflow: "hidden",
                       cursor: "zoom-in",
                       marginBottom: "0.5rem",
-                      background: "#1e293b",
+                      background: "#361519",
                     }}
                   >
                     <Image
@@ -751,7 +751,7 @@ export default function LandDetailClient({ land, settings, related }) {
                         position: "absolute",
                         bottom: "1rem",
                         right: "1rem",
-                        background: "rgba(0,0,0,0.55)",
+                        background: "rgba(87,34,40,0.55)",
                         color: "white",
                         padding: "0.375rem 0.75rem",
                         borderRadius: "var(--radius)",
@@ -789,7 +789,7 @@ export default function LandDetailClient({ land, settings, related }) {
                             overflow: "hidden",
                             cursor: "zoom-in",
                             position: "relative",
-                            background: "#1e293b",
+                            background: "#361519",
                           }}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -808,7 +808,7 @@ export default function LandDetailClient({ land, settings, related }) {
                               style={{
                                 position: "absolute",
                                 inset: 0,
-                                background: "rgba(0,0,0,0.55)",
+                                background: "rgba(87,34,40,0.55)",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -834,14 +834,14 @@ export default function LandDetailClient({ land, settings, related }) {
                   style={{
                     height: "280px",
                     borderRadius: "var(--radius-lg)",
-                    background: "linear-gradient(135deg, #0f172a, #1e293b)",
+                    background: "linear-gradient(135deg, #301316, #361519)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: "2rem",
                   }}
                 >
-                  <MapPin size={48} style={{ color: "#475569" }} />
+                  <MapPin size={48} style={{ color: "#754a4f" }} />
                 </div>
               )}
 
@@ -985,7 +985,7 @@ export default function LandDetailClient({ land, settings, related }) {
                         <CheckCircle2
                           size={16}
                           style={{
-                            color: "var(--color-primary)",
+                            color: "var(--color-primary-dark)",
                             flexShrink: 0,
                           }}
                         />
@@ -1045,7 +1045,7 @@ export default function LandDetailClient({ land, settings, related }) {
                         <MapPin
                           size={14}
                           style={{
-                            color: "var(--color-primary)",
+                            color: "var(--color-primary-dark)",
                             flexShrink: 0,
                           }}
                         />
@@ -1068,9 +1068,9 @@ export default function LandDetailClient({ land, settings, related }) {
                 <div
                   style={{
                     background:
-                      "linear-gradient(135deg, rgb(178 255 112 / 0.06), rgb(178 255 112 / 0.02))",
+                      "linear-gradient(135deg, rgb(244 158 11 / 0.06), rgb(244 158 11 / 0.02))",
                     borderRadius: "var(--radius-lg)",
-                    border: "1px solid rgb(178 255 112 / 0.2)",
+                    border: "1px solid rgb(244 158 11 / 0.2)",
                     padding: "1.75rem",
                     marginBottom: "1.5rem",
                   }}
@@ -1144,7 +1144,7 @@ export default function LandDetailClient({ land, settings, related }) {
                       paddingBottom: "56.25%",
                       borderRadius: "var(--radius-lg)",
                       overflow: "hidden",
-                      background: "#000",
+                      background: "#301316",
                     }}
                   >
                     <iframe
@@ -1289,7 +1289,7 @@ export default function LandDetailClient({ land, settings, related }) {
                       width: "100%",
                       padding: "0.875rem",
                       borderRadius: "var(--radius)",
-                      background: "#25D366",
+                      background: "#572228",
                       color: "white",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 700,
@@ -1299,10 +1299,10 @@ export default function LandDetailClient({ land, settings, related }) {
                       transition: "background 150ms",
                     }}
                     onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#1ebe5a")
+                      (e.currentTarget.style.background = "#361519")
                     }
                     onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "#25D366")
+                      (e.currentTarget.style.background = "#572228")
                     }
                   >
                     <WAIcon size={18} /> Chat on WhatsApp
@@ -1350,7 +1350,7 @@ export default function LandDetailClient({ land, settings, related }) {
                 {isSold && (
                   <div
                     style={{
-                      background: "#FEE2E2",
+                      background: "#F2EDEE",
                       borderRadius: "var(--radius)",
                       padding: "0.75rem 1rem",
                       marginTop: "0.625rem",
@@ -1360,7 +1360,7 @@ export default function LandDetailClient({ land, settings, related }) {
                       style={{
                         fontSize: "0.875rem",
                         fontWeight: 600,
-                        color: "#991B1B",
+                        color: "#4E1F24",
                         fontFamily: "var(--font-heading)",
                       }}
                     >
@@ -1429,7 +1429,7 @@ export default function LandDetailClient({ land, settings, related }) {
                   >
                     <Icon
                       size={16}
-                      style={{ color: "var(--color-primary)", flexShrink: 0 }}
+                      style={{ color: "var(--color-primary-dark)", flexShrink: 0 }}
                     />
                     <span
                       style={{
@@ -1472,7 +1472,7 @@ export default function LandDetailClient({ land, settings, related }) {
                   style={{
                     fontSize: "0.875rem",
                     fontWeight: 600,
-                    color: "var(--color-primary)",
+                    color: "var(--color-primary-dark)",
                     textDecoration: "none",
                     fontFamily: "var(--font-heading)",
                   }}

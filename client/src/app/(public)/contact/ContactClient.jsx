@@ -66,7 +66,7 @@ export default function ContactClient({ settings }) {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleFocus = (e) => {
-    e.target.style.borderColor = "var(--color-primary)";
+    e.target.style.borderColor = "var(--color-primary-dark)";
     e.target.style.background = "var(--color-surface)";
   };
   const handleBlur = (e) => {
@@ -103,7 +103,7 @@ export default function ContactClient({ settings }) {
       value: phone,
       sub: "Mon – Sat, 8am – 6pm",
       href: `tel:${phone}`,
-      color: "#10B981",
+      color: "#99561C",
     },
     {
       icon: <MessageCircle size={20} />,
@@ -114,7 +114,7 @@ export default function ContactClient({ settings }) {
         whatsapp,
         "Hello! I'd like to enquire about a property.",
       ),
-      color: "#25D366",
+      color: "#572228",
     },
     {
       icon: <Mail size={20} />,
@@ -122,7 +122,7 @@ export default function ContactClient({ settings }) {
       value: email || "Send us a mail",
       sub: "We reply within 24hrs",
       href: `mailto:${email}`,
-      color: "var(--color-primary)",
+      color: "var(--color-primary-dark)",
     },
     {
       icon: <MapPin size={20} />,
@@ -130,7 +130,7 @@ export default function ContactClient({ settings }) {
       value: address,
       sub: "Visit us in person",
       href: `https://maps.google.com/?q=${encodeURIComponent(address)}`,
-      color: "#3B82F6",
+      color: "#896469",
     },
   ];
 
@@ -280,14 +280,14 @@ export default function ContactClient({ settings }) {
                       width: "4rem",
                       height: "4rem",
                       borderRadius: "50%",
-                      background: "#DCFCE7",
+                      background: "#FEF5E7",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       margin: "0 auto 1.5rem",
                     }}
                   >
-                    <CheckCircle size={28} style={{ color: "#16A34A" }} />
+                    <CheckCircle size={28} style={{ color: "#99561C" }} />
                   </div>
                   <h3
                     style={{
@@ -606,7 +606,7 @@ export default function ContactClient({ settings }) {
                   >
                     <Clock
                       size={14}
-                      style={{ color: "var(--color-primary)" }}
+                      style={{ color: "var(--color-primary-dark)" }}
                     />
                   </div>
                   <h3
@@ -674,7 +674,7 @@ export default function ContactClient({ settings }) {
                   gap: "1rem",
                   padding: "1.5rem",
                   background:
-                    "linear-gradient(135deg, #128C7E 0%, #25D366 100%)",
+                    "linear-gradient(135deg, #896469 0%, #572228 100%)",
                   borderRadius: "var(--radius-lg)",
                   textDecoration: "none",
                   transition: "transform 200ms, box-shadow 200ms",
@@ -682,7 +682,7 @@ export default function ContactClient({ settings }) {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-3px)";
                   e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(37,211,102,0.35)";
+                    "0 8px 24px rgba(87,34,40,0.35)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "none";
@@ -771,8 +771,8 @@ export default function ContactClient({ settings }) {
                           e.currentTarget.style.background =
                             "var(--color-primary)";
                           e.currentTarget.style.borderColor =
-                            "var(--color-primary)";
-                          e.currentTarget.style.color = "white";
+                            "var(--color-primary-dark)";
+                          e.currentTarget.style.color = "#301316";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.background = "transparent";
@@ -835,7 +835,7 @@ export default function ContactClient({ settings }) {
                         transition: "color 150ms",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--color-primary)")
+                        (e.currentTarget.style.color = "var(--color-primary-dark)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "rgba(255,255,255,0.65)")

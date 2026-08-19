@@ -58,7 +58,7 @@ function AnimatedStat({ target, suffix = "+", label, enabled }) {
         className="text-2xl font-extrabold leading-none"
         style={{
           fontFamily: "var(--font-heading)",
-          color: "var(--color-primary)",
+          color: "var(--color-primary-dark)",
         }}
       >
         {display}
@@ -120,7 +120,7 @@ function WhatsAppButton({ href }) {
         display: "inline-flex",
         alignItems: "center",
         gap: "0.625rem",
-        background: "#25D366",
+        background: "#572228",
         color: "white",
         padding: "0.75rem 1.5rem",
         borderRadius: "9999px",
@@ -128,16 +128,16 @@ function WhatsAppButton({ href }) {
         fontWeight: 700,
         fontSize: "0.9375rem",
         textDecoration: "none",
-        boxShadow: "0 4px 20px rgba(37,211,102,0.35)",
+        boxShadow: "0 4px 20px rgba(87,34,40,0.35)",
         transition: "transform 150ms, box-shadow 150ms",
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.boxShadow = "0 8px 28px rgba(37,211,102,0.45)";
+        e.currentTarget.style.boxShadow = "0 8px 28px rgba(87,34,40,0.45)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "none";
-        e.currentTarget.style.boxShadow = "0 4px 20px rgba(37,211,102,0.35)";
+        e.currentTarget.style.boxShadow = "0 4px 20px rgba(87,34,40,0.35)";
       }}
     >
       <svg
@@ -225,7 +225,7 @@ export default function HeroSection({ settings, publicStats }) {
         className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(244,158,11,0.12) 0%, transparent 70%)",
           transform: "translate(30%, -30%)",
         }}
       />
@@ -233,7 +233,7 @@ export default function HeroSection({ settings, publicStats }) {
         className="absolute bottom-0 left-0 w-72 h-72 rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(244,158,11,0.08) 0%, transparent 70%)",
           transform: "translate(-30%, 30%)",
         }}
       />
@@ -246,9 +246,9 @@ export default function HeroSection({ settings, publicStats }) {
             <div
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
               style={{
-                background: "rgba(16,185,129,0.12)",
-                color: "var(--color-primary)",
-                border: "1px solid rgba(16,185,129,0.25)",
+                background: "rgba(244,158,11,0.12)",
+                color: "var(--color-primary-dark)",
+                border: "1px solid rgba(244,158,11,0.25)",
                 fontFamily: "var(--font-heading)",
               }}
             >

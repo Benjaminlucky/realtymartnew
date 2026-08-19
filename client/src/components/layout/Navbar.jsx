@@ -107,7 +107,7 @@ export default function Navbar({ settings }) {
               className="flex items-center gap-2 text-sm transition-colors duration-200"
               style={{ color: "rgba(255,255,255,0.65)" }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-primary)")
+                (e.currentTarget.style.color = "var(--color-primary-dark)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.color = "rgba(255,255,255,0.65)")

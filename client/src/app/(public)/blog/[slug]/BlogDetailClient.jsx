@@ -222,7 +222,7 @@ function RelatedCard({ post, index }) {
             display: "flex",
             alignItems: "center",
             gap: "0.3rem",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
             fontFamily: "var(--font-heading)",
             fontWeight: 700,
             fontSize: "0.8rem",
@@ -415,7 +415,7 @@ export default function BlogPostClient({ post, settings, related }) {
                 alignItems: "center",
                 gap: "0.375rem",
                 background: "rgba(244,158,11,0.15)",
-                color: "var(--color-primary)",
+                color: "var(--color-primary-dark)",
                 border: "1px solid rgba(244,158,11,0.3)",
                 padding: "0.3rem 0.875rem",
                 borderRadius: "var(--radius-full)",
@@ -730,8 +730,8 @@ export default function BlogPostClient({ post, settings, related }) {
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor =
-                        "var(--color-primary)";
-                      e.currentTarget.style.color = "var(--color-primary)";
+                        "var(--color-primary-dark)";
+                      e.currentTarget.style.color = "var(--color-primary-dark)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = "var(--color-border)";
@@ -906,7 +906,7 @@ export default function BlogPostClient({ post, settings, related }) {
                     gap: "0.375rem",
                   }}
                 >
-                  <Share2 size={15} style={{ color: "var(--color-primary)" }} />{" "}
+                  <Share2 size={15} style={{ color: "var(--color-primary-dark)" }} />{" "}
                   Share Article
                 </p>
                 <ShareButtons
@@ -996,8 +996,8 @@ export default function BlogPostClient({ post, settings, related }) {
                   transition: "all 150ms",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--color-primary)";
-                  e.currentTarget.style.color = "var(--color-primary)";
+                  e.currentTarget.style.borderColor = "var(--color-primary-dark)";
+                  e.currentTarget.style.color = "var(--color-primary-dark)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "var(--color-border)";
@@ -1035,7 +1035,7 @@ export default function BlogPostClient({ post, settings, related }) {
                   style={{
                     fontSize: "0.875rem",
                     fontWeight: 600,
-                    color: "var(--color-primary)",
+                    color: "var(--color-primary-dark)",
                     textDecoration: "none",
                     fontFamily: "var(--font-heading)",
                     display: "flex",

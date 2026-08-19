@@ -99,7 +99,7 @@ export default function Footer({ settings }) {
               <h4
                 className="text-sm font-bold uppercase tracking-widest mb-5"
                 style={{
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
@@ -113,7 +113,7 @@ export default function Footer({ settings }) {
                       className="text-sm transition-colors duration-200"
                       style={{ color: "rgba(255,255,255,0.5)" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--color-primary)")
+                        (e.currentTarget.style.color = "var(--color-primary-dark)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
@@ -131,7 +131,7 @@ export default function Footer({ settings }) {
               <h4
                 className="text-sm font-bold uppercase tracking-widest mb-5"
                 style={{
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
@@ -145,7 +145,7 @@ export default function Footer({ settings }) {
                       className="text-sm transition-colors duration-200"
                       style={{ color: "rgba(255,255,255,0.5)" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--color-primary)")
+                        (e.currentTarget.style.color = "var(--color-primary-dark)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
@@ -163,7 +163,7 @@ export default function Footer({ settings }) {
               <h4
                 className="text-sm font-bold uppercase tracking-widest mb-5"
                 style={{
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
@@ -175,7 +175,7 @@ export default function Footer({ settings }) {
                     <MapPin
                       size={15}
                       className="shrink-0 mt-0.5"
-                      style={{ color: "var(--color-primary)" }}
+                      style={{ color: "var(--color-primary-dark)" }}
                     />
                     <span
                       className="text-sm"
@@ -192,7 +192,7 @@ export default function Footer({ settings }) {
                       className="flex items-center gap-3 text-sm transition-colors"
                       style={{ color: "rgba(255,255,255,0.5)" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--color-primary)")
+                        (e.currentTarget.style.color = "var(--color-primary-dark)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
@@ -200,7 +200,7 @@ export default function Footer({ settings }) {
                     >
                       <Phone
                         size={15}
-                        style={{ color: "var(--color-primary)" }}
+                        style={{ color: "var(--color-primary-dark)" }}
                       />
                       {phone}
                     </a>
@@ -213,7 +213,7 @@ export default function Footer({ settings }) {
                       className="flex items-center gap-3 text-sm transition-colors"
                       style={{ color: "rgba(255,255,255,0.5)" }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--color-primary)")
+                        (e.currentTarget.style.color = "var(--color-primary-dark)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.color = "rgba(255,255,255,0.5)")
@@ -221,7 +221,7 @@ export default function Footer({ settings }) {
                     >
                       <Mail
                         size={15}
-                        style={{ color: "var(--color-primary)" }}
+                        style={{ color: "var(--color-primary-dark)" }}
                       />
                       {email}
                     </a>

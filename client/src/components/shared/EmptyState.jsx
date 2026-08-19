@@ -25,7 +25,7 @@ export default function EmptyState({
           margin: "0 auto 1.5rem",
         }}
       >
-        <SearchX size={24} style={{ color: "var(--color-primary)" }} />
+        <SearchX size={24} style={{ color: "var(--color-primary-dark)" }} />
       </div>
       <h3
         style={{

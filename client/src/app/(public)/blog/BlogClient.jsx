@@ -31,12 +31,12 @@ const DEFAULT_CATEGORIES = [
 ];
 
 const cardBgs = [
-  "linear-gradient(135deg, #0F172A 0%, #1a2744 100%)",
-  "linear-gradient(135deg, #0d1f2d 0%, #1E293B 100%)",
-  "linear-gradient(135deg, #1a150d 0%, #0F172A 100%)",
-  "linear-gradient(135deg, #0d1a1a 0%, #1E293B 100%)",
-  "linear-gradient(135deg, #1a1f35 0%, #0F172A 100%)",
-  "linear-gradient(135deg, #1a0d1a 0%, #1E293B 100%)",
+  "linear-gradient(135deg, #301316 0%, #361519 100%)",
+  "linear-gradient(135deg, #896469 0%, #361519 100%)",
+  "linear-gradient(135deg, #361519 0%, #301316 100%)",
+  "linear-gradient(135deg, #896469 0%, #361519 100%)",
+  "linear-gradient(135deg, #896469 0%, #301316 100%)",
+  "linear-gradient(135deg, #896469 0%, #361519 100%)",
 ];
 
 function BlogCard({ post, index }) {
@@ -122,7 +122,7 @@ function BlogCard({ post, index }) {
             <span
               style={{
                 background: "var(--color-primary)",
-                color: "white",
+                color: "var(--color-text, #301316)",
                 fontSize: "0.65rem",
                 fontWeight: 700,
                 padding: "0.25rem 0.7rem",
@@ -150,7 +150,7 @@ function BlogCard({ post, index }) {
                 display: "flex",
                 alignItems: "center",
                 gap: "0.3rem",
-                background: "rgba(0,0,0,0.6)",
+                background: "rgba(87,34,40,0.6)",
                 backdropFilter: "blur(8px)",
                 color: "rgba(255,255,255,0.8)",
                 fontSize: "0.65rem",
@@ -243,7 +243,7 @@ function BlogCard({ post, index }) {
             display: "flex",
             alignItems: "center",
             gap: "0.375rem",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark, #99561c)",
             fontFamily: "var(--font-heading)",
             fontWeight: 700,
             fontSize: "0.8125rem",
@@ -344,7 +344,9 @@ export default function BlogClient({
                     background: active
                       ? "var(--color-primary)"
                       : "var(--color-surface)",
-                    color: active ? "white" : "var(--color-text-secondary)",
+                    color: active
+                      ? "var(--color-text, #301316)"
+                      : "var(--color-text-secondary)",
                     fontFamily: "var(--font-heading)",
                     fontWeight: 600,
                     fontSize: "0.8125rem",
@@ -355,8 +357,9 @@ export default function BlogClient({
                   onMouseEnter={(e) => {
                     if (!active) {
                       e.currentTarget.style.borderColor =
-                        "var(--color-primary)";
-                      e.currentTarget.style.color = "var(--color-primary)";
+                        "var(--color-primary-dark, #99561c)";
+                      e.currentTarget.style.color =
+                        "var(--color-primary-dark, #99561c)";
                     }
                   }}
                   onMouseLeave={(e) => {

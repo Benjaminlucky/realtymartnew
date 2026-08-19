@@ -46,25 +46,25 @@ export default function ShareButtons({ url, title, whatsapp, vertical = false })
       label: "Facebook",
       icon: <Facebook size={15} />,
       href: `https://www.facebook.com/sharer/sharer.php?u=${encoded}`,
-      color: "#1877F2",
+      color: "#572228",
     },
     {
       label: "Twitter / X",
       icon: <Twitter size={15} />,
       href: `https://twitter.com/intent/tweet?url=${encoded}&text=${encodedTitle}`,
-      color: "#000000",
+      color: "#301316",
     },
     {
       label: "LinkedIn",
       icon: <Linkedin size={15} />,
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`,
-      color: "#0A66C2",
+      color: "#896469",
     },
     {
       label: "WhatsApp",
       icon: <WAIcon size={15} />,
       href: waLink,
-      color: "#25D366",
+      color: "#99561c",
     },
   ];
 

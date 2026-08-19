@@ -11,7 +11,7 @@ export default function OGImage() {
     (
       <div
         style={{
-          background: "#1b2f31",
+          background: "#572228",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -32,7 +32,7 @@ export default function OGImage() {
             width: 520,
             height: 520,
             borderRadius: "50%",
-            background: "rgba(178,255,112,0.07)",
+            background: "rgba(244,158,11,0.07)",
             display: "flex",
           }}
         />
@@ -44,7 +44,7 @@ export default function OGImage() {
             width: 380,
             height: 380,
             borderRadius: "50%",
-            background: "rgba(178,255,112,0.04)",
+            background: "rgba(244,158,11,0.04)",
             display: "flex",
           }}
         />
@@ -56,7 +56,7 @@ export default function OGImage() {
             width: 240,
             height: 240,
             borderRadius: "50%",
-            background: "rgba(178,255,112,0.05)",
+            background: "rgba(244,158,11,0.05)",
             display: "flex",
           }}
         />
@@ -74,7 +74,7 @@ export default function OGImage() {
             style={{
               width: 60,
               height: 60,
-              background: "#b2ff70",
+              background: "#f49e0b",
               borderRadius: 14,
               display: "flex",
               alignItems: "center",
@@ -83,7 +83,7 @@ export default function OGImage() {
           >
             <span
               style={{
-                color: "#1b2f31",
+                color: "#301316",
                 fontSize: 36,
                 fontWeight: 900,
                 lineHeight: 1,
@@ -107,10 +107,10 @@ export default function OGImage() {
           </span>
         </div>
 
-        {/* Headline — line 1 in lime */}
+        {/* Headline — line 1 in amber */}
         <div
           style={{
-            color: "#b2ff70",
+            color: "#f8c060",
             fontSize: 78,
             fontWeight: 800,
             lineHeight: 1.05,

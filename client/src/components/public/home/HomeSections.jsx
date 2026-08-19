@@ -236,10 +236,10 @@ export function FeaturedLands({ lands = [] }) {
                     marginBottom: "0.75rem",
                   }}
                 >
-                  <MapPin size={11} style={{ color: "var(--color-primary)" }} />
+                  <MapPin size={11} style={{ color: "var(--color-primary-dark)" }} />
                   <span
                     style={{
-                      color: "var(--color-primary)",
+                      color: "var(--color-primary-dark)",
                       fontSize: "0.75rem",
                       fontWeight: 600,
                       fontFamily: "var(--font-heading)",
@@ -303,7 +303,7 @@ export function FeaturedLands({ lands = [] }) {
                     )}
                     <span
                       style={{
-                        color: "var(--color-primary)",
+                        color: "var(--color-primary-dark)",
                         fontFamily: "var(--font-heading)",
                         fontSize: "1.25rem",
                         fontWeight: 800,
@@ -476,7 +476,7 @@ export function FeaturedLands({ lands = [] }) {
                 >
                   <span
                     style={{
-                      color: "var(--color-primary)",
+                      color: "var(--color-primary-dark)",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 800,
                       fontSize: "1rem",
@@ -554,7 +554,7 @@ export function FeaturedLands({ lands = [] }) {
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "0.875rem",
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   fontWeight: 700,
                 }}
               >
@@ -614,12 +614,12 @@ export function FeaturedHouses({ houses = [] }) {
   const tagColors = {
     "New Listing": {
       bg: "rgba(137,100,105,0.15)",
-      color: "var(--color-accent)",
+      color: "var(--color-primary-dark)",
       border: "rgba(137,100,105,0.3)",
     },
     "Hot Offer": {
       bg: "rgba(244,158,11,0.15)",
-      color: "var(--color-primary)",
+      color: "var(--color-primary-dark)",
       border: "rgba(244,158,11,0.3)",
     },
     Featured: {
@@ -681,7 +681,7 @@ export function FeaturedHouses({ houses = [] }) {
                 fontWeight: 700,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
-                color: "var(--color-primary)",
+                color: "var(--color-primary-dark)",
                 fontFamily: "var(--font-heading)",
                 marginBottom: "0.75rem",
               }}
@@ -757,7 +757,7 @@ export function FeaturedHouses({ houses = [] }) {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "var(--color-primary)";
-                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                  e.currentTarget.style.borderColor = "var(--color-primary-dark)";
                   e.currentTarget.style.color = "#301316";
                 }}
                 onMouseLeave={(e) => {
@@ -776,7 +776,7 @@ export function FeaturedHouses({ houses = [] }) {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.4rem",
-                color: "var(--color-primary)",
+                color: "var(--color-primary-dark)",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.875rem",
@@ -929,10 +929,10 @@ export function FeaturedHouses({ houses = [] }) {
                   padding: "0.25rem 0.75rem",
                 }}
               >
-                <MapPin size={11} style={{ color: "var(--color-primary)" }} />
+                <MapPin size={11} style={{ color: "var(--color-primary-dark)" }} />
                 <span
                   style={{
-                    color: "var(--color-primary)",
+                    color: "var(--color-primary-dark)",
                     fontSize: "0.75rem",
                     fontWeight: 600,
                     fontFamily: "var(--font-heading)",
@@ -995,7 +995,7 @@ export function FeaturedHouses({ houses = [] }) {
                         fontSize: "0.8125rem",
                       }}
                     >
-                      <span style={{ color: "var(--color-primary)" }}>
+                      <span style={{ color: "var(--color-primary-dark)" }}>
                         {stat.icon}
                       </span>
                       {stat.value}
@@ -1044,7 +1044,7 @@ export function FeaturedHouses({ houses = [] }) {
                   </p>
                   <p
                     style={{
-                      color: "var(--color-primary)",
+                      color: "var(--color-primary-dark)",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 900,
                       fontSize: "1.5rem",
@@ -1192,7 +1192,7 @@ export function FeaturedHouses({ houses = [] }) {
                         style={{
                           fontSize: "0.6rem",
                           fontWeight: 700,
-                          color: "var(--color-primary)",
+                          color: "var(--color-primary-dark)",
                           fontFamily: "var(--font-heading)",
                           textTransform: "uppercase",
                           letterSpacing: "0.06em",
@@ -1255,7 +1255,7 @@ export function FeaturedHouses({ houses = [] }) {
                     </span>
                     <span
                       style={{
-                        color: "var(--color-primary)",
+                        color: "var(--color-primary-dark)",
                         fontFamily: "var(--font-heading)",
                         fontWeight: 800,
                         fontSize: "0.8125rem",
@@ -1291,7 +1291,7 @@ export function FeaturedHouses({ houses = [] }) {
                 marginTop: "0.5rem",
                 justifyContent: "center",
                 borderColor: "rgba(255,107,107,0.4)",
-                color: "var(--color-primary)",
+                color: "var(--color-primary-dark)",
               }}
             >
               Browse All Properties <ArrowRight size={15} />
@@ -1440,7 +1440,7 @@ export function PopularAreas({ areas = [] }) {
                     className="self-start px-2.5 py-1 rounded-full text-xs font-semibold"
                     style={{
                       background: "rgba(16,185,129,0.2)",
-                      color: "var(--color-primary)",
+                      color: "var(--color-primary-dark)",
                       border: "1px solid rgba(16,185,129,0.3)",
                       fontFamily: "var(--font-heading)",
                     }}
@@ -1557,8 +1557,8 @@ export function Testimonials({ testimonials = [] }) {
                   <Star
                     key={i}
                     size={15}
-                    fill="var(--color-accent)"
-                    style={{ color: "var(--color-accent)" }}
+                    fill="var(--color-primary-dark)"
+                    style={{ color: "var(--color-primary-dark)" }}
                   />
                 ))}
               </div>

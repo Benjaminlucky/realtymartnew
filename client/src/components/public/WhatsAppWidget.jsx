@@ -32,7 +32,7 @@ function Initials({ name, size = 56 }) {
         width: size,
         height: size,
         borderRadius: "50%",
-        background: "linear-gradient(135deg,#b2ff70,#5ecb40)",
+        background: "linear-gradient(135deg,#f8c060,#f49e0b)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -42,7 +42,7 @@ function Initials({ name, size = 56 }) {
     >
       <span
         style={{
-          color: "#1b2f31",
+          color: "#572228",
           fontWeight: 800,
           fontSize: size * 0.38,
           lineHeight: 1,
@@ -129,8 +129,8 @@ export default function WhatsAppWidget({ settings = {} }) {
           to   { opacity: 0; transform: translateY(20px) scale(0.95); }
         }
         @keyframes wa-pulse {
-          0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
-          50%      { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+          0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(87,34,40,0.5); }
+          50%      { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(87,34,40,0); }
         }
         @keyframes wa-bubble-in {
           from { opacity: 0; transform: scale(0.85) translateY(8px); }
@@ -167,7 +167,7 @@ export default function WhatsAppWidget({ settings = {} }) {
               borderRadius: "1.25rem",
               overflow: "hidden",
               boxShadow:
-                "0 24px 64px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.12)",
+                "0 24px 64px rgba(87,34,40,0.18), 0 8px 24px rgba(87,34,40,0.12)",
               animation: animate
                 ? "wa-slide-up 0.28s cubic-bezier(0.16,1,0.3,1) both"
                 : "wa-slide-down 0.22s ease both",
@@ -177,7 +177,7 @@ export default function WhatsAppWidget({ settings = {} }) {
             {/* Header */}
             <div
               style={{
-                background: "linear-gradient(135deg, #1b2f31 0%, #2a4547 100%)",
+                background: "linear-gradient(135deg, #572228 0%, #7c5357 100%)",
                 padding: "1.125rem 1.125rem 1.25rem",
                 position: "relative",
               }}
@@ -243,8 +243,8 @@ export default function WhatsAppWidget({ settings = {} }) {
                       width: 13,
                       height: 13,
                       borderRadius: "50%",
-                      background: "#25D366",
-                      border: "2px solid #1b2f31",
+                      background: "#f49e0b",
+                      border: "2px solid #572228",
                     }}
                   />
                 </div>
@@ -253,7 +253,7 @@ export default function WhatsAppWidget({ settings = {} }) {
                 <div>
                   <p
                     style={{
-                      color: "#fff",
+                      color: "#ffffff",
                       fontWeight: 700,
                       fontSize: "0.9375rem",
                       margin: "0 0 0.15rem",
@@ -279,7 +279,7 @@ export default function WhatsAppWidget({ settings = {} }) {
                       alignItems: "center",
                       gap: "0.3rem",
                       fontSize: "0.68rem",
-                      color: "#b2ff70",
+                      color: "#f8c060",
                       fontWeight: 600,
                       fontFamily: "Inter, sans-serif",
                     }}
@@ -289,7 +289,7 @@ export default function WhatsAppWidget({ settings = {} }) {
                         width: 6,
                         height: 6,
                         borderRadius: "50%",
-                        background: "#25D366",
+                        background: "#f49e0b",
                         display: "inline-block",
                       }}
                     />
@@ -302,9 +302,9 @@ export default function WhatsAppWidget({ settings = {} }) {
             {/* Body — chat bubbles */}
             <div
               style={{
-                background: "#ECE5DD",
+                background: "#FEF3E2",
                 backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4c9b8' fill-opacity='0.35'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbddaa' fill-opacity='0.35'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
                 padding: "1.125rem",
                 minHeight: "120px",
               }}
@@ -314,7 +314,7 @@ export default function WhatsAppWidget({ settings = {} }) {
                 style={{
                   textAlign: "center",
                   fontSize: "0.68rem",
-                  color: "#8a8a8a",
+                  color: "#9a7a7e",
                   marginBottom: "0.75rem",
                   fontFamily: "Inter, sans-serif",
                 }}
@@ -346,17 +346,17 @@ export default function WhatsAppWidget({ settings = {} }) {
                 </div>
                 <div
                   style={{
-                    background: "#fff",
+                    background: "#ffffff",
                     borderRadius: "0 0.75rem 0.75rem 0.75rem",
                     padding: "0.625rem 0.875rem",
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+                    boxShadow: "0 1px 2px rgba(87,34,40,0.08)",
                     maxWidth: "82%",
                   }}
                 >
                   <p
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#1a1a1a",
+                      color: "#301316",
                       margin: 0,
                       lineHeight: 1.55,
                       fontFamily: "Inter, sans-serif",
@@ -367,7 +367,7 @@ export default function WhatsAppWidget({ settings = {} }) {
                   <p
                     style={{
                       fontSize: "0.65rem",
-                      color: "#9a9a9a",
+                      color: "#9a7a7e",
                       margin: "0.3rem 0 0",
                       textAlign: "right",
                       fontFamily: "Inter, sans-serif",
@@ -385,7 +385,7 @@ export default function WhatsAppWidget({ settings = {} }) {
             {/* Footer — CTA buttons */}
             <div
               style={{
-                background: "#fff",
+                background: "#ffffff",
                 padding: "0.875rem 1rem",
                 display: "flex",
                 flexDirection: "column",
@@ -402,8 +402,8 @@ export default function WhatsAppWidget({ settings = {} }) {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: "0.5rem",
-                  background: "#25D366",
-                  color: "#fff",
+                  background: "#572228",
+                  color: "#ffffff",
                   textDecoration: "none",
                   borderRadius: "0.75rem",
                   padding: "0.75rem 1rem",
@@ -411,16 +411,16 @@ export default function WhatsAppWidget({ settings = {} }) {
                   fontSize: "0.875rem",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   transition: "background 150ms",
-                  boxShadow: "0 2px 8px rgba(37,211,102,0.35)",
+                  boxShadow: "0 2px 8px rgba(87,34,40,0.35)",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "#20bd5a")
+                  (e.currentTarget.style.background = "#361519")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "#25D366")
+                  (e.currentTarget.style.background = "#572228")
                 }
               >
-                <WaIcon size={18} color="#fff" />
+                <WaIcon size={18} color="#ffffff" />
                 Start Chat on WhatsApp
               </a>
 
@@ -432,22 +432,22 @@ export default function WhatsAppWidget({ settings = {} }) {
                   alignItems: "center",
                   justifyContent: "center",
                   gap: "0.5rem",
-                  background: "var(--color-surface-2, #f4f9f4)",
-                  color: "var(--color-secondary, #1b2f31)",
+                  background: "var(--color-surface-2, #fffcf6)",
+                  color: "var(--color-secondary, #572228)",
                   textDecoration: "none",
                   borderRadius: "0.75rem",
                   padding: "0.625rem 1rem",
                   fontWeight: 600,
                   fontSize: "0.8125rem",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
-                  border: "1px solid var(--color-border, #e2e8e0)",
+                  border: "1px solid var(--color-border, #ddd3d4)",
                   transition: "background 150ms",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "var(--color-surface-3, #edf5ed)")
+                  (e.currentTarget.style.background = "var(--color-surface-3, #fef8ee)")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = "var(--color-surface-2, #f4f9f4)")
+                  (e.currentTarget.style.background = "var(--color-surface-2, #fffcf6)")
                 }
               >
                 <Phone size={14} />
@@ -465,13 +465,13 @@ export default function WhatsAppWidget({ settings = {} }) {
             width: 60,
             height: 60,
             borderRadius: "50%",
-            background: "#25D366",
+            background: "#572228",
             border: "none",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            boxShadow: "0 4px 20px rgba(37,211,102,0.5)",
+            boxShadow: "0 4px 20px rgba(87,34,40,0.5)",
             animation: open ? "none" : "wa-pulse 2.5s ease-in-out infinite",
             transition: "opacity 0.3s, transform 0.2s",
             opacity: visible ? 1 : 0,
@@ -483,9 +483,9 @@ export default function WhatsAppWidget({ settings = {} }) {
           onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         >
           {open ? (
-            <X size={24} color="#fff" />
+            <X size={24} color="#ffffff" />
           ) : (
-            <WaIcon size={28} color="#fff" />
+            <WaIcon size={28} color="#ffffff" />
           )}
 
           {/* Notification badge */}
@@ -498,14 +498,14 @@ export default function WhatsAppWidget({ settings = {} }) {
                 width: 18,
                 height: 18,
                 borderRadius: "50%",
-                background: "#ef4444",
-                border: "2px solid #fff",
+                background: "#f49e0b",
+                border: "2px solid #ffffff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontSize: "0.6rem",
                 fontWeight: 800,
-                color: "#fff",
+                color: "#301316",
                 fontFamily: "Inter, sans-serif",
                 animation: "wa-fade-in 0.5s 1.5s both",
               }}

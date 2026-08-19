@@ -81,8 +81,8 @@ function formatDate(d) {
 // ── Status badge ──────────────────────────────────────────────────
 function StatusBadge({ status }) {
   const map = {
-    published: ["#dcfce7", "#15803d"],
-    draft: ["#f1f5f9", "#475569"],
+    published: ["#fef5e7", "#99561c"],
+    draft: ["#fef8ee", "#754a4f"],
   };
   const [bg, color] = map[status] || map.draft;
   return (
@@ -128,7 +128,7 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
             display: "block",
             fontSize: "0.8125rem",
             fontWeight: 600,
-            color: "var(--color-text-secondary, #475569)",
+            color: "var(--color-text-secondary, #754a4f)",
             marginBottom: "0.375rem",
           }}
         >
@@ -137,24 +137,24 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
       )}
       <div
         style={{
-          border: "1px dashed #CBD5E1",
+          border: "1px dashed #9a7a7e",
           borderRadius: "var(--radius, 0.75rem)",
           padding: "1rem",
-          background: "var(--color-surface-2, #F8FAFC)",
+          background: "var(--color-surface-2, #fffcf6)",
           cursor: "pointer",
           position: "relative",
         }}
         onClick={() => ref.current?.click()}
         onDragOver={(e) => {
           e.preventDefault();
-          e.currentTarget.style.borderColor = "var(--color-primary, #FF6B6B)";
+          e.currentTarget.style.borderColor = "var(--color-primary-dark, #99561c)";
         }}
         onDragLeave={(e) => {
-          e.currentTarget.style.borderColor = "#CBD5E1";
+          e.currentTarget.style.borderColor = "#9a7a7e";
         }}
         onDrop={(e) => {
           e.preventDefault();
-          e.currentTarget.style.borderColor = "#CBD5E1";
+          e.currentTarget.style.borderColor = "#9a7a7e";
           upload(e.dataTransfer.files[0]);
         }}
       >
@@ -183,7 +183,7 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
                 width: "1.75rem",
                 height: "1.75rem",
                 borderRadius: "50%",
-                background: "rgba(0,0,0,0.6)",
+                background: "rgba(87,34,40,0.6)",
                 border: "none",
                 color: "white",
                 cursor: "pointer",
@@ -201,7 +201,7 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
               <Loader2
                 size={24}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   animation: "spin 1s linear infinite",
                   margin: "0 auto",
                 }}
@@ -210,7 +210,7 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
               <Upload
                 size={24}
                 style={{
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9a7a7e)",
                   margin: "0 auto 0.5rem",
                 }}
               />
@@ -218,7 +218,7 @@ function ImageUpload({ label, value, onChange, folder = "blog" }) {
             <p
               style={{
                 fontSize: "0.8125rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
                 margin: 0,
               }}
             >
@@ -284,7 +284,7 @@ function ArticleEditor({ value, onChange, onImportFrontmatter }) {
   }, [value]);
 
   const panelStyle = {
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     borderRadius: "var(--radius, 0.75rem)",
     overflow: "hidden",
     background: "var(--color-surface, white)",
@@ -296,11 +296,11 @@ function ArticleEditor({ value, onChange, onImportFrontmatter }) {
     alignItems: "center",
     gap: "0.375rem",
     padding: "0.625rem 0.875rem",
-    borderBottom: "1px solid #E2E8F0",
-    background: "var(--color-surface-2, #F8FAFC)",
+    borderBottom: "1px solid #ddd3d4",
+    background: "var(--color-surface-2, #fffcf6)",
     fontSize: "0.75rem",
     fontWeight: 700,
-    color: "var(--color-text-muted, #94A3B8)",
+    color: "var(--color-text-muted, #9a7a7e)",
     textTransform: "uppercase",
     letterSpacing: "0.06em",
   };
@@ -334,7 +334,7 @@ function ArticleEditor({ value, onChange, onImportFrontmatter }) {
             fontFamily: "var(--font-mono, ui-monospace, monospace)",
             fontSize: "0.8125rem",
             lineHeight: 1.6,
-            color: "var(--color-text, #0F172A)",
+            color: "var(--color-text, #301316)",
             background: "transparent",
           }}
         />
@@ -355,7 +355,7 @@ function ArticleEditor({ value, onChange, onImportFrontmatter }) {
           ) : (
             <p
               style={{
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
                 fontStyle: "italic",
                 fontSize: "0.875rem",
               }}
@@ -376,7 +376,7 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.5)",
+        background: "rgba(87,34,40,0.5)",
         zIndex: 1000,
         display: "flex",
         alignItems: "center",
@@ -391,7 +391,7 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
           padding: "2rem",
           maxWidth: "420px",
           width: "100%",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+          boxShadow: "0 20px 60px rgba(87,34,40,0.2)",
         }}
       >
         <div
@@ -399,21 +399,21 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
             width: "3rem",
             height: "3rem",
             borderRadius: "50%",
-            background: "#FEF2F2",
+            background: "#f2edee",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto 1rem",
           }}
         >
-          <Trash2 size={20} style={{ color: "#EF4444" }} />
+          <Trash2 size={20} style={{ color: "#4e1f24" }} />
         </div>
         <h3
           style={{
             fontFamily: "var(--font-heading)",
             fontWeight: 700,
             fontSize: "1.125rem",
-            color: "var(--color-text, #0F172A)",
+            color: "var(--color-text, #301316)",
             textAlign: "center",
             marginBottom: "0.5rem",
           }}
@@ -422,7 +422,7 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
         </h3>
         <p
           style={{
-            color: "var(--color-text-secondary, #64748B)",
+            color: "var(--color-text-secondary, #754a4f)",
             fontSize: "0.875rem",
             textAlign: "center",
             marginBottom: "1.5rem",
@@ -439,13 +439,13 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
               flex: 1,
               padding: "0.75rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #ddd3d4)",
               background: "var(--color-surface, white)",
               fontFamily: "var(--font-heading)",
               fontWeight: 600,
               fontSize: "0.875rem",
               cursor: "pointer",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
             }}
           >
             Cancel
@@ -459,7 +459,7 @@ function DeleteModal({ item, onConfirm, onCancel, loading }) {
               padding: "0.75rem",
               borderRadius: "var(--radius, 0.625rem)",
               border: "none",
-              background: "#EF4444",
+              background: "#4e1f24",
               color: "white",
               fontFamily: "var(--font-heading)",
               fontWeight: 700,
@@ -558,7 +558,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.5)",
+        background: "rgba(87,34,40,0.5)",
         zIndex: 1000,
         display: "flex",
         alignItems: "center",
@@ -572,26 +572,26 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
           borderRadius: "var(--radius-lg, 1rem)",
           width: "100%",
           maxWidth: "500px",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+          boxShadow: "0 20px 60px rgba(87,34,40,0.2)",
         }}
       >
         <div
           style={{
             padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid #ddd3d4",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <Tag size={18} style={{ color: "var(--color-primary, #FF6B6B)" }} />
+            <Tag size={18} style={{ color: "var(--color-primary-dark, #99561c)" }} />
             <h2
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "1.0625rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 margin: 0,
               }}
             >
@@ -601,8 +601,8 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
               style={{
                 fontSize: "0.75rem",
                 fontWeight: 600,
-                color: "var(--color-text-muted, #94A3B8)",
-                background: "var(--color-surface-3, #F1F5F9)",
+                color: "var(--color-text-muted, #9a7a7e)",
+                background: "var(--color-surface-3, #fef8ee)",
                 padding: "0.1rem 0.5rem",
                 borderRadius: "9999px",
               }}
@@ -617,7 +617,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "var(--color-text-secondary, #64748B)",
+              color: "var(--color-text-secondary, #754a4f)",
               padding: "0.25rem",
             }}
           >
@@ -631,7 +631,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                 display: "block",
                 fontSize: "0.75rem",
                 fontWeight: 700,
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
                 marginBottom: "0.5rem",
@@ -649,10 +649,10 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                   flex: 1,
                   padding: "0.625rem 0.875rem",
                   borderRadius: "var(--radius, 0.625rem)",
-                  border: "1px solid var(--color-border, #E2E8F0)",
+                  border: "1px solid var(--color-border, #ddd3d4)",
                   fontSize: "0.875rem",
                   outline: "none",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                 }}
               />
               <button
@@ -663,8 +663,8 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                   padding: "0.625rem 1.125rem",
                   borderRadius: "var(--radius, 0.625rem)",
                   border: "none",
-                  background: saving || !name.trim() ? "#E2E8F0" : "#FF6B6B",
-                  color: saving || !name.trim() ? "#94A3B8" : "white",
+                  background: saving || !name.trim() ? "#ddd3d4" : "#f49e0b",
+                  color: saving || !name.trim() ? "#9A7A7E" : "#301316",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                   fontSize: "0.875rem",
@@ -688,7 +688,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
             </div>
           </div>
           <div
-            style={{ borderTop: "1px solid #F1F5F9", marginBottom: "1rem" }}
+            style={{ borderTop: "1px solid #fef8ee", marginBottom: "1rem" }}
           />
           <div
             style={{
@@ -703,11 +703,11 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
               <div style={{ padding: "2rem 0", textAlign: "center" }}>
                 <Tag
                   size={28}
-                  style={{ color: "#E2E8F0", margin: "0 auto 0.75rem" }}
+                  style={{ color: "#ddd3d4", margin: "0 auto 0.75rem" }}
                 />
                 <p
                   style={{
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9a7a7e)",
                     fontSize: "0.875rem",
                     margin: 0,
                   }}
@@ -730,10 +730,10 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                     gap: "0.625rem",
                     padding: "0.625rem 0.875rem",
                     borderRadius: "var(--radius, 0.625rem)",
-                    border: `1px solid ${isEditing ? "#FF6B6B" : "#E2E8F0"}`,
+                    border: `1px solid ${isEditing ? "#99561c" : "#ddd3d4"}`,
                     background: isEditing
-                      ? "rgba(255,107,107,0.03)"
-                      : "#F8FAFC",
+                      ? "rgba(244,158,11,0.03)"
+                      : "#fffcf6",
                     transition: "border-color 150ms",
                   }}
                 >
@@ -751,10 +751,10 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                           flex: 1,
                           padding: "0.25rem 0.5rem",
                           borderRadius: "0.375rem",
-                          border: "1px solid #FF6B6B",
+                          border: "1px solid #99561c",
                           fontSize: "0.875rem",
                           outline: "none",
-                          color: "var(--color-text, #0F172A)",
+                          color: "var(--color-text, #301316)",
                           background: "var(--color-surface, white)",
                         }}
                       />
@@ -766,9 +766,9 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                         style={{
                           padding: "0.375rem",
                           borderRadius: "0.375rem",
-                          border: "1px solid #22C55E",
-                          background: "#F0FDF4",
-                          color: "#16A34A",
+                          border: "1px solid #99561c",
+                          background: "#fffcf6",
+                          color: "#99561c",
                           cursor: "pointer",
                           display: "flex",
                           flexShrink: 0,
@@ -790,9 +790,9 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                         style={{
                           padding: "0.375rem",
                           borderRadius: "0.375rem",
-                          border: "1px solid var(--color-border, #E2E8F0)",
+                          border: "1px solid var(--color-border, #ddd3d4)",
                           background: "var(--color-surface, white)",
-                          color: "var(--color-text-secondary, #64748B)",
+                          color: "var(--color-text-secondary, #754a4f)",
                           cursor: "pointer",
                           display: "flex",
                           flexShrink: 0,
@@ -808,7 +808,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                           style={{
                             fontWeight: 600,
                             fontSize: "0.875rem",
-                            color: "var(--color-text, #0F172A)",
+                            color: "var(--color-text, #301316)",
                             margin: 0,
                             overflow: "hidden",
                             textOverflow: "ellipsis",
@@ -820,7 +820,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                         <p
                           style={{
                             fontSize: "0.7rem",
-                            color: "var(--color-text-muted, #94A3B8)",
+                            color: "var(--color-text-muted, #9a7a7e)",
                             margin: 0,
                           }}
                         >
@@ -834,22 +834,22 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                         style={{
                           padding: "0.375rem",
                           borderRadius: "0.375rem",
-                          border: "1px solid var(--color-border, #E2E8F0)",
+                          border: "1px solid var(--color-border, #ddd3d4)",
                           background: "var(--color-surface, white)",
-                          color: "var(--color-text-secondary, #64748B)",
+                          color: "var(--color-text-secondary, #754a4f)",
                           cursor: "pointer",
                           display: "flex",
                           flexShrink: 0,
                           transition: "all 150ms",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "#94A3B8";
-                          e.currentTarget.style.color = "#0F172A";
+                          e.currentTarget.style.borderColor = "#9A7A7E";
+                          e.currentTarget.style.color = "#301316";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.borderColor =
-                            "var(--color-border, #E2E8F0)";
-                          e.currentTarget.style.color = "#64748B";
+                            "var(--color-border, #ddd3d4)";
+                          e.currentTarget.style.color = "#754A4F";
                         }}
                       >
                         <Edit2 size={13} />
@@ -862,9 +862,9 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
                         style={{
                           padding: "0.375rem",
                           borderRadius: "0.375rem",
-                          border: "1px solid #FEE2E2",
-                          background: "#FEF2F2",
-                          color: "#EF4444",
+                          border: "1px solid #f2edee",
+                          background: "#f2edee",
+                          color: "#4e1f24",
                           cursor: "pointer",
                           display: "flex",
                           flexShrink: 0,
@@ -889,7 +889,7 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
         <div
           style={{
             padding: "1rem 1.5rem",
-            borderTop: "1px solid #E2E8F0",
+            borderTop: "1px solid #ddd3d4",
             display: "flex",
             justifyContent: "flex-end",
           }}
@@ -900,13 +900,13 @@ function CategoriesModal({ categories, onClose, onRefresh }) {
             style={{
               padding: "0.5rem 1.25rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #ddd3d4)",
               background: "var(--color-surface, white)",
               fontFamily: "var(--font-heading)",
               fontWeight: 600,
               fontSize: "0.875rem",
               cursor: "pointer",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
             }}
           >
             Done
@@ -931,9 +931,9 @@ function FaqEditor({ faqs, onChange }) {
     width: "100%",
     padding: "0.625rem 0.875rem",
     borderRadius: "var(--radius, 0.625rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     fontSize: "0.875rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     outline: "none",
     background: "var(--color-surface, white)",
     boxSizing: "border-box",
@@ -941,7 +941,7 @@ function FaqEditor({ faqs, onChange }) {
 
   return (
     <div style={{ maxWidth: "700px", display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <p style={{ fontSize: "0.8125rem", color: "var(--color-text-muted, #94A3B8)", margin: 0 }}>
+      <p style={{ fontSize: "0.8125rem", color: "var(--color-text-muted, #9a7a7e)", margin: 0 }}>
         Optional. If you add questions here, this post gets FAQ rich-result markup in
         Google search — otherwise this tab can stay empty.
       </p>
@@ -949,7 +949,7 @@ function FaqEditor({ faqs, onChange }) {
         <div
           key={i}
           style={{
-            border: "1px solid var(--color-border, #E2E8F0)",
+            border: "1px solid var(--color-border, #ddd3d4)",
             borderRadius: "var(--radius, 0.75rem)",
             padding: "1rem",
             display: "flex",
@@ -969,13 +969,13 @@ function FaqEditor({ faqs, onChange }) {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
             }}
           >
             <X size={15} />
           </button>
           <div>
-            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #475569)", marginBottom: "0.375rem" }}>
+            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #754a4f)", marginBottom: "0.375rem" }}>
               Question {i + 1}
             </label>
             <input
@@ -986,7 +986,7 @@ function FaqEditor({ faqs, onChange }) {
             />
           </div>
           <div>
-            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #475569)", marginBottom: "0.375rem" }}>
+            <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 600, color: "var(--color-text-secondary, #754a4f)", marginBottom: "0.375rem" }}>
               Answer
             </label>
             <textarea
@@ -1009,9 +1009,9 @@ function FaqEditor({ faqs, onChange }) {
           gap: "0.375rem",
           padding: "0.5rem 1rem",
           borderRadius: "var(--radius, 0.625rem)",
-          border: "1px dashed var(--color-border, #E2E8F0)",
+          border: "1px dashed var(--color-border, #ddd3d4)",
           background: "none",
-          color: "var(--color-text-secondary, #475569)",
+          color: "var(--color-text-secondary, #754a4f)",
           fontFamily: "var(--font-heading)",
           fontWeight: 600,
           fontSize: "0.8125rem",
@@ -1185,9 +1185,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
     width: "100%",
     padding: "0.625rem 0.875rem",
     borderRadius: "var(--radius, 0.625rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     fontSize: "0.875rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     outline: "none",
     background: "var(--color-surface, white)",
     boxSizing: "border-box",
@@ -1196,7 +1196,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
     display: "block",
     fontSize: "0.8125rem",
     fontWeight: 600,
-    color: "var(--color-text-secondary, #475569)",
+    color: "var(--color-text-secondary, #754a4f)",
     marginBottom: "0.375rem",
   };
 
@@ -1205,7 +1205,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.5)",
+        background: "rgba(87,34,40,0.5)",
         zIndex: 999,
         overflowY: "auto",
         padding: "1rem",
@@ -1217,13 +1217,13 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
           borderRadius: "1.25rem",
           maxWidth: "900px",
           margin: "0 auto",
-          boxShadow: "0 24px 64px rgba(0,0,0,0.2)",
+          boxShadow: "0 24px 64px rgba(87,34,40,0.2)",
         }}
       >
         <div
           style={{
             padding: "1.5rem 2rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid #ddd3d4",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -1239,14 +1239,14 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
           >
             <FileText
               size={18}
-              style={{ color: "var(--color-primary, #FF6B6B)" }}
+              style={{ color: "var(--color-primary-dark, #99561c)" }}
             />
             <h2
               style={{
                 fontFamily: "var(--font-heading)",
                 fontWeight: 800,
                 fontSize: "1.125rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 margin: 0,
               }}
             >
@@ -1260,7 +1260,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
               style={{
                 display: "flex",
                 gap: "0.375rem",
-                background: "var(--color-surface-3, #F1F5F9)",
+                background: "var(--color-surface-3, #fef8ee)",
                 borderRadius: "var(--radius, 0.625rem)",
                 padding: "0.25rem",
               }}
@@ -1281,16 +1281,16 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                       background:
                         form.status === s
                           ? s === "published"
-                            ? "#22C55E"
+                            ? "#f49e0b"
                             : "white"
                           : "transparent",
                       color: disabled
-                        ? "#CBD5E1"
+                        ? "#9a7a7e"
                         : form.status === s
                           ? s === "published"
-                            ? "white"
-                            : "#0F172A"
-                          : "#64748B",
+                            ? "#301316"
+                            : "#301316"
+                          : "#754A4F",
                       fontFamily: "var(--font-heading)",
                       fontWeight: 600,
                       fontSize: "0.8125rem",
@@ -1328,7 +1328,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
               }}
             >
               <X size={18} />
@@ -1340,7 +1340,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
             style={{
               display: "flex",
               gap: "0",
-              borderBottom: "1px solid #E2E8F0",
+              borderBottom: "1px solid #ddd3d4",
               padding: "0 2rem",
             }}
           >
@@ -1360,9 +1360,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   padding: "0.875rem 1.25rem",
                   border: "none",
                   borderBottom:
-                    tab === t ? "2px solid #FF6B6B" : "2px solid transparent",
+                    tab === t ? "2px solid #99561c" : "2px solid transparent",
                   background: "none",
-                  color: tab === t ? "#FF6B6B" : "#64748B",
+                  color: tab === t ? "#99561c" : "#754A4F",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                   fontSize: "0.875rem",
@@ -1413,7 +1413,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                             left: "0.875rem",
                             top: "50%",
                             transform: "translateY(-50%)",
-                            color: "var(--color-text-muted, #94A3B8)",
+                            color: "var(--color-text-muted, #9a7a7e)",
                             fontSize: "0.8125rem",
                           }}
                         >
@@ -1484,9 +1484,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                               flexShrink: 0,
                               padding: "0 0.75rem",
                               borderRadius: "var(--radius, 0.625rem)",
-                              border: "1px solid #22C55E",
-                              background: "#F0FDF4",
-                              color: "#16A34A",
+                              border: "1px solid #99561c",
+                              background: "#fffcf6",
+                              color: "#99561c",
                               cursor: newCategoryName.trim() && !creatingCategory ? "pointer" : "not-allowed",
                               display: "flex",
                               alignItems: "center",
@@ -1509,9 +1509,9 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                               flexShrink: 0,
                               padding: "0 0.75rem",
                               borderRadius: "var(--radius, 0.625rem)",
-                              border: "1px solid var(--color-border, #E2E8F0)",
+                              border: "1px solid var(--color-border, #ddd3d4)",
                               background: "var(--color-surface, white)",
-                              color: "var(--color-text-secondary, #64748B)",
+                              color: "var(--color-text-secondary, #754a4f)",
                               cursor: "pointer",
                               display: "flex",
                               alignItems: "center",
@@ -1564,7 +1564,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                         <span
                           style={{
                             fontSize: "0.8125rem",
-                            color: "var(--color-text-muted, #94A3B8)",
+                            color: "var(--color-text-muted, #9a7a7e)",
                           }}
                         >
                           min read
@@ -1598,15 +1598,15 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   style={{
                     padding: "1rem",
                     borderRadius: "var(--radius, 0.75rem)",
-                    background: "var(--color-surface-2, #F8FAFC)",
-                    border: "1px solid var(--color-border, #E2E8F0)",
+                    background: "var(--color-surface-2, #fffcf6)",
+                    border: "1px solid var(--color-border, #ddd3d4)",
                   }}
                 >
                   <p
                     style={{
                       fontSize: "0.75rem",
                       fontWeight: 600,
-                      color: "var(--color-text-muted, #94A3B8)",
+                      color: "var(--color-text-muted, #9a7a7e)",
                       textTransform: "uppercase",
                       letterSpacing: "0.08em",
                       marginBottom: "0.75rem",
@@ -1617,7 +1617,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   <p
                     style={{
                       fontSize: "1rem",
-                      color: "#1558d6",
+                      color: "#896469",
                       fontWeight: 500,
                       marginBottom: "0.25rem",
                       lineHeight: 1.3,
@@ -1628,7 +1628,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   <p
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#006621",
+                      color: "#99561c",
                       marginBottom: "0.25rem",
                     }}
                   >
@@ -1637,7 +1637,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   <p
                     style={{
                       fontSize: "0.8125rem",
-                      color: "#545454",
+                      color: "#754a4f",
                       lineHeight: 1.5,
                     }}
                   >
@@ -1651,7 +1651,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                     Meta Title{" "}
                     <span
                       style={{
-                        color: "var(--color-text-muted, #94A3B8)",
+                        color: "var(--color-text-muted, #9a7a7e)",
                         fontWeight: 400,
                       }}
                     >
@@ -1671,7 +1671,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                     Meta Description{" "}
                     <span
                       style={{
-                        color: "var(--color-text-muted, #94A3B8)",
+                        color: "var(--color-text-muted, #9a7a7e)",
                         fontWeight: 400,
                       }}
                     >
@@ -1699,18 +1699,18 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
           <div
             style={{
               padding: "1.25rem 2rem",
-              borderTop: "1px solid #E2E8F0",
+              borderTop: "1px solid #ddd3d4",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "var(--color-surface-2, #F8FAFC)",
+              background: "var(--color-surface-2, #fffcf6)",
               borderRadius: "0 0 1.25rem 1.25rem",
             }}
           >
             <div
               style={{
                 fontSize: "0.8125rem",
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.5rem",
@@ -1725,13 +1725,13 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                 style={{
                   padding: "0.625rem 1.25rem",
                   borderRadius: "var(--radius, 0.625rem)",
-                  border: "1px solid var(--color-border, #E2E8F0)",
+                  border: "1px solid var(--color-border, #ddd3d4)",
                   background: "var(--color-surface, white)",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                   fontSize: "0.875rem",
                   cursor: "pointer",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                 }}
               >
                 Cancel
@@ -1744,8 +1744,8 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   borderRadius: "var(--radius, 0.625rem)",
                   border: "none",
                   background: saving
-                    ? "rgba(255,107,107,0.5)"
-                    : "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
+                    ? "rgba(244,158,11,0.5)"
+                    : "linear-gradient(135deg, #f49e0b 0%, #99561c 100%)",
                   color: "white",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 700,
@@ -1756,7 +1756,7 @@ function PostForm({ post, categories, currentUser, onSave, onCancel, onCategorie
                   gap: "0.5rem",
                   boxShadow: saving
                     ? "none"
-                    : "0 4px 12px rgba(255,107,107,0.3)",
+                    : "0 4px 12px rgba(244,158,11,0.3)",
                 }}
               >
                 {saving ? (
@@ -1898,14 +1898,14 @@ export default function AdminBlogPage() {
             >
               <BookOpen
                 size={20}
-                style={{ color: "var(--color-primary, #FF6B6B)" }}
+                style={{ color: "var(--color-primary-dark, #99561c)" }}
               />
               <h1
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   margin: 0,
                 }}
               >
@@ -1914,7 +1914,7 @@ export default function AdminBlogPage() {
             </div>
             <p
               style={{
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
                 fontSize: "0.875rem",
                 margin: 0,
               }}
@@ -1931,9 +1931,9 @@ export default function AdminBlogPage() {
                 gap: "0.5rem",
                 padding: "0.625rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 background: "var(--color-surface, white)",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754a4f)",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -1947,10 +1947,10 @@ export default function AdminBlogPage() {
               style={{
                 padding: "0.625rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 background: "var(--color-surface, white)",
                 cursor: "pointer",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754a4f)",
               }}
             >
               <RefreshCw size={15} style={{ display: "block" }} />
@@ -1964,13 +1964,13 @@ export default function AdminBlogPage() {
                 padding: "0.625rem 1.25rem",
                 borderRadius: "var(--radius, 0.625rem)",
                 border: "none",
-                background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
+                background: "linear-gradient(135deg, #f49e0b 0%, #99561c 100%)",
                 color: "white",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.875rem",
                 cursor: "pointer",
-                boxShadow: "0 4px 12px rgba(255,107,107,0.3)",
+                boxShadow: "0 4px 12px rgba(244,158,11,0.3)",
               }}
             >
               <Plus size={16} /> New Post
@@ -1995,7 +1995,7 @@ export default function AdminBlogPage() {
                 left: "0.75rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
               }}
             />
             <input
@@ -2009,10 +2009,10 @@ export default function AdminBlogPage() {
                 paddingTop: "0.625rem",
                 paddingBottom: "0.625rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 fontSize: "0.875rem",
                 outline: "none",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 boxSizing: "border-box",
               }}
             />
@@ -2023,9 +2023,9 @@ export default function AdminBlogPage() {
             style={{
               padding: "0.625rem 0.875rem",
               borderRadius: "var(--radius, 0.625rem)",
-              border: "1px solid var(--color-border, #E2E8F0)",
+              border: "1px solid var(--color-border, #ddd3d4)",
               fontSize: "0.875rem",
-              color: "var(--color-text-secondary, #475569)",
+              color: "var(--color-text-secondary, #754a4f)",
               background: "var(--color-surface, white)",
               cursor: "pointer",
               outline: "none",
@@ -2042,9 +2042,9 @@ export default function AdminBlogPage() {
           style={{
             background: "var(--color-surface, white)",
             borderRadius: "var(--radius-lg, 1rem)",
-            border: "1px solid var(--color-border, #E2E8F0)",
+            border: "1px solid var(--color-border, #ddd3d4)",
             overflow: "hidden",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+            boxShadow: "0 1px 3px rgba(87,34,40,0.04)",
           }}
         >
           <div
@@ -2052,8 +2052,8 @@ export default function AdminBlogPage() {
               display: "grid",
               gridTemplateColumns: "1fr 140px 120px 100px 80px 80px 100px",
               padding: "0.75rem 1.25rem",
-              borderBottom: "1px solid #F1F5F9",
-              background: "var(--color-surface-2, #F8FAFC)",
+              borderBottom: "1px solid #fef8ee",
+              background: "var(--color-surface-2, #fffcf6)",
             }}
           >
             {[
@@ -2070,7 +2070,7 @@ export default function AdminBlogPage() {
                 style={{
                   fontSize: "0.7rem",
                   fontWeight: 700,
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9a7a7e)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
                 }}
@@ -2085,7 +2085,7 @@ export default function AdminBlogPage() {
               <Loader2
                 size={28}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   animation: "spin 1s linear infinite",
                   margin: "0 auto",
                 }}
@@ -2095,11 +2095,11 @@ export default function AdminBlogPage() {
             <div style={{ padding: "4rem", textAlign: "center" }}>
               <BookOpen
                 size={40}
-                style={{ color: "#E2E8F0", margin: "0 auto 1rem" }}
+                style={{ color: "#ddd3d4", margin: "0 auto 1rem" }}
               />
               <p
                 style={{
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9a7a7e)",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                 }}
@@ -2113,8 +2113,8 @@ export default function AdminBlogPage() {
                   padding: "0.625rem 1.25rem",
                   borderRadius: "var(--radius, 0.625rem)",
                   border: "none",
-                  background: "var(--color-primary, #FF6B6B)",
-                  color: "white",
+                  background: "var(--color-primary, #f49e0b)",
+                  color: "#301316",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                   fontSize: "0.875rem",
@@ -2133,11 +2133,11 @@ export default function AdminBlogPage() {
                   gridTemplateColumns: "1fr 140px 120px 100px 80px 80px 100px",
                   padding: "1rem 1.25rem",
                   borderBottom:
-                    i < posts.length - 1 ? "1px solid #F8FAFC" : "none",
+                    i < posts.length - 1 ? "1px solid #fffcf6" : "none",
                   alignItems: "center",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "#FAFAFA")
+                  (e.currentTarget.style.background = "#FFFCF6")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.background = "white")
@@ -2169,7 +2169,7 @@ export default function AdminBlogPage() {
                         fontFamily: "var(--font-heading)",
                         fontWeight: 600,
                         fontSize: "0.875rem",
-                        color: "var(--color-text, #0F172A)",
+                        color: "var(--color-text, #301316)",
                         margin: 0,
                         overflow: "hidden",
                         textOverflow: "ellipsis",
@@ -2183,17 +2183,17 @@ export default function AdminBlogPage() {
                 <span
                   style={{
                     fontSize: "0.8125rem",
-                    color: "var(--color-text-secondary, #64748B)",
+                    color: "var(--color-text-secondary, #754a4f)",
                   }}
                 >
                   {post.category?.name || post.category || (
-                    <span style={{ color: "#CBD5E1" }}>—</span>
+                    <span style={{ color: "#9a7a7e" }}>—</span>
                   )}
                 </span>
                 <span
                   style={{
                     fontSize: "0.8125rem",
-                    color: "var(--color-text-secondary, #64748B)",
+                    color: "var(--color-text-secondary, #754a4f)",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -2208,19 +2208,19 @@ export default function AdminBlogPage() {
                     alignItems: "center",
                     gap: "0.25rem",
                     fontSize: "0.8125rem",
-                    color: "var(--color-text-secondary, #64748B)",
+                    color: "var(--color-text-secondary, #754a4f)",
                   }}
                 >
                   <BarChart2
                     size={12}
-                    style={{ color: "var(--color-text-muted, #94A3B8)" }}
+                    style={{ color: "var(--color-text-muted, #9a7a7e)" }}
                   />{" "}
                   {post.views_count || 0}
                 </div>
                 <span
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9a7a7e)",
                   }}
                 >
                   {formatDate(post.published_at || post.createdAt)}
@@ -2232,10 +2232,10 @@ export default function AdminBlogPage() {
                     style={{
                       padding: "0.4rem",
                       borderRadius: "0.375rem",
-                      border: "1px solid var(--color-border, #E2E8F0)",
+                      border: "1px solid var(--color-border, #ddd3d4)",
                       background: "var(--color-surface, white)",
                       cursor: "pointer",
-                      color: "var(--color-text-secondary, #475569)",
+                      color: "var(--color-text-secondary, #754a4f)",
                       display: "flex",
                     }}
                   >
@@ -2247,10 +2247,10 @@ export default function AdminBlogPage() {
                     style={{
                       padding: "0.4rem",
                       borderRadius: "0.375rem",
-                      border: "1px solid #FEE2E2",
-                      background: "#FEF2F2",
+                      border: "1px solid #f2edee",
+                      background: "#f2edee",
                       cursor: "pointer",
-                      color: "#EF4444",
+                      color: "#4e1f24",
                       display: "flex",
                     }}
                   >

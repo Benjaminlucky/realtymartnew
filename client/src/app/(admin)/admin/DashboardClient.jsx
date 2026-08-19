@@ -765,7 +765,7 @@ export default function DashboardClient({
             label="Land Listings"
             value={counts.lands}
             icon={MapPin}
-            color="#F49E0B"
+            color="#99561c"
             href="/admin/lands"
             loading={loading}
           />
@@ -967,7 +967,7 @@ export default function DashboardClient({
                 description="Create a new plot or estate"
                 icon={MapPin}
                 href="/admin/lands"
-                color="#F49E0B"
+                color="#99561c"
               />
               <QuickAction
                 label="Add House Listing"

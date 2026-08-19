@@ -980,7 +980,7 @@ export default function AdminLandsPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <MapPin size={20} color="#f49e0b" />
+              <MapPin size={20} color="#99561c" />
               <h1
                 style={{
                   fontWeight: 800,

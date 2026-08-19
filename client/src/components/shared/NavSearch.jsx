@@ -215,7 +215,7 @@ export default function NavSearch() {
             style={{
               flexShrink: 0,
               marginRight: "0.625rem",
-              color: "var(--color-primary)",
+              color: "var(--color-primary-dark)",
               animation: "spin 0.8s linear infinite",
             }}
           />
@@ -292,7 +292,7 @@ export default function NavSearch() {
                 size={15}
                 style={{
                   animation: "spin 0.8s linear infinite",
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   flexShrink: 0,
                 }}
               />
@@ -349,7 +349,7 @@ export default function NavSearch() {
                           height: "38px",
                           borderRadius: "var(--radius-sm)",
                           background:
-                            "linear-gradient(135deg, #0f172a, #1e293b)",
+                            "linear-gradient(135deg, #301316, #361519)",
                           flexShrink: 0,
                           overflow: "hidden",
                         }}
@@ -408,7 +408,7 @@ export default function NavSearch() {
                             fontFamily: "var(--font-heading)",
                             fontWeight: 700,
                             fontSize: "0.8125rem",
-                            color: "var(--color-primary)",
+                            color: "var(--color-primary-dark)",
                             flexShrink: 0,
                           }}
                         >
@@ -466,7 +466,7 @@ export default function NavSearch() {
                           height: "38px",
                           borderRadius: "var(--radius-sm)",
                           background:
-                            "linear-gradient(135deg, #0f172a, #1e293b)",
+                            "linear-gradient(135deg, #301316, #361519)",
                           flexShrink: 0,
                           overflow: "hidden",
                         }}
@@ -547,7 +547,7 @@ export default function NavSearch() {
                             fontFamily: "var(--font-heading)",
                             fontWeight: 700,
                             fontSize: "0.8125rem",
-                            color: "var(--color-primary)",
+                            color: "var(--color-primary-dark)",
                             flexShrink: 0,
                           }}
                         >
@@ -602,7 +602,7 @@ export default function NavSearch() {
                     fontSize: "0.8125rem",
                     fontWeight: 700,
                     fontFamily: "var(--font-heading)",
-                    color: "var(--color-primary)",
+                    color: "var(--color-primary-dark)",
                     textDecoration: "none",
                     background: "var(--color-surface-2)",
                     borderTop: "1px solid var(--color-border)",

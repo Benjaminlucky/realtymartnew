@@ -80,7 +80,7 @@ export default function HouseCard({ house, whatsapp }) {
       <Link href={`/houses/${slug}`} className="block group">
         <div
           className="relative h-56 overflow-hidden"
-          style={{ background: "#1e293b" }}
+          style={{ background: "#361519" }}
         >
           {imageUrl ? (
             <Image
@@ -99,13 +99,13 @@ export default function HouseCard({ house, whatsapp }) {
               style={{
                 width: "100%",
                 height: "100%",
-                background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+                background: "linear-gradient(135deg, #301316 0%, #361519 100%)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <MapPin size={32} style={{ color: "#475569" }} />
+              <MapPin size={32} style={{ color: "#754a4f" }} />
             </div>
           )}
 
@@ -114,7 +114,7 @@ export default function HouseCard({ house, whatsapp }) {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to top, rgba(28,28,46,0.85) 0%, transparent 55%)",
+                "linear-gradient(to top, rgba(54,21,25,0.85) 0%, transparent 55%)",
             }}
           />
 
@@ -125,7 +125,7 @@ export default function HouseCard({ house, whatsapp }) {
                 className="text-xs font-bold px-2.5 py-1 rounded-full"
                 style={{
                   background: "var(--color-primary)",
-                  color: "white",
+                  color: "#301316",
                   fontFamily: "var(--font-heading)",
                 }}
               >
@@ -154,7 +154,7 @@ export default function HouseCard({ house, whatsapp }) {
               <p
                 className="font-bold text-base leading-tight"
                 style={{
-                  color: "var(--color-primary)",
+                  color: "var(--color-primary-dark)",
                   fontFamily: "var(--font-heading)",
                 }}
               >
@@ -169,7 +169,7 @@ export default function HouseCard({ house, whatsapp }) {
       <div className="p-4">
         <Link href={`/houses/${slug}`} className="block group">
           <h3
-            className="font-bold text-sm mb-3 line-clamp-2 group-hover:text-[var(--color-primary)] transition-colors leading-snug"
+            className="font-bold text-sm mb-3 line-clamp-2 group-hover:text-[var(--color-primary-dark)] transition-colors leading-snug"
             style={{
               fontFamily: "var(--font-heading)",
               color: "var(--color-secondary)",
@@ -189,19 +189,19 @@ export default function HouseCard({ house, whatsapp }) {
         >
           {bedrooms != null && (
             <span className="flex items-center gap-1.5">
-              <BedDouble size={14} style={{ color: "var(--color-primary)" }} />
+              <BedDouble size={14} style={{ color: "var(--color-primary-dark)" }} />
               <span>{bedrooms === 0 ? "Self Con" : `${bedrooms} Bed`}</span>
             </span>
           )}
           {bathrooms != null && (
             <span className="flex items-center gap-1.5">
-              <Bath size={14} style={{ color: "var(--color-primary)" }} />
+              <Bath size={14} style={{ color: "var(--color-primary-dark)" }} />
               <span>{bathrooms} Bath</span>
             </span>
           )}
           {garage > 0 && (
             <span className="flex items-center gap-1.5">
-              <Car size={14} style={{ color: "var(--color-primary)" }} />
+              <Car size={14} style={{ color: "var(--color-primary-dark)" }} />
               <span>{garage} Car</span>
             </span>
           )}
@@ -235,7 +235,7 @@ export default function HouseCard({ house, whatsapp }) {
                 flex: 1,
                 padding: "0.625rem 0.75rem",
                 borderRadius: "var(--radius)",
-                background: "#25D366",
+                background: "#572228",
                 color: "white",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
@@ -245,11 +245,11 @@ export default function HouseCard({ house, whatsapp }) {
                 whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#1ebe5a";
+                e.currentTarget.style.background = "#361519";
                 e.currentTarget.style.transform = "translateY(-1px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#25D366";
+                e.currentTarget.style.background = "#572228";
                 e.currentTarget.style.transform = "none";
               }}
             >
@@ -278,7 +278,7 @@ export default function HouseCard({ house, whatsapp }) {
               whiteSpace: "nowrap",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--color-primary)";
+              e.currentTarget.style.background = "var(--color-primary-dark)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "var(--color-secondary)";

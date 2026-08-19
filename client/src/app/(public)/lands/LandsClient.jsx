@@ -137,7 +137,7 @@ function FilterRadio({
                     width: "4px",
                     height: "4px",
                     borderRadius: "50%",
-                    background: "white",
+                    background: "#301316",
                   }}
                 />
               )}
@@ -376,7 +376,7 @@ export default function LandsClient({
                 background: chip.active
                   ? "var(--color-primary)"
                   : "rgba(255,255,255,0.08)",
-                color: chip.active ? "white" : "rgba(255,255,255,0.6)",
+                color: chip.active ? "#301316" : "rgba(255,255,255,0.6)",
                 border: `1px solid ${chip.active ? "var(--color-primary)" : "rgba(255,255,255,0.15)"}`,
               }}
             >
@@ -403,7 +403,7 @@ export default function LandsClient({
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <SlidersHorizontal size={15} style={{ color: "var(--color-primary)" }} />
+            <SlidersHorizontal size={15} style={{ color: "var(--color-primary-dark)" }} />
             <span
               style={{
                 fontFamily: "var(--font-heading)",
@@ -418,7 +418,7 @@ export default function LandsClient({
               <span
                 style={{
                   background: "var(--color-primary)",
-                  color: "white",
+                  color: "#301316",
                   fontSize: "0.65rem",
                   fontWeight: 700,
                   width: "1.25rem",
@@ -488,7 +488,7 @@ export default function LandsClient({
                 >
                   <SlidersHorizontal
                     size={15}
-                    style={{ color: "var(--color-primary)" }}
+                    style={{ color: "var(--color-primary-dark)" }}
                   />
                   <span
                     style={{
@@ -505,7 +505,7 @@ export default function LandsClient({
                   <span
                     style={{
                       background: "var(--color-primary)",
-                      color: "white",
+                      color: "#301316",
                       fontSize: "0.65rem",
                       fontWeight: 700,
                       width: "1.25rem",
@@ -582,7 +582,7 @@ export default function LandsClient({
                       in{" "}
                       <span
                         style={{
-                          color: "var(--color-primary)",
+                          color: "var(--color-primary-dark)",
                           fontWeight: 600,
                         }}
                       >
@@ -751,10 +751,10 @@ function PropertyListItem({ land }) {
     survey_plan: "Survey Plan",
   };
   const statusColors = {
-    available: { bg: "#DCFCE7", color: "#15803D" },
-    sold: { bg: "#FEE2E2", color: "#991B1B" },
-    reserved: { bg: "#E0F2FE", color: "#0369A1" },
-    coming_soon: { bg: "#FEF3C7", color: "#92400E" },
+    available: { bg: "#FEF5E7", color: "#99561C" },
+    sold: { bg: "#F2EDEE", color: "#4E1F24" },
+    reserved: { bg: "#EEE9EA", color: "#361519" },
+    coming_soon: { bg: "#FDF0DA", color: "#99561C" },
   };
   const sc = statusColors[status] || statusColors.available;
   import("@/lib/utils").then(() => {});
@@ -788,7 +788,7 @@ function PropertyListItem({ land }) {
           height: "72px",
           borderRadius: "var(--radius)",
           background:
-            "linear-gradient(135deg, var(--color-secondary) 0%, #1E2D4A 100%)",
+            "linear-gradient(135deg, var(--color-secondary) 0%, #361519 100%)",
           flexShrink: 0,
         }}
       />
@@ -868,7 +868,7 @@ function PropertyListItem({ land }) {
             fontFamily: "var(--font-heading)",
             fontWeight: 800,
             fontSize: "1rem",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
             marginBottom: "0.5rem",
           }}
         >
@@ -878,7 +878,7 @@ function PropertyListItem({ land }) {
           style={{
             fontSize: "0.75rem",
             fontWeight: 600,
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
             fontFamily: "var(--font-heading)",
           }}
         >

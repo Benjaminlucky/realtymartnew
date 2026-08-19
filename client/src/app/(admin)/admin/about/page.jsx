@@ -26,9 +26,9 @@ const S = {
     width: "100%",
     padding: "0.625rem 0.875rem",
     borderRadius: "var(--radius, 0.625rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     fontSize: "0.875rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     outline: "none",
     fontFamily: "Inter, sans-serif",
     background: "var(--color-surface, white)",
@@ -40,24 +40,24 @@ const S = {
     fontSize: "0.75rem",
     fontWeight: 600,
     marginBottom: "0.375rem",
-    color: "var(--color-text-secondary, #475569)",
+    color: "var(--color-text-secondary, #754a4f)",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
     fontFamily: "Plus Jakarta Sans, sans-serif",
   },
   card: {
     background: "var(--color-surface, white)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     borderRadius: "var(--radius-lg, 1rem)",
     padding: "1.5rem",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+    boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
     marginBottom: "1.5rem",
   },
   sectionTitle: {
     fontFamily: "Plus Jakarta Sans, sans-serif",
     fontWeight: 700,
     fontSize: "1rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     margin: "0 0 1.25rem",
     display: "flex",
     alignItems: "center",
@@ -67,15 +67,15 @@ const S = {
 };
 
 const focus = (e) =>
-  (e.target.style.borderColor = "var(--color-primary, #FF6B6B)");
+  (e.target.style.borderColor = "var(--color-primary-dark, #99561c)");
 const blur = (e) =>
-  (e.target.style.borderColor = "var(--color-border, #E2E8F0)");
+  (e.target.style.borderColor = "var(--color-border, #ddd3d4)");
 
 // ── Collapsible section ───────────────────────────────────────────
 function Accordion({
   icon: Icon,
   title,
-  color = "#FF6B6B",
+  color = "#99561c",
   children,
   defaultOpen = false,
 }) {
@@ -116,12 +116,12 @@ function Accordion({
         {open ? (
           <ChevronUp
             size={16}
-            style={{ color: "var(--color-text-muted, #94A3B8)" }}
+            style={{ color: "var(--color-text-muted, #9a7a7e)" }}
           />
         ) : (
           <ChevronDown
             size={16}
-            style={{ color: "var(--color-text-muted, #94A3B8)" }}
+            style={{ color: "var(--color-text-muted, #9a7a7e)" }}
           />
         )}
       </button>
@@ -167,7 +167,7 @@ function Field({
         <p
           style={{
             fontSize: "0.7rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9a7a7e)",
             marginTop: "0.25rem",
           }}
         >
@@ -197,8 +197,8 @@ function RepeatableList({ items, onChange, fields, addLabel }) {
         <div
           key={i}
           style={{
-            background: "var(--color-surface-2, #F8FAFC)",
-            border: "1px solid var(--color-border, #E2E8F0)",
+            background: "var(--color-surface-2, #fffcf6)",
+            border: "1px solid var(--color-border, #ddd3d4)",
             borderRadius: "var(--radius, 0.75rem)",
             padding: "1rem",
             marginBottom: "0.875rem",
@@ -211,12 +211,12 @@ function RepeatableList({ items, onChange, fields, addLabel }) {
               position: "absolute",
               top: "0.75rem",
               right: "0.75rem",
-              background: "#FEF2F2",
-              border: "1px solid #FCA5A5",
+              background: "#f2edee",
+              border: "1px solid #9a7a7e",
               borderRadius: "0.375rem",
               padding: "0.25rem 0.5rem",
               cursor: "pointer",
-              color: "#EF4444",
+              color: "#4E1F24",
               display: "flex",
               alignItems: "center",
             }}
@@ -269,9 +269,9 @@ function RepeatableList({ items, onChange, fields, addLabel }) {
           gap: "0.375rem",
           padding: "0.5rem 1rem",
           borderRadius: "var(--radius, 0.625rem)",
-          border: "1px dashed #CBD5E1",
+          border: "1px dashed #9A7A7E",
           background: "transparent",
-          color: "var(--color-text-secondary, #64748B)",
+          color: "var(--color-text-secondary, #754a4f)",
           cursor: "pointer",
           fontSize: "0.8125rem",
           fontWeight: 600,
@@ -312,8 +312,8 @@ function TeamEditor({ team, onChange }) {
         <div
           key={i}
           style={{
-            background: "var(--color-surface-2, #F8FAFC)",
-            border: "1px solid var(--color-border, #E2E8F0)",
+            background: "var(--color-surface-2, #fffcf6)",
+            border: "1px solid var(--color-border, #ddd3d4)",
             borderRadius: "0.875rem",
             padding: "1.25rem",
             marginBottom: "1rem",
@@ -331,7 +331,7 @@ function TeamEditor({ team, onChange }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
               }}
             >
               Team Member {i + 1}
@@ -339,12 +339,12 @@ function TeamEditor({ team, onChange }) {
             <button
               onClick={() => remove(i)}
               style={{
-                background: "#FEF2F2",
-                border: "1px solid #FCA5A5",
+                background: "#f2edee",
+                border: "1px solid #9a7a7e",
                 borderRadius: "0.375rem",
                 padding: "0.25rem 0.625rem",
                 cursor: "pointer",
-                color: "#EF4444",
+                color: "#4E1F24",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.25rem",
@@ -436,9 +436,9 @@ function TeamEditor({ team, onChange }) {
           gap: "0.375rem",
           padding: "0.5rem 1rem",
           borderRadius: "var(--radius, 0.625rem)",
-          border: "1px dashed #CBD5E1",
+          border: "1px dashed #9A7A7E",
           background: "transparent",
-          color: "var(--color-text-secondary, #64748B)",
+          color: "var(--color-text-secondary, #754a4f)",
           cursor: "pointer",
           fontSize: "0.8125rem",
           fontWeight: 600,
@@ -522,7 +522,7 @@ export default function AdminAboutPage() {
             justifyContent: "center",
             height: "60vh",
             gap: "0.75rem",
-            color: "var(--color-text-muted, #94A3B8)",
+            color: "var(--color-text-muted, #9a7a7e)",
           }}
         >
           <Loader2 size={20} style={{ animation: "spin 1s linear infinite" }} />{" "}
@@ -558,14 +558,14 @@ export default function AdminAboutPage() {
             >
               <Info
                 size={20}
-                style={{ color: "var(--color-primary, #FF6B6B)" }}
+                style={{ color: "var(--color-primary-dark, #99561c)" }}
               />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   margin: 0,
                 }}
               >
@@ -574,7 +574,7 @@ export default function AdminAboutPage() {
             </div>
             <p
               style={{
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
                 fontSize: "0.875rem",
                 margin: 0,
               }}
@@ -593,9 +593,9 @@ export default function AdminAboutPage() {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 background: "var(--color-surface, white)",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754a4f)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -614,8 +614,8 @@ export default function AdminAboutPage() {
                 padding: "0.5rem 1.25rem",
                 borderRadius: "var(--radius, 0.625rem)",
                 border: "none",
-                background: "linear-gradient(135deg, #FF6B6B, #E85555)",
-                color: "white",
+                background: "linear-gradient(135deg, #f49e0b, #99561c)",
+                color: "#301316",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
@@ -644,7 +644,7 @@ export default function AdminAboutPage() {
         <Accordion
           icon={Info}
           title="Hero / Page Header"
-          color="#FF6B6B"
+          color="#99561c"
           defaultOpen
         >
           <Field
@@ -663,11 +663,11 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Stats ── */}
-        <Accordion icon={BarChart2} title="Key Stats / Numbers" color="#38BDF8">
+        <Accordion icon={BarChart2} title="Key Stats / Numbers" color="#896469">
           <p
             style={{
               fontSize: "0.8125rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               marginBottom: "1rem",
             }}
           >
@@ -690,7 +690,7 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Our Story ── */}
-        <Accordion icon={Info} title="Our Story" color="#F59E0B">
+        <Accordion icon={Info} title="Our Story" color="#99561C">
           <Field
             label="Section Title"
             value={data.story_title}
@@ -726,7 +726,7 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Mission & Vision ── */}
-        <Accordion icon={Target} title="Mission & Vision" color="#22C55E">
+        <Accordion icon={Target} title="Mission & Vision" color="#99561C">
           <Field
             label="Mission Statement"
             value={data.mission}
@@ -746,11 +746,11 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Core Values ── */}
-        <Accordion icon={Star} title="Core Values" color="#A78BFA">
+        <Accordion icon={Star} title="Core Values" color="#896469">
           <p
             style={{
               fontSize: "0.8125rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               marginBottom: "1rem",
             }}
           >
@@ -777,11 +777,11 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Why Choose Us ── */}
-        <Accordion icon={CheckCircle} title="Why Choose Us" color="#FB923C">
+        <Accordion icon={CheckCircle} title="Why Choose Us" color="#99561C">
           <p
             style={{
               fontSize: "0.8125rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               marginBottom: "1rem",
             }}
           >
@@ -809,11 +809,11 @@ export default function AdminAboutPage() {
         </Accordion>
 
         {/* ── Team ── */}
-        <Accordion icon={User} title="Meet the Team" color="#F472B6">
+        <Accordion icon={User} title="Meet the Team" color="#896469">
           <p
             style={{
               fontSize: "0.8125rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               marginBottom: "1rem",
             }}
           >
@@ -841,8 +841,8 @@ export default function AdminAboutPage() {
               padding: "0.75rem 2rem",
               borderRadius: "var(--radius, 0.75rem)",
               border: "none",
-              background: "linear-gradient(135deg, #FF6B6B, #E85555)",
-              color: "white",
+              background: "linear-gradient(135deg, #f49e0b, #99561c)",
+              color: "#301316",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
               fontSize: "0.9375rem",

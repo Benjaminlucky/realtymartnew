@@ -25,7 +25,7 @@ export default function PublicError({ error, reset }) {
           width: "64px",
           height: "64px",
           borderRadius: "50%",
-          background: "var(--color-primary-muted, #e8ffd6)",
+          background: "var(--color-primary-muted, #fef3e2)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -39,7 +39,7 @@ export default function PublicError({ error, reset }) {
         style={{
           fontSize: "1.5rem",
           fontWeight: 800,
-          color: "var(--color-text, #0f1f20)",
+          color: "var(--color-text, #301316)",
           margin: "0 0 0.5rem",
           fontFamily: "var(--font-heading, Plus Jakarta Sans, sans-serif)",
         }}
@@ -48,7 +48,7 @@ export default function PublicError({ error, reset }) {
       </h1>
       <p
         style={{
-          color: "var(--color-text-secondary, #3d5a5c)",
+          color: "var(--color-text-secondary, #754a4f)",
           maxWidth: "400px",
           margin: "0 auto 2rem",
           lineHeight: 1.6,
@@ -59,8 +59,8 @@ export default function PublicError({ error, reset }) {
       <button
         onClick={reset}
         style={{
-          background: "var(--color-primary, #b2ff70)",
-          color: "var(--color-secondary, #1b2f31)",
+          background: "var(--color-primary, #f49e0b)",
+          color: "var(--color-secondary, #572228)",
           border: "none",
           borderRadius: "var(--radius, 0.625rem)",
           padding: "0.75rem 2rem",

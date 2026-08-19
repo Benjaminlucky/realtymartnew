@@ -128,7 +128,7 @@ export default function Pagination({
               cursor: "pointer",
               outline: "none",
             }}
-            onFocus={(e) => (e.target.style.borderColor = "#F49E0B")}
+            onFocus={(e) => (e.target.style.borderColor = "#99561C")}
             onBlur={(e) => (e.target.style.borderColor = "#DDD3D4")}
           >
             {perPageOptions.map((n) => (
@@ -159,8 +159,8 @@ export default function Pagination({
             style={page === 1 ? disabledBtnStyle : btnBase}
             onMouseEnter={(e) => {
               if (page !== 1) {
-                e.currentTarget.style.borderColor = "#F49E0B";
-                e.currentTarget.style.color = "#F49E0B";
+                e.currentTarget.style.borderColor = "#99561C";
+                e.currentTarget.style.color = "#99561C";
               }
             }}
             onMouseLeave={(e) => {
@@ -178,8 +178,8 @@ export default function Pagination({
                 onClick={() => onPage(1)}
                 style={btnBase}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#F49E0B";
-                  e.currentTarget.style.color = "#F49E0B";
+                  e.currentTarget.style.borderColor = "#99561C";
+                  e.currentTarget.style.color = "#99561C";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "#DDD3D4";
@@ -210,8 +210,8 @@ export default function Pagination({
               style={p === page ? activeBtnStyle : btnBase}
               onMouseEnter={(e) => {
                 if (p !== page) {
-                  e.currentTarget.style.borderColor = "#F49E0B";
-                  e.currentTarget.style.color = "#F49E0B";
+                  e.currentTarget.style.borderColor = "#99561C";
+                  e.currentTarget.style.color = "#99561C";
                 }
               }}
               onMouseLeave={(e) => {
@@ -243,8 +243,8 @@ export default function Pagination({
                 onClick={() => onPage(totalPages)}
                 style={btnBase}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#F49E0B";
-                  e.currentTarget.style.color = "#F49E0B";
+                  e.currentTarget.style.borderColor = "#99561C";
+                  e.currentTarget.style.color = "#99561C";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "#DDD3D4";
@@ -263,8 +263,8 @@ export default function Pagination({
             style={page === totalPages ? disabledBtnStyle : btnBase}
             onMouseEnter={(e) => {
               if (page !== totalPages) {
-                e.currentTarget.style.borderColor = "#F49E0B";
-                e.currentTarget.style.color = "#F49E0B";
+                e.currentTarget.style.borderColor = "#99561C";
+                e.currentTarget.style.color = "#99561C";
               }
             }}
             onMouseLeave={(e) => {

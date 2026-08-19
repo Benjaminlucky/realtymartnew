@@ -75,7 +75,7 @@ export default function LoginForm() {
         minHeight: "100vh",
         display: "flex",
         background:
-          "linear-gradient(135deg, #060B14 0%, #0F172A 60%, #1E2D4A 100%)",
+          "linear-gradient(135deg, #361519 0%, #301316 60%, #361519 100%)",
         position: "relative",
         overflow: "hidden",
         fontFamily: "Inter, sans-serif",
@@ -90,7 +90,7 @@ export default function LoginForm() {
           height: "600px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, color-mix(in srgb, var(--color-primary, #b2ff70) 8%, transparent) 0%, transparent 65%)",
+            "radial-gradient(circle, color-mix(in srgb, var(--color-primary, #f49e0b) 8%, transparent) 0%, transparent 65%)",
           pointerEvents: "none",
         }}
       />
@@ -131,14 +131,14 @@ export default function LoginForm() {
               width: "2.75rem",
               height: "2.75rem",
               borderRadius: "0.75rem",
-              background: "var(--color-primary, #b2ff70)",
+              background: "var(--color-primary, #f49e0b)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.25))",
+              boxShadow: "var(--shadow-coral, 0 8px 24px rgba(87,34,40,0.25))",
             }}
           >
-            <Building2 size={22} style={{ color: "var(--color-secondary, #1b2f31)" }} />
+            <Building2 size={22} style={{ color: "var(--color-secondary, #572228)" }} />
           </div>
           <div>
             <p
@@ -179,7 +179,7 @@ export default function LoginForm() {
         >
           Manage your
           <br />
-          <span style={{ color: "var(--color-primary, #b2ff70)" }}>real estate</span>
+          <span style={{ color: "var(--color-primary-dark, #99561c)" }}>real estate</span>
           <br />
           empire.
         </h1>
@@ -196,7 +196,7 @@ export default function LoginForm() {
           performance.
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-          <ShieldCheck size={14} style={{ color: "#22C55E", flexShrink: 0 }} />
+          <ShieldCheck size={14} style={{ color: "#99561C", flexShrink: 0 }} />
           <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.75rem" }}>
             Secured with JWT. Sessions auto-expire.
           </span>
@@ -222,7 +222,7 @@ export default function LoginForm() {
             borderRadius: "1.5rem",
             padding: "2.5rem",
             backdropFilter: "blur(20px)",
-            boxShadow: "0 32px 64px rgba(0,0,0,0.4)",
+            boxShadow: "0 32px 64px rgba(87,34,40,0.4)",
           }}
         >
           <div
@@ -238,13 +238,13 @@ export default function LoginForm() {
                 width: "2.25rem",
                 height: "2.25rem",
                 borderRadius: "0.625rem",
-                background: "var(--color-primary, #b2ff70)",
+                background: "var(--color-primary, #f49e0b)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Building2 size={18} style={{ color: "var(--color-secondary, #1b2f31)" }} />
+              <Building2 size={18} style={{ color: "var(--color-secondary, #572228)" }} />
             </div>
             <span
               style={{
@@ -288,18 +288,18 @@ export default function LoginForm() {
                 gap: "0.625rem",
                 padding: "0.875rem 1rem",
                 borderRadius: "0.75rem",
-                background: "rgba(239,68,68,0.12)",
-                border: "1px solid rgba(239,68,68,0.3)",
+                background: "rgba(78,31,36,0.12)",
+                border: "1px solid rgba(78,31,36,0.3)",
                 marginBottom: "1.5rem",
               }}
             >
               <AlertCircle
                 size={16}
-                style={{ color: "#EF4444", flexShrink: 0, marginTop: "0.1rem" }}
+                style={{ color: "#D0C1C3", flexShrink: 0, marginTop: "0.1rem" }}
               />
               <p
                 style={{
-                  color: "#FCA5A5",
+                  color: "#9A7A7E",
                   fontSize: "0.875rem",
                   lineHeight: 1.5,
                   margin: 0,
@@ -352,7 +352,7 @@ export default function LoginForm() {
                   boxSizing: "border-box",
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = "var(--color-primary, #b2ff70)";
+                  e.target.style.borderColor = "var(--color-primary-dark, #99561c)";
                   e.target.style.background = "rgba(255,255,255,0.08)";
                 }}
                 onBlur={(e) => {
@@ -396,7 +396,7 @@ export default function LoginForm() {
                     boxSizing: "border-box",
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = "var(--color-primary, #b2ff70)";
+                    e.target.style.borderColor = "var(--color-primary-dark, #99561c)";
                     e.target.style.background = "rgba(255,255,255,0.08)";
                   }}
                   onBlur={(e) => {
@@ -431,9 +431,9 @@ export default function LoginForm() {
                 borderRadius: "0.75rem",
                 border: "none",
                 background: submitting
-                  ? "color-mix(in srgb, var(--color-primary, #b2ff70) 50%, transparent)"
-                  : "var(--color-primary, #b2ff70)",
-                color: "var(--color-secondary, #1b2f31)",
+                  ? "color-mix(in srgb, var(--color-primary, #f49e0b) 50%, transparent)"
+                  : "var(--color-primary, #f49e0b)",
+                color: "var(--color-secondary, #572228)",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.9375rem",
@@ -445,7 +445,7 @@ export default function LoginForm() {
                 marginTop: "0.5rem",
                 boxShadow: submitting
                   ? "none"
-                  : "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.2))",
+                  : "var(--shadow-coral, 0 8px 24px rgba(87,34,40,0.2))",
               }}
             >
               {submitting ? (
@@ -474,7 +474,7 @@ export default function LoginForm() {
             First time?{" "}
             <a
               href="/admin/setup"
-              style={{ color: "var(--color-primary, #b2ff70)", textDecoration: "none", opacity: 0.85 }}
+              style={{ color: "var(--color-primary-dark, #99561c)", textDecoration: "none", opacity: 0.85 }}
             >
               Create your admin account &rarr;
             </a>

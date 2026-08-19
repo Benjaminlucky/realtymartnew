@@ -13,7 +13,7 @@ export default function PageHero({
     <section
       style={{
         background:
-          "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #1E2D4A 100%)",
+          "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #361519 100%)",
         paddingTop: "7rem",
         paddingBottom: "3.5rem",
         position: "relative",
@@ -30,7 +30,7 @@ export default function PageHero({
           height: "500px",
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(244,158,11,0.1) 0%, transparent 65%)",
           pointerEvents: "none",
         }}
       />
@@ -69,7 +69,7 @@ export default function PageHero({
                 transition: "color 150ms",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--color-primary)")
+                (e.currentTarget.style.color = "var(--color-primary-dark)")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.color = "rgba(255,255,255,0.45)")
@@ -99,7 +99,7 @@ export default function PageHero({
                       transition: "color 150ms",
                     }}
                     onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "var(--color-primary)")
+                      (e.currentTarget.style.color = "var(--color-primary-dark)")
                     }
                     onMouseLeave={(e) =>
                       (e.currentTarget.style.color = "rgba(255,255,255,0.45)")
@@ -110,7 +110,7 @@ export default function PageHero({
                 ) : (
                   <span
                     style={{
-                      color: "var(--color-primary)",
+                      color: "var(--color-primary-dark)",
                       fontSize: "0.8rem",
                       fontWeight: 600,
                       fontFamily: "var(--font-heading)",

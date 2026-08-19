@@ -23,17 +23,17 @@ export const runtime = "edge";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 // Brand colours — match the default theme
-const PRIMARY = "#FF6B6B";
-const SECONDARY = "#0F172A";
+const PRIMARY = "#F49E0B";
+const SECONDARY = "#301316";
 const WHITE = "#FFFFFF";
 const MUTED = "rgba(255,255,255,0.55)";
 
 // Type labels and accent colours
 const TYPE_CONFIG = {
-  land: { label: "Land Listing", accent: "#FF6B6B" },
-  house: { label: "House Listing", accent: "#38BDF8" },
-  blog: { label: "Blog & Insights", accent: "#F59E0B" },
-  default: { label: "NaijaRealty", accent: "#FF6B6B" },
+  land: { label: "Land Listing", accent: "#F49E0B" },
+  house: { label: "House Listing", accent: "#896469" },
+  blog: { label: "Blog & Insights", accent: "#F49E0B" },
+  default: { label: "NaijaRealty", accent: "#F49E0B" },
 };
 
 export async function GET(request) {
@@ -152,7 +152,7 @@ export async function GET(request) {
                 justifyContent: "center",
                 fontSize: "20px",
                 fontWeight: "bold",
-                color: WHITE,
+                color: "#301316",
               }}
             >
               N

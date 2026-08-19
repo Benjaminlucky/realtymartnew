@@ -85,7 +85,7 @@ const S = {
 };
 
 const focus = (e) =>
-  (e.target.style.borderColor = "var(--color-primary, #F49E0B)");
+  (e.target.style.borderColor = "var(--color-primary-dark, #99561c)");
 const blur = (e) =>
   (e.target.style.borderColor = "var(--color-border, #DDD3D4)");
 
@@ -275,8 +275,8 @@ function LogoUpload({ value, onChange }) {
             onMouseEnter={(e) => {
               if (!uploading) {
                 e.currentTarget.style.borderColor =
-                  "var(--color-primary, #F49E0B)";
-                e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
+                  "var(--color-primary-dark, #99561c)";
+                e.currentTarget.style.color = "var(--color-primary-dark, #99561c)";
               }
             }}
             onMouseLeave={(e) => {
@@ -561,8 +561,8 @@ function FaviconUpload({ value, onChange }) {
             onMouseEnter={(e) => {
               if (!uploading) {
                 e.currentTarget.style.borderColor =
-                  "var(--color-primary, #F49E0B)";
-                e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
+                  "var(--color-primary-dark, #99561c)";
+                e.currentTarget.style.color = "var(--color-primary-dark, #99561c)";
               }
             }}
             onMouseLeave={(e) => {
@@ -825,8 +825,8 @@ function NavLinksEditor({ value, onChange }) {
           justifyContent: "center",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = "var(--color-primary, #F49E0B)";
-          e.currentTarget.style.color = "var(--color-primary, #F49E0B)";
+          e.currentTarget.style.borderColor = "var(--color-primary-dark, #99561c)";
+          e.currentTarget.style.color = "var(--color-primary-dark, #99561c)";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.borderColor = "#9A7A7E";
@@ -842,7 +842,7 @@ function NavLinksEditor({ value, onChange }) {
 function Accordion({
   icon: Icon,
   title,
-  color = "#F49E0B",
+  color = "#99561c",
   children,
   defaultOpen = false,
 }) {
@@ -1513,7 +1513,7 @@ export default function AdminSettingsPage() {
             >
               <Settings
                 size={20}
-                style={{ color: "var(--color-primary, #F49E0B)" }}
+                style={{ color: "var(--color-primary-dark, #99561c)" }}
               />
               <h1
                 style={{
@@ -1562,7 +1562,7 @@ export default function AdminSettingsPage() {
         <Accordion
           icon={Globe}
           title="General & Brand"
-          color="#F49E0B"
+          color="#99561c"
           defaultOpen
         >
           {/* ── Logo upload — first field ── */}

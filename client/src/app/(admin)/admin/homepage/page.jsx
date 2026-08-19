@@ -75,7 +75,7 @@ const S = {
 };
 
 const focus = (e) =>
-  (e.target.style.borderColor = "var(--color-primary, #f49e0b)");
+  (e.target.style.borderColor = "var(--color-primary-dark, #99561c)");
 const blur = (e) =>
   (e.target.style.borderColor = "var(--color-border, #ddd3d4)");
 
@@ -417,7 +417,7 @@ function PopularAreasSection() {
           >
             <MapPin
               size={18}
-              style={{ color: "var(--color-primary, #f49e0b)" }}
+              style={{ color: "var(--color-primary-dark, #99561c)" }}
             />
             <h2
               style={{
@@ -505,7 +505,7 @@ function PopularAreasSection() {
               size={20}
               style={{
                 animation: "spin 1s linear infinite",
-                color: "var(--color-primary, #f49e0b)",
+                color: "var(--color-primary-dark, #99561c)",
               }}
             />
           </div>
@@ -1013,7 +1013,7 @@ function PartnersSection() {
           >
             <Building2
               size={18}
-              style={{ color: "var(--color-primary, #f49e0b)" }}
+              style={{ color: "var(--color-primary-dark, #99561c)" }}
             />
             <h2
               style={{
@@ -1100,7 +1100,7 @@ function PartnersSection() {
               size={20}
               style={{
                 animation: "spin 1s linear infinite",
-                color: "var(--color-primary, #f49e0b)",
+                color: "var(--color-primary-dark, #99561c)",
               }}
             />
           </div>

@@ -61,7 +61,7 @@ function SectionTitle({
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
             fontFamily: "var(--font-heading)",
             marginBottom: "0.75rem",
           }}
@@ -135,7 +135,7 @@ function TeamCard({ member }) {
       <div
         style={{
           height: "220px",
-          background: "linear-gradient(135deg, #0F172A, #1E293B)",
+          background: "linear-gradient(135deg, #301316, #361519)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -167,7 +167,7 @@ function TeamCard({ member }) {
                 height: "80px",
                 borderRadius: "50%",
                 background:
-                  "linear-gradient(135deg, var(--color-primary), #E85555)",
+                  "linear-gradient(135deg, var(--color-primary), #99561C)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -178,7 +178,7 @@ function TeamCard({ member }) {
                   fontFamily: "var(--font-heading)",
                   fontWeight: 800,
                   fontSize: "2rem",
-                  color: "white",
+                  color: "#301316",
                 }}
               >
                 {member.name?.charAt(0) || "?"}
@@ -214,7 +214,7 @@ function TeamCard({ member }) {
         <p
           style={{
             fontSize: "0.8125rem",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
             fontWeight: 600,
             marginBottom: "0.625rem",
           }}
@@ -258,7 +258,7 @@ function TeamCard({ member }) {
                   transition: "all 150ms",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#0A66C2";
+                  e.currentTarget.style.background = "#896469";
                   e.currentTarget.style.color = "white";
                 }}
                 onMouseLeave={(e) => {
@@ -287,7 +287,7 @@ function TeamCard({ member }) {
                   transition: "all 150ms",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "#000";
+                  e.currentTarget.style.background = "#301316";
                   e.currentTarget.style.color = "white";
                 }}
                 onMouseLeave={(e) => {
@@ -315,7 +315,7 @@ function TeamCard({ member }) {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "var(--color-primary)";
-                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.color = "#301316";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "var(--color-surface-2)";
@@ -337,12 +337,12 @@ function ValueCard({ value, index }) {
   const icons = [Target, Eye, Award, CheckCircle, Star, Users];
   const Icon = icons[index % icons.length];
   const colors = [
-    "#FF6B6B",
-    "#38BDF8",
-    "#F59E0B",
-    "#22C55E",
-    "#A78BFA",
-    "#FB923C",
+    "#F8C060",
+    "#D0C1C3",
+    "#F8C060",
+    "#FBDDAA",
+    "#D0C1C3",
+    "#F8C060",
   ];
   const color = colors[index % colors.length];
   return (
@@ -410,7 +410,7 @@ function StatBadge({ value, label }) {
           fontFamily: "var(--font-heading)",
           fontWeight: 900,
           fontSize: "clamp(2rem, 4vw, 3rem)",
-          color: "var(--color-primary)",
+          color: "var(--color-primary-dark)",
           letterSpacing: "-0.04em",
           lineHeight: 1,
         }}
@@ -607,16 +607,16 @@ export default function AboutClient({ about, settings }) {
                   padding: "0.625rem 1.25rem",
                   background: "var(--color-primary-muted)",
                   borderRadius: "var(--radius-full)",
-                  border: "1px solid rgba(255,107,107,0.2)",
+                  border: "1px solid rgba(244,158,11,0.2)",
                 }}
               >
-                <Award size={15} style={{ color: "var(--color-primary)" }} />
+                <Award size={15} style={{ color: "var(--color-primary-dark)" }} />
                 <span
                   style={{
                     fontFamily: "var(--font-heading)",
                     fontWeight: 600,
                     fontSize: "0.875rem",
-                    color: "var(--color-primary)",
+                    color: "var(--color-primary-dark)",
                   }}
                 >
                   Founded {story.founded}
@@ -632,7 +632,7 @@ export default function AboutClient({ about, settings }) {
                 overflow: "hidden",
                 position: "relative",
                 minHeight: "400px",
-                background: "linear-gradient(135deg, #0F172A, #1E293B)",
+                background: "linear-gradient(135deg, #301316, #361519)",
               }}
             >
               <Image
@@ -683,8 +683,8 @@ export default function AboutClient({ about, settings }) {
           }}
         >
           {[
-            { icon: Target, label: "Mission", text: mission, color: "#FF6B6B" },
-            { icon: Eye, label: "Vision", text: vision, color: "#38BDF8" },
+            { icon: Target, label: "Mission", text: mission, color: "#F8C060" },
+            { icon: Eye, label: "Vision", text: vision, color: "#D0C1C3" },
           ].map(({ icon: Icon, label, text, color }) => (
             <div
               key={label}
@@ -807,7 +807,7 @@ export default function AboutClient({ about, settings }) {
               >
                 <CheckCircle
                   size={16}
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: "var(--color-primary-dark)" }}
                 />
               </div>
               <div>
@@ -888,7 +888,7 @@ export default function AboutClient({ about, settings }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(244,158,11,0.08) 0%, transparent 65%)",
           }}
         />
         <div
@@ -897,7 +897,7 @@ export default function AboutClient({ about, settings }) {
         >
           <p
             style={{
-              color: "var(--color-primary)",
+              color: "var(--color-primary-dark)",
               fontFamily: "var(--font-heading)",
               fontWeight: 700,
               fontSize: "0.75rem",
@@ -948,7 +948,7 @@ export default function AboutClient({ about, settings }) {
                 padding: "0.875rem 2rem",
                 borderRadius: "var(--radius)",
                 background: "var(--color-primary)",
-                color: "white",
+                color: "#301316",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.9375rem",

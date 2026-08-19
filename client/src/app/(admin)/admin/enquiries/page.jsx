@@ -312,7 +312,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Phone
                 size={14}
                 style={{
-                  color: "var(--color-primary, #F49E0B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   flexShrink: 0,
                 }}
               />
@@ -352,7 +352,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <Mail
                   size={14}
                   style={{
-                    color: "var(--color-primary, #F49E0B)",
+                    color: "var(--color-primary-dark, #99561c)",
                     flexShrink: 0,
                   }}
                 />
@@ -393,7 +393,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Tag
                 size={14}
                 style={{
-                  color: "var(--color-primary, #F49E0B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   flexShrink: 0,
                 }}
               />
@@ -427,7 +427,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Globe
                 size={14}
                 style={{
-                  color: "var(--color-primary, #F49E0B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   flexShrink: 0,
                 }}
               />
@@ -627,7 +627,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 boxSizing: "border-box",
               }}
               onFocus={(e) =>
-                (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
+                (e.target.style.borderColor = "var(--color-primary-dark, #99561c)")
               }
               onBlur={(e) =>
                 (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
@@ -895,7 +895,7 @@ export default function EnquiriesPage() {
             >
               <MessageSquare
                 size={20}
-                style={{ color: "var(--color-primary, #F49E0B)" }}
+                style={{ color: "var(--color-primary-dark, #99561c)" }}
               />
               <h1
                 style={{
@@ -1187,7 +1187,7 @@ export default function EnquiriesPage() {
               <Loader2
                 size={28}
                 style={{
-                  color: "var(--color-primary, #F49E0B)",
+                  color: "var(--color-primary-dark, #99561c)",
                   animation: "spin 1s linear infinite",
                   margin: "0 auto 0.75rem",
                   display: "block",

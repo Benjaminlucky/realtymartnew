@@ -58,8 +58,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         }}
         onMouseEnter={(e) => {
           if (currentPage !== 1) {
-            e.currentTarget.style.borderColor = "var(--color-primary)";
-            e.currentTarget.style.color = "var(--color-primary)";
+            e.currentTarget.style.borderColor = "var(--color-primary-dark)";
+            e.currentTarget.style.color = "var(--color-primary-dark)";
           }
         }}
         onMouseLeave={(e) => {
@@ -103,8 +103,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             }}
             onMouseEnter={(e) => {
               if (currentPage !== page) {
-                e.currentTarget.style.borderColor = "var(--color-primary)";
-                e.currentTarget.style.color = "var(--color-primary)";
+                e.currentTarget.style.borderColor = "var(--color-primary-dark)";
+                e.currentTarget.style.color = "var(--color-primary-dark)";
               }
             }}
             onMouseLeave={(e) => {
@@ -130,8 +130,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
         }}
         onMouseEnter={(e) => {
           if (currentPage !== totalPages) {
-            e.currentTarget.style.borderColor = "var(--color-primary)";
-            e.currentTarget.style.color = "var(--color-primary)";
+            e.currentTarget.style.borderColor = "var(--color-primary-dark)";
+            e.currentTarget.style.color = "var(--color-primary-dark)";
           }
         }}
         onMouseLeave={(e) => {

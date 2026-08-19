@@ -24,7 +24,7 @@ export default function Logo({ settings, className = "" }) {
           className="text-xl font-extrabold tracking-tight"
           style={{
             fontFamily: "var(--font-heading)",
-            color: "var(--color-primary)",
+            color: "var(--color-primary-dark)",
           }}
         >
           {siteName}

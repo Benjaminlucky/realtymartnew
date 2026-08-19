@@ -82,7 +82,7 @@ export default function InquiryForm({ settings }) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleFocus = (e) => {
-    e.target.style.borderColor = "var(--color-primary)";
+    e.target.style.borderColor = "var(--color-primary-dark)";
     e.target.style.background = "rgba(244,158,11,0.06)";
   };
 

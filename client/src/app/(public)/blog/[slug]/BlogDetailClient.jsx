@@ -49,7 +49,7 @@ function ReadProgressBar() {
         right: 0,
         zIndex: 100,
         height: "3px",
-        background: "rgba(0,0,0,0.08)",
+        background: "rgba(87,34,40,0.08)",
       }}
     >
       <div
@@ -66,9 +66,9 @@ function ReadProgressBar() {
 
 // ── Related post card — matches BlogClient's BlogCard style ───────
 const cardBgs = [
-  "linear-gradient(135deg, #0F172A 0%, #1a2744 100%)",
-  "linear-gradient(135deg, #0d1f2d 0%, #1E293B 100%)",
-  "linear-gradient(135deg, #1a150d 0%, #0F172A 100%)",
+  "linear-gradient(135deg, #301316 0%, #361519 100%)",
+  "linear-gradient(135deg, #896469 0%, #361519 100%)",
+  "linear-gradient(135deg, #361519 0%, #301316 100%)",
 ];
 
 function RelatedCard({ post, index }) {
@@ -144,7 +144,7 @@ function RelatedCard({ post, index }) {
             <span
               style={{
                 background: "var(--color-primary)",
-                color: "white",
+                color: "#301316",
                 fontSize: "0.65rem",
                 fontWeight: 700,
                 padding: "0.2rem 0.6rem",
@@ -171,7 +171,7 @@ function RelatedCard({ post, index }) {
                 display: "flex",
                 alignItems: "center",
                 gap: "0.3rem",
-                background: "rgba(0,0,0,0.6)",
+                background: "rgba(87,34,40,0.6)",
                 backdropFilter: "blur(8px)",
                 color: "rgba(255,255,255,0.8)",
                 fontSize: "0.65rem",
@@ -325,7 +325,7 @@ export default function BlogPostClient({ post, settings, related }) {
       <section
         style={{
           background:
-            "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #1E2D4A 100%)",
+            "linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 60%, #361519 100%)",
           paddingTop: "7rem",
           paddingBottom: "3rem",
           position: "relative",
@@ -342,7 +342,7 @@ export default function BlogPostClient({ post, settings, related }) {
             height: "500px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(244,158,11,0.08) 0%, transparent 65%)",
             pointerEvents: "none",
           }}
         />
@@ -414,9 +414,9 @@ export default function BlogPostClient({ post, settings, related }) {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.375rem",
-                background: "rgba(255,107,107,0.15)",
+                background: "rgba(244,158,11,0.15)",
                 color: "var(--color-primary)",
-                border: "1px solid rgba(255,107,107,0.3)",
+                border: "1px solid rgba(244,158,11,0.3)",
                 padding: "0.3rem 0.875rem",
                 borderRadius: "var(--radius-full)",
                 fontSize: "0.75rem",
@@ -466,7 +466,7 @@ export default function BlogPostClient({ post, settings, related }) {
                     height: "2rem",
                     borderRadius: "50%",
                     background:
-                      "linear-gradient(135deg, var(--color-primary), #E85555)",
+                      "linear-gradient(135deg, var(--color-primary), #99561C)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -481,7 +481,7 @@ export default function BlogPostClient({ post, settings, related }) {
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   ) : (
-                    <User size={13} style={{ color: "white" }} />
+                    <User size={13} style={{ color: "#301316" }} />
                   )}
                 </div>
                 <span
@@ -569,7 +569,7 @@ export default function BlogPostClient({ post, settings, related }) {
                     borderRadius: "var(--radius-lg)",
                     overflow: "hidden",
                     marginBottom: "2.5rem",
-                    background: "#1e293b",
+                    background: "#361519",
                   }}
                 >
                   <Image
@@ -767,7 +767,7 @@ export default function BlogPostClient({ post, settings, related }) {
                       height: "3.5rem",
                       borderRadius: "50%",
                       background:
-                        "linear-gradient(135deg, var(--color-primary), #E85555)",
+                        "linear-gradient(135deg, var(--color-primary), #99561C)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -782,7 +782,7 @@ export default function BlogPostClient({ post, settings, related }) {
                         style={{ width: "100%", height: "100%", objectFit: "cover" }}
                       />
                     ) : (
-                      <User size={22} style={{ color: "white" }} />
+                      <User size={22} style={{ color: "#301316" }} />
                     )}
                   </div>
                   <div>

@@ -14,12 +14,12 @@ export default function AdminLoginPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "linear-gradient(135deg, #060B14 0%, #0F172A 100%)",
+            background: "linear-gradient(135deg, #361519 0%, #301316 100%)",
           }}
         >
           <Loader2
             size={32}
-            style={{ color: "#FF6B6B", animation: "spin 1s linear infinite" }}
+            style={{ color: "#99561c", animation: "spin 1s linear infinite" }}
           />
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>

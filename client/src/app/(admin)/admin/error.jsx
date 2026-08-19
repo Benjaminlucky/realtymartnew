@@ -26,20 +26,20 @@ export default function AdminError({ error, reset }) {
           width: "56px",
           height: "56px",
           borderRadius: "50%",
-          background: "#fee2e2",
+          background: "#f2edee",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           margin: "0 auto 1.25rem",
         }}
       >
-        <AlertCircle size={26} color="#ef4444" />
+        <AlertCircle size={26} color="#4e1f24" />
       </div>
       <h2
         style={{
           fontWeight: 800,
           fontSize: "1.25rem",
-          color: "#0f172a",
+          color: "#301316",
           margin: "0 0 0.5rem",
         }}
       >
@@ -47,7 +47,7 @@ export default function AdminError({ error, reset }) {
       </h2>
       <p
         style={{
-          color: "#64748b",
+          color: "#754a4f",
           maxWidth: "360px",
           margin: "0 auto 1.75rem",
           fontSize: "0.9rem",
@@ -62,8 +62,8 @@ export default function AdminError({ error, reset }) {
           display: "inline-flex",
           alignItems: "center",
           gap: "0.5rem",
-          background: "var(--color-primary, #b2ff70)",
-          color: "var(--color-secondary, #1b2f31)",
+          background: "var(--color-primary, #f49e0b)",
+          color: "var(--color-secondary, #572228)",
           border: "none",
           borderRadius: "var(--radius, 0.625rem)",
           padding: "0.625rem 1.5rem",

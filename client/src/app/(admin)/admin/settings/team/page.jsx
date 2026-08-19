@@ -35,22 +35,22 @@ function getAvatarUrl(path) {
 const ROLES = {
   super_admin: {
     label: "Super Admin",
-    color: "#FF6B6B",
-    bg: "rgba(255,107,107,0.12)",
+    color: "#572228",
+    bg: "rgba(87,34,40,0.12)",
     icon: ShieldCheck,
     desc: "Full access to everything",
   },
   admin: {
     label: "Admin",
-    color: "#38BDF8",
-    bg: "rgba(56,189,248,0.12)",
+    color: "#896469",
+    bg: "rgba(137,100,105,0.12)",
     icon: Shield,
     desc: "Full access except team management",
   },
   editor: {
     label: "Editor",
-    color: "#F59E0B",
-    bg: "rgba(245,158,11,0.12)",
+    color: "#99561C",
+    bg: "rgba(244,158,11,0.12)",
     icon: PenLine,
     desc: "Blog and listings only",
   },
@@ -93,9 +93,9 @@ const inputBase = {
   width: "100%",
   padding: "0.6875rem 0.875rem",
   borderRadius: "0.625rem",
-  border: "1px solid #E2E8F0",
-  background: "#F8FAFC",
-  color: "#0F172A",
+  border: "1px solid #DDD3D4",
+  background: "#FFFCF6",
+  color: "#301316",
   fontSize: "0.875rem",
   outline: "none",
   fontFamily: "Inter, sans-serif",
@@ -122,7 +122,7 @@ function Modal({ title, onClose, children }) {
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(15,23,42,0.7)",
+          background: "rgba(48,19,22,0.7)",
           backdropFilter: "blur(4px)",
         }}
       />
@@ -133,7 +133,7 @@ function Modal({ title, onClose, children }) {
           maxWidth: "480px",
           background: "white",
           borderRadius: "1rem",
-          boxShadow: "0 32px 64px rgba(0,0,0,0.2)",
+          boxShadow: "0 32px 64px rgba(87,34,40,0.2)",
           overflow: "hidden",
         }}
       >
@@ -144,7 +144,7 @@ function Modal({ title, onClose, children }) {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid #DDD3D4",
           }}
         >
           <h3
@@ -152,7 +152,7 @@ function Modal({ title, onClose, children }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
               fontSize: "1rem",
-              color: "#0F172A",
+              color: "#301316",
               margin: 0,
             }}
           >
@@ -164,18 +164,18 @@ function Modal({ title, onClose, children }) {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "#94A3B8",
+              color: "#9A7A7E",
               padding: "0.25rem",
               borderRadius: "0.375rem",
               transition: "all 150ms",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#F1F5F9";
-              e.currentTarget.style.color = "#0F172A";
+              e.currentTarget.style.background = "#FEF8EE";
+              e.currentTarget.style.color = "#301316";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = "none";
-              e.currentTarget.style.color = "#94A3B8";
+              e.currentTarget.style.color = "#9A7A7E";
             }}
           >
             <X size={18} />
@@ -267,15 +267,15 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             gap: "0.5rem",
             padding: "0.75rem",
             borderRadius: "0.625rem",
-            background: "#FEF2F2",
-            border: "1px solid #FCA5A5",
+            background: "#F2EDEE",
+            border: "1px solid #9A7A7E",
           }}
         >
           <AlertCircle
             size={15}
-            style={{ color: "#EF4444", flexShrink: 0, marginTop: "0.1rem" }}
+            style={{ color: "#4E1F24", flexShrink: 0, marginTop: "0.1rem" }}
           />
-          <p style={{ color: "#DC2626", fontSize: "0.8125rem", margin: 0 }}>
+          <p style={{ color: "#4E1F24", fontSize: "0.8125rem", margin: 0 }}>
             {error}
           </p>
         </div>
@@ -288,7 +288,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.75rem",
-            color: "#64748B",
+            color: "#754A4F",
             marginBottom: "0.375rem",
           }}
         >
@@ -300,12 +300,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
           placeholder="e.g. Amara Okafor"
           style={inputBase}
           onFocus={(e) => {
-            e.target.style.borderColor = "#FF6B6B";
+            e.target.style.borderColor = "#F49E0B";
             e.target.style.background = "white";
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = "#E2E8F0";
-            e.target.style.background = "#F8FAFC";
+            e.target.style.borderColor = "#DDD3D4";
+            e.target.style.background = "#FFFCF6";
           }}
         />
       </div>
@@ -317,7 +317,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.75rem",
-            color: "#64748B",
+            color: "#754A4F",
             marginBottom: "0.375rem",
           }}
         >
@@ -330,12 +330,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
           placeholder="staff@yourcompany.com"
           style={inputBase}
           onFocus={(e) => {
-            e.target.style.borderColor = "#FF6B6B";
+            e.target.style.borderColor = "#F49E0B";
             e.target.style.background = "white";
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = "#E2E8F0";
-            e.target.style.background = "#F8FAFC";
+            e.target.style.borderColor = "#DDD3D4";
+            e.target.style.background = "#FFFCF6";
           }}
         />
       </div>
@@ -351,7 +351,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.75rem",
-                color: "#64748B",
+                color: "#754A4F",
                 marginBottom: "0.375rem",
               }}
             >
@@ -365,11 +365,11 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                   borderRadius: "50%",
                   overflow: "hidden",
                   flexShrink: 0,
-                  background: "#F1F5F9",
+                  background: "#FEF8EE",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  border: "1px solid #E2E8F0",
+                  border: "1px solid #DDD3D4",
                 }}
               >
                 {form.avatar ? (
@@ -379,7 +379,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 ) : (
-                  <User size={22} style={{ color: "#CBD5E1" }} />
+                  <User size={22} style={{ color: "#9A7A7E" }} />
                 )}
               </div>
               <label
@@ -389,9 +389,9 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                   gap: "0.375rem",
                   padding: "0.5rem 0.875rem",
                   borderRadius: "0.625rem",
-                  border: "1px solid #E2E8F0",
+                  border: "1px solid #DDD3D4",
                   background: "white",
-                  color: "#475569",
+                  color: "#754A4F",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 600,
                   fontSize: "0.8125rem",
@@ -419,7 +419,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                   style={{
                     background: "none",
                     border: "none",
-                    color: "#94A3B8",
+                    color: "#9A7A7E",
                     fontSize: "0.8125rem",
                     cursor: "pointer",
                   }}
@@ -437,12 +437,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.75rem",
-                color: "#64748B",
+                color: "#754A4F",
                 marginBottom: "0.375rem",
               }}
             >
               Bio{" "}
-              <span style={{ color: "#94A3B8", fontWeight: 400 }}>
+              <span style={{ color: "#9A7A7E", fontWeight: 400 }}>
                 ({(form.bio || "").length}/500)
               </span>
             </label>
@@ -454,12 +454,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
               placeholder="A couple of sentences about you — shown below every article you publish."
               style={{ ...inputBase, resize: "vertical", fontFamily: "Inter, sans-serif" }}
               onFocus={(e) => {
-                e.target.style.borderColor = "#FF6B6B";
+                e.target.style.borderColor = "#F49E0B";
                 e.target.style.background = "white";
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = "#E2E8F0";
-                e.target.style.background = "#F8FAFC";
+                e.target.style.borderColor = "#DDD3D4";
+                e.target.style.background = "#FFFCF6";
               }}
             />
           </div>
@@ -475,7 +475,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.75rem",
-              color: "#64748B",
+              color: "#754A4F",
               marginBottom: "0.375rem",
             }}
           >
@@ -486,12 +486,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             onChange={(e) => setForm((p) => ({ ...p, role: e.target.value }))}
             style={{ ...inputBase, cursor: "pointer" }}
             onFocus={(e) => {
-              e.target.style.borderColor = "#FF6B6B";
+              e.target.style.borderColor = "#F49E0B";
               e.target.style.background = "white";
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = "#E2E8F0";
-              e.target.style.background = "#F8FAFC";
+              e.target.style.borderColor = "#DDD3D4";
+              e.target.style.background = "#FFFCF6";
             }}
           >
             {Object.entries(ROLES).map(([val, cfg]) => (
@@ -512,7 +512,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.75rem",
-              color: "#64748B",
+              color: "#754A4F",
               marginBottom: "0.375rem",
             }}
           >
@@ -528,12 +528,12 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
               placeholder="Minimum 8 characters"
               style={{ ...inputBase, paddingRight: "2.75rem" }}
               onFocus={(e) => {
-                e.target.style.borderColor = "#FF6B6B";
+                e.target.style.borderColor = "#F49E0B";
                 e.target.style.background = "white";
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = "#E2E8F0";
-                e.target.style.background = "#F8FAFC";
+                e.target.style.borderColor = "#DDD3D4";
+                e.target.style.background = "#FFFCF6";
               }}
             />
             <button
@@ -547,7 +547,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: "#94A3B8",
+                color: "#9A7A7E",
               }}
             >
               {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -570,7 +570,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                     alignItems: "center",
                     gap: "0.25rem",
                     fontSize: "0.7rem",
-                    color: r.test(form.password) ? "#16A34A" : "#94A3B8",
+                    color: r.test(form.password) ? "#99561C" : "#9A7A7E",
                   }}
                 >
                   <CheckCircle
@@ -589,7 +589,7 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.75rem",
-                color: "#64748B",
+                color: "#754A4F",
                 marginBottom: "0.375rem",
               }}
             >
@@ -606,19 +606,19 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
                 ...inputBase,
                 borderColor:
                   form.confirm && form.confirm !== form.password
-                    ? "#FCA5A5"
-                    : "#E2E8F0",
+                    ? "#9A7A7E"
+                    : "#DDD3D4",
               }}
               onFocus={(e) => {
-                e.target.style.borderColor = "#FF6B6B";
+                e.target.style.borderColor = "#F49E0B";
                 e.target.style.background = "white";
               }}
               onBlur={(e) => {
                 e.target.style.borderColor =
                   form.confirm && form.confirm !== form.password
-                    ? "#FCA5A5"
-                    : "#E2E8F0";
-                e.target.style.background = "#F8FAFC";
+                    ? "#9A7A7E"
+                    : "#DDD3D4";
+                e.target.style.background = "#FFFCF6";
               }}
             />
           </div>
@@ -634,9 +634,9 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             flex: 1,
             padding: "0.6875rem",
             borderRadius: "0.625rem",
-            border: "1px solid #E2E8F0",
+            border: "1px solid #DDD3D4",
             background: "white",
-            color: "#64748B",
+            color: "#754A4F",
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.875rem",
@@ -655,9 +655,9 @@ function MemberForm({ initial, onSave, onClose, isSelf }) {
             border: "none",
             background:
               canSubmit && !loading
-                ? "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)"
-                : "rgba(255,107,107,0.3)",
-            color: "white",
+                ? "linear-gradient(135deg, #F49E0B 0%, #99561C 100%)"
+                : "rgba(244,158,11,0.3)",
+            color: "#301316",
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 700,
             fontSize: "0.875rem",
@@ -729,12 +729,12 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             gap: "0.5rem",
             padding: "0.75rem",
             borderRadius: "0.625rem",
-            background: "#FEF2F2",
-            border: "1px solid #FCA5A5",
+            background: "#F2EDEE",
+            border: "1px solid #9A7A7E",
           }}
         >
-          <AlertCircle size={15} style={{ color: "#EF4444", flexShrink: 0 }} />
-          <p style={{ color: "#DC2626", fontSize: "0.8125rem", margin: 0 }}>
+          <AlertCircle size={15} style={{ color: "#4E1F24", flexShrink: 0 }} />
+          <p style={{ color: "#4E1F24", fontSize: "0.8125rem", margin: 0 }}>
             {error}
           </p>
         </div>
@@ -748,7 +748,7 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.75rem",
-              color: "#64748B",
+              color: "#754A4F",
               marginBottom: "0.375rem",
             }}
           >
@@ -763,12 +763,12 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             style={inputBase}
             placeholder="Your current password"
             onFocus={(e) => {
-              e.target.style.borderColor = "#FF6B6B";
+              e.target.style.borderColor = "#F49E0B";
               e.target.style.background = "white";
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = "#E2E8F0";
-              e.target.style.background = "#F8FAFC";
+              e.target.style.borderColor = "#DDD3D4";
+              e.target.style.background = "#FFFCF6";
             }}
           />
         </div>
@@ -780,7 +780,7 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.75rem",
-            color: "#64748B",
+            color: "#754A4F",
             marginBottom: "0.375rem",
           }}
         >
@@ -796,12 +796,12 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             style={{ ...inputBase, paddingRight: "2.75rem" }}
             placeholder="Min 8 chars, uppercase, number"
             onFocus={(e) => {
-              e.target.style.borderColor = "#FF6B6B";
+              e.target.style.borderColor = "#F49E0B";
               e.target.style.background = "white";
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = "#E2E8F0";
-              e.target.style.background = "#F8FAFC";
+              e.target.style.borderColor = "#DDD3D4";
+              e.target.style.background = "#FFFCF6";
             }}
           />
           <button
@@ -815,7 +815,7 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "#94A3B8",
+              color: "#9A7A7E",
             }}
           >
             {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -829,7 +829,7 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.75rem",
-            color: "#64748B",
+            color: "#754A4F",
             marginBottom: "0.375rem",
           }}
         >
@@ -844,12 +844,12 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
           style={inputBase}
           placeholder="Repeat new password"
           onFocus={(e) => {
-            e.target.style.borderColor = "#FF6B6B";
+            e.target.style.borderColor = "#F49E0B";
             e.target.style.background = "white";
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = "#E2E8F0";
-            e.target.style.background = "#F8FAFC";
+            e.target.style.borderColor = "#DDD3D4";
+            e.target.style.background = "#FFFCF6";
           }}
         />
       </div>
@@ -861,9 +861,9 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             flex: 1,
             padding: "0.6875rem",
             borderRadius: "0.625rem",
-            border: "1px solid #E2E8F0",
+            border: "1px solid #DDD3D4",
             background: "white",
-            color: "#64748B",
+            color: "#754A4F",
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.875rem",
@@ -880,8 +880,8 @@ function ChangePasswordForm({ member, isSelf, onClose }) {
             padding: "0.6875rem",
             borderRadius: "0.625rem",
             border: "none",
-            background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
-            color: "white",
+            background: "linear-gradient(135deg, #F49E0B 0%, #99561C 100%)",
+            color: "#301316",
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 700,
             fontSize: "0.875rem",
@@ -994,20 +994,20 @@ export default function TeamPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <Users size={20} style={{ color: "#FF6B6B" }} />
+              <Users size={20} style={{ color: "#99561c" }} />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "#0F172A",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
                 Team
               </h1>
             </div>
-            <p style={{ color: "#94A3B8", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#9A7A7E", fontSize: "0.875rem", margin: 0 }}>
               Manage admin accounts and access levels for your platform.
             </p>
           </div>
@@ -1021,13 +1021,13 @@ export default function TeamPage() {
                 padding: "0.6875rem 1.25rem",
                 borderRadius: "0.75rem",
                 border: "none",
-                background: "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
-                color: "white",
+                background: "linear-gradient(135deg, #F49E0B 0%, #99561C 100%)",
+                color: "#301316",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
                 cursor: "pointer",
-                boxShadow: "0 4px 12px rgba(255,107,107,0.3)",
+                boxShadow: "0 4px 12px rgba(244,158,11,0.3)",
                 flexShrink: 0,
               }}
             >
@@ -1069,7 +1069,7 @@ export default function TeamPage() {
               >
                 {cfg.label}
               </span>
-              <span style={{ fontSize: "0.7rem", color: "#94A3B8" }}>
+              <span style={{ fontSize: "0.7rem", color: "#9A7A7E" }}>
                 — {cfg.desc}
               </span>
             </div>
@@ -1086,12 +1086,12 @@ export default function TeamPage() {
               padding: "4rem",
               background: "white",
               borderRadius: "1rem",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
             }}
           >
             <Loader2
               size={24}
-              style={{ color: "#FF6B6B", animation: "spin 1s linear infinite" }}
+              style={{ color: "#99561c", animation: "spin 1s linear infinite" }}
             />
           </div>
         ) : (
@@ -1111,18 +1111,18 @@ export default function TeamPage() {
                     padding: "1.25rem 1.5rem",
                     background: "white",
                     borderRadius: "1rem",
-                    border: "1px solid #E2E8F0",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                    border: "1px solid #DDD3D4",
+                    boxShadow: "0 1px 3px rgba(87,34,40,0.04)",
                     opacity: isInactive ? 0.6 : 1,
                     transition: "box-shadow 150ms",
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.boxShadow =
-                      "0 4px 12px rgba(0,0,0,0.08)")
+                      "0 4px 12px rgba(87,34,40,0.08)")
                   }
                   onMouseLeave={(e) =>
                     (e.currentTarget.style.boxShadow =
-                      "0 1px 3px rgba(0,0,0,0.04)")
+                      "0 1px 3px rgba(87,34,40,0.04)")
                   }
                 >
                   {/* Avatar */}
@@ -1132,7 +1132,7 @@ export default function TeamPage() {
                       height: "2.75rem",
                       borderRadius: "50%",
                       flexShrink: 0,
-                      background: `linear-gradient(135deg, ${ROLES[member.role]?.color || "#FF6B6B"} 0%, #0F172A 100%)`,
+                      background: `linear-gradient(135deg, ${ROLES[member.role]?.color || "#99561C"} 0%, #301316 100%)`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -1166,7 +1166,7 @@ export default function TeamPage() {
                           fontFamily: "Plus Jakarta Sans, sans-serif",
                           fontWeight: 700,
                           fontSize: "0.9375rem",
-                          color: "#0F172A",
+                          color: "#301316",
                           margin: 0,
                         }}
                       >
@@ -1179,8 +1179,8 @@ export default function TeamPage() {
                             fontWeight: 700,
                             padding: "0.1rem 0.5rem",
                             borderRadius: "9999px",
-                            background: "#F1F5F9",
-                            color: "#64748B",
+                            background: "#FEF8EE",
+                            color: "#754A4F",
                             fontFamily: "Plus Jakarta Sans, sans-serif",
                           }}
                         >
@@ -1194,8 +1194,8 @@ export default function TeamPage() {
                             fontWeight: 700,
                             padding: "0.1rem 0.5rem",
                             borderRadius: "9999px",
-                            background: "#FEF2F2",
-                            color: "#EF4444",
+                            background: "#F2EDEE",
+                            color: "#4E1F24",
                             fontFamily: "Plus Jakarta Sans, sans-serif",
                           }}
                         >
@@ -1206,7 +1206,7 @@ export default function TeamPage() {
                     </div>
                     <p
                       style={{
-                        color: "#94A3B8",
+                        color: "#9A7A7E",
                         fontSize: "0.8125rem",
                         margin: 0,
                       }}
@@ -1216,7 +1216,7 @@ export default function TeamPage() {
                     {member.last_login && (
                       <p
                         style={{
-                          color: "#CBD5E1",
+                          color: "#9A7A7E",
                           fontSize: "0.75rem",
                           margin: "0.125rem 0 0",
                         }}
@@ -1247,19 +1247,19 @@ export default function TeamPage() {
                         style={{
                           padding: "0.5rem",
                           borderRadius: "0.5rem",
-                          border: "1px solid #E2E8F0",
+                          border: "1px solid #DDD3D4",
                           background: "white",
-                          color: "#94A3B8",
+                          color: "#9A7A7E",
                           cursor: "pointer",
                           transition: "all 150ms",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "#38BDF8";
-                          e.currentTarget.style.color = "#38BDF8";
+                          e.currentTarget.style.borderColor = "#896469";
+                          e.currentTarget.style.color = "#896469";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "#E2E8F0";
-                          e.currentTarget.style.color = "#94A3B8";
+                          e.currentTarget.style.borderColor = "#DDD3D4";
+                          e.currentTarget.style.color = "#9A7A7E";
                         }}
                       >
                         <KeyRound size={15} />
@@ -1273,19 +1273,19 @@ export default function TeamPage() {
                         style={{
                           padding: "0.5rem",
                           borderRadius: "0.5rem",
-                          border: "1px solid #E2E8F0",
+                          border: "1px solid #DDD3D4",
                           background: "white",
-                          color: "#94A3B8",
+                          color: "#9A7A7E",
                           cursor: "pointer",
                           transition: "all 150ms",
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.borderColor = "#FF6B6B";
-                          e.currentTarget.style.color = "#FF6B6B";
+                          e.currentTarget.style.borderColor = "#F49E0B";
+                          e.currentTarget.style.color = "#F49E0B";
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.borderColor = "#E2E8F0";
-                          e.currentTarget.style.color = "#94A3B8";
+                          e.currentTarget.style.borderColor = "#DDD3D4";
+                          e.currentTarget.style.color = "#9A7A7E";
                         }}
                       >
                         <Edit2 size={15} />
@@ -1300,19 +1300,19 @@ export default function TeamPage() {
                           style={{
                             padding: "0.5rem",
                             borderRadius: "0.5rem",
-                            border: "1px solid #E2E8F0",
+                            border: "1px solid #DDD3D4",
                             background: "white",
-                            color: "#94A3B8",
+                            color: "#9A7A7E",
                             cursor: "pointer",
                             transition: "all 150ms",
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = "#F59E0B";
-                            e.currentTarget.style.color = "#F59E0B";
+                            e.currentTarget.style.borderColor = "#F49E0B";
+                            e.currentTarget.style.color = "#F49E0B";
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = "#E2E8F0";
-                            e.currentTarget.style.color = "#94A3B8";
+                            e.currentTarget.style.borderColor = "#DDD3D4";
+                            e.currentTarget.style.color = "#9A7A7E";
                           }}
                         >
                           {member.is_active ? (
@@ -1327,19 +1327,19 @@ export default function TeamPage() {
                           style={{
                             padding: "0.5rem",
                             borderRadius: "0.5rem",
-                            border: "1px solid #E2E8F0",
+                            border: "1px solid #DDD3D4",
                             background: "white",
-                            color: "#94A3B8",
+                            color: "#9A7A7E",
                             cursor: "pointer",
                             transition: "all 150ms",
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.borderColor = "#EF4444";
-                            e.currentTarget.style.color = "#EF4444";
+                            e.currentTarget.style.borderColor = "#4E1F24";
+                            e.currentTarget.style.color = "#4E1F24";
                           }}
                           onMouseLeave={(e) => {
-                            e.currentTarget.style.borderColor = "#E2E8F0";
-                            e.currentTarget.style.color = "#94A3B8";
+                            e.currentTarget.style.borderColor = "#DDD3D4";
+                            e.currentTarget.style.color = "#9A7A7E";
                           }}
                         >
                           <Trash2 size={15} />

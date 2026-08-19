@@ -582,7 +582,7 @@ function ReviewModal({ initial, onClose, onSave }) {
                     style={{
                       width: "1rem",
                       height: "1rem",
-                      accentColor: "#F49E0B",
+                      accentColor: "#99561c",
                     }}
                   />
                   <span

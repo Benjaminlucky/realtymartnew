@@ -76,7 +76,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
         width: sidebarWidth,
         minHeight: "100%",
         background:
-          "linear-gradient(180deg, var(--color-secondary-dark, #060B14) 0%, var(--color-secondary, #0F172A) 100%)",
+          "linear-gradient(180deg, var(--color-secondary-dark, #361519) 0%, var(--color-secondary, #301316) 100%)",
         borderRight: "1px solid rgba(255,255,255,0.06)",
         display: "flex",
         flexDirection: "column",
@@ -105,14 +105,14 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                 width: "2rem",
                 height: "2rem",
                 borderRadius: "0.5rem",
-                background: "var(--color-primary, #FF6B6B)",
+                background: "var(--color-primary, #F49E0B)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 flexShrink: 0,
               }}
             >
-              <Building2 size={14} style={{ color: "white" }} />
+              <Building2 size={14} style={{ color: "#301316" }} />
             </div>
             <div>
               <p
@@ -146,13 +146,13 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
               width: "2rem",
               height: "2rem",
               borderRadius: "0.5rem",
-              background: "var(--color-primary, #FF6B6B)",
+              background: "var(--color-primary, #F49E0B)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Building2 size={14} style={{ color: "white" }} />
+            <Building2 size={14} style={{ color: "#301316" }} />
           </div>
         )}
         <button
@@ -219,10 +219,10 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                 textDecoration: "none",
                 // Active: solid primary bg with WHITE text — never a colour clash
                 background: active
-                  ? "var(--color-primary, #FF6B6B)"
+                  ? "var(--color-primary, #F49E0B)"
                   : "transparent",
-                border: `1px solid ${active ? "var(--color-primary, #FF6B6B)" : "transparent"}`,
-                color: active ? "white" : "rgba(255,255,255,0.55)",
+                border: `1px solid ${active ? "var(--color-primary, #F49E0B)" : "transparent"}`,
+                color: active ? "#301316" : "rgba(255,255,255,0.55)",
                 transition: "all 150ms ease",
                 position: "relative",
               }}
@@ -262,8 +262,8 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                     // On active (primary bg): invert to white bg + primary text
                     background: active
                       ? "white"
-                      : "var(--color-primary, #FF6B6B)",
-                    color: active ? "var(--color-primary, #FF6B6B)" : "white",
+                      : "var(--color-primary, #F49E0B)",
+                    color: active ? "var(--color-primary, #F49E0B)" : "#301316",
                     fontSize: "0.6rem",
                     fontWeight: 700,
                     width: "1.1rem",
@@ -339,7 +339,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                 width: "2rem",
                 height: "2rem",
                 borderRadius: "50%",
-                background: "var(--color-primary, #FF6B6B)",
+                background: "var(--color-primary, #F49E0B)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -348,7 +348,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
             >
               <span
                 style={{
-                  color: "white",
+                  color: "#301316",
                   fontSize: "0.75rem",
                   fontWeight: 700,
                   fontFamily: "Plus Jakarta Sans, sans-serif",
@@ -400,16 +400,16 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
             border: "none",
             background: "transparent",
             cursor: "pointer",
-            color: "rgba(255,100,100,0.5)",
+            color: "rgba(163,133,137,0.5)",
             transition: "all 150ms",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "rgba(239,68,68,0.1)";
-            e.currentTarget.style.color = "#FCA5A5";
+            e.currentTarget.style.background = "rgba(78,31,36,0.1)";
+            e.currentTarget.style.color = "#9A7A7E";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "rgba(255,100,100,0.5)";
+            e.currentTarget.style.color = "rgba(163,133,137,0.5)";
           }}
         >
           <LogOut size={17} style={{ flexShrink: 0 }} />
@@ -445,7 +445,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
             top: "1rem",
             left: "1rem",
             zIndex: 50,
-            background: "var(--color-secondary, #0F172A)",
+            background: "var(--color-secondary, #301316)",
             border: "1px solid rgba(255,255,255,0.1)",
             borderRadius: "0.625rem",
             padding: "0.5rem",
@@ -466,7 +466,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
               position: "fixed",
               inset: 0,
               zIndex: 40,
-              background: "rgba(0,0,0,0.7)",
+              background: "rgba(87,34,40,0.7)",
               backdropFilter: "blur(4px)",
             }}
           />
@@ -496,7 +496,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                 position: "absolute",
                 top: "1rem",
                 right: "-2.5rem",
-                background: "var(--color-secondary-mid, #2a4547)",
+                background: "var(--color-secondary-mid, #7c5357)",
                 border: "1px solid rgba(255,255,255,0.12)",
                 borderLeft: "none",
                 borderRadius: "0 0.5rem 0.5rem 0",
@@ -521,7 +521,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
             position: "fixed",
             inset: 0,
             zIndex: 100,
-            background: "rgba(0,0,0,0.6)",
+            background: "rgba(87,34,40,0.6)",
             backdropFilter: "blur(4px)",
             display: "flex",
             alignItems: "center",
@@ -532,13 +532,13 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: "var(--color-secondary, #0F172A)",
+              background: "var(--color-secondary, #301316)",
               border: "1px solid rgba(255,255,255,0.1)",
               borderRadius: "1rem",
               padding: "1.5rem",
               width: "100%",
               maxWidth: "360px",
-              boxShadow: "0 24px 48px rgba(0,0,0,0.5)",
+              boxShadow: "0 24px 48px rgba(87,34,40,0.5)",
             }}
           >
             <div
@@ -554,14 +554,14 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                   width: "2.25rem",
                   height: "2.25rem",
                   borderRadius: "0.625rem",
-                  background: "rgba(239,68,68,0.15)",
+                  background: "rgba(78,31,36,0.15)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <LogOut size={16} style={{ color: "#FCA5A5" }} />
+                <LogOut size={16} style={{ color: "#9A7A7E" }} />
               </div>
               <p
                 style={{
@@ -620,7 +620,7 @@ export default function AdminSidebar({ newEnquiries = 0 }) {
                   borderRadius: "0.625rem",
                   border: "none",
                   background:
-                    "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+                    "linear-gradient(135deg, #4E1F24 0%, #361519 100%)",
                   color: "white",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,

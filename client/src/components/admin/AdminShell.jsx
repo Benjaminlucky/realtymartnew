@@ -25,7 +25,7 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
         justifyContent: "center",
         flexDirection: "column",
         gap: "1rem",
-        background: "linear-gradient(135deg, #060B14 0%, #0F172A 100%)",
+        background: "linear-gradient(135deg, #361519 0%, #301316 100%)",
       }}
     >
       <div
@@ -33,16 +33,16 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
           width: "2.75rem",
           height: "2.75rem",
           borderRadius: "0.75rem",
-          background: "var(--color-primary, #b2ff70)",
+          background: "var(--color-primary, #f49e0b)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "var(--shadow-coral, 0 8px 24px rgba(0,0,0,0.25))",
+          boxShadow: "var(--shadow-coral, 0 8px 24px rgba(87,34,40,0.25))",
         }}
       >
         <Loader2
           size={20}
-          style={{ color: "var(--color-secondary, #1b2f31)", animation: "spin 1s linear infinite" }}
+          style={{ color: "var(--color-secondary, #572228)", animation: "spin 1s linear infinite" }}
         />
       </div>
       <p
@@ -66,7 +66,7 @@ export default function AdminShell({ children, newEnquiries = 0 }) {
       style={{
         display: "flex",
         minHeight: "100vh",
-        background: "#F8FAFC",
+        background: "#FFFCF6",
         fontFamily: "Inter, sans-serif",
       }}
     >

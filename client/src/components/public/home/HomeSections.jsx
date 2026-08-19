@@ -51,10 +51,10 @@ export function FeaturedLands({ lands = [] }) {
   };
 
   const bgGradients = [
-    "linear-gradient(135deg, #1a2744 0%, #0F172A 100%)",
-    "linear-gradient(135deg, #0d1f1a 0%, #0F172A 100%)",
-    "linear-gradient(135deg, #1f1020 0%, #0F172A 100%)",
-    "linear-gradient(135deg, #1a1a2e 0%, #0F172A 100%)",
+    "linear-gradient(135deg, #361519 0%, #301316 100%)",
+    "linear-gradient(135deg, #f49e0b 0%, #301316 100%)",
+    "linear-gradient(135deg, #896469 0%, #301316 100%)",
+    "linear-gradient(135deg, #896469 0%, #301316 100%)",
   ];
 
   return (
@@ -151,7 +151,7 @@ export function FeaturedLands({ lands = [] }) {
                   position: "absolute",
                   inset: 0,
                   background:
-                    "linear-gradient(to top, rgba(5,10,20,0.97) 0%, rgba(5,10,20,0.5) 45%, rgba(5,10,20,0.1) 100%)",
+                    "linear-gradient(to top, rgba(48,19,22,0.97) 0%, rgba(48,19,22,0.5) 45%, rgba(48,19,22,0.1) 100%)",
                 }}
               />
 
@@ -182,7 +182,7 @@ export function FeaturedLands({ lands = [] }) {
                 <span
                   style={{
                     background: "var(--color-primary)",
-                    color: "white",
+                    color: "#301316",
                     fontSize: "0.7rem",
                     fontWeight: 700,
                     padding: "0.3rem 0.8rem",
@@ -229,8 +229,8 @@ export function FeaturedLands({ lands = [] }) {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "0.35rem",
-                    background: "rgba(255,107,107,0.15)",
-                    border: "1px solid rgba(255,107,107,0.3)",
+                    background: "rgba(244,158,11,0.15)",
+                    border: "1px solid rgba(244,158,11,0.3)",
                     borderRadius: "var(--radius-full)",
                     padding: "0.25rem 0.75rem",
                     marginBottom: "0.75rem",
@@ -379,7 +379,7 @@ export function FeaturedLands({ lands = [] }) {
                       position: "absolute",
                       inset: 0,
                       background:
-                        "linear-gradient(to top, rgba(5,10,20,0.95) 0%, rgba(5,10,20,0.35) 55%, transparent 100%)",
+                        "linear-gradient(to top, rgba(48,19,22,0.95) 0%, rgba(48,19,22,0.35) 55%, transparent 100%)",
                     }}
                   />
                 </>
@@ -604,28 +604,28 @@ export function FeaturedHouses({ houses = [] }) {
   const active = houses[activeIdx];
 
   const cardBgs = [
-    "linear-gradient(160deg, #1a1f35 0%, #0F172A 100%)",
-    "linear-gradient(160deg, #0d1f2d 0%, #0F172A 100%)",
-    "linear-gradient(160deg, #1a1520 0%, #0F172A 100%)",
-    "linear-gradient(160deg, #0d1a1a 0%, #0F172A 100%)",
-    "linear-gradient(160deg, #1a150d 0%, #0F172A 100%)",
+    "linear-gradient(160deg, #896469 0%, #301316 100%)",
+    "linear-gradient(160deg, #896469 0%, #301316 100%)",
+    "linear-gradient(160deg, #896469 0%, #301316 100%)",
+    "linear-gradient(160deg, #896469 0%, #301316 100%)",
+    "linear-gradient(160deg, #361519 0%, #301316 100%)",
   ];
 
   const tagColors = {
     "New Listing": {
-      bg: "rgba(56,189,248,0.15)",
+      bg: "rgba(137,100,105,0.15)",
       color: "var(--color-accent)",
-      border: "rgba(56,189,248,0.3)",
+      border: "rgba(137,100,105,0.3)",
     },
     "Hot Offer": {
-      bg: "rgba(255,107,107,0.15)",
+      bg: "rgba(244,158,11,0.15)",
       color: "var(--color-primary)",
-      border: "rgba(255,107,107,0.3)",
+      border: "rgba(244,158,11,0.3)",
     },
     Featured: {
-      bg: "rgba(245,158,11,0.15)",
-      color: "#F59E0B",
-      border: "rgba(245,158,11,0.3)",
+      bg: "rgba(244,158,11,0.15)",
+      color: "#99561c",
+      border: "rgba(244,158,11,0.3)",
     },
   };
 
@@ -758,7 +758,7 @@ export function FeaturedHouses({ houses = [] }) {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "var(--color-primary)";
                   e.currentTarget.style.borderColor = "var(--color-primary)";
-                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.color = "#301316";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "rgba(255,255,255,0.06)";
@@ -822,7 +822,7 @@ export function FeaturedHouses({ houses = [] }) {
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to top, rgba(5,10,20,0.98) 0%, rgba(5,10,20,0.5) 50%, rgba(5,10,20,0.1) 100%)",
+                  "linear-gradient(to top, rgba(48,19,22,0.98) 0%, rgba(48,19,22,0.5) 50%, rgba(48,19,22,0.1) 100%)",
               }}
             />
 

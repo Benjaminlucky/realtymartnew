@@ -143,7 +143,7 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
             <Loader2
               size={26}
               style={{
-                color: "#f49e0b",
+                color: "#99561c",
                 animation: "spin 1s linear infinite",
                 display: "block",
                 margin: "0 auto 0.5rem",
@@ -215,7 +215,7 @@ function ImageUpload({ label, value, onChange, folder = "lands" }) {
               style={{
                 margin: "0.5rem 0 0",
                 fontSize: "0.75rem",
-                color: "#f49e0b",
+                color: "#99561c",
                 fontWeight: 600,
                 display: "flex",
                 alignItems: "center",
@@ -355,7 +355,7 @@ function GalleryUpload({ value = [], onChange, folder = "lands" }) {
           {uploading ? (
             <Loader2
               size={20}
-              style={{ color: "#f49e0b", animation: "spin 1s linear infinite" }}
+              style={{ color: "#99561c", animation: "spin 1s linear infinite" }}
             />
           ) : (
             <>
@@ -1092,7 +1092,7 @@ export default function AdminLandsPage() {
               <Loader2
                 size={30}
                 style={{
-                  color: "#f49e0b",
+                  color: "#99561c",
                   animation: "spin 1s linear infinite",
                   display: "block",
                   margin: "0 auto 0.75rem",

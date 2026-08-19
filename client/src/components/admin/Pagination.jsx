@@ -42,9 +42,9 @@ export default function Pagination({
     height: "2rem",
     padding: "0 0.5rem",
     borderRadius: "0.5rem",
-    border: "1px solid #E2E8F0",
+    border: "1px solid #DDD3D4",
     background: "white",
-    color: "#475569",
+    color: "#754A4F",
     fontFamily: "Plus Jakarta Sans, sans-serif",
     fontWeight: 600,
     fontSize: "0.8125rem",
@@ -55,9 +55,9 @@ export default function Pagination({
 
   const activeBtnStyle = {
     ...btnBase,
-    background: "#FF6B6B",
-    borderColor: "#FF6B6B",
-    color: "white",
+    background: "#F49E0B",
+    borderColor: "#99561c",
+    color: "#301316",
   };
 
   const disabledBtnStyle = {
@@ -76,7 +76,7 @@ export default function Pagination({
         gap: "0.75rem",
         marginTop: "1.25rem",
         paddingTop: "1.25rem",
-        borderTop: "1px solid #F1F5F9",
+        borderTop: "1px solid #FEF8EE",
       }}
     >
       {/* Left: total + per-page selector */}
@@ -91,12 +91,12 @@ export default function Pagination({
         <p
           style={{
             fontSize: "0.8125rem",
-            color: "#94A3B8",
+            color: "#9A7A7E",
             margin: 0,
             fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
-          <strong style={{ color: "#0F172A" }}>{total.toLocaleString()}</strong>{" "}
+          <strong style={{ color: "#301316" }}>{total.toLocaleString()}</strong>{" "}
           {label}
         </p>
 
@@ -105,7 +105,7 @@ export default function Pagination({
           <span
             style={{
               fontSize: "0.75rem",
-              color: "#94A3B8",
+              color: "#9A7A7E",
               fontFamily: "Plus Jakarta Sans, sans-serif",
             }}
           >
@@ -119,17 +119,17 @@ export default function Pagination({
             style={{
               padding: "0.3rem 0.625rem",
               borderRadius: "0.5rem",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               background: "white",
-              color: "#0F172A",
+              color: "#301316",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
               cursor: "pointer",
               outline: "none",
             }}
-            onFocus={(e) => (e.target.style.borderColor = "#FF6B6B")}
-            onBlur={(e) => (e.target.style.borderColor = "#E2E8F0")}
+            onFocus={(e) => (e.target.style.borderColor = "#F49E0B")}
+            onBlur={(e) => (e.target.style.borderColor = "#DDD3D4")}
           >
             {perPageOptions.map((n) => (
               <option key={n} value={n}>
@@ -140,7 +140,7 @@ export default function Pagination({
           <span
             style={{
               fontSize: "0.75rem",
-              color: "#94A3B8",
+              color: "#9A7A7E",
               fontFamily: "Plus Jakarta Sans, sans-serif",
             }}
           >
@@ -159,13 +159,13 @@ export default function Pagination({
             style={page === 1 ? disabledBtnStyle : btnBase}
             onMouseEnter={(e) => {
               if (page !== 1) {
-                e.currentTarget.style.borderColor = "#FF6B6B";
-                e.currentTarget.style.color = "#FF6B6B";
+                e.currentTarget.style.borderColor = "#F49E0B";
+                e.currentTarget.style.color = "#F49E0B";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#E2E8F0";
-              e.currentTarget.style.color = "#475569";
+              e.currentTarget.style.borderColor = "#DDD3D4";
+              e.currentTarget.style.color = "#754A4F";
             }}
           >
             ‹
@@ -178,12 +178,12 @@ export default function Pagination({
                 onClick={() => onPage(1)}
                 style={btnBase}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#FF6B6B";
-                  e.currentTarget.style.color = "#FF6B6B";
+                  e.currentTarget.style.borderColor = "#F49E0B";
+                  e.currentTarget.style.color = "#F49E0B";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
-                  e.currentTarget.style.color = "#475569";
+                  e.currentTarget.style.borderColor = "#DDD3D4";
+                  e.currentTarget.style.color = "#754A4F";
                 }}
               >
                 1
@@ -192,7 +192,7 @@ export default function Pagination({
                 <span
                   style={{
                     padding: "0 0.25rem",
-                    color: "#94A3B8",
+                    color: "#9A7A7E",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -210,14 +210,14 @@ export default function Pagination({
               style={p === page ? activeBtnStyle : btnBase}
               onMouseEnter={(e) => {
                 if (p !== page) {
-                  e.currentTarget.style.borderColor = "#FF6B6B";
-                  e.currentTarget.style.color = "#FF6B6B";
+                  e.currentTarget.style.borderColor = "#F49E0B";
+                  e.currentTarget.style.color = "#F49E0B";
                 }
               }}
               onMouseLeave={(e) => {
                 if (p !== page) {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
-                  e.currentTarget.style.color = "#475569";
+                  e.currentTarget.style.borderColor = "#DDD3D4";
+                  e.currentTarget.style.color = "#754A4F";
                 }
               }}
             >
@@ -232,7 +232,7 @@ export default function Pagination({
                 <span
                   style={{
                     padding: "0 0.25rem",
-                    color: "#94A3B8",
+                    color: "#9A7A7E",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -243,12 +243,12 @@ export default function Pagination({
                 onClick={() => onPage(totalPages)}
                 style={btnBase}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "#FF6B6B";
-                  e.currentTarget.style.color = "#FF6B6B";
+                  e.currentTarget.style.borderColor = "#F49E0B";
+                  e.currentTarget.style.color = "#F49E0B";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
-                  e.currentTarget.style.color = "#475569";
+                  e.currentTarget.style.borderColor = "#DDD3D4";
+                  e.currentTarget.style.color = "#754A4F";
                 }}
               >
                 {totalPages}
@@ -263,13 +263,13 @@ export default function Pagination({
             style={page === totalPages ? disabledBtnStyle : btnBase}
             onMouseEnter={(e) => {
               if (page !== totalPages) {
-                e.currentTarget.style.borderColor = "#FF6B6B";
-                e.currentTarget.style.color = "#FF6B6B";
+                e.currentTarget.style.borderColor = "#F49E0B";
+                e.currentTarget.style.color = "#F49E0B";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#E2E8F0";
-              e.currentTarget.style.color = "#475569";
+              e.currentTarget.style.borderColor = "#DDD3D4";
+              e.currentTarget.style.color = "#754A4F";
             }}
           >
             ›

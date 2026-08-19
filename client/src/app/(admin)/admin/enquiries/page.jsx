@@ -33,17 +33,17 @@ const STATUS_OPTIONS = [
   {
     value: "",
     label: "All",
-    color: "var(--color-text-secondary, #475569)",
-    bg: "#F1F5F9",
+    color: "var(--color-text-secondary, #754A4F)",
+    bg: "#FEF8EE",
   },
-  { value: "new", label: "New", color: "#16A34A", bg: "#DCFCE7" },
-  { value: "read", label: "Read", color: "#0369A1", bg: "#E0F2FE" },
-  { value: "replied", label: "Replied", color: "#92400E", bg: "#FEF9C3" },
+  { value: "new", label: "New", color: "#99561c", bg: "#FEF5E7" },
+  { value: "read", label: "Read", color: "#361519", bg: "#EEE9EA" },
+  { value: "replied", label: "Replied", color: "#99561C", bg: "#FDF0DA" },
   {
     value: "closed",
     label: "Closed",
-    color: "var(--color-text-secondary, #64748B)",
-    bg: "#F1F5F9",
+    color: "var(--color-text-secondary, #754A4F)",
+    bg: "#FEF8EE",
   },
 ];
 
@@ -117,7 +117,7 @@ function ListingBadge({ type }) {
     return (
       <span
         style={{
-          color: "var(--color-text-muted, #94A3B8)",
+          color: "var(--color-text-muted, #9A7A7E)",
           fontSize: "0.8rem",
         }}
       >
@@ -125,10 +125,10 @@ function ListingBadge({ type }) {
       </span>
     );
   const colors = {
-    land: ["#FEF9C3", "#92400E"],
-    house: ["#E0F2FE", "#0369A1"],
+    land: ["#FDF0DA", "#99561C"],
+    house: ["#EEE9EA", "#361519"],
   };
-  const [bg, color] = colors[type] || ["#F1F5F9", "#475569"];
+  const [bg, color] = colors[type] || ["#FEF8EE", "#754A4F"];
   return (
     <span
       style={{
@@ -187,7 +187,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(15,23,42,0.65)",
+        background: "rgba(48,19,22,0.65)",
         backdropFilter: "blur(4px)",
         display: "flex",
         alignItems: "center",
@@ -204,7 +204,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
           maxWidth: "580px",
           maxHeight: "90vh",
           overflow: "auto",
-          boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
+          boxShadow: "0 25px 60px rgba(87,34,40,0.25)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -215,7 +215,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "1.25rem 1.5rem",
-            borderBottom: "1px solid #E2E8F0",
+            borderBottom: "1px solid #DDD3D4",
             position: "sticky",
             top: 0,
             background: "var(--color-surface, white)",
@@ -230,7 +230,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 width: "2.25rem",
                 height: "2.25rem",
                 borderRadius: "50%",
-                background: "linear-gradient(135deg, #FF6B6B, #0F172A)",
+                background: "linear-gradient(135deg, #F49E0B, #301316)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -253,7 +253,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                   fontFamily: "var(--font-heading)",
                   fontWeight: 700,
                   fontSize: "1rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   margin: 0,
                 }}
               >
@@ -262,7 +262,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <p
                 style={{
                   fontSize: "0.75rem",
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9A7A7E)",
                   margin: 0,
                 }}
               >
@@ -278,7 +278,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9A7A7E)",
                 padding: "0.25rem",
               }}
             >
@@ -298,7 +298,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
           {/* Contact card */}
           <div
             style={{
-              background: "var(--color-surface-2, #F8FAFC)",
+              background: "var(--color-surface-2, #FFFCF6)",
               borderRadius: "var(--radius, 0.75rem)",
               padding: "1rem 1.25rem",
               display: "grid",
@@ -312,7 +312,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Phone
                 size={14}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary, #F49E0B)",
                   flexShrink: 0,
                 }}
               />
@@ -320,7 +320,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.7rem",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9A7A7E)",
                     margin: 0,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
@@ -332,7 +332,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                   href={"tel:" + enquiry.phone}
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--color-text, #0F172A)",
+                    color: "var(--color-text, #301316)",
                     fontWeight: 600,
                     textDecoration: "none",
                   }}
@@ -352,7 +352,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <Mail
                   size={14}
                   style={{
-                    color: "var(--color-primary, #FF6B6B)",
+                    color: "var(--color-primary, #F49E0B)",
                     flexShrink: 0,
                   }}
                 />
@@ -360,7 +360,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                   <p
                     style={{
                       fontSize: "0.7rem",
-                      color: "var(--color-text-muted, #94A3B8)",
+                      color: "var(--color-text-muted, #9A7A7E)",
                       margin: 0,
                       textTransform: "uppercase",
                       letterSpacing: "0.06em",
@@ -372,7 +372,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                     href={"mailto:" + enquiry.email}
                     style={{
                       fontSize: "0.875rem",
-                      color: "var(--color-text, #0F172A)",
+                      color: "var(--color-text, #301316)",
                       fontWeight: 600,
                       textDecoration: "none",
                       overflow: "hidden",
@@ -393,7 +393,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Tag
                 size={14}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary, #F49E0B)",
                   flexShrink: 0,
                 }}
               />
@@ -401,7 +401,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.7rem",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9A7A7E)",
                     margin: 0,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
@@ -412,7 +412,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--color-text, #0F172A)",
+                    color: "var(--color-text, #301316)",
                     fontWeight: 600,
                     margin: 0,
                   }}
@@ -427,7 +427,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               <Globe
                 size={14}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary, #F49E0B)",
                   flexShrink: 0,
                 }}
               />
@@ -435,7 +435,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.7rem",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9A7A7E)",
                     margin: 0,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
@@ -446,7 +446,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--color-text, #0F172A)",
+                    color: "var(--color-text, #301316)",
                     fontWeight: 600,
                     margin: 0,
                     textTransform: "capitalize",
@@ -464,8 +464,8 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
               style={{
                 padding: "0.875rem 1.125rem",
                 borderRadius: "var(--radius, 0.75rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
-                background: "#FAFAFA",
+                border: "1px solid var(--color-border, #DDD3D4)",
+                background: "#FFFCF6",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.75rem",
@@ -477,7 +477,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                   height: "2rem",
                   borderRadius: "0.5rem",
                   background:
-                    enquiry.listing_type === "land" ? "#FEF9C3" : "#E0F2FE",
+                    enquiry.listing_type === "land" ? "#FDF0DA" : "#EEE9EA",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -485,16 +485,16 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 }}
               >
                 {enquiry.listing_type === "land" ? (
-                  <MapPin size={14} style={{ color: "#92400E" }} />
+                  <MapPin size={14} style={{ color: "#99561C" }} />
                 ) : (
-                  <Home size={14} style={{ color: "#0369A1" }} />
+                  <Home size={14} style={{ color: "#361519" }} />
                 )}
               </div>
               <div>
                 <p
                   style={{
                     fontSize: "0.7rem",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9A7A7E)",
                     margin: 0,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
@@ -505,7 +505,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 <p
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--color-text, #0F172A)",
+                    color: "var(--color-text, #301316)",
                     fontWeight: 600,
                     margin: 0,
                   }}
@@ -525,7 +525,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.75rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
                 marginBottom: "0.5rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
@@ -535,14 +535,14 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
             </p>
             <div
               style={{
-                background: "var(--color-surface-2, #F8FAFC)",
+                background: "var(--color-surface-2, #FFFCF6)",
                 borderRadius: "var(--radius, 0.75rem)",
                 padding: "1rem 1.25rem",
                 fontSize: "0.9375rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 lineHeight: 1.75,
                 whiteSpace: "pre-wrap",
-                border: "1px solid #F1F5F9",
+                border: "1px solid #FEF8EE",
               }}
             >
               {enquiry.message}
@@ -556,7 +556,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.75rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
                 marginBottom: "0.625rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
@@ -572,9 +572,9 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                   style={{
                     padding: "0.4rem 1rem",
                     borderRadius: "9999px",
-                    border: `1px solid ${status === s.value ? s.color : "#E2E8F0"}`,
+                    border: `1px solid ${status === s.value ? s.color : "#DDD3D4"}`,
                     background: status === s.value ? s.bg : "white",
-                    color: status === s.value ? s.color : "#64748B",
+                    color: status === s.value ? s.color : "#754A4F",
                     fontFamily: "var(--font-heading)",
                     fontWeight: 600,
                     fontSize: "0.8rem",
@@ -598,7 +598,7 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.75rem",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
                 marginBottom: "0.5rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
@@ -618,19 +618,19 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 width: "100%",
                 padding: "0.75rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 fontSize: "0.875rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 resize: "vertical",
                 outline: "none",
                 fontFamily: "inherit",
                 boxSizing: "border-box",
               }}
               onFocus={(e) =>
-                (e.target.style.borderColor = "var(--color-primary, #FF6B6B)")
+                (e.target.style.borderColor = "var(--color-primary, #F49E0B)")
               }
               onBlur={(e) =>
-                (e.target.style.borderColor = "var(--color-border, #E2E8F0)")
+                (e.target.style.borderColor = "var(--color-border, #DDD3D4)")
               }
             />
           </div>
@@ -648,13 +648,13 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 padding: "0.75rem 1.25rem",
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
-                background: "linear-gradient(135deg, #128C7E 0%, #25D366 100%)",
+                background: "linear-gradient(135deg, #896469 0%, #572228 100%)",
                 color: "white",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.875rem",
                 textDecoration: "none",
-                boxShadow: "0 4px 12px rgba(37,211,102,0.3)",
+                boxShadow: "0 4px 12px rgba(87,34,40,0.3)",
               }}
             >
               <MessageCircle size={15} /> Reply on WhatsApp
@@ -672,16 +672,16 @@ function EnquiryModal({ enquiry, onClose, onUpdate }) {
                 borderRadius: "var(--radius, 0.75rem)",
                 border: "none",
                 background: saving
-                  ? "rgba(255,107,107,0.5)"
-                  : "linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)",
-                color: "white",
+                  ? "rgba(244,158,11,0.5)"
+                  : "linear-gradient(135deg, #F49E0B 0%, #99561C 100%)",
+                color: "#301316",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 700,
                 fontSize: "0.875rem",
                 cursor: saving ? "not-allowed" : "pointer",
                 boxShadow: saving
                   ? "none"
-                  : "0 4px 12px rgba(255,107,107,0.25)",
+                  : "0 4px 12px rgba(244,158,11,0.25)",
               }}
             >
               {saving ? (
@@ -895,14 +895,14 @@ export default function EnquiriesPage() {
             >
               <MessageSquare
                 size={20}
-                style={{ color: "var(--color-primary, #FF6B6B)" }}
+                style={{ color: "var(--color-primary, #F49E0B)" }}
               />
               <h1
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "var(--color-text, #0F172A)",
+                  color: "var(--color-text, #301316)",
                   margin: 0,
                 }}
               >
@@ -910,8 +910,8 @@ export default function EnquiriesPage() {
               </h1>
               <span
                 style={{
-                  background: "var(--color-surface-3, #F1F5F9)",
-                  color: "var(--color-text-secondary, #475569)",
+                  background: "var(--color-surface-3, #FEF8EE)",
+                  color: "var(--color-text-secondary, #754A4F)",
                   fontSize: "0.75rem",
                   fontWeight: 700,
                   padding: "0.2rem 0.55rem",
@@ -923,8 +923,8 @@ export default function EnquiriesPage() {
               {newCount > 0 && (
                 <span
                   style={{
-                    background: "#DCFCE7",
-                    color: "#16A34A",
+                    background: "#FEF5E7",
+                    color: "#99561c",
                     fontSize: "0.75rem",
                     fontWeight: 700,
                     padding: "0.2rem 0.55rem",
@@ -940,7 +940,7 @@ export default function EnquiriesPage() {
             </div>
             <p
               style={{
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9A7A7E)",
                 fontSize: "0.875rem",
                 margin: 0,
               }}
@@ -957,9 +957,9 @@ export default function EnquiriesPage() {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 background: "var(--color-surface, white)",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754A4F)",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -977,9 +977,9 @@ export default function EnquiriesPage() {
                 gap: "0.5rem",
                 padding: "0.5rem 1rem",
                 borderRadius: "var(--radius, 0.625rem)",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 background: "var(--color-surface, white)",
-                color: "var(--color-text-secondary, #475569)",
+                color: "var(--color-text-secondary, #754A4F)",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 600,
                 fontSize: "0.8125rem",
@@ -1019,9 +1019,9 @@ export default function EnquiriesPage() {
                 style={{
                   padding: "0.4rem 1rem",
                   borderRadius: "9999px",
-                  border: `1px solid ${active ? s.color || "#FF6B6B" : "#E2E8F0"}`,
-                  background: active ? s.bg || "#FFECEC" : "white",
-                  color: active ? s.color || "#FF6B6B" : "#475569",
+                  border: `1px solid ${active ? s.color || "#F49E0B" : "#DDD3D4"}`,
+                  background: active ? s.bg || "#FFFCF6" : "white",
+                  color: active ? s.color || "#F49E0B" : "#754A4F",
                   fontFamily: "var(--font-heading)",
                   fontWeight: 600,
                   fontSize: "0.8125rem",
@@ -1043,7 +1043,7 @@ export default function EnquiriesPage() {
                 left: "0.75rem",
                 top: "50%",
                 transform: "translateY(-50%)",
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9A7A7E)",
               }}
             />
             <input
@@ -1056,10 +1056,10 @@ export default function EnquiriesPage() {
                 paddingTop: "0.5rem",
                 paddingBottom: "0.5rem",
                 borderRadius: "9999px",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #DDD3D4)",
                 fontSize: "0.8125rem",
                 outline: "none",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 width: "240px",
               }}
             />
@@ -1077,7 +1077,7 @@ export default function EnquiriesPage() {
                   background: "none",
                   border: "none",
                   cursor: "pointer",
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9A7A7E)",
                   padding: 0,
                 }}
               >
@@ -1096,8 +1096,8 @@ export default function EnquiriesPage() {
               gap: "0.75rem",
               padding: "0.75rem 1.25rem",
               borderRadius: "var(--radius, 0.75rem)",
-              background: "#EFF6FF",
-              border: "1px solid #BFDBFE",
+              background: "#EEE9EA",
+              border: "1px solid #D0C1C3",
               marginBottom: "1rem",
             }}
           >
@@ -1105,7 +1105,7 @@ export default function EnquiriesPage() {
               style={{
                 fontSize: "0.875rem",
                 fontWeight: 600,
-                color: "#1D4ED8",
+                color: "#896469",
               }}
             >
               {checked.size} selected
@@ -1120,7 +1120,7 @@ export default function EnquiriesPage() {
                 padding: "0.375rem 0.875rem",
                 borderRadius: "0.5rem",
                 border: "none",
-                background: "#1D4ED8",
+                background: "#896469",
                 color: "white",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 600,
@@ -1146,9 +1146,9 @@ export default function EnquiriesPage() {
                 gap: "0.375rem",
                 padding: "0.375rem 0.875rem",
                 borderRadius: "0.5rem",
-                border: "1px solid #BFDBFE",
+                border: "1px solid #D0C1C3",
                 background: "var(--color-surface, white)",
-                color: "#1D4ED8",
+                color: "#896469",
                 fontFamily: "var(--font-heading)",
                 fontWeight: 600,
                 fontSize: "0.8rem",
@@ -1164,7 +1164,7 @@ export default function EnquiriesPage() {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754A4F)",
               }}
             >
               <X size={14} />
@@ -1177,9 +1177,9 @@ export default function EnquiriesPage() {
           style={{
             background: "var(--color-surface, white)",
             borderRadius: "var(--radius-lg, 1rem)",
-            border: "1px solid var(--color-border, #E2E8F0)",
+            border: "1px solid var(--color-border, #DDD3D4)",
             overflow: "hidden",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+            boxShadow: "0 1px 3px rgba(87,34,40,0.04)",
           }}
         >
           {loading ? (
@@ -1187,7 +1187,7 @@ export default function EnquiriesPage() {
               <Loader2
                 size={28}
                 style={{
-                  color: "var(--color-primary, #FF6B6B)",
+                  color: "var(--color-primary, #F49E0B)",
                   animation: "spin 1s linear infinite",
                   margin: "0 auto 0.75rem",
                   display: "block",
@@ -1195,7 +1195,7 @@ export default function EnquiriesPage() {
               />
               <p
                 style={{
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9A7A7E)",
                   margin: 0,
                   fontSize: "0.875rem",
                 }}
@@ -1217,7 +1217,7 @@ export default function EnquiriesPage() {
                 style={{
                   fontFamily: "var(--font-heading)",
                   fontWeight: 700,
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754A4F)",
                   margin: "0 0 0.25rem",
                 }}
               >
@@ -1227,7 +1227,7 @@ export default function EnquiriesPage() {
                 style={{
                   margin: 0,
                   fontSize: "0.875rem",
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9A7A7E)",
                 }}
               >
                 Try a different filter
@@ -1239,8 +1239,8 @@ export default function EnquiriesPage() {
                 <thead>
                   <tr
                     style={{
-                      borderBottom: "1px solid #F1F5F9",
-                      background: "var(--color-surface-2, #F8FAFC)",
+                      borderBottom: "1px solid #FEF8EE",
+                      background: "var(--color-surface-2, #FFFCF6)",
                     }}
                   >
                     <th
@@ -1252,7 +1252,7 @@ export default function EnquiriesPage() {
                           background: "none",
                           border: "none",
                           cursor: "pointer",
-                          color: allChecked ? "#3B82F6" : "#CBD5E1",
+                          color: allChecked ? "#896469" : "#9A7A7E",
                           display: "flex",
                         }}
                       >
@@ -1281,7 +1281,7 @@ export default function EnquiriesPage() {
                           fontSize: "0.68rem",
                           fontFamily: "var(--font-heading)",
                           fontWeight: 700,
-                          color: "var(--color-text-muted, #94A3B8)",
+                          color: "var(--color-text-muted, #9A7A7E)",
                           textTransform: "uppercase",
                           letterSpacing: "0.06em",
                           whiteSpace: "nowrap",
@@ -1301,23 +1301,23 @@ export default function EnquiriesPage() {
                       <tr
                         key={id}
                         style={{
-                          borderBottom: "1px solid #F8FAFC",
+                          borderBottom: "1px solid #FFFCF6",
                           background: checked.has(id)
-                            ? "#EFF6FF"
+                            ? "#EEE9EA"
                             : isNew
-                              ? "rgba(220,252,231,0.3)"
+                              ? "rgba(254,245,231,0.3)"
                               : "transparent",
                           transition: "background 100ms",
                         }}
                         onMouseEnter={(el) => {
                           if (!checked.has(id))
-                            el.currentTarget.style.background = "#FAFBFF";
+                            el.currentTarget.style.background = "#FFFCF6";
                         }}
                         onMouseLeave={(el) => {
                           el.currentTarget.style.background = checked.has(id)
-                            ? "#EFF6FF"
+                            ? "#EEE9EA"
                             : isNew
-                              ? "rgba(220,252,231,0.3)"
+                              ? "rgba(254,245,231,0.3)"
                               : "transparent";
                         }}
                       >
@@ -1328,7 +1328,7 @@ export default function EnquiriesPage() {
                               background: "none",
                               border: "none",
                               cursor: "pointer",
-                              color: checked.has(id) ? "#3B82F6" : "#CBD5E1",
+                              color: checked.has(id) ? "#896469" : "#9A7A7E",
                               display: "flex",
                             }}
                           >
@@ -1353,7 +1353,7 @@ export default function EnquiriesPage() {
                                 height: "1.875rem",
                                 borderRadius: "50%",
                                 background:
-                                  "linear-gradient(135deg, #FF6B6B, #0F172A)",
+                                  "linear-gradient(135deg, #F49E0B, #301316)",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -1376,7 +1376,7 @@ export default function EnquiriesPage() {
                                   fontFamily: "var(--font-heading)",
                                   fontWeight: 600,
                                   fontSize: "0.875rem",
-                                  color: "var(--color-text, #0F172A)",
+                                  color: "var(--color-text, #301316)",
                                   margin: 0,
                                   whiteSpace: "nowrap",
                                 }}
@@ -1388,8 +1388,8 @@ export default function EnquiriesPage() {
                                   style={{
                                     fontSize: "0.65rem",
                                     fontWeight: 700,
-                                    color: "#16A34A",
-                                    background: "#DCFCE7",
+                                    color: "#99561c",
+                                    background: "#FEF5E7",
                                     padding: "0 0.4rem",
                                     borderRadius: "9999px",
                                   }}
@@ -1404,7 +1404,7 @@ export default function EnquiriesPage() {
                           <p
                             style={{
                               fontSize: "0.8125rem",
-                              color: "var(--color-text, #0F172A)",
+                              color: "var(--color-text, #301316)",
                               margin: 0,
                               fontWeight: 600,
                               whiteSpace: "nowrap",
@@ -1416,7 +1416,7 @@ export default function EnquiriesPage() {
                             <p
                               style={{
                                 fontSize: "0.75rem",
-                                color: "var(--color-text-muted, #94A3B8)",
+                                color: "var(--color-text-muted, #9A7A7E)",
                                 margin: 0,
                                 maxWidth: "160px",
                                 overflow: "hidden",
@@ -1432,7 +1432,7 @@ export default function EnquiriesPage() {
                           <span
                             style={{
                               fontSize: "0.8125rem",
-                              color: "var(--color-text-secondary, #475569)",
+                              color: "var(--color-text-secondary, #754A4F)",
                               whiteSpace: "nowrap",
                             }}
                           >
@@ -1446,7 +1446,7 @@ export default function EnquiriesPage() {
                           <span
                             style={{
                               fontSize: "0.8rem",
-                              color: "var(--color-text-secondary, #64748B)",
+                              color: "var(--color-text-secondary, #754A4F)",
                               textTransform: "capitalize",
                             }}
                           >
@@ -1460,7 +1460,7 @@ export default function EnquiriesPage() {
                           <span
                             style={{
                               fontSize: "0.8rem",
-                              color: "var(--color-text-muted, #94A3B8)",
+                              color: "var(--color-text-muted, #9A7A7E)",
                               whiteSpace: "nowrap",
                             }}
                           >
@@ -1473,10 +1473,10 @@ export default function EnquiriesPage() {
                               onClick={() => setSelected(e)}
                               title="View"
                               style={{
-                                background: "var(--color-surface-2, #F8FAFC)",
-                                color: "var(--color-text-secondary, #475569)",
+                                background: "var(--color-surface-2, #FFFCF6)",
+                                color: "var(--color-text-secondary, #754A4F)",
                                 border:
-                                  "1px solid var(--color-border, #E2E8F0)",
+                                  "1px solid var(--color-border, #DDD3D4)",
                                 cursor: "pointer",
                                 padding: "0.4rem",
                                 borderRadius: "0.375rem",
@@ -1494,9 +1494,9 @@ export default function EnquiriesPage() {
                               rel="noopener noreferrer"
                               title="WhatsApp"
                               style={{
-                                background: "#F0FFF4",
-                                color: "#16A34A",
-                                border: "1px solid #BBF7D0",
+                                background: "#FFFCF6",
+                                color: "#99561c",
+                                border: "1px solid #FEF5E7",
                                 padding: "0.4rem",
                                 borderRadius: "0.375rem",
                                 display: "inline-flex",
@@ -1510,9 +1510,9 @@ export default function EnquiriesPage() {
                               disabled={deleting === id}
                               title="Delete"
                               style={{
-                                background: "#FFF5F5",
-                                color: "#EF4444",
-                                border: "1px solid #FCA5A5",
+                                background: "#F2EDEE",
+                                color: "#4E1F24",
+                                border: "1px solid #9A7A7E",
                                 cursor: "pointer",
                                 padding: "0.4rem",
                                 borderRadius: "0.375rem",

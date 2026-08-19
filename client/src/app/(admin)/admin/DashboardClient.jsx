@@ -41,18 +41,18 @@ function StatCard({ label, value, icon: Icon, color, href, loading }) {
         padding: "1.5rem",
         borderRadius: "1rem",
         background: "white",
-        border: "1px solid #E2E8F0",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+        border: "1px solid #DDD3D4",
+        boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
         transition: "box-shadow 150ms, transform 150ms",
         cursor: href ? "pointer" : "default",
       }}
       onMouseEnter={(e) => {
         if (!href) return;
-        e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.1)";
+        e.currentTarget.style.boxShadow = "0 4px 16px rgba(87,34,40,0.1)";
         e.currentTarget.style.transform = "translateY(-2px)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "0 1px 3px rgba(0,0,0,0.06)";
+        e.currentTarget.style.boxShadow = "0 1px 3px rgba(87,34,40,0.06)";
         e.currentTarget.style.transform = "none";
       }}
     >
@@ -69,7 +69,7 @@ function StatCard({ label, value, icon: Icon, color, href, loading }) {
             fontSize: "0.75rem",
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 700,
-            color: "#94A3B8",
+            color: "#9A7A7E",
             textTransform: "uppercase",
             letterSpacing: "0.06em",
             margin: 0,
@@ -96,7 +96,7 @@ function StatCard({ label, value, icon: Icon, color, href, loading }) {
           style={{
             height: "2.5rem",
             borderRadius: "0.5rem",
-            background: "#F1F5F9",
+            background: "#FEF8EE",
             animation: "pulse 1.5s ease-in-out infinite",
           }}
         />
@@ -106,7 +106,7 @@ function StatCard({ label, value, icon: Icon, color, href, loading }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 800,
             fontSize: "2rem",
-            color: "#0F172A",
+            color: "#301316",
             margin: 0,
             letterSpacing: "-0.03em",
           }}
@@ -128,11 +128,11 @@ function StatCard({ label, value, icon: Icon, color, href, loading }) {
 // ── Enquiry row ───────────────────────────────────────────────────
 function EnquiryRow({ enquiry }) {
   const sc = {
-    new: { bg: "#DCFCE7", color: "#16A34A" },
-    read: { bg: "#E0F2FE", color: "#0369A1" },
-    replied: { bg: "#FEF9C3", color: "#92400E" },
-    closed: { bg: "#F1F5F9", color: "#64748B" },
-  }[enquiry.status] || { bg: "#DCFCE7", color: "#16A34A" };
+    new: { bg: "#FEF5E7", color: "#99561c" },
+    read: { bg: "#EEE9EA", color: "#361519" },
+    replied: { bg: "#FDF0DA", color: "#99561C" },
+    closed: { bg: "#FEF8EE", color: "#754A4F" },
+  }[enquiry.status] || { bg: "#FEF5E7", color: "#99561c" };
   const name = [enquiry.first_name, enquiry.last_name]
     .filter(Boolean)
     .join(" ");
@@ -147,7 +147,7 @@ function EnquiryRow({ enquiry }) {
         alignItems: "center",
         gap: "1rem",
         padding: "0.875rem 0",
-        borderBottom: "1px solid #F8FAFC",
+        borderBottom: "1px solid #FFFCF6",
       }}
     >
       <div
@@ -155,7 +155,7 @@ function EnquiryRow({ enquiry }) {
           width: "2rem",
           height: "2rem",
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #FF6B6B, #0F172A)",
+          background: "linear-gradient(135deg, #F49E0B, #301316)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -172,7 +172,7 @@ function EnquiryRow({ enquiry }) {
             fontFamily: "Plus Jakarta Sans, sans-serif",
             fontWeight: 600,
             fontSize: "0.875rem",
-            color: "#0F172A",
+            color: "#301316",
             margin: 0,
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -181,7 +181,7 @@ function EnquiryRow({ enquiry }) {
         >
           {name}
         </p>
-        <p style={{ fontSize: "0.75rem", color: "#94A3B8", margin: 0 }}>
+        <p style={{ fontSize: "0.75rem", color: "#9A7A7E", margin: 0 }}>
           {enquiry.inquiry_type || "General"} · {enquiry.phone}
         </p>
       </div>
@@ -206,7 +206,7 @@ function EnquiryRow({ enquiry }) {
         >
           {enquiry.status}
         </span>
-        <span style={{ fontSize: "0.75rem", color: "#94A3B8" }}>{date}</span>
+        <span style={{ fontSize: "0.75rem", color: "#9A7A7E" }}>{date}</span>
       </div>
     </div>
   );
@@ -223,7 +223,7 @@ function QuickAction({ label, description, icon: Icon, href, color }) {
           gap: "1rem",
           padding: "1rem 1.25rem",
           borderRadius: "0.875rem",
-          border: "1px solid #E2E8F0",
+          border: "1px solid #DDD3D4",
           background: "white",
           transition: "all 150ms",
           cursor: "pointer",
@@ -233,7 +233,7 @@ function QuickAction({ label, description, icon: Icon, href, color }) {
           e.currentTarget.style.boxShadow = `0 0 0 3px ${color}15`;
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = "#E2E8F0";
+          e.currentTarget.style.borderColor = "#DDD3D4";
           e.currentTarget.style.boxShadow = "none";
         }}
       >
@@ -257,19 +257,19 @@ function QuickAction({ label, description, icon: Icon, href, color }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
               fontSize: "0.875rem",
-              color: "#0F172A",
+              color: "#301316",
               margin: 0,
             }}
           >
             {label}
           </p>
-          <p style={{ fontSize: "0.75rem", color: "#94A3B8", margin: 0 }}>
+          <p style={{ fontSize: "0.75rem", color: "#9A7A7E", margin: 0 }}>
             {description}
           </p>
         </div>
         <ArrowRight
           size={14}
-          style={{ color: "#CBD5E1", marginLeft: "auto" }}
+          style={{ color: "#9A7A7E", marginLeft: "auto" }}
         />
       </div>
     </Link>
@@ -283,10 +283,10 @@ function ChartTooltip({ active, payload, label }) {
     <div
       style={{
         background: "white",
-        border: "1px solid #E2E8F0",
+        border: "1px solid #DDD3D4",
         borderRadius: "0.625rem",
         padding: "0.625rem 0.875rem",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        boxShadow: "0 4px 12px rgba(87,34,40,0.1)",
         fontFamily: "Plus Jakarta Sans, sans-serif",
       }}
     >
@@ -294,7 +294,7 @@ function ChartTooltip({ active, payload, label }) {
         style={{
           margin: "0 0 0.25rem",
           fontSize: "0.75rem",
-          color: "#94A3B8",
+          color: "#9A7A7E",
           fontWeight: 600,
         }}
       >
@@ -305,12 +305,12 @@ function ChartTooltip({ active, payload, label }) {
           margin: 0,
           fontSize: "1rem",
           fontWeight: 800,
-          color: "#0F172A",
+          color: "#301316",
         }}
       >
         {payload[0].value}{" "}
         <span
-          style={{ fontSize: "0.75rem", fontWeight: 500, color: "#94A3B8" }}
+          style={{ fontSize: "0.75rem", fontWeight: 500, color: "#9A7A7E" }}
         >
           enquiries
         </span>
@@ -335,13 +335,13 @@ function EnquiryChart({ data, loading }) {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <TrendingUp size={16} style={{ color: "#FF6B6B" }} />
+            <TrendingUp size={16} style={{ color: "#99561c" }} />
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "1rem",
-                color: "#0F172A",
+                color: "#301316",
                 margin: 0,
               }}
             >
@@ -353,7 +353,7 @@ function EnquiryChart({ data, loading }) {
           style={{
             height: "200px",
             borderRadius: "0.75rem",
-            background: "#F8FAFC",
+            background: "#FFFCF6",
             animation: "pulse 1.5s ease-in-out infinite",
           }}
         />
@@ -372,13 +372,13 @@ function EnquiryChart({ data, loading }) {
             marginBottom: "1.25rem",
           }}
         >
-          <TrendingUp size={16} style={{ color: "#FF6B6B" }} />
+          <TrendingUp size={16} style={{ color: "#99561c" }} />
           <h2
             style={{
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
               fontSize: "1rem",
-              color: "#0F172A",
+              color: "#301316",
               margin: 0,
             }}
           >
@@ -393,7 +393,7 @@ function EnquiryChart({ data, loading }) {
             justifyContent: "center",
             flexDirection: "column",
             gap: "0.5rem",
-            color: "#94A3B8",
+            color: "#9A7A7E",
           }}
         >
           <BarChart2 size={28} style={{ opacity: 0.4 }} />
@@ -420,20 +420,20 @@ function EnquiryChart({ data, loading }) {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-          <TrendingUp size={16} style={{ color: "#FF6B6B" }} />
+          <TrendingUp size={16} style={{ color: "#99561c" }} />
           <div>
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "1rem",
-                color: "#0F172A",
+                color: "#301316",
                 margin: 0,
               }}
             >
               Enquiries — Last 6 Months
             </h2>
-            <p style={{ fontSize: "0.75rem", color: "#94A3B8", margin: 0 }}>
+            <p style={{ fontSize: "0.75rem", color: "#9A7A7E", margin: 0 }}>
               {total} total · Peak: {peak.month} ({peak.count})
             </p>
           </div>
@@ -442,7 +442,7 @@ function EnquiryChart({ data, loading }) {
         <div
           style={{
             display: "flex",
-            background: "#F1F5F9",
+            background: "#FEF8EE",
             borderRadius: "0.5rem",
             padding: "0.25rem",
             gap: "0.25rem",
@@ -457,13 +457,13 @@ function EnquiryChart({ data, loading }) {
                 borderRadius: "0.375rem",
                 border: "none",
                 background: chartType === type ? "white" : "transparent",
-                color: chartType === type ? "#0F172A" : "#94A3B8",
+                color: chartType === type ? "#301316" : "#9A7A7E",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
                 fontSize: "0.75rem",
                 cursor: "pointer",
                 boxShadow:
-                  chartType === type ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                  chartType === type ? "0 1px 3px rgba(87,34,40,0.08)" : "none",
                 transition: "all 150ms",
                 textTransform: "capitalize",
               }}
@@ -484,20 +484,20 @@ function EnquiryChart({ data, loading }) {
           >
             <defs>
               <linearGradient id="coralGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#FF6B6B" />
-                <stop offset="100%" stopColor="#E85555" stopOpacity={0.85} />
+                <stop offset="0%" stopColor="#F49E0B" />
+                <stop offset="100%" stopColor="#99561C" stopOpacity={0.85} />
               </linearGradient>
             </defs>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#F1F5F9"
+              stroke="#FEF8EE"
               vertical={false}
             />
             <XAxis
               dataKey="month"
               tick={{
                 fontSize: 11,
-                fill: "#94A3B8",
+                fill: "#9A7A7E",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
               }}
@@ -508,13 +508,13 @@ function EnquiryChart({ data, loading }) {
               allowDecimals={false}
               tick={{
                 fontSize: 11,
-                fill: "#94A3B8",
+                fill: "#9A7A7E",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
               }}
               axisLine={false}
               tickLine={false}
             />
-            <Tooltip content={<ChartTooltip />} cursor={{ fill: "#F8FAFC" }} />
+            <Tooltip content={<ChartTooltip />} cursor={{ fill: "#FFFCF6" }} />
             <Bar
               dataKey="count"
               fill="url(#coralGrad)"
@@ -529,20 +529,20 @@ function EnquiryChart({ data, loading }) {
           >
             <defs>
               <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#FF6B6B" stopOpacity={0.18} />
-                <stop offset="100%" stopColor="#FF6B6B" stopOpacity={0} />
+                <stop offset="0%" stopColor="#F49E0B" stopOpacity={0.18} />
+                <stop offset="100%" stopColor="#F49E0B" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="#F1F5F9"
+              stroke="#FEF8EE"
               vertical={false}
             />
             <XAxis
               dataKey="month"
               tick={{
                 fontSize: 11,
-                fill: "#94A3B8",
+                fill: "#9A7A7E",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 600,
               }}
@@ -553,7 +553,7 @@ function EnquiryChart({ data, loading }) {
               allowDecimals={false}
               tick={{
                 fontSize: 11,
-                fill: "#94A3B8",
+                fill: "#9A7A7E",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
               }}
               axisLine={false}
@@ -569,12 +569,12 @@ function EnquiryChart({ data, loading }) {
             <Line
               type="monotone"
               dataKey="count"
-              stroke="#FF6B6B"
+              stroke="#F49E0B"
               strokeWidth={2.5}
-              dot={{ fill: "#FF6B6B", strokeWidth: 0, r: 4 }}
+              dot={{ fill: "#F49E0B", strokeWidth: 0, r: 4 }}
               activeDot={{
                 r: 6,
-                fill: "#FF6B6B",
+                fill: "#F49E0B",
                 stroke: "white",
                 strokeWidth: 2,
               }}
@@ -590,7 +590,7 @@ function EnquiryChart({ data, loading }) {
           gap: "0.5rem",
           marginTop: "1rem",
           paddingTop: "1rem",
-          borderTop: "1px solid #F1F5F9",
+          borderTop: "1px solid #FEF8EE",
           overflowX: "auto",
         }}
       >
@@ -608,13 +608,13 @@ function EnquiryChart({ data, loading }) {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "0.875rem",
-                color: d.count === peak.count ? "#FF6B6B" : "#0F172A",
+                color: d.count === peak.count ? "#F49E0B" : "#301316",
                 margin: "0 0 0.2rem",
               }}
             >
               {d.count}
             </p>
-            <p style={{ fontSize: "0.65rem", color: "#94A3B8", margin: 0 }}>
+            <p style={{ fontSize: "0.65rem", color: "#9A7A7E", margin: 0 }}>
               {d.month}
             </p>
           </div>
@@ -680,20 +680,20 @@ export default function DashboardClient({
                 marginBottom: "0.25rem",
               }}
             >
-              <LayoutDashboard size={20} style={{ color: "#FF6B6B" }} />
+              <LayoutDashboard size={20} style={{ color: "#99561c" }} />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 800,
                   fontSize: "1.5rem",
-                  color: "#0F172A",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
                 Dashboard
               </h1>
             </div>
-            <p style={{ color: "#94A3B8", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#9A7A7E", fontSize: "0.875rem", margin: 0 }}>
               {greeting}
               {user?.name ? `, ${user.name.split(" ")[0]}` : ""}. Here&apos;s
               what&apos;s happening.
@@ -708,9 +708,9 @@ export default function DashboardClient({
               gap: "0.5rem",
               padding: "0.5rem 1rem",
               borderRadius: "0.625rem",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               background: "white",
-              color: "#475569",
+              color: "#754A4F",
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 600,
               fontSize: "0.8125rem",
@@ -737,16 +737,16 @@ export default function DashboardClient({
               gap: "0.75rem",
               padding: "1rem 1.25rem",
               borderRadius: "0.875rem",
-              background: "#FEF2F2",
-              border: "1px solid #FCA5A5",
+              background: "#F2EDEE",
+              border: "1px solid #9A7A7E",
               marginBottom: "1.5rem",
             }}
           >
             <AlertCircle
               size={16}
-              style={{ color: "#EF4444", flexShrink: 0 }}
+              style={{ color: "#4E1F24", flexShrink: 0 }}
             />
-            <p style={{ color: "#DC2626", fontSize: "0.875rem", margin: 0 }}>
+            <p style={{ color: "#4E1F24", fontSize: "0.875rem", margin: 0 }}>
               {error}
             </p>
           </div>
@@ -765,7 +765,7 @@ export default function DashboardClient({
             label="Land Listings"
             value={counts.lands}
             icon={MapPin}
-            color="#FF6B6B"
+            color="#F49E0B"
             href="/admin/lands"
             loading={loading}
           />
@@ -773,7 +773,7 @@ export default function DashboardClient({
             label="House Listings"
             value={counts.houses}
             icon={Home}
-            color="#38BDF8"
+            color="#896469"
             href="/admin/houses"
             loading={loading}
           />
@@ -781,7 +781,7 @@ export default function DashboardClient({
             label="Blog Posts"
             value={counts.blog_posts}
             icon={BookOpen}
-            color="#F59E0B"
+            color="#99561C"
             href="/admin/blog"
             loading={loading}
           />
@@ -789,7 +789,7 @@ export default function DashboardClient({
             label="Total Enquiries"
             value={counts.enquiries}
             icon={MessageSquare}
-            color="#22C55E"
+            color="#572228"
             href="/admin/enquiries"
             loading={loading}
           />
@@ -798,7 +798,7 @@ export default function DashboardClient({
               label="New Enquiries"
               value={counts.new_enquiries}
               icon={TrendingUp}
-              color="#EF4444"
+              color="#4E1F24"
               href="/admin/enquiries"
               loading={loading}
             />
@@ -809,10 +809,10 @@ export default function DashboardClient({
         <div
           style={{
             background: "white",
-            border: "1px solid #E2E8F0",
+            border: "1px solid #DDD3D4",
             borderRadius: "1rem",
             padding: "1.5rem",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+            boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
             marginBottom: "1.5rem",
           }}
         >
@@ -832,10 +832,10 @@ export default function DashboardClient({
           <div
             style={{
               background: "white",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               borderRadius: "1rem",
               padding: "1.5rem",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+              boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
             }}
           >
             <div
@@ -849,13 +849,13 @@ export default function DashboardClient({
               <div
                 style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
               >
-                <MessageSquare size={16} style={{ color: "#FF6B6B" }} />
+                <MessageSquare size={16} style={{ color: "#99561c" }} />
                 <h2
                   style={{
                     fontFamily: "Plus Jakarta Sans, sans-serif",
                     fontWeight: 700,
                     fontSize: "1rem",
-                    color: "#0F172A",
+                    color: "#301316",
                     margin: 0,
                   }}
                 >
@@ -866,7 +866,7 @@ export default function DashboardClient({
                 href="/admin/enquiries"
                 style={{
                   fontSize: "0.8125rem",
-                  color: "#FF6B6B",
+                  color: "#99561c",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 600,
                   textDecoration: "none",
@@ -881,14 +881,14 @@ export default function DashboardClient({
                   key={i}
                   style={{
                     padding: "0.875rem 0",
-                    borderBottom: "1px solid #F8FAFC",
+                    borderBottom: "1px solid #FFFCF6",
                   }}
                 >
                   <div
                     style={{
                       height: "0.875rem",
                       borderRadius: "0.25rem",
-                      background: "#F1F5F9",
+                      background: "#FEF8EE",
                       marginBottom: "0.4rem",
                       width: "60%",
                       animation: "pulse 1.5s ease-in-out infinite",
@@ -898,7 +898,7 @@ export default function DashboardClient({
                     style={{
                       height: "0.75rem",
                       borderRadius: "0.25rem",
-                      background: "#F1F5F9",
+                      background: "#FEF8EE",
                       width: "40%",
                       animation: "pulse 1.5s ease-in-out infinite",
                     }}
@@ -912,7 +912,7 @@ export default function DashboardClient({
             ) : (
               <p
                 style={{
-                  color: "#94A3B8",
+                  color: "#9A7A7E",
                   fontSize: "0.875rem",
                   textAlign: "center",
                   padding: "2rem 0",
@@ -928,10 +928,10 @@ export default function DashboardClient({
           <div
             style={{
               background: "white",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               borderRadius: "1rem",
               padding: "1.5rem",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+              boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
             }}
           >
             <div
@@ -942,13 +942,13 @@ export default function DashboardClient({
                 marginBottom: "1.25rem",
               }}
             >
-              <Plus size={16} style={{ color: "#FF6B6B" }} />
+              <Plus size={16} style={{ color: "#99561c" }} />
               <h2
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "1rem",
-                  color: "#0F172A",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
@@ -967,28 +967,28 @@ export default function DashboardClient({
                 description="Create a new plot or estate"
                 icon={MapPin}
                 href="/admin/lands"
-                color="#FF6B6B"
+                color="#F49E0B"
               />
               <QuickAction
                 label="Add House Listing"
                 description="Add a property for sale/rent"
                 icon={Home}
                 href="/admin/houses"
-                color="#38BDF8"
+                color="#896469"
               />
               <QuickAction
                 label="Write Blog Post"
                 description="Publish a new article"
                 icon={BookOpen}
                 href="/admin/blog"
-                color="#F59E0B"
+                color="#99561C"
               />
               <QuickAction
                 label="Manage Team"
                 description="Invite or update staff"
                 icon={Users}
                 href="/admin/settings/team"
-                color="#22C55E"
+                color="#572228"
               />
             </div>
           </div>
@@ -999,10 +999,10 @@ export default function DashboardClient({
           <div
             style={{
               background: "white",
-              border: "1px solid #E2E8F0",
+              border: "1px solid #DDD3D4",
               borderRadius: "1rem",
               padding: "1.5rem",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+              boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
             }}
           >
             <div
@@ -1013,13 +1013,13 @@ export default function DashboardClient({
                 marginBottom: "1.25rem",
               }}
             >
-              <Eye size={16} style={{ color: "#FF6B6B" }} />
+              <Eye size={16} style={{ color: "#99561c" }} />
               <h2
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "1rem",
-                  color: "#0F172A",
+                  color: "#301316",
                   margin: 0,
                 }}
               >
@@ -1043,7 +1043,7 @@ export default function DashboardClient({
                     padding: "0.625rem 0",
                     borderBottom:
                       i < stats.top_lands.length - 1
-                        ? "1px solid #F8FAFC"
+                        ? "1px solid #FFFCF6"
                         : "none",
                   }}
                 >
@@ -1052,8 +1052,8 @@ export default function DashboardClient({
                       width: "1.5rem",
                       height: "1.5rem",
                       borderRadius: "50%",
-                      background: i === 0 ? "#FF6B6B" : "#F1F5F9",
-                      color: i === 0 ? "white" : "#94A3B8",
+                      background: i === 0 ? "#F49E0B" : "#FEF8EE",
+                      color: i === 0 ? "#301316" : "#9A7A7E",
                       fontSize: "0.7rem",
                       fontWeight: 700,
                       display: "flex",
@@ -1071,7 +1071,7 @@ export default function DashboardClient({
                       fontFamily: "Plus Jakarta Sans, sans-serif",
                       fontWeight: 600,
                       fontSize: "0.875rem",
-                      color: "#0F172A",
+                      color: "#301316",
                       margin: 0,
                     }}
                   >
@@ -1083,7 +1083,7 @@ export default function DashboardClient({
                       alignItems: "center",
                       gap: "0.3rem",
                       fontSize: "0.8rem",
-                      color: "#94A3B8",
+                      color: "#9A7A7E",
                     }}
                   >
                     <Eye size={12} /> {(land.views_count || 0).toLocaleString()}

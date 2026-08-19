@@ -320,7 +320,7 @@ function UploadZone({ folder, onUploaded }) {
           <Loader2
             size={28}
             style={{
-              color: "#F49E0B",
+              color: "#99561c",
               animation: "spin 1s linear infinite",
               margin: "0 auto 0.75rem",
             }}
@@ -444,7 +444,7 @@ export default function MediaPage() {
                 marginBottom: "0.25rem",
               }}
             >
-              <ImageIcon size={20} style={{ color: "#F49E0B" }} />
+              <ImageIcon size={20} style={{ color: "#99561c" }} />
               <h1
                 style={{
                   fontFamily: "Plus Jakarta Sans, sans-serif",

@@ -83,7 +83,7 @@ export default function InquiryForm({ settings }) {
 
   const handleFocus = (e) => {
     e.target.style.borderColor = "var(--color-primary)";
-    e.target.style.background = "rgba(16,185,129,0.06)";
+    e.target.style.background = "rgba(244,158,11,0.06)";
   };
 
   const handleBlur = (e) => {
@@ -200,11 +200,11 @@ export default function InquiryForm({ settings }) {
               onBlur={handleBlur}
               style={{ ...inputStyle, cursor: "pointer" }}
             >
-              <option value="" style={{ background: "#1C1C2E" }}>
+              <option value="" style={{ background: "#361519" }}>
                 Select Inquiry Type
               </option>
               {INQUIRY_TYPES.map((t) => (
-                <option key={t} value={t} style={{ background: "#1C1C2E" }}>
+                <option key={t} value={t} style={{ background: "#361519" }}>
                   {t}
                 </option>
               ))}
@@ -220,11 +220,11 @@ export default function InquiryForm({ settings }) {
               onBlur={handleBlur}
               style={{ ...inputStyle, cursor: "pointer" }}
             >
-              <option value="" style={{ background: "#1C1C2E" }}>
+              <option value="" style={{ background: "#361519" }}>
                 Property Type
               </option>
               {PROPERTY_TYPES.map((t) => (
-                <option key={t} value={t} style={{ background: "#1C1C2E" }}>
+                <option key={t} value={t} style={{ background: "#361519" }}>
                   {t}
                 </option>
               ))}
@@ -244,11 +244,11 @@ export default function InquiryForm({ settings }) {
               onBlur={handleBlur}
               style={{ ...inputStyle, cursor: "pointer" }}
             >
-              <option value="" style={{ background: "#1C1C2E" }}>
+              <option value="" style={{ background: "#361519" }}>
                 Select Budget
               </option>
               {BUDGET_RANGES.map((b) => (
-                <option key={b} value={b} style={{ background: "#1C1C2E" }}>
+                <option key={b} value={b} style={{ background: "#361519" }}>
                   {b}
                 </option>
               ))}
@@ -264,14 +264,14 @@ export default function InquiryForm({ settings }) {
               onBlur={handleBlur}
               style={{ ...inputStyle, cursor: "pointer" }}
             >
-              <option value="" style={{ background: "#1C1C2E" }}>
+              <option value="" style={{ background: "#361519" }}>
                 Preferred Location
               </option>
               {POPULAR_LOCATIONS.map((l) => (
                 <option
                   key={l.value}
                   value={l.value}
-                  style={{ background: "#1C1C2E" }}
+                  style={{ background: "#361519" }}
                 >
                   {l.label}
                 </option>
@@ -299,7 +299,7 @@ export default function InquiryForm({ settings }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label style={labelStyle}>
-              First Name <span style={{ color: "#ff6b6b" }}>*</span>
+              First Name <span style={{ color: "#99561c" }}>*</span>
             </label>
             <input
               type="text"
@@ -345,7 +345,7 @@ export default function InquiryForm({ settings }) {
           </div>
           <div>
             <label style={labelStyle}>
-              Phone Number <span style={{ color: "#ff6b6b" }}>*</span>
+              Phone Number <span style={{ color: "#99561c" }}>*</span>
             </label>
             <input
               type="tel"

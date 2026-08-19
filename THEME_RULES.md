@@ -32,12 +32,14 @@ No other hue (no blue, green, purple, gray, red, etc.) may remain anywhere in th
 | text-inverse | `#ffffff` | Text on dark backgrounds |
 | danger | `#4e1f24` | Destructive actions, error text/icons (deep wine reads as "serious") |
 | danger-bg | `#f2edee` | Error banner/badge background |
-| success-bg | `#fef5e7` | Success badge background (success text/icon = `primary` #f49e0b) |
-| warning-bg | `#fdf0da` | Warning banner background (warning = `primary` #f49e0b) |
+| success-bg | `#fef5e7` | Success badge background — **text/icon on this bg must be `#99561c` (primary-dark), NOT plain `#f49e0b`** |
+| warning-bg | `#fdf0da` | Warning banner background — same rule: text/icon = `#99561c`, not `#f49e0b` |
 | info | `#896469` | Informational accents (replaces old blue/purple "info" colors) |
 | info-bg | `#eee9ea` | Informational banner background |
 
-There is **no separate "success" or "warning" hex** — both map to `primary` (#f49e0b). Differentiate success/warning/info/danger through **icon choice and background tint**, not hue, since only two hues exist in this system.
+CORRECTION (verified by contrast audit): plain amber `#f49e0b` text/icon on `success-bg`/`warning-bg` measures **1.99:1 — fails badly**, because both are light tints of the same hue. Use `#99561c` (primary-dark, 5.25:1) for any success/warning TEXT or icon glyph sitting on those backgrounds. Plain `#f49e0b` is only safe as a solid FILL (with dark `#301316` text on top), never as small text/icon color against a light background — this includes plain white too (`primary` on white is 2.16:1, also fails). If you already applied `#f49e0b` as text/icon color anywhere on `success-bg`, `warning-bg`, `surface`, `surface-2`, or `surface-3`, fix it to `#99561c`.
+
+There is **no separate "success" or "warning" hex** — both map to `primary` (#f49e0b) for fills/badges-as-a-whole, but `#99561c` for the readable text/icon within them. Differentiate success/warning/info/danger through **icon choice and background tint**, not hue, since only two hues exist in this system.
 
 ## The mapping table
 

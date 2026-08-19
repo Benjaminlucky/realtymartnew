@@ -32,18 +32,18 @@ const S = {
   },
   card: {
     background: "var(--color-surface, white)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     borderRadius: "var(--radius-lg, 1rem)",
     padding: "1.5rem",
     marginBottom: "2rem",
-    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+    boxShadow: "0 1px 3px rgba(87,34,40,0.06)",
   },
   label: {
     display: "block",
     fontSize: "0.75rem",
     fontWeight: 600,
     marginBottom: "0.375rem",
-    color: "var(--color-text-secondary, #475569)",
+    color: "var(--color-text-secondary, #754a4f)",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
     fontFamily: "Plus Jakarta Sans, sans-serif",
@@ -52,9 +52,9 @@ const S = {
     width: "100%",
     padding: "0.625rem 0.875rem",
     borderRadius: "var(--radius, 0.625rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     fontSize: "0.875rem",
-    color: "var(--color-text, #0F172A)",
+    color: "var(--color-text, #301316)",
     outline: "none",
     background: "var(--color-surface, white)",
     boxSizing: "border-box",
@@ -68,16 +68,16 @@ const S = {
     gap: "0.875rem",
     padding: "0.875rem 1rem",
     borderRadius: "var(--radius, 0.75rem)",
-    border: "1px solid var(--color-border, #E2E8F0)",
+    border: "1px solid var(--color-border, #ddd3d4)",
     marginBottom: "0.625rem",
     background: "var(--color-surface, white)",
   },
 };
 
 const focus = (e) =>
-  (e.target.style.borderColor = "var(--color-primary, #FF6B6B)");
+  (e.target.style.borderColor = "var(--color-primary, #f49e0b)");
 const blur = (e) =>
-  (e.target.style.borderColor = "var(--color-border, #E2E8F0)");
+  (e.target.style.borderColor = "var(--color-border, #ddd3d4)");
 
 // ── Image preview helper ──────────────────────────────────────────
 function ImgPreview({ src, size = 48 }) {
@@ -88,7 +88,7 @@ function ImgPreview({ src, size = 48 }) {
           width: size,
           height: size,
           borderRadius: "0.5rem",
-          background: "var(--color-surface-3, #F1F5F9)",
+          background: "var(--color-surface-3, #fef8ee)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -97,7 +97,7 @@ function ImgPreview({ src, size = 48 }) {
       >
         <ImageIcon
           size={16}
-          style={{ color: "var(--color-text-muted, #94A3B8)" }}
+          style={{ color: "var(--color-text-muted, #9a7a7e)" }}
         />
       </div>
     );
@@ -112,7 +112,7 @@ function ImgPreview({ src, size = 48 }) {
         borderRadius: "0.5rem",
         objectFit: "cover",
         flexShrink: 0,
-        border: "1px solid var(--color-border, #E2E8F0)",
+        border: "1px solid var(--color-border, #ddd3d4)",
       }}
     />
   );
@@ -127,7 +127,7 @@ function Modal({ title, onClose, children }) {
         position: "fixed",
         inset: 0,
         zIndex: 50,
-        background: "rgba(0,0,0,0.5)",
+        background: "rgba(87,34,40,0.5)",
         backdropFilter: "blur(4px)",
         display: "flex",
         alignItems: "center",
@@ -143,7 +143,7 @@ function Modal({ title, onClose, children }) {
           padding: "1.75rem",
           width: "100%",
           maxWidth: "520px",
-          boxShadow: "0 24px 48px rgba(0,0,0,0.15)",
+          boxShadow: "0 24px 48px rgba(87,34,40,0.15)",
           maxHeight: "90vh",
           overflowY: "auto",
         }}
@@ -161,7 +161,7 @@ function Modal({ title, onClose, children }) {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 700,
               fontSize: "1rem",
-              color: "var(--color-text, #0F172A)",
+              color: "var(--color-text, #301316)",
               margin: 0,
             }}
           >
@@ -170,12 +170,12 @@ function Modal({ title, onClose, children }) {
           <button
             onClick={onClose}
             style={{
-              background: "var(--color-surface-3, #F1F5F9)",
+              background: "var(--color-surface-3, #fef8ee)",
               border: "none",
               borderRadius: "0.5rem",
               padding: "0.375rem",
               cursor: "pointer",
-              color: "var(--color-text-secondary, #64748B)",
+              color: "var(--color-text-secondary, #754a4f)",
               display: "flex",
             }}
           >
@@ -210,12 +210,12 @@ function ImageUploadField({
               alignItems: "center",
               gap: "0.5rem",
               padding: "0.5rem 0.875rem",
-              border: "1px dashed #CBD5E1",
+              border: "1px dashed #9a7a7e",
               borderRadius: "var(--radius, 0.625rem)",
               cursor: "pointer",
               fontSize: "0.8125rem",
-              color: "var(--color-text-secondary, #64748B)",
-              background: "var(--color-surface-2, #F8FAFC)",
+              color: "var(--color-text-secondary, #754a4f)",
+              background: "var(--color-surface-2, #fffcf6)",
             }}
           >
             <Upload size={14} />
@@ -235,7 +235,7 @@ function ImageUploadField({
             <p
               style={{
                 fontSize: "0.7rem",
-                color: "var(--color-text-muted, #94A3B8)",
+                color: "var(--color-text-muted, #9a7a7e)",
                 marginTop: "0.25rem",
               }}
             >
@@ -252,12 +252,12 @@ function ImageUploadField({
               onRemove?.();
             }}
             style={{
-              background: "#FEE2E2",
+              background: "#f2edee",
               border: "none",
               borderRadius: "0.5rem",
               padding: "0.375rem",
               cursor: "pointer",
-              color: "#EF4444",
+              color: "#4e1f24",
               display: "flex",
             }}
           >
@@ -417,14 +417,14 @@ function PopularAreasSection() {
           >
             <MapPin
               size={18}
-              style={{ color: "var(--color-primary, #FF6B6B)" }}
+              style={{ color: "var(--color-primary, #f49e0b)" }}
             />
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "1rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 margin: 0,
               }}
             >
@@ -432,12 +432,12 @@ function PopularAreasSection() {
             </h2>
             <span
               style={{
-                background: "var(--color-surface-3, #F1F5F9)",
+                background: "var(--color-surface-3, #fef8ee)",
                 borderRadius: "999px",
                 padding: "0.15rem 0.6rem",
                 fontSize: "0.75rem",
                 fontWeight: 600,
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
               }}
             >
               {areas.length}
@@ -448,11 +448,11 @@ function PopularAreasSection() {
               onClick={load}
               style={{
                 background: "none",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 borderRadius: "var(--radius, 0.625rem)",
                 padding: "0.5rem",
                 cursor: "pointer",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
                 display: "flex",
               }}
               title="Refresh"
@@ -465,8 +465,8 @@ function PopularAreasSection() {
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
-                background: "var(--color-primary, #FF6B6B)",
-                color: "white",
+                background: "var(--color-primary, #f49e0b)",
+                color: "#301316",
                 border: "none",
                 borderRadius: "var(--radius, 0.625rem)",
                 padding: "0.5rem 1rem",
@@ -484,7 +484,7 @@ function PopularAreasSection() {
         <p
           style={{
             fontSize: "0.8125rem",
-            color: "var(--color-text-secondary, #64748B)",
+            color: "var(--color-text-secondary, #754a4f)",
             marginBottom: "1.25rem",
           }}
         >
@@ -505,7 +505,7 @@ function PopularAreasSection() {
               size={20}
               style={{
                 animation: "spin 1s linear infinite",
-                color: "var(--color-primary, #FF6B6B)",
+                color: "var(--color-primary, #f49e0b)",
               }}
             />
           </div>
@@ -514,7 +514,7 @@ function PopularAreasSection() {
             style={{
               textAlign: "center",
               padding: "2rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               fontSize: "0.875rem",
             }}
           >
@@ -529,7 +529,7 @@ function PopularAreasSection() {
               >
                 <GripVertical
                   size={14}
-                  style={{ color: "#CBD5E1", cursor: "grab" }}
+                  style={{ color: "#9a7a7e", cursor: "grab" }}
                 />
                 <div
                   style={{
@@ -546,7 +546,7 @@ function PopularAreasSection() {
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         fontWeight: 700,
                         fontSize: "0.875rem",
-                        color: "var(--color-text, #0F172A)",
+                        color: "var(--color-text, #301316)",
                         margin: 0,
                         whiteSpace: "nowrap",
                         overflow: "hidden",
@@ -558,7 +558,7 @@ function PopularAreasSection() {
                     <p
                       style={{
                         fontSize: "0.75rem",
-                        color: "var(--color-text-secondary, #64748B)",
+                        color: "var(--color-text-secondary, #754a4f)",
                         margin: 0,
                       }}
                     >
@@ -573,8 +573,8 @@ function PopularAreasSection() {
                     fontWeight: 600,
                     padding: "0.2rem 0.6rem",
                     borderRadius: "999px",
-                    background: area.is_active ? "#DCFCE7" : "#F1F5F9",
-                    color: area.is_active ? "#16A34A" : "#94A3B8",
+                    background: area.is_active ? "#fef5e7" : "#fef8ee",
+                    color: area.is_active ? "#f49e0b" : "#9a7a7e",
                   }}
                 >
                   {area.is_active ? "Active" : "Hidden"}
@@ -583,11 +583,11 @@ function PopularAreasSection() {
                   onClick={() => toggleActive(area)}
                   style={{
                     background: "none",
-                    border: "1px solid var(--color-border, #E2E8F0)",
+                    border: "1px solid var(--color-border, #ddd3d4)",
                     borderRadius: "0.5rem",
                     padding: "0.375rem",
                     cursor: "pointer",
-                    color: "var(--color-text-secondary, #64748B)",
+                    color: "var(--color-text-secondary, #754a4f)",
                     display: "flex",
                   }}
                   title={area.is_active ? "Hide" : "Show"}
@@ -598,12 +598,12 @@ function PopularAreasSection() {
                   <button
                     onClick={() => openEdit(area)}
                     style={{
-                      background: "var(--color-surface-3, #F1F5F9)",
+                      background: "var(--color-surface-3, #fef8ee)",
                       border: "none",
                       borderRadius: "0.5rem",
                       padding: "0.375rem 0.625rem",
                       cursor: "pointer",
-                      color: "var(--color-text-secondary, #475569)",
+                      color: "var(--color-text-secondary, #754a4f)",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.3rem",
@@ -617,12 +617,12 @@ function PopularAreasSection() {
                     onClick={() => handleDelete(area._id)}
                     disabled={deleting === area._id}
                     style={{
-                      background: "#FEE2E2",
+                      background: "#f2edee",
                       border: "none",
                       borderRadius: "0.5rem",
                       padding: "0.375rem 0.625rem",
                       cursor: "pointer",
-                      color: "#EF4444",
+                      color: "#4e1f24",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.3rem",
@@ -725,7 +725,7 @@ function PopularAreasSection() {
                     left: "0.75rem",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9a7a7e)",
                   }}
                 />
                 <input
@@ -742,7 +742,7 @@ function PopularAreasSection() {
               <p
                 style={{
                   fontSize: "0.7rem",
-                  color: "var(--color-text-muted, #94A3B8)",
+                  color: "var(--color-text-muted, #9a7a7e)",
                   marginTop: "0.25rem",
                 }}
               >
@@ -773,7 +773,7 @@ function PopularAreasSection() {
                   height: "1.25rem",
                   borderRadius: "999px",
                   border: "none",
-                  background: form.is_active ? "#FF6B6B" : "#E2E8F0",
+                  background: form.is_active ? "#f49e0b" : "#ddd3d4",
                   cursor: "pointer",
                   position: "relative",
                   transition: "background 200ms",
@@ -797,7 +797,7 @@ function PopularAreasSection() {
               <label
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                   cursor: "pointer",
                 }}
                 onClick={() =>
@@ -819,9 +819,9 @@ function PopularAreasSection() {
                   flex: 1,
                   padding: "0.625rem",
                   borderRadius: "var(--radius, 0.625rem)",
-                  border: "1px solid var(--color-border, #E2E8F0)",
+                  border: "1px solid var(--color-border, #ddd3d4)",
                   background: "var(--color-surface, white)",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 600,
                   fontSize: "0.875rem",
@@ -838,8 +838,8 @@ function PopularAreasSection() {
                   padding: "0.625rem",
                   borderRadius: "var(--radius, 0.625rem)",
                   border: "none",
-                  background: "var(--color-primary, #FF6B6B)",
-                  color: "white",
+                  background: "var(--color-primary, #f49e0b)",
+                  color: "#301316",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
@@ -1013,14 +1013,14 @@ function PartnersSection() {
           >
             <Building2
               size={18}
-              style={{ color: "var(--color-primary, #FF6B6B)" }}
+              style={{ color: "var(--color-primary, #f49e0b)" }}
             />
             <h2
               style={{
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontWeight: 700,
                 fontSize: "1rem",
-                color: "var(--color-text, #0F172A)",
+                color: "var(--color-text, #301316)",
                 margin: 0,
               }}
             >
@@ -1028,12 +1028,12 @@ function PartnersSection() {
             </h2>
             <span
               style={{
-                background: "var(--color-surface-3, #F1F5F9)",
+                background: "var(--color-surface-3, #fef8ee)",
                 borderRadius: "999px",
                 padding: "0.15rem 0.6rem",
                 fontSize: "0.75rem",
                 fontWeight: 600,
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
               }}
             >
               {partners.length}
@@ -1044,11 +1044,11 @@ function PartnersSection() {
               onClick={load}
               style={{
                 background: "none",
-                border: "1px solid var(--color-border, #E2E8F0)",
+                border: "1px solid var(--color-border, #ddd3d4)",
                 borderRadius: "var(--radius, 0.625rem)",
                 padding: "0.5rem",
                 cursor: "pointer",
-                color: "var(--color-text-secondary, #64748B)",
+                color: "var(--color-text-secondary, #754a4f)",
                 display: "flex",
               }}
               title="Refresh"
@@ -1061,8 +1061,8 @@ function PartnersSection() {
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
-                background: "var(--color-primary, #FF6B6B)",
-                color: "white",
+                background: "var(--color-primary, #f49e0b)",
+                color: "#301316",
                 border: "none",
                 borderRadius: "var(--radius, 0.625rem)",
                 padding: "0.5rem 1rem",
@@ -1080,7 +1080,7 @@ function PartnersSection() {
         <p
           style={{
             fontSize: "0.8125rem",
-            color: "var(--color-text-secondary, #64748B)",
+            color: "var(--color-text-secondary, #754a4f)",
             marginBottom: "1.25rem",
           }}
         >
@@ -1100,7 +1100,7 @@ function PartnersSection() {
               size={20}
               style={{
                 animation: "spin 1s linear infinite",
-                color: "var(--color-primary, #FF6B6B)",
+                color: "var(--color-primary, #f49e0b)",
               }}
             />
           </div>
@@ -1109,7 +1109,7 @@ function PartnersSection() {
             style={{
               textAlign: "center",
               padding: "2rem",
-              color: "var(--color-text-muted, #94A3B8)",
+              color: "var(--color-text-muted, #9a7a7e)",
               fontSize: "0.875rem",
             }}
           >
@@ -1124,7 +1124,7 @@ function PartnersSection() {
               >
                 <GripVertical
                   size={14}
-                  style={{ color: "#CBD5E1", cursor: "grab" }}
+                  style={{ color: "#9a7a7e", cursor: "grab" }}
                 />
                 <div
                   style={{
@@ -1144,9 +1144,9 @@ function PartnersSection() {
                         maxWidth: "100px",
                         objectFit: "contain",
                         borderRadius: "0.375rem",
-                        background: "var(--color-surface-2, #F8FAFC)",
+                        background: "var(--color-surface-2, #fffcf6)",
                         padding: "2px",
-                        border: "1px solid var(--color-border, #E2E8F0)",
+                        border: "1px solid var(--color-border, #ddd3d4)",
                       }}
                     />
                   ) : (
@@ -1154,14 +1154,14 @@ function PartnersSection() {
                       style={{
                         height: "32px",
                         padding: "0 0.5rem",
-                        background: "var(--color-surface-3, #F1F5F9)",
+                        background: "var(--color-surface-3, #fef8ee)",
                         borderRadius: "0.375rem",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         fontSize: "0.75rem",
                         fontWeight: 700,
-                        color: "var(--color-text-secondary, #475569)",
+                        color: "var(--color-text-secondary, #754a4f)",
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         whiteSpace: "nowrap",
                       }}
@@ -1175,7 +1175,7 @@ function PartnersSection() {
                         fontFamily: "Plus Jakarta Sans, sans-serif",
                         fontWeight: 700,
                         fontSize: "0.875rem",
-                        color: "var(--color-text, #0F172A)",
+                        color: "var(--color-text, #301316)",
                         margin: 0,
                       }}
                     >
@@ -1185,7 +1185,7 @@ function PartnersSection() {
                       <p
                         style={{
                           fontSize: "0.7rem",
-                          color: "var(--color-text-muted, #94A3B8)",
+                          color: "var(--color-text-muted, #9a7a7e)",
                           margin: 0,
                           display: "flex",
                           alignItems: "center",
@@ -1203,8 +1203,8 @@ function PartnersSection() {
                     fontWeight: 600,
                     padding: "0.2rem 0.6rem",
                     borderRadius: "999px",
-                    background: partner.is_active ? "#DCFCE7" : "#F1F5F9",
-                    color: partner.is_active ? "#16A34A" : "#94A3B8",
+                    background: partner.is_active ? "#fef5e7" : "#fef8ee",
+                    color: partner.is_active ? "#f49e0b" : "#9a7a7e",
                   }}
                 >
                   {partner.is_active ? "Active" : "Hidden"}
@@ -1213,11 +1213,11 @@ function PartnersSection() {
                   onClick={() => toggleActive(partner)}
                   style={{
                     background: "none",
-                    border: "1px solid var(--color-border, #E2E8F0)",
+                    border: "1px solid var(--color-border, #ddd3d4)",
                     borderRadius: "0.5rem",
                     padding: "0.375rem",
                     cursor: "pointer",
-                    color: "var(--color-text-secondary, #64748B)",
+                    color: "var(--color-text-secondary, #754a4f)",
                     display: "flex",
                   }}
                   title={partner.is_active ? "Hide" : "Show"}
@@ -1228,12 +1228,12 @@ function PartnersSection() {
                   <button
                     onClick={() => openEdit(partner)}
                     style={{
-                      background: "var(--color-surface-3, #F1F5F9)",
+                      background: "var(--color-surface-3, #fef8ee)",
                       border: "none",
                       borderRadius: "0.5rem",
                       padding: "0.375rem 0.625rem",
                       cursor: "pointer",
-                      color: "var(--color-text-secondary, #475569)",
+                      color: "var(--color-text-secondary, #754a4f)",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.3rem",
@@ -1247,12 +1247,12 @@ function PartnersSection() {
                     onClick={() => handleDelete(partner._id)}
                     disabled={deleting === partner._id}
                     style={{
-                      background: "#FEE2E2",
+                      background: "#f2edee",
                       border: "none",
                       borderRadius: "0.5rem",
                       padding: "0.375rem 0.625rem",
                       cursor: "pointer",
-                      color: "#EF4444",
+                      color: "#4e1f24",
                       display: "flex",
                       alignItems: "center",
                       gap: "0.3rem",
@@ -1326,7 +1326,7 @@ function PartnersSection() {
                     left: "0.75rem",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--color-text-muted, #94A3B8)",
+                    color: "var(--color-text-muted, #9a7a7e)",
                   }}
                 />
                 <input
@@ -1365,7 +1365,7 @@ function PartnersSection() {
                   height: "1.25rem",
                   borderRadius: "999px",
                   border: "none",
-                  background: form.is_active ? "#FF6B6B" : "#E2E8F0",
+                  background: form.is_active ? "#f49e0b" : "#ddd3d4",
                   cursor: "pointer",
                   position: "relative",
                   transition: "background 200ms",
@@ -1389,7 +1389,7 @@ function PartnersSection() {
               <label
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                   cursor: "pointer",
                 }}
                 onClick={() =>
@@ -1411,9 +1411,9 @@ function PartnersSection() {
                   flex: 1,
                   padding: "0.625rem",
                   borderRadius: "var(--radius, 0.625rem)",
-                  border: "1px solid var(--color-border, #E2E8F0)",
+                  border: "1px solid var(--color-border, #ddd3d4)",
                   background: "var(--color-surface, white)",
-                  color: "var(--color-text-secondary, #475569)",
+                  color: "var(--color-text-secondary, #754a4f)",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 600,
                   fontSize: "0.875rem",
@@ -1430,8 +1430,8 @@ function PartnersSection() {
                   padding: "0.625rem",
                   borderRadius: "var(--radius, 0.625rem)",
                   border: "none",
-                  background: "var(--color-primary, #FF6B6B)",
-                  color: "white",
+                  background: "var(--color-primary, #f49e0b)",
+                  color: "#301316",
                   fontFamily: "Plus Jakarta Sans, sans-serif",
                   fontWeight: 700,
                   fontSize: "0.875rem",
@@ -1480,7 +1480,7 @@ export default function HomepagePage() {
               fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 800,
               fontSize: "1.5rem",
-              color: "var(--color-text, #0F172A)",
+              color: "var(--color-text, #301316)",
               marginBottom: "0.375rem",
             }}
           >
@@ -1488,7 +1488,7 @@ export default function HomepagePage() {
           </h1>
           <p
             style={{
-              color: "var(--color-text-secondary, #64748B)",
+              color: "var(--color-text-secondary, #754a4f)",
               fontSize: "0.9rem",
             }}
           >

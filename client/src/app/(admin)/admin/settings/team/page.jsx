@@ -921,7 +921,11 @@ export default function TeamPage() {
   const load = useCallback(async () => {
     try {
       const res = await teamApi.getAll();
-      setMembers(res.data || []);
+      const normalized = (res.data || []).map((m) => ({
+        ...m,
+        id: m.id || m._id,
+      }));
+      setMembers(normalized);
     } catch {
       toast.error("Failed to load team members.");
     } finally {
